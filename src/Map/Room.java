@@ -50,7 +50,7 @@ public class Room {
      * @param a A lerakandó tárgy
      */
     public void spawnItem(Item a) {
-    	SkeletonUtil.printLog(name+".spawnItem(Item)");
+    	SkeletonUtil.printLog(name+".spawnItem("+a.name+")");
 		SkeletonUtil.increaseIndent();
 		addItem(a);
     	SkeletonUtil.decreaseIndent();
@@ -61,7 +61,7 @@ public class Room {
      * @param c A hozzáadandó karakter
      */
     public void addCharacter(Character character) {
-    	SkeletonUtil.printLog(name+".addCharacter(Character)");
+    	SkeletonUtil.printLog(name+".addCharacter("+character.name+")");
 		SkeletonUtil.increaseIndent();
 		if(SkeletonUtil.binaryQuestion("Gázos-e a szoba?")) {
 			new Gas().stun(character);
@@ -75,7 +75,7 @@ public class Room {
      * @param i A hozzáadandó tárgy
      */
     public void addItem(Item i) {
-    	SkeletonUtil.printLog(name+".addItem(Item)");
+    	SkeletonUtil.printLog(name+".addItem("+i.name+")");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
     }
@@ -85,7 +85,7 @@ public class Room {
      * @param c Az eltávolítandó karakter
      */
     public void removeCharacter(Character character) {
-		SkeletonUtil.printLog(name+".removeCharacter(Character)");
+		SkeletonUtil.printLog(name+".removeCharacter("+character.name+")");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
     }
@@ -95,7 +95,7 @@ public class Room {
      * @param i Az eltávolítandó tárgy
      */
     public void removeItem(Item i) {
-    	SkeletonUtil.printLog(name+".removeItem(Item)");
+    	SkeletonUtil.printLog(name+".removeItem("+i.name+")");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
     }
@@ -105,7 +105,7 @@ public class Room {
      * @param r A hozzáadandó szomszédos szoba
      */
     public void addNeighbour(Room r) {
-    	SkeletonUtil.printLog(name+".addNeighbour(Room)");
+    	SkeletonUtil.printLog(name+".addNeighbour("+r.name+")");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
     }
@@ -115,7 +115,7 @@ public class Room {
      * @param r Az eltávolítandó szomszédos szoba
      */
     public void removeNeighbour(Room r) {
-    	SkeletonUtil.printLog(name+".removeNeighbour(Room)");
+    	SkeletonUtil.printLog(name+".removeNeighbour("+r.name+")");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
     }
@@ -125,7 +125,7 @@ public class Room {
      * @param ef A hozzáadandó környezeti tényező
      */
     public void addEnvironmentalFactor(EnvironmentalFactors ef) {
-    	SkeletonUtil.printLog(name+".addEnvironmentalFactor(EnvironmentalFactors)");
+    	SkeletonUtil.printLog(name+".addEnvironmentalFactor("+ef.name+")");
 		SkeletonUtil.increaseIndent();
 		ef.setLocation(this);
     	SkeletonUtil.decreaseIndent();
@@ -147,7 +147,7 @@ public class Room {
      * @param r Az összeolvasztandó szoba
      */
     public void merge(Room r) {
-    	SkeletonUtil.printLog(name+".merge()");
+    	SkeletonUtil.printLog(name+".merge("+r.name+")");
 		SkeletonUtil.increaseIndent();
 		r.getNeighbours();
 		if(SkeletonUtil.binaryQuestion("Legyen Szoba_Új a szomszédja "+r.name+"-nek?")) {

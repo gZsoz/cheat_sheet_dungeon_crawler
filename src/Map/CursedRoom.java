@@ -52,7 +52,7 @@ public class CursedRoom extends Room{
      */
     @Override
 	public void addCharacter(Character character) {
-		SkeletonUtil.printLog(name+".addCharacter()");
+		SkeletonUtil.printLog(name+".addCharacter("+character.name+")");
 		SkeletonUtil.increaseIndent();
     	hideDoors();
 		if(SkeletonUtil.binaryQuestion("Gázos-e a szoba?")) {
