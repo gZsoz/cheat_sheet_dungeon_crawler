@@ -29,13 +29,9 @@ public class Student extends Character {
      * @param i A tárgy.
      */
     public void activate(Item i) {
-    	SkeletonUtil.printLog(name + ".activate(Item)");
+    	SkeletonUtil.printLog(name + ".activate(" + i.name + ")");
 		SkeletonUtil.increaseIndent();
 		i.use();
 		SkeletonUtil.decreaseIndent();
-    }
-
-    @Override
-    public void update() {
     }
 }
