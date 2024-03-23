@@ -33,7 +33,7 @@ public abstract class Character {
      * @return Ha a karakter befér az új szobába, akkor a művelet sikeres és igaz értékkel tér vissza a függvény, egyébként hamissal.
      */
     public boolean enterRoom(Room r) {
-    	SkeletonUtil.printLog(name + ".enterRoom(Room)");
+    	SkeletonUtil.printLog(name + ".enterRoom(" + r.name + ")");
     	SkeletonUtil.increaseIndent();
     	if(SkeletonUtil.binaryQuestion("Befér-e a szobába?")) {
     		new Room().getCapacity();
@@ -56,7 +56,7 @@ public abstract class Character {
      * @return Ha az inventory-ban van hely, akkor a művelet sikeres és igaz értékkel tér vissza afüggvény, egyébként hamissal.
      */
     public boolean pickupItem(Item i) {
-    	SkeletonUtil.printLog(name + ".pickupItem(Item)");
+    	SkeletonUtil.printLog(name + ".pickupItem(" + i.name + ")");
 		SkeletonUtil.increaseIndent();
 		this.getInventory();
 		if(SkeletonUtil.binaryQuestion("Van hely a karakternél a tárgy számára?")) {
@@ -73,7 +73,7 @@ public abstract class Character {
      * @param i A tárgy, amit le akar tenni.
      */
     public void putdownItem(Item i) {
-    	SkeletonUtil.printLog(name + "putdownItem(Item)");
+    	SkeletonUtil.printLog(name + "putdownItem(" + i.name + ")");
 		SkeletonUtil.increaseIndent();
 		
 		if(SkeletonUtil.binaryQuestion("Ez egy tranzisztor?")) {
