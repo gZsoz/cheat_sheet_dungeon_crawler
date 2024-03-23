@@ -3,6 +3,9 @@ package Items;
 import SkeletonUtil.SkeletonUtil;
 import Character.Teacher;
 
+/**
+ * Class representing WetCLoth item.
+ */
 public class WetCloth extends DecayingItems{
 	/**
      * Actions to perform when the WetCLoth is used by a character.
@@ -24,15 +27,5 @@ public class WetCloth extends DecayingItems{
 		SkeletonUtil.decreaseIndent();
     }
 	
-	/**
-	 * Keeps data up to date
-	 */
-	@Override
-public void update() {
-        
-    	SkeletonUtil.printLog("update()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();// Implementation
-    }
 
 }

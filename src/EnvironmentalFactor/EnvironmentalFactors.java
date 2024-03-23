@@ -20,13 +20,5 @@ public abstract class EnvironmentalFactors {
 
 	}
 	
-	/**
-	 * Keeps data up to date
-	 */
-	public void update() {
-        // Implementation
-		SkeletonUtil.printLog("update()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
-    }
+
 }

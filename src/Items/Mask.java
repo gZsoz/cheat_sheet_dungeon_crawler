@@ -3,7 +3,7 @@ package Items;
 import SkeletonUtil.SkeletonUtil;
 
 /**
- * Class representing a mask item in the game.
+ * Class representing a Mask item in the game.
  */
 public class Mask extends DecayingItems {
     
@@ -22,14 +22,4 @@ public class Mask extends DecayingItems {
     }
 
 	
-	/**
-	 * Keeps data up to date
-	 */
-    @Override
-public void update() {
-        
-    	SkeletonUtil.printLog("update()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
-    }
 }

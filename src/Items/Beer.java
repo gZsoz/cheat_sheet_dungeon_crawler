@@ -19,13 +19,5 @@ public class Beer extends DecayingItems {
 		reduceDuration();
     	SkeletonUtil.decreaseIndent();
     }
-	/**
-	 * Keeps data up to date
-	 */
-    @Override
-    public void update() {
-        SkeletonUtil.printLog("update()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();// Implementation
-    }
+
 }
