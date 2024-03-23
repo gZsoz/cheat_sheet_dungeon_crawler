@@ -95,7 +95,7 @@ public class Room {
      * @param i Az eltávolítandó tárgy
      */
     public void removeItem(Item i) {
-    	SkeletonUtil.printLog(name+".removeCharacter(Item)");
+    	SkeletonUtil.printLog(name+".removeItem(Item)");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
     }
@@ -127,7 +127,7 @@ public class Room {
     public void addEnvironmentalFactor(EnvironmentalFactors ef) {
     	SkeletonUtil.printLog(name+".addEnvironmentalFactor(EnvironmentalFactors)");
 		SkeletonUtil.increaseIndent();
-		ef.setRoom(this);
+		ef.setLocation(this);
     	SkeletonUtil.decreaseIndent();
     }
     

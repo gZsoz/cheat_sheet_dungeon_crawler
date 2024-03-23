@@ -45,4 +45,11 @@ public class BatSkin extends NumberOfUsesItem {
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
 	}
+
+	@Override
+	public void onPickUp() {
+		SkeletonUtil.printLog(name+".onPickUp()");
+		SkeletonUtil.increaseIndent();
+    	SkeletonUtil.decreaseIndent();
+	}
 }

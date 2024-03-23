@@ -37,4 +37,11 @@ public class CabbageCamembert extends NumberOfUsesItem {
 		new Room().addEnvironmentalFactor(new Gas());
     	SkeletonUtil.decreaseIndent();
     }
+
+	@Override
+	public void onPickUp() {
+		SkeletonUtil.printLog(name+".onPickUp()");
+		SkeletonUtil.increaseIndent();
+    	SkeletonUtil.decreaseIndent();
+	}
 }

@@ -30,7 +30,7 @@ public class CursedRoom extends Room{
      * Beállítja az ajtók állapotát zártnak és inicializálja a closeDuration-t a definiált kezdőértékre.
      */
     public void hideDoors() {
-		SkeletonUtil.printLog("hideDoors()");
+		SkeletonUtil.printLog(name+".hideDoors()");
 		SkeletonUtil.increaseIndent();
     	removeAllDoors();
     	SkeletonUtil.decreaseIndent();
@@ -40,7 +40,7 @@ public class CursedRoom extends Room{
      * A szoba összes ajtaját eltávolítja.
      */
 	public void removeAllDoors() {
-		SkeletonUtil.printLog("removeAllDoors()");
+		SkeletonUtil.printLog(name+".removeAllDoors()");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
 	}
@@ -52,7 +52,7 @@ public class CursedRoom extends Room{
      */
     @Override
 	public void addCharacter(Character character) {
-		SkeletonUtil.printLog("addCharacter()");
+		SkeletonUtil.printLog(name+".addCharacter()");
 		SkeletonUtil.increaseIndent();
     	hideDoors();
 		if(SkeletonUtil.binaryQuestion("Gázos-e a szoba?")) {

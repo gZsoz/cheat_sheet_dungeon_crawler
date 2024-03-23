@@ -89,4 +89,16 @@ public class Transistor extends Item {
     	SkeletonUtil.decreaseIndent();
     	return null;
 	}
+	
+	@Override
+	public void onPickUp() {
+		SkeletonUtil.printLog(name+".onPickUp()");
+		SkeletonUtil.increaseIndent();
+		if(SkeletonUtil.binaryQuestion("Ez lesz a második tranzisztor nála?")) {
+			Transistor t1 = new Transistor("tranzisztor_első");
+			Transistor t2 = new Transistor("tranzisztor_második");
+			t2.connect(t1);
+		}
+    	SkeletonUtil.decreaseIndent();
+	}
 }

@@ -61,28 +61,7 @@ public abstract class Character {
 		this.getInventory();
 		if(SkeletonUtil.binaryQuestion("Van hely a karakternél a tárgy számára?")) {
 			new Room().removeItem(i);
-			String[] opt = {
-					"Söröspohár",		// 1
-					"Maszk",			// 2
-					"Táblatörlő rongy", // 3
-					"Camembert",		// 4
-					"Denevérbőr",		// 5
-					"Logarléc",			// 6
-					"Tranzisztor", 		// 7
-			};
-			switch(SkeletonUtil.question("Milyen tárgyat vesz fel a karakter?", opt)) {
-			case 1, 3, 6:
-				i.use();
-			case 7:
-				if(SkeletonUtil.binaryQuestion("Ez lesz a második tranzisztor nála?")) {
-					Transistor t1 = new Transistor("tranzisztor_első");
-					Transistor t2 = new Transistor("tranzisztor_második");
-					t2.connect(t1);
-				}
-				break;
-			default:
-			}
-			
+			i.onPickUp();
 		} else {
 		}
 		SkeletonUtil.decreaseIndent();
@@ -96,17 +75,8 @@ public abstract class Character {
     public void putdownItem(Item i) {
     	SkeletonUtil.printLog(name + "putdownItem(Item)");
 		SkeletonUtil.increaseIndent();
-		String[] opt = {
-				"Söröspohár",		// 1
-				"Maszk",			// 2
-				"Táblatörlő rongy", // 3
-				"Camembert",		// 4
-				"Denevérbőr",		// 5
-				"Logarléc",			// 6
-				"Tranzisztor", 		// 7
-		};
-		switch(SkeletonUtil.question("Milyen tárgyat tesz le a karakter?", opt)) {
-		case 7:
+		
+		if(SkeletonUtil.binaryQuestion("Ez egy tranzisztor?")) {
 			if(SkeletonUtil.binaryQuestion("Ez a tranzisztor össze van kötve egy másikkal?")) {
 				if(SkeletonUtil.binaryQuestion("Ez lesz közülük a második, amit letesz?")) {
 					if(SkeletonUtil.binaryQuestion("Aktiválva van?")) {
@@ -116,8 +86,6 @@ public abstract class Character {
 					new Transistor("tranzisztor_első").setLocation(new Room());
 				}
 			}
-			break;
-		default:
 		}
 		new Room().addItem(i);
 		SkeletonUtil.decreaseIndent();

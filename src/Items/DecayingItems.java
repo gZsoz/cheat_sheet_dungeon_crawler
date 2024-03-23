@@ -13,7 +13,7 @@ public abstract class DecayingItems extends Item {
      * ha a duration eléri a 0-t.
      */
     public void reduceDuration() {
-    	SkeletonUtil.printLog(name+"reduceDuration()");
+    	SkeletonUtil.printLog(name+".reduceDuration()");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
     }
@@ -21,5 +21,4 @@ public abstract class DecayingItems extends Item {
      * a gyermekosztályok által leírt tárgyak használatát és hatását elindító függvény, 
      * gyermekosztályok implementálják. Item ősosztályból örökölt metódus
      */
-    abstract void use();
 }

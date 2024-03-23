@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.io.File;
@@ -38,7 +39,6 @@ public class SkeletonUtil {
 			fos.write((message+'\n').getBytes());
 	    	fos.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {e.printStackTrace();}
 	}
@@ -47,11 +47,17 @@ public class SkeletonUtil {
 		int choice;
 		Scanner sc = new Scanner(System.in);
 		do {
-		System.out.println('\n'+question+"\n1) Igen\n2) Nem");
-		choice=sc.nextInt();
-		sc.nextLine();	// eat the \n
-		if(choice<1 || choice>2)
-			System.out.println("Hibás input!\n Válasszon a fenti opciók közül!");
+		try {
+			System.out.println('\n'+question+"\n1) Igen\n2) Nem");
+			choice=sc.nextInt();
+			sc.nextLine();	// eat the \n
+			if(choice<1 || choice>2)
+				System.out.println("Hibás input!\n Válasszon a fenti opciók közül!");
+		}catch(InputMismatchException e) {
+			System.out.println("Hibás input!\\n Válasszon a fenti opciók közül, csak egy számot írjon be!");
+			sc.nextLine();
+			choice=0;
+		}
 		}while(choice<1 || choice>2);
 		return (choice==1);
 	}
@@ -60,26 +66,238 @@ public class SkeletonUtil {
 		int choice;
 		Scanner sc = new Scanner(System.in);
 		do {
-		System.out.println('\n'+question);
-		for(int i=0;i<opt.length;i++)
-			System.out.println((i+1)+") "+opt[i]);
-		choice=sc.nextInt();
-		sc.nextLine();	// eat the \n
-		if(choice<1 || choice>opt.length)
-			System.out.println("Hibás input!\n Válasszon a fenti opciók közül!");
+		try {
+			System.out.println('\n'+question);
+			for(int i=0;i<opt.length;i++)
+				System.out.println((i+1)+") "+opt[i]);
+			choice=sc.nextInt();
+			sc.nextLine();	// eat the \n
+			if(choice<1 || choice>opt.length)
+				System.out.println("Hibás input!\n Válasszon a fenti opciók közül!");
+		}catch(InputMismatchException e) {
+			System.out.println("Hibás input!\\n Válasszon a fenti opciók közül, csak egy számot írjon be!");
+			sc.nextLine();
+			choice=0;
+		}
 		}while(choice<1 || choice>opt.length);
 		return choice;
 	}
+	
+	public static void initTest() {
+		new Labyrinth().generateRooms();
+	}
+	
+	public static void szobaTest() {
+		String[] opt={
+				"Szobák összeolvadása",
+				"Szoba osztódása",
+				"Tárgy megidézése"
+		};
+		switch(question("Mit szeretnél tenni a Szobával?", opt)) {
+		case 1:
+			new Labyrinth().mergeRoom(new Room("Szoba_1"),new Room("Szoba_2"));
+			break;
+		case 2:
+			new Labyrinth().splitRoom(new Room());
+			break;
+		case 3:
+			String[] opt2 = {
+					"Söröspohár",		// 1
+					"Maszk",			// 2
+					"Táblatörlő rongy", // 3
+					"Camembert",		// 4
+					"Denevérbőr",		// 5
+					"Logarléc",			// 6
+					"Tranzisztor", 		// 7
+			};
+			switch(SkeletonUtil.question("Milyen tárgyat idéz meg?", opt2)) {
+			case 1:
+				Beer b= new Beer();
+				b.create();
+				new Room().spawnItem(b);
+				break;
+			case 2:
+				Mask m= new Mask();
+				m.create();
+				new Room().spawnItem(m);
+				break;
+			case 3:
+				WetCloth w= new WetCloth();
+				w.create();
+				new Room().spawnItem(w);
+				break;
+			case 4:
+				CabbageCamembert c= new CabbageCamembert();
+				c.create();
+				new Room().spawnItem(c);
+				break;
+			case 5:
+				BatSkin i= new BatSkin();
+				i.create();
+				new Room().spawnItem(i);
+				break;
+			case 6:
+				SlideRule s= new SlideRule();
+				s.create();
+				new Room().spawnItem(s);
+				break;
+			case 7:
+				Transistor t= new Transistor();
+				t.create();
+				new Room().spawnItem(t);
+				break;
+			default:
+			}
+			break;
+		}
+	}
+	
+	public static void tanarTest() {
+		String[] opt={
+				"Bemmenni egy szobába",
+				"Felvenni egy tárgyat",
+				"Kirúgni egy diákot"
+		};
+		switch(question("Mit szeretnél tenni a Tanárral?", opt)) {
+		case 1:
+			new Teacher().enterRoom(new Room());
+			break;
+		case 2:
+			String[] opt2 = {
+					"Söröspohár",		// 1
+					"Maszk",			// 2
+					"Táblatörlő rongy", // 3
+					"Camembert",		// 4
+					"Denevérbőr",		// 5
+					"Logarléc",			// 6
+					"Tranzisztor", 		// 7
+			};
+			switch(SkeletonUtil.question("Milyen tárgyat vesz fel a tanár?", opt2)) {
+			case 1:
+				new Teacher().pickupItem(new Beer());
+				break;
+			case 2:
+				new Teacher().pickupItem(new Mask());
+				break;
+			case 3:
+				new Teacher().pickupItem(new WetCloth());
+				break;
+			case 4:
+				new Teacher().pickupItem(new CabbageCamembert());
+				break;
+			case 5:
+				new Teacher().pickupItem(new BatSkin());
+				break;
+			case 6:
+				new Teacher().pickupItem(new SlideRule());
+				break;
+			case 7:
+				new Teacher().pickupItem(new Transistor());
+				break;
+			default:
+			}
+			break;
+		case 3:
+			new Teacher().update();
+			break;
+		}
+	}
+	
 	public static void hallgatoTest() {
 		String[] opt={
 				"Bemmenni egy szobába",
-				"Felvenni Itemet",
+				"Felvenni egy tárgyat",
+				"Letenni egy tárgyat",
+				"Használni egy tárgyat"
 		};
 		switch(question("Mit szeretnél tenni a Hallgatóval?", opt)) {
 		case 1:
 			new Student().enterRoom(new Room());
 			break;
 		case 2:
+			String[] opt2 = {
+					"Söröspohár",		// 1
+					"Maszk",			// 2
+					"Táblatörlő rongy", // 3
+					"Camembert",		// 4
+					"Denevérbőr",		// 5
+					"Logarléc",			// 6
+					"Tranzisztor", 		// 7
+			};
+			switch(SkeletonUtil.question("Milyen tárgyat vesz fel a hallgató?", opt2)) {
+			case 1:
+				new Student().pickupItem(new Beer());
+				break;
+			case 2:
+				new Student().pickupItem(new Mask());
+				break;
+			case 3:
+				new Student().pickupItem(new WetCloth());
+				break;
+			case 4:
+				new Student().pickupItem(new CabbageCamembert());
+				break;
+			case 5:
+				new Student().pickupItem(new BatSkin());
+				break;
+			case 6:
+				new Student().pickupItem(new SlideRule());
+				break;
+			case 7:
+				new Student().pickupItem(new Transistor());
+				break;
+			default:
+			}
+			break;
+		case 3:
+			String[] opt3 = {
+					"Söröspohár",		// 1
+					"Maszk",			// 2
+					"Táblatörlő rongy", // 3
+					"Camembert",		// 4
+					"Denevérbőr",		// 5
+					"Logarléc",			// 6
+					"Tranzisztor", 		// 7
+			};
+			switch(SkeletonUtil.question("Milyen tárgyat tesz le a hallgató?", opt3)) {
+			case 1:
+				new Student().putdownItem(new Beer());
+				break;
+			case 2:
+				new Student().putdownItem(new Mask());
+				break;
+			case 3:
+				new Student().putdownItem(new WetCloth());
+				break;
+			case 4:
+				new Student().putdownItem(new CabbageCamembert());
+				break;
+			case 5:
+				new Student().putdownItem(new BatSkin());
+				break;
+			case 6:
+				new Student().putdownItem(new SlideRule());
+				break;
+			case 7:
+				new Student().putdownItem(new Transistor());
+				break;
+			default:
+			}
+			break;
+		case 4:
+			String[] opt4 = {
+					"Camembert",
+					"Tranzisztor",
+			};
+			switch(SkeletonUtil.question("Milyen tárgyat használjon a hallgató?", opt4)) {
+			case 1:
+				new Student().activate(new CabbageCamembert());
+				break;
+			case 2:
+				new Student().pickupItem(new Transistor());
+				break;
+			default:
+			}
 			break;
 		}
 	}
@@ -89,6 +307,7 @@ public class SkeletonUtil {
 		boolean quit=false;
 		do {
 			String[] opt={
+					"Inicializálás",
 					"Hallgató",
 					"Tanár",
 					"Szoba",
@@ -99,15 +318,18 @@ public class SkeletonUtil {
 			writer.close();
 			switch(ans) {
 			case 1:
-				hallgatoTest();
+				initTest();
 				break;
 			case 2:
-				System.out.println("2");
+				hallgatoTest();
 				break;
 			case 3:
-				System.out.println("3");
+				tanarTest();
 				break;
 			case 4:
+				szobaTest();
+				break;
+			case 5:
 				quit=true;
 				break;
 			}
@@ -118,4 +340,5 @@ public class SkeletonUtil {
 			filesc.close();
 		}while(!quit);
 	}
+	
 }

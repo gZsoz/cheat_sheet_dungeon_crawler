@@ -1,5 +1,9 @@
 package Map;
 
+import Character.Student;
+import Character.Teacher;
+import EnvironmentalFactor.Gas;
+import Items.*;
 import SkeletonUtil.SkeletonUtil;
 
 /**
@@ -57,7 +61,6 @@ public class Labyrinth {
 				// The room had Gas, so add gas to the new room
 				new Gas().create();
 				new CursedRoom("Szoba_R").addEnvironmentalFactor(new Gas());
-				new Gas().setLocation(new CursedRoom("Szoba_R"));
 			}
 		}
 		else {
@@ -69,7 +72,6 @@ public class Labyrinth {
 				// The room had Gas, so add gas to the new room
 				new Gas().create();
 				new Room("Szoba_R").addEnvironmentalFactor(new Gas());
-				new Gas().setLocation(new Room("Szoba_R"));
 			}
 		}
     	SkeletonUtil.decreaseIndent();
@@ -136,10 +138,10 @@ public class Labyrinth {
 		new Teacher("Tivadar").create();
 		
 		// They enter their starting rooms
-		new Student("Bela").enterRoom("Szoba_F");
-		new Student("Aladar").enterRoom("Szoba_E");
-		new Teacher("Tasnadi").enterRoom("Szoba_E");
-		new Teacher("Tivadar").enterRoom("Szoba_T");
+		new Student("Bela").enterRoom(new Room("Szoba_F"));
+		new Student("Aladar").enterRoom(new Room("Szoba_E"));
+		new Teacher("Tasnadi").enterRoom(new Room("Szoba_E"));
+		new Teacher("Tivadar").enterRoom(new Room("Szoba_T"));
 		
 		// Each room notes who entered the room and is currently there
 		new Room("Szoba_F").addCharacter(new Student("Bela"));
@@ -180,11 +182,11 @@ public class Labyrinth {
 		new Transistor("transistor1").create();
 		new Transistor("transistor2").create();
 		new WetCloth().create();
-		new Camambert().create();
+		new CabbageCamembert().create();
 		new Mask("mask2").create();
 		
 		// Add to players their own
-		new Student("Bela").pickupItem(new Camambert());
+		new Student("Bela").pickupItem(new CabbageCamembert());
 		new Student("Aladar").pickupItem(new Mask("mask1"));
 		new Student("Aladar").pickupItem(new BatSkin());
 		new Student("Aladar").pickupItem(new Transistor("transistor1"));

@@ -1,6 +1,7 @@
 package Character;
 
 import Items.BatSkin;
+import Items.Beer;
 import Map.Room;
 import SkeletonUtil.SkeletonUtil;
 
@@ -54,10 +55,11 @@ public class Teacher extends Character {
      * @param s A hallgató, amelyet ki szándékozik rúgni.
      */
     public void kick(Student s) {
-    	SkeletonUtil.printLog(name + ".kick(Student)");
+    	SkeletonUtil.printLog(name + ".kick("+s.name+")");
 		SkeletonUtil.increaseIndent();
 		s.getInventory();
 		if(SkeletonUtil.binaryQuestion("Van söröspohár a hallgatónál?")) {
+			new Beer().use();
 		} else if(SkeletonUtil.binaryQuestion("Van denevérbőr a hallgatónál?")) {
 			new BatSkin().use();
 		} else {

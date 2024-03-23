@@ -8,6 +8,21 @@ import SkeletonUtil.SkeletonUtil;
 public class Mask extends DecayingItems {
     
 	/**
+     * Konstruktor egy tárgy létrehozásához. Mask-ra állítja a nevet.
+     */
+	public Mask() {
+		name="Mask";
+	}
+	
+	/**
+     * Konstruktor egy tárgy létrehozásához.
+     * @param n A tárgy neve
+     */
+	public Mask(String n) {
+		name=n;
+	}
+	
+	/**
      * Actions to perform when the mask is triggered by gas.
      * Gives immunity to the user,
      * Lowers the duration of the effect each second
@@ -15,11 +30,17 @@ public class Mask extends DecayingItems {
 	
 	@Override
     public void use() {
-    	SkeletonUtil.printLog("use()");
+    	SkeletonUtil.printLog(name+".use()");
 		SkeletonUtil.increaseIndent();
 		reduceDuration();
     	SkeletonUtil.decreaseIndent();
     }
 
+	@Override
+	public void onPickUp() {
+		SkeletonUtil.printLog(name+".onPickUp()");
+		SkeletonUtil.increaseIndent();
+    	SkeletonUtil.decreaseIndent();
+	}
 	
 }

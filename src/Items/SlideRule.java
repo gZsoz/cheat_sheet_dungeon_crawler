@@ -34,4 +34,12 @@ public class SlideRule extends NumberOfUsesItem {
 		SkeletonUtil.printLog("Vége a játéknak!!!");
     	SkeletonUtil.decreaseIndent();
     }
+	
+	@Override
+	public void onPickUp() {
+		SkeletonUtil.printLog(name+".onPickUp()");
+		SkeletonUtil.increaseIndent();
+		use();
+    	SkeletonUtil.decreaseIndent();
+	}
 }

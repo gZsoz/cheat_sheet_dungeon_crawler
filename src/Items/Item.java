@@ -21,8 +21,14 @@ public abstract class Item {
 	}
 	
 	/**
+     * Egy tárgy felvételekor hívodik meg. A tárgyak a saját,egyedi módján kerül használatba, 
+     * ezért ezt külön-külön valósítják meg a  leszármazottak.
+     */
+	public abstract void onPickUp();
+	
+	/**
      * Egy tárgy használata. A tárgyak a saját,egyedi módján kerül használatba, 
      * ezért ezt külön-külön valósítják meg a  leszármazottak.
      */
-    abstract void use();
+    public abstract void use();
 }
