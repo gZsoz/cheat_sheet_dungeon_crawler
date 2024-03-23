@@ -1,13 +1,32 @@
 package EnvironmentalFactor;
 
 import Map.Room;
+import SkeletonUtil.SkeletonUtil;
 
 /**
  * Abstract class representing environmental factors in the game.
  */
 public abstract class EnvironmentalFactors {
 
-    public void update() {
+    /**
+     * Sets the location of the environmental factor to a given room
+     * @param room the location that is to be set
+     */
+	
+	public void setRoom(Room room) {
+		SkeletonUtil.printLog("setRoom()");
+		SkeletonUtil.increaseIndent();
+    	SkeletonUtil.decreaseIndent();
+
+	}
+	
+	/**
+	 * Keeps data up to date
+	 */
+	public void update() {
         // Implementation
+		SkeletonUtil.printLog("update()");
+		SkeletonUtil.increaseIndent();
+    	SkeletonUtil.decreaseIndent();
     }
 }
