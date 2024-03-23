@@ -3,11 +3,17 @@ package Items;
 import SkeletonUtil.SkeletonUtil;
 
 /**
- * Class representing a mask item in the game.
+ * Class representing a Mask item in the game.
  */
 public class Mask extends DecayingItems {
-    @Override
+    
+	/**
+     * Actions to perform when the mask is triggered by gas.
+     * Gives immunity to the user,
+     * Lowers the duration of the effect each second
+     */
 	
+	@Override
     public void use() {
     	SkeletonUtil.printLog("use()");
 		SkeletonUtil.increaseIndent();
@@ -15,8 +21,5 @@ public class Mask extends DecayingItems {
     	SkeletonUtil.decreaseIndent();
     }
 
-    @Override
-    public void update() {
-        // Implementation
-    }
+	
 }

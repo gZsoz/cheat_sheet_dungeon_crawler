@@ -3,21 +3,23 @@ package Items;
 import SkeletonUtil.SkeletonUtil;
 
 /**
- * Abstract class representing items with decaying properties.
+ * Absztrakt osztály, amely összefoglalja az időérzékeny tárgyak közös tulajdonságait és metódusait.
  */
 public abstract class DecayingItems extends Item {
 
     /**
-     * Reduces the duration of the decaying item.
+     * duration attribútum értéket csökkenti a Time osztály időmérése alapján, 
+     * amennyiben a usable értéke true, illetve átbillenti azt hamis értékre, 
+     * ha a duration eléri a 0-t.
      */
     public void reduceDuration() {
-    	SkeletonUtil.printLog("reduceDuration()");
+    	SkeletonUtil.printLog(name+"reduceDuration()");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
     }
-
     /**
-     * Abstract method to update the decaying item's properties.
+     * a gyermekosztályok által leírt tárgyak használatát és hatását elindító függvény, 
+     * gyermekosztályok implementálják. Item ősosztályból örökölt metódus
      */
-    abstract void update();
+    abstract void use();
 }

@@ -1,15 +1,23 @@
 package Items;
+
+import SkeletonUtil.SkeletonUtil;
+
 /**
  * Class representing Beer item.
  */
 public class Beer extends DecayingItems {
-    @Override
+	/**
+     * Actions to perform when the beer is used (picked up) by a character.
+     * Gives immunity to the user,
+     * Lowers the duration of the effect each second
+     */
+	@Override
     public void use() {
         // Implementation
+    	SkeletonUtil.printLog("use()");
+		SkeletonUtil.increaseIndent();
+		reduceDuration();
+    	SkeletonUtil.decreaseIndent();
     }
 
-    @Override
-    public void update() {
-        // Implementation
-    }
 }
