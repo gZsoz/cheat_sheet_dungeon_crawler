@@ -9,7 +9,7 @@ A projektet le lehet klónozni:
 git clone https://github.com/gZsoz/cheat_sheet_dungeon_crawler.git
 ```
 ### ZIP Letöltés
-A projektet zip formátumban is le lehet tölteni
+A projektet zip formátumban is le lehet tölteni. A zip fájlt ki kell csomagolni.
 
 ### Mappába lépés
 A fordítás és futtatáshoz szükséges a src mappába lépés
