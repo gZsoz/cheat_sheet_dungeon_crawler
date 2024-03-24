@@ -40,12 +40,13 @@ public class WetCloth extends DecayingItems{
     	reduceDuration();
 		SkeletonUtil.decreaseIndent();
     }
-	
+	/**
+	 * A trágy felvételekor elvégezendő feladatok
+	 */
 	@Override
 	public void onPickUp() {
 		SkeletonUtil.printLog(name+".onPickUp()");
 		SkeletonUtil.increaseIndent();
-		use();
     	SkeletonUtil.decreaseIndent();
 	}
 

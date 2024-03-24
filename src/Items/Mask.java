@@ -35,7 +35,9 @@ public class Mask extends DecayingItems {
 		reduceDuration();
     	SkeletonUtil.decreaseIndent();
     }
-
+	/**
+	 * A trágy felvételekor elvégezendő feladatok
+	 */
 	@Override
 	public void onPickUp() {
 		SkeletonUtil.printLog(name+".onPickUp()");
