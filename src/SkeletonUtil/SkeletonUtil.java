@@ -357,10 +357,10 @@ public class SkeletonUtil {
         boolean quit=false; // Kilépési feltétel
         do {
             String[] opt={
-                    "Inicializálás",
                     "Hallgató",
                     "Tanár",
                     "Szoba",
+                    "Inicializálás",
                     "Kilépés"
             };
             int ans=question("Mit szeretnél tesztelni?", opt); // Felhasználói választás bekérése
@@ -368,16 +368,16 @@ public class SkeletonUtil {
             writer.close(); // Naplófájl tartalmának törlése
             switch(ans) {
                 case 1:
-                    initTest(); // Inicializáló teszt végrehajtása
-                    break;
-                case 2:
                     hallgatoTest(); // Hallgató teszt végrehajtása
                     break;
-                case 3:
+                case 2:
                     tanarTest(); // Tanár teszt végrehajtása
                     break;
-                case 4:
+                case 3:
                     szobaTest(); // Szoba teszt végrehajtása
+                    break;
+                case 4:
+                    initTest(); // Inicializáló teszt végrehajtása
                     break;
                 case 5:
                     quit=true; // Kilépés
