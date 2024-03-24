@@ -24,7 +24,7 @@ public abstract class EnvironmentalFactors {
      */
 	
 	public void setLocation(Room room) {
-		SkeletonUtil.printLog("setLocation("+room.name+")");
+		SkeletonUtil.printLog(name+".setLocation("+room.name+")");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
 
