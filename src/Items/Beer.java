@@ -3,7 +3,7 @@ package Items;
 import SkeletonUtil.SkeletonUtil;
 
 /**
- * Class representing Beer item.
+ * Osztály a Beer tárgy reprezentálására
  */
 public class Beer extends DecayingItems {
 	
@@ -23,9 +23,9 @@ public class Beer extends DecayingItems {
 	}
 	
 	/**
-     * Actions to perform when the beer is used (picked up) by a character.
-     * Gives immunity to the user,
-     * Lowers the duration of the effect each second
+     * Sör használatakor (felvételekor) végrehajtandó műveleteket végzi
+     * Immunitást ad a használónak,
+     * Minden másodpercben csökkenti a hatás időtartamát
      */
 	@Override
     public void use() {
@@ -35,6 +35,9 @@ public class Beer extends DecayingItems {
 		reduceDuration();
     	SkeletonUtil.decreaseIndent();
     }
+	/**
+	 * A tárgy felvételekor elindítja a használatot
+	 */
 
 	@Override
 	public void onPickUp() {

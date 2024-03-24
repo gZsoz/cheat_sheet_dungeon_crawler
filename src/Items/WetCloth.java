@@ -25,9 +25,9 @@ public class WetCloth extends DecayingItems{
 	}
 	
 	/**
-     * Actions to perform when the WetCLoth is used by a character.
-     * Stuns teachers in the room that the item is used
-     * Lowers the duration of the effect each second
+     * A WetCLoth tárgy használatakor elvégezendő műveleteket végzi
+     * Elkábítja abban a szobában tartozkodó tanárokat, ahol a tárgy használva volt
+     * Minden másodpercben csökkenti a hatás időtartamát
      */
 	
 	@Override

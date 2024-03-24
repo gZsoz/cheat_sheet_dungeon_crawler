@@ -23,9 +23,9 @@ public class Mask extends DecayingItems {
 	}
 	
 	/**
-     * Actions to perform when the mask is triggered by gas.
-     * Gives immunity to the user,
-     * Lowers the duration of the effect each second
+     * A gáz által aktivált maszk elvégezendő műveleteit végzi
+     * Immunitást ad a használónak a gázzal szemben
+     * Minden másodpercben csökkenti a hatás időtartamát
      */
 	
 	@Override
