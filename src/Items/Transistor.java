@@ -45,7 +45,7 @@ public class Transistor extends Item {
      * @param c A Karakter akit teleportál
      */
     public void onDrop(Character c) {
-    	SkeletonUtil.printLog(name+".onDrop(Character)");
+    	SkeletonUtil.printLog(name+".onDrop("+c.name+")");
 		SkeletonUtil.increaseIndent();
 		c.enterRoom(new Transistor().getLocation());
     	SkeletonUtil.decreaseIndent();
@@ -56,7 +56,7 @@ public class Transistor extends Item {
      * @param t A Tranzisztor akivel párosul
      */
     public void connect(Transistor t) {
-    	SkeletonUtil.printLog(name+".connect(Transistor)");
+    	SkeletonUtil.printLog(name+".connect("+t.name+")");
 		SkeletonUtil.increaseIndent();
 		t.setPair(this);
     	SkeletonUtil.decreaseIndent();
@@ -66,7 +66,7 @@ public class Transistor extends Item {
      * @param t A Tranzisztor akivel párosul
      */
 	public void setPair(Transistor t) {
-		SkeletonUtil.printLog(name+".setPair(Transistor)");
+		SkeletonUtil.printLog(name+".setPair("+t.name+")");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
 	}
@@ -75,7 +75,7 @@ public class Transistor extends Item {
      * @param r A szoba ahova letették
      */
 	public void setLocation(Room r) {
-		SkeletonUtil.printLog(name+".setLocation(Room)");
+		SkeletonUtil.printLog(name+".setLocation("+r.name+")");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
 	}
@@ -90,6 +90,9 @@ public class Transistor extends Item {
     	return null;
 	}
 	
+	/**
+     * Végrehajtja azokat a tevékenységeket, amiknek a tárgy felvevésénél kell megtörténnie.
+     */
 	@Override
 	public void onPickUp() {
 		SkeletonUtil.printLog(name+".onPickUp()");

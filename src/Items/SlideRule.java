@@ -35,6 +35,9 @@ public class SlideRule extends NumberOfUsesItem {
     	SkeletonUtil.decreaseIndent();
     }
 	
+	/**
+     * Végrehajtja azokat a tevékenységeket, amiknek a tárgy felvevésénél kell megtörténnie.
+     */
 	@Override
 	public void onPickUp() {
 		SkeletonUtil.printLog(name+".onPickUp()");
