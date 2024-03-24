@@ -87,7 +87,7 @@ public class Transistor extends Item {
 		SkeletonUtil.printLog(name+".getLocation()");
 		SkeletonUtil.increaseIndent();
     	SkeletonUtil.decreaseIndent();
-    	return null;
+    	return new Room();
 	}
 	
 	/**
