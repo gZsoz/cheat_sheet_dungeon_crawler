@@ -55,7 +55,7 @@ public class Teacher extends Character {
      * @param s A hallgató, amelyet ki szándékozik rúgni.
      */
     public void kick(Student s) {
-    	SkeletonUtil.printLog(name + ".kick("+s.name+")");
+    	SkeletonUtil.printLog(name + ".kick(" + s.name + ")");
 		SkeletonUtil.increaseIndent();
 		s.getInventory();
 		if(SkeletonUtil.binaryQuestion("Van söröspohár a hallgatónál?")) {

@@ -1,7 +1,6 @@
 package Character;
 
 import Items.Item;
-import Items.Mask;
 import Items.Transistor;
 import Map.*;
 import SkeletonUtil.*;
@@ -111,7 +110,7 @@ public abstract class Character {
 	 * @param b Ha elkábult a karakter, akkor igaz, egyébként hamis.
 	 */
 	public void setStunned(boolean b) {
-		SkeletonUtil.printLog(name + ".setStunned()");
+		SkeletonUtil.printLog(name + ".setStunned(" + b + ")");
 		SkeletonUtil.increaseIndent();
 		SkeletonUtil.decreaseIndent();
 	}
