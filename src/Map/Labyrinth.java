@@ -35,10 +35,6 @@ public class Labyrinth {
 		SkeletonUtil.printLog("Labyrinth.mergeRoom(" + result.name + ", " + merging.name +")");
 		SkeletonUtil.increaseIndent();
 		result.merge(merging);
-		merging.getNeighbours();
-		result.addNeighbour(new Room("Szoba_T"));
-		new Room("Szoba_T").addNeighbour(result);
-		new Room("Szoba_T").removeNeighbour(merging);
 		this.removeRoom(merging);
     	SkeletonUtil.decreaseIndent();
     }
