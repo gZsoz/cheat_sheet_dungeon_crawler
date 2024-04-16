@@ -25,13 +25,14 @@ import Map.*;
  * A SkeletonUtil osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
  */
 public class SkeletonUtil {
-    private static String filename = "log.txt"; // A naplófájl neve
+	private static final String dirName = "test/";
+    private static String testname = ""; // A naplófájl neve
     public static void printLog(String str) {
         String message=str;
         System.out.println(message); // Üzenet kiírása a konzolra
         FileOutputStream fos;
         try {
-            fos = new FileOutputStream(filename, true);
+            fos = new FileOutputStream(dirName+"output/"+testname+"_output.txt", true);
             fos.write((message+'\n').getBytes()); // Üzenet írása a naplófájlba
             fos.close();
         } catch (FileNotFoundException e) {
@@ -109,7 +110,7 @@ public class SkeletonUtil {
 	    if(!input.equals(System.in))
 	    	sc.close();
 	    if(!output.equals(System.out))
-	    	sc.close();
+	    	out.close();
     }
     
 	private static boolean evaluateTest(InputStream output, InputStream expected) {
@@ -124,15 +125,59 @@ public class SkeletonUtil {
 		}
 		return true;
 	}
-    
+	
+	private static ArrayList<String> getTestNames() {
+		File folder = new File(dirName+"input");
+		File[] listOfFiles = folder.listFiles();
+		ArrayList<String> names=new ArrayList<String>();
+		if(listOfFiles != null) {
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile()) {
+					String fullname=listOfFiles[i].getName();
+					names.add(fullname.substring(0,fullname.lastIndexOf('_')));
+				}
+			}
+		}
+		return names;
+	}
+	
+	private static void runTestFromName(String name) {
+		try {
+			File output = new File(dirName+"output/"+name+"_output.txt"); // Naplófájl inicializálása
+	        File input = new File(dirName+"input/"+name+"_input.txt");
+	        PrintWriter writer = new PrintWriter(output);
+	        writer.close(); // Naplófájl tartalmának törlése
+	        InputStream inStream = new FileInputStream(input);
+	        OutputStream outStream = new FileOutputStream(output);
+	    	runTest(inStream, outStream);
+			inStream.close();
+			outStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+	}
+	
+	private static boolean evaluateTestFromName(String name) {
+		boolean result=false;
+		try {
+			InputStream output = new FileInputStream(new File(dirName+"output/"+name+"_output.txt"));		
+			InputStream expected = new FileInputStream(new File(dirName+"expected/"+name+"_expected.txt"));
+			result=evaluateTest(output, expected);
+			output.close();
+			expected.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
     /**
      * A program belépési pontja.
      * @param args A program argumentumai
      * @throws FileNotFoundException Ha a naplófájl nem található
      */
     public static void main(String[] args) throws FileNotFoundException {
-        File myObj = new File(filename); // Naplófájl inicializálása
-        File myInpObj = new File("testinput.txt");
         boolean quit=false; // Kilépési feltétel
         do {
             String[] opt={
@@ -142,26 +187,19 @@ public class SkeletonUtil {
                     "Kilépés"
             };
             int ans=question("Mit szeretnél tesztelni?", opt); // Felhasználói választás bekérése
-            PrintWriter writer = new PrintWriter(myObj);
-            writer.close(); // Naplófájl tartalmának törlése
             switch(ans) {
                 case 1:
                     runTest(System.in,System.out);
                     break;
                 case 2:
-                	InputStream targetStream = new FileInputStream(myInpObj);
-                    OutputStream outStream = new FileOutputStream(myObj);
-                	runTest(targetStream, outStream);
-					try {
-						targetStream.close();
-						outStream.close();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					};
-					InputStream output = new FileInputStream(myObj);
-					InputStream expected = new FileInputStream(new File("testexpected.txt"));
-					System.out.println("A teszt eredménye: "+evaluateTest(output, expected));	
+                	ArrayList<String> tests=getTestNames();
+                	tests.add(0, "Kilépés teszt futtatása nélkül");
+                	String[] opt2=new String[tests.size()];
+                	int selectedTest=question("Melyik tesztet szeretnéd futtatni?", tests.toArray(opt2))-1;
+                	if(selectedTest==0)
+                		break;
+                	runTestFromName(tests.get(selectedTest));
+                	System.out.println("A teszt eredménye: "+evaluateTestFromName(tests.get(selectedTest)));
                     break;
                 case 3:
                 	break;
@@ -170,12 +208,10 @@ public class SkeletonUtil {
                     break;
             }
             System.out.println(); // Üres sor a jobb olvashatóság érdekében
-            Scanner filesc = new Scanner(myObj); // Naplófájl beolvasása
-            while(filesc.hasNextLine())
-                System.out.println(filesc.nextLine()); // Naplófájl tartalmának kiírása
-            filesc.close();
         } while(!quit);
     }
+
+	
 
 
 }

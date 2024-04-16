@@ -21,6 +21,13 @@ public class TestCommand {
 	    this.quantity = quantity;
 	    this.atLeast = atLeast;
     }
+    
+    public void write() {
+    	System.out.println(command);
+    	System.out.println(parameter);
+    	System.out.println(quantity);
+    	System.out.println(atLeast);
+    }
 
 	public static List<TestCommand> readTestCommands(InputStream in) {
 	    List<TestCommand> commands = new ArrayList<>();
@@ -41,7 +48,7 @@ public class TestCommand {
 			    if (scanner.hasNext()) {
 			        parameter=scanner.next();
 			    }
-			    String[] optional=null;
+			    String[] optional= new String[0];
 			    if (scanner.hasNextLine()) {
 			       optional =scanner.nextLine().substring(1).trim().split(" ");
 			    }
@@ -83,7 +90,6 @@ public class TestCommand {
         	else {
         		Pattern pattern = Pattern.compile(parameter, Pattern.LITERAL);
         		int count = countMatches(pattern, text);
-        		System.out.println("count: "+count);
         		if(atLeast.equals("m"))
         			return count<=quantity;
         		else if(atLeast.equals("l"))

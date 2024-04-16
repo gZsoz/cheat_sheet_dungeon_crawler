@@ -1,0 +1,6 @@
+Ez a bemenet
+itt lesznek a parancsok
+create
+create
+move
+create
