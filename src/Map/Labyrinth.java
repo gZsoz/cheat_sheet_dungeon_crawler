@@ -4,7 +4,7 @@ import Character.Student;
 import Character.Teacher;
 import EnvironmentalFactor.Gas;
 import Items.*;
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * Osztály, mely reprezentálja a labirintust a játékban.
@@ -15,7 +15,7 @@ public class Labyrinth {
 	 * Létrehozza a labirintust.
 	 */
 	public void create(){
-		SkeletonUtil.printLog("Labyrinth.create()");
+		ProtoUtil.printLog("Labyrinth.create()");
 	}
 	
     /**
@@ -23,7 +23,7 @@ public class Labyrinth {
      * @param r A hozzáadandó szoba.
      */
 	public void addRoom(Room r) {
-		SkeletonUtil.printLog("Labyrinth.addRoom("+ r.name +")");
+		ProtoUtil.printLog("Labyrinth.addRoom("+ r.name +")");
     }
 
     /**
@@ -32,11 +32,11 @@ public class Labyrinth {
      * @param merging A beolvasztandó szoba.
      */
 	public void mergeRoom(Room result, Room merging) {
-		SkeletonUtil.printLog("Labyrinth.mergeRoom(" + result.name + ", " + merging.name +")");
-		SkeletonUtil.increaseIndent();
+		ProtoUtil.printLog("Labyrinth.mergeRoom(" + result.name + ", " + merging.name +")");
+		ProtoUtil.increaseIndent();
 		result.merge(merging);
 		this.removeRoom(merging);
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
 
     /**
@@ -44,16 +44,16 @@ public class Labyrinth {
      * @param r A szétosztandó szoba.
      */
 	public void splitRoom(Room r) {
-		SkeletonUtil.printLog("Labyrinth.splitRoom(" + r.name + ")");
-		SkeletonUtil.increaseIndent();
-		if(SkeletonUtil.binaryQuestion("Elátkozott a kettéosztandó szoba?")) {
+		ProtoUtil.printLog("Labyrinth.splitRoom(" + r.name + ")");
+		ProtoUtil.increaseIndent();
+		if(ProtoUtil.binaryQuestion("Elátkozott a kettéosztandó szoba?")) {
 			// The room was cursed, so to new one will be too
 			new CursedRoom("Szoba_R").create();
 			new CursedRoom("Szoba_R").addEnvironmentalFactor(new Gas());
 			new CursedRoom("Szoba_C").addNeighbour(new Room("Szoba_R"));
 			r.removeNeighbour(new CursedRoom("Szoba_C"));
 			
-			if(SkeletonUtil.binaryQuestion("Van gáz a kettéosztandó szobában?")) {
+			if(ProtoUtil.binaryQuestion("Van gáz a kettéosztandó szobában?")) {
 				// The room had Gas, so add gas to the new room
 				new Gas().create();
 				new CursedRoom("Szoba_R").addEnvironmentalFactor(new Gas());
@@ -64,13 +64,13 @@ public class Labyrinth {
 			new Room("Szoba_C").addNeighbour(new Room("Szoba_R"));
 			r.removeNeighbour(new Room("Szoba_C"));
 			
-			if(SkeletonUtil.binaryQuestion("Van gáz a kettéosztandó szobában?")) {
+			if(ProtoUtil.binaryQuestion("Van gáz a kettéosztandó szobában?")) {
 				// The room had Gas, so add gas to the new room
 				new Gas().create();
 				new Room("Szoba_R").addEnvironmentalFactor(new Gas());
 			}
 		}
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
 	
 	/**
@@ -78,15 +78,15 @@ public class Labyrinth {
 	 * @param r - A törlendő szoba.
 	 */
 	public void removeRoom(Room r) {
-		SkeletonUtil.printLog("Labyrinth.removeRoom(" + r.name + ")");
+		ProtoUtil.printLog("Labyrinth.removeRoom(" + r.name + ")");
 	}
 
     /**
      * A szobák generálása a labirintusban.
      */
 	public void generateRooms() {
-		SkeletonUtil.printLog("Labyrinth.generateRooms()");
-		SkeletonUtil.increaseIndent();
+		ProtoUtil.printLog("Labyrinth.generateRooms()");
+		ProtoUtil.increaseIndent();
 		// Create each room
 		new Room("Szoba_C").create();
 		new Room("Szoba_G").create();
@@ -190,6 +190,6 @@ public class Labyrinth {
 		new Student("Aladar").pickupItem(new WetCloth());
 		new Teacher("Tasnadi").pickupItem(new Mask("mask2"));
 		
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
 }

@@ -3,7 +3,7 @@ package Character;
 import Items.BatSkin;
 import Items.Beer;
 import Map.Room;
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * Kirúgás esetén a Student eltávolítását ez az osztály végzi.
@@ -30,22 +30,22 @@ public class Teacher extends Character {
      * @return Ha van, akkor igaz értékkel tér vissza, egyébként hamissal.
      */
 	public boolean checkCollision() {
-		SkeletonUtil.printLog(name + ".checkCollision()");
-		SkeletonUtil.increaseIndent();
-		if(SkeletonUtil.binaryQuestion("Van hallgató a szobában?")) {
+		ProtoUtil.printLog(name + ".checkCollision()");
+		ProtoUtil.increaseIndent();
+		if(ProtoUtil.binaryQuestion("Van hallgató a szobában?")) {
 			this.kick(new Student());
 		} else {
 		}
-		SkeletonUtil.decreaseIndent();
+		ProtoUtil.decreaseIndent();
     	return false;
     }
 
     @Override
     public void update() {
-    	SkeletonUtil.printLog(name + ".update()");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name + ".update()");
+		ProtoUtil.increaseIndent();
 		this.checkCollision();
-		SkeletonUtil.decreaseIndent();
+		ProtoUtil.decreaseIndent();
     }
 
     /**
@@ -55,16 +55,16 @@ public class Teacher extends Character {
      * @param s A hallgató, amelyet ki szándékozik rúgni.
      */
     public void kick(Student s) {
-    	SkeletonUtil.printLog(name + ".kick(" + s.name + ")");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name + ".kick(" + s.name + ")");
+		ProtoUtil.increaseIndent();
 		s.getInventory();
-		if(SkeletonUtil.binaryQuestion("Van söröspohár a hallgatónál?")) {
+		if(ProtoUtil.binaryQuestion("Van söröspohár a hallgatónál?")) {
 			new Beer().use();
-		} else if(SkeletonUtil.binaryQuestion("Van denevérbőr a hallgatónál?")) {
+		} else if(ProtoUtil.binaryQuestion("Van denevérbőr a hallgatónál?")) {
 			new BatSkin().use();
 		} else {
 			new Room().removeCharacter(s);
 		}
-		SkeletonUtil.decreaseIndent();
+		ProtoUtil.decreaseIndent();
     }
 }

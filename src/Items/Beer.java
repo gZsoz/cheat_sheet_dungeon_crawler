@@ -1,6 +1,6 @@
 package Items;
 
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * Osztály a Beer tárgy reprezentálására
@@ -30,10 +30,10 @@ public class Beer extends DecayingItems {
 	@Override
     public void use() {
         // Implementation
-    	SkeletonUtil.printLog(name+".use()");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name+".use()");
+		ProtoUtil.increaseIndent();
 		reduceDuration();
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
 	/**
 	 * A tárgy felvételekor elindítja a használatot
@@ -41,10 +41,10 @@ public class Beer extends DecayingItems {
 
 	@Override
 	public void onPickUp() {
-		SkeletonUtil.printLog(name+".onPickUp()");
-		SkeletonUtil.increaseIndent();
+		ProtoUtil.printLog(name+".onPickUp()");
+		ProtoUtil.increaseIndent();
 		use();
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 
 }

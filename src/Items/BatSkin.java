@@ -1,6 +1,6 @@
 package Items;
 
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * A tárgyhoz tartozó objektum feladata, hogy veszély esetén megvédje a karaktereket 
@@ -32,18 +32,18 @@ public class BatSkin extends NumberOfUsesItem {
 	 */
 	@Override
     public void use() {
-    	SkeletonUtil.printLog(name+".use()");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name+".use()");
+		ProtoUtil.increaseIndent();
 		this.setRemainingUses();
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
 	/**
      * Levon a fennmaradó használatok számából egyet.
      */
 	public void setRemainingUses() {
-		SkeletonUtil.printLog(name+".setRemainingUses()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".setRemainingUses()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 
 	/**
@@ -51,8 +51,8 @@ public class BatSkin extends NumberOfUsesItem {
      */
 	@Override
 	public void onPickUp() {
-		SkeletonUtil.printLog(name+".onPickUp()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".onPickUp()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 }

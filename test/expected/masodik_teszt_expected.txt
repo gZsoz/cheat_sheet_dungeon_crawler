@@ -1,0 +1,4 @@
+contains "create
+create"
+notcontains "eger vara"
+contains "move" 3 m

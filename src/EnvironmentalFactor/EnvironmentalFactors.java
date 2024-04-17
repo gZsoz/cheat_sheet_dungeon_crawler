@@ -1,7 +1,7 @@
 package EnvironmentalFactor;
 
 import Map.Room;
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * Absztrakt osztály a környezeti változók reprezentálására
@@ -14,9 +14,9 @@ public abstract class EnvironmentalFactors {
 	 * Létrehoz egy környezeti változót
 	 */
 	public void create() {
-		SkeletonUtil.printLog(name+".create()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".create()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
     /**
      * Beállítja a környezeti változó helyét egy adott szobába
@@ -24,9 +24,9 @@ public abstract class EnvironmentalFactors {
      */
 	
 	public void setLocation(Room room) {
-		SkeletonUtil.printLog(name+".setLocation("+room.name+")");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".setLocation("+room.name+")");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 
 	}
 	

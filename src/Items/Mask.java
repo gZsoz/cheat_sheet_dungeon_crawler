@@ -1,6 +1,6 @@
 package Items;
 
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * Class representing a Mask item in the game.
@@ -30,19 +30,19 @@ public class Mask extends DecayingItems {
 	
 	@Override
     public void use() {
-    	SkeletonUtil.printLog(name+".use()");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name+".use()");
+		ProtoUtil.increaseIndent();
 		reduceDuration();
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
 	/**
 	 * A trágy felvételekor elvégezendő feladatok
 	 */
 	@Override
 	public void onPickUp() {
-		SkeletonUtil.printLog(name+".onPickUp()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".onPickUp()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 	
 }

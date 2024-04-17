@@ -1,4 +1,4 @@
-package SkeletonUtil;
+package ProtoUtil;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,9 +24,10 @@ import Map.*;
 /**
  * A SkeletonUtil osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
  */
-public class SkeletonUtil {
+public class ProtoUtil {
 	private static final String dirName = "test/";
     private static String testname = ""; // A naplófájl neve
+    
     public static void printLog(String str) {
         String message=str;
         System.out.println(message); // Üzenet kiírása a konzolra
@@ -41,7 +42,7 @@ public class SkeletonUtil {
             e.printStackTrace();
         }
     }
-
+    // csak azért vannak itt mert nem akartam belenyúlni az osztályokba
     public static void increaseIndent(){}
     public static void decreaseIndent(){}
     /**
@@ -98,14 +99,13 @@ public class SkeletonUtil {
     public static void runTest(InputStream input, OutputStream output) {
     	Scanner sc = new Scanner(input);
     	PrintStream out = new PrintStream(output);
-    	out.println("almafa");
     	String line;
     	while (sc.hasNextLine()) {
     	    line = sc.nextLine();
     	    if (line.equals("quit"))
     	        break; // this will exit the loop
-    	    System.out.println(line);
     	    out.println(line);
+    	    // !!!!!!! Ide jön majd a parancs felismerése, futtatása !!!!!!!
     	}
 	    if(!input.equals(System.in))
 	    	sc.close();
@@ -117,9 +117,8 @@ public class SkeletonUtil {
 		Scanner scanner = new Scanner( output );
 		String text = scanner.useDelimiter("\\A").next();
 		scanner.close();
-		System.out.println("Végső:\n"+text);
-		List<TestCommand> commands = TestCommand.readTestCommands(expected);
-		for (TestCommand command : commands) {
+		List<EvalCommand> commands = EvalCommand.readEvalCommands(expected);
+		for (EvalCommand command : commands) {
 			if(!command.runCommand(text))
 				return false;
 		}
@@ -143,10 +142,10 @@ public class SkeletonUtil {
 	
 	private static void runTestFromName(String name) {
 		try {
-			File output = new File(dirName+"output/"+name+"_output.txt"); // Naplófájl inicializálása
+			File output = new File(dirName+"output/"+name+"_output.txt");
 	        File input = new File(dirName+"input/"+name+"_input.txt");
 	        PrintWriter writer = new PrintWriter(output);
-	        writer.close(); // Naplófájl tartalmának törlése
+	        writer.close();
 	        InputStream inStream = new FileInputStream(input);
 	        OutputStream outStream = new FileOutputStream(output);
 	    	runTest(inStream, outStream);
@@ -199,9 +198,27 @@ public class SkeletonUtil {
                 	if(selectedTest==0)
                 		break;
                 	runTestFromName(tests.get(selectedTest));
-                	System.out.println("A teszt eredménye: "+evaluateTestFromName(tests.get(selectedTest)));
+                	if(evaluateTestFromName(tests.get(selectedTest)))
+            			System.out.printf("%-30sSuccess\n",tests.get(selectedTest));
+            		else
+            			System.out.printf("%-30sFailure\n",tests.get(selectedTest));
                     break;
                 case 3:
+                	ArrayList<String> alltests=getTestNames();
+                	boolean success=true;
+                	for(String test : alltests) {
+                		runTestFromName(test);
+                		if(evaluateTestFromName(test))
+                			System.out.printf("%-30sSuccess\n",test);
+                		else {
+                			System.out.printf("%-30sFailure\n",test);
+                			success=false;
+                		}
+                	}
+                	if(success)
+            			System.out.println("\nMinden teszt sikeresen lefutott!");
+            		else 
+            			System.out.println("\nEgy vagy több teszt hibás eredményt adott!");
                 	break;
                 case 4:
                     quit=true; // Kilépés
@@ -210,9 +227,5 @@ public class SkeletonUtil {
             System.out.println(); // Üres sor a jobb olvashatóság érdekében
         } while(!quit);
     }
-
-	
-
-
 }
 

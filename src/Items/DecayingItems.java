@@ -1,6 +1,6 @@
 package Items;
 
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * Absztrakt osztály, amely összefoglalja az időérzékeny tárgyak közös tulajdonságait és metódusait.
@@ -13,9 +13,9 @@ public abstract class DecayingItems extends Item {
      * ha a duration eléri a 0-t.
      */
     public void reduceDuration() {
-    	SkeletonUtil.printLog(name+".reduceDuration()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.printLog(name+".reduceDuration()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
     /**
      * a gyermekosztályok által leírt tárgyak használatát és hatását elindító függvény, 

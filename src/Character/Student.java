@@ -1,7 +1,7 @@
 package Character;
 
 import Items.Item;
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * A Student osztály felelős a hallgatók inventory-jában lévő aktiválható tárgyak aktiválásáért.
@@ -29,9 +29,9 @@ public class Student extends Character {
      * @param i A tárgy.
      */
     public void activate(Item i) {
-    	SkeletonUtil.printLog(name + ".activate(" + i.name + ")");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name + ".activate(" + i.name + ")");
+		ProtoUtil.increaseIndent();
 		i.use();
-		SkeletonUtil.decreaseIndent();
+		ProtoUtil.decreaseIndent();
     }
 }

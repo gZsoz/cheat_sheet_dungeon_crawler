@@ -2,7 +2,7 @@ package Map;
 
 import Character.Character;
 import EnvironmentalFactor.Gas;
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * A CursedRoom osztály egy speciális típusú szobát reprezentál a játékban, amely az alap Room osztálytól származik.
@@ -30,19 +30,19 @@ public class CursedRoom extends Room{
      * Beállítja az ajtók állapotát zártnak és inicializálja a closeDuration-t a definiált kezdőértékre.
      */
     public void hideDoors() {
-		SkeletonUtil.printLog(name+".hideDoors()");
-		SkeletonUtil.increaseIndent();
+		ProtoUtil.printLog(name+".hideDoors()");
+		ProtoUtil.increaseIndent();
     	removeAllDoors();
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
     
     /**
      * A szoba összes ajtaját eltávolítja.
      */
 	public void removeAllDoors() {
-		SkeletonUtil.printLog(name+".removeAllDoors()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".removeAllDoors()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 	
 	/**
@@ -52,13 +52,13 @@ public class CursedRoom extends Room{
      */
     @Override
 	public void addCharacter(Character character) {
-		SkeletonUtil.printLog(name+".addCharacter("+character.name+")");
-		SkeletonUtil.increaseIndent();
+		ProtoUtil.printLog(name+".addCharacter("+character.name+")");
+		ProtoUtil.increaseIndent();
     	hideDoors();
-		if(SkeletonUtil.binaryQuestion("Gázos-e a szoba?")) {
+		if(ProtoUtil.binaryQuestion("Gázos-e a szoba?")) {
 			new Gas().stun(character);
 		}else {
 		}
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 }

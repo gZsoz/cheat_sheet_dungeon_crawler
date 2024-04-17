@@ -1,6 +1,6 @@
 package Items;
 
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * Absztrakt osztály, ebből származnak le a különböző tárgyak.
@@ -15,9 +15,9 @@ public abstract class Item {
      * Az inicializálás tesztjéhez a konstruktor szimulálására.
      */
 	public void create() {
-		SkeletonUtil.printLog(name+".create()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".create()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 	
 	/**

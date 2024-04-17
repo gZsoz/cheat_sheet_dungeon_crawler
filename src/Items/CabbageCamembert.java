@@ -2,7 +2,7 @@ package Items;
 
 import EnvironmentalFactor.Gas;
 import Map.Room;
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * A Káposztás Camembert osztály felelős mérges gáz kibocsátására egy adott szobában egyszeri alkalommal. 
@@ -31,11 +31,11 @@ public class CabbageCamembert extends NumberOfUsesItem {
 	 */
     @Override
     public void use() {
-    	SkeletonUtil.printLog(name+".use()");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name+".use()");
+		ProtoUtil.increaseIndent();
 		new Gas().create();
 		new Room().addEnvironmentalFactor(new Gas());
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
 
     /**
@@ -43,8 +43,8 @@ public class CabbageCamembert extends NumberOfUsesItem {
      */
 	@Override
 	public void onPickUp() {
-		SkeletonUtil.printLog(name+".onPickUp()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".onPickUp()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 }

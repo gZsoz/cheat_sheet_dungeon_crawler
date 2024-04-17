@@ -1,7 +1,7 @@
 package Items;
 
 import Map.Room;
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 import Character.*;
 import Character.Character;
 
@@ -34,9 +34,9 @@ public class Transistor extends Item {
      */
     @Override
     public void use() {
-    	SkeletonUtil.printLog(name+".use()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.printLog(name+".use()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
 
     /**
@@ -45,10 +45,10 @@ public class Transistor extends Item {
      * @param c A Karakter akit teleportál
      */
     public void onDrop(Character c) {
-    	SkeletonUtil.printLog(name+".onDrop("+c.name+")");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name+".onDrop("+c.name+")");
+		ProtoUtil.increaseIndent();
 		c.enterRoom(new Transistor().getLocation());
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
 
     /**
@@ -56,37 +56,37 @@ public class Transistor extends Item {
      * @param t A Tranzisztor akivel párosul
      */
     public void connect(Transistor t) {
-    	SkeletonUtil.printLog(name+".connect("+t.name+")");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name+".connect("+t.name+")");
+		ProtoUtil.increaseIndent();
 		t.setPair(this);
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
     }
     /**
      * Beállítja ennek a Transistornak a párját.
      * @param t A Tranzisztor akivel párosul
      */
 	public void setPair(Transistor t) {
-		SkeletonUtil.printLog(name+".setPair("+t.name+")");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".setPair("+t.name+")");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 	/**
      * Beállítja ennek a Transistornak a helyét, ahol letették.
      * @param r A szoba ahova letették
      */
 	public void setLocation(Room r) {
-		SkeletonUtil.printLog(name+".setLocation("+r.name+")");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".setLocation("+r.name+")");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 	/**
      * visszaadja ennek a Transistornak a helyét, ahol letették.
      * @return A szoba ahova letették
      */
 	public Room getLocation() {
-		SkeletonUtil.printLog(name+".getLocation()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".getLocation()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
     	return new Room();
 	}
 	
@@ -95,13 +95,13 @@ public class Transistor extends Item {
      */
 	@Override
 	public void onPickUp() {
-		SkeletonUtil.printLog(name+".onPickUp()");
-		SkeletonUtil.increaseIndent();
-		if(SkeletonUtil.binaryQuestion("Ez lesz a második tranzisztor nála?")) {
+		ProtoUtil.printLog(name+".onPickUp()");
+		ProtoUtil.increaseIndent();
+		if(ProtoUtil.binaryQuestion("Ez lesz a második tranzisztor nála?")) {
 			Transistor t1 = new Transistor("tranzisztor_első");
 			Transistor t2 = new Transistor("tranzisztor_második");
 			t2.connect(t1);
 		}
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 }

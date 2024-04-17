@@ -2,7 +2,7 @@ package Items;
 
 import Character.Teacher;
 import Map.Room;
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * Class representing WetCLoth item.
@@ -32,22 +32,22 @@ public class WetCloth extends DecayingItems{
 	
 	@Override
 	public void use() {
-    	SkeletonUtil.printLog(name+".WetCloth.use()");
-		SkeletonUtil.increaseIndent();
+    	ProtoUtil.printLog(name+".WetCloth.use()");
+		ProtoUtil.increaseIndent();
     	new Room().getCharacters();
-    	if(SkeletonUtil.binaryQuestion("Van a szobában tanár?"))
+    	if(ProtoUtil.binaryQuestion("Van a szobában tanár?"))
     		new Teacher().setStunned(true);
     	reduceDuration();
-		SkeletonUtil.decreaseIndent();
+		ProtoUtil.decreaseIndent();
     }
 	/**
 	 * A trágy felvételekor elvégezendő feladatok
 	 */
 	@Override
 	public void onPickUp() {
-		SkeletonUtil.printLog(name+".onPickUp()");
-		SkeletonUtil.increaseIndent();
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".onPickUp()");
+		ProtoUtil.increaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 
 }

@@ -1,4 +1,4 @@
-package SkeletonUtil;
+package ProtoUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,28 +9,21 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TestCommand {
+public class EvalCommand {
     String command;
     String parameter;
     int quantity;
     String atLeast;
 
-    public TestCommand(String command, String parameter, int quantity, String atLeast) {
+    public EvalCommand(String command, String parameter, int quantity, String atLeast) {
 	    this.command = command;
 	    this.parameter = parameter;
 	    this.quantity = quantity;
 	    this.atLeast = atLeast;
     }
-    
-    public void write() {
-    	System.out.println(command);
-    	System.out.println(parameter);
-    	System.out.println(quantity);
-    	System.out.println(atLeast);
-    }
 
-	public static List<TestCommand> readTestCommands(InputStream in) {
-	    List<TestCommand> commands = new ArrayList<>();
+	public static List<EvalCommand> readEvalCommands(InputStream in) {
+	    List<EvalCommand> commands = new ArrayList<>();
 		try (Scanner scanner = new Scanner(in)) {
 			while(scanner.hasNext()) {
 			    String command ="";
@@ -58,7 +51,7 @@ public class TestCommand {
 			    if (optional.length>=2) {
 			        atLeast=optional[1];
 			    }
-			    commands.add(new TestCommand(command, parameter, quantity, atLeast));
+			    commands.add(new EvalCommand(command, parameter, quantity, atLeast));
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

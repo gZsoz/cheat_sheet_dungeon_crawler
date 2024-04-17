@@ -1,6 +1,6 @@
 package Items;
 
-import SkeletonUtil.SkeletonUtil;
+import ProtoUtil.ProtoUtil;
 
 /**
  * A logarléc osztályból az összes többi tárggyal ellentétben csupán egy lehet a pályán, 
@@ -29,10 +29,10 @@ public class SlideRule extends NumberOfUsesItem {
 	 */
 	@Override
     public void use() {
-		SkeletonUtil.printLog(name+".use()");
-		SkeletonUtil.increaseIndent();
-		SkeletonUtil.printLog("Vége a játéknak!!!");
-    	SkeletonUtil.decreaseIndent();
+		ProtoUtil.printLog(name+".use()");
+		ProtoUtil.increaseIndent();
+		ProtoUtil.printLog("Vége a játéknak!!!");
+    	ProtoUtil.decreaseIndent();
     }
 	
 	/**
@@ -40,9 +40,9 @@ public class SlideRule extends NumberOfUsesItem {
      */
 	@Override
 	public void onPickUp() {
-		SkeletonUtil.printLog(name+".onPickUp()");
-		SkeletonUtil.increaseIndent();
+		ProtoUtil.printLog(name+".onPickUp()");
+		ProtoUtil.increaseIndent();
 		use();
-    	SkeletonUtil.decreaseIndent();
+    	ProtoUtil.decreaseIndent();
 	}
 }
