@@ -25,6 +25,11 @@ import Map.*;
  * A SkeletonUtil osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
  */
 public class ProtoUtil {
+	public static final String RESET = "\033[0m";  // Text Reset
+
+    public static final String RED = "\033[0;31m";     // RED
+    public static final String GREEN = "\033[0;32m";   // GREEN
+	
 	private static final String dirName = "test/";
     private static String testname = ""; // A naplófájl neve
     
@@ -199,9 +204,9 @@ public class ProtoUtil {
                 		break;
                 	runTestFromName(tests.get(selectedTest));
                 	if(evaluateTestFromName(tests.get(selectedTest)))
-            			System.out.printf("%-30sSuccess\n",tests.get(selectedTest));
+            			System.out.printf(GREEN+"%-30sSuccess\n"+RESET,tests.get(selectedTest));
             		else
-            			System.out.printf("%-30sFailure\n",tests.get(selectedTest));
+            			System.out.printf(RED+"%-30sFailure\n"+RESET,tests.get(selectedTest));
                     break;
                 case 3:
                 	ArrayList<String> alltests=getTestNames();
@@ -209,16 +214,16 @@ public class ProtoUtil {
                 	for(String test : alltests) {
                 		runTestFromName(test);
                 		if(evaluateTestFromName(test))
-                			System.out.printf("%-30sSuccess\n",test);
+                			System.out.printf(GREEN+"%-30sSuccess\n"+RESET,test);
                 		else {
-                			System.out.printf("%-30sFailure\n",test);
+                			System.out.printf(RED+"%-30sFailure\n"+RESET,test);
                 			success=false;
                 		}
                 	}
                 	if(success)
-            			System.out.println("\nMinden teszt sikeresen lefutott!");
+            			System.out.println(GREEN+"\nMinden teszt sikeresen lefutott!"+RESET);
             		else 
-            			System.out.println("\nEgy vagy több teszt hibás eredményt adott!");
+            			System.out.println(RED+"\nEgy vagy több teszt hibás eredményt adott!"+RESET);
                 	break;
                 case 4:
                     quit=true; // Kilépés
