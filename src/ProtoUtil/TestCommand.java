@@ -32,40 +32,42 @@ public class TestCommand {
 			e.printStackTrace();
 		}
 	}
-
-	public void runCommand(Labyrinth l) {
+	// returns false if quit
+	public boolean runCommand(Labyrinth l, ArrayList<Character> characters, Character actor) {
 		switch (command) {
-		case "create_room":
-			return;
-		case "create_item":
-			return;
-		case "create_factor":
-			return;
-		case "create_character":
-			return;
-		case "pickup_item":
-			return;
-		case "throw_item":
-			return;
-		case "use_item":
-			return;
-		case "enter_room":
-			return;
-		case "split":
-			return;
-		case "merge":
-			return;
-		case "kick":
-			return;
-		case "activate":
-			return;
-		case "select_actor":
-			return;
+		case "create_room":	// Balázs
+			break;
+		case "create_item": // Imi
+			break;
+		case "create_factor": // Bence
+			break;
+		case "create_character": // Sam
+			break;
+		case "pickup_item": // Imi
+			break;
+		case "throw_item": // Imi
+			break;
+		case "use_item": // Zsombor
+			break;
+		case "enter_room": // Sam
+			break;
+		case "split": // Bence
+			break;
+		case "merge": // Bence
+			break;
+		case "kick": // Sam
+			break;
+		case "activate": // Bence
+			break;
+		case "select_actor": // Balázs
+			actor=characters.get(Integer.parseInt(parameters[0]));
+			break;
 		case "quit":
-			return;
+			return false;
 		default:
 			System.out.println("Invalid command: " + command);
 			break;
 		}
+		return true;
 	}
 }
