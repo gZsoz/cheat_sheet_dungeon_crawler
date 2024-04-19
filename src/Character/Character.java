@@ -100,9 +100,7 @@ public abstract class Character {
 	 * Visszaadja a karakter inventory-ját.
 	 */
 	public void getInventory() {
-		ProtoUtil.printLog(name + ".getInventory()");
-		ProtoUtil.increaseIndent();
-		ProtoUtil.decreaseIndent();
+		ProtoUtil.printLog("getInventory");
 	}
 
 	/**
