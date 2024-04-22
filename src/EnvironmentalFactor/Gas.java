@@ -5,36 +5,34 @@ import Items.*;
 import Map.CursedRoom;
 import ProtoUtil.ProtoUtil;
 
+import javax.lang.model.type.ArrayType;
+import java.util.ArrayList;
+
 /**
  * Class representing gas environmental factor in the game.
  */
 public class Gas extends EnvironmentalFactors {
 	
-	/**
-     * Konstruktor egy EnvironmentalFactors létrehozásához. EnvironmentalFactors-ra állítja a nevet.
-     */
-	public Gas() {
-		name="Gas";
-	}
-	
-	/**
-     * Konstruktor egy tárgy létrehozásához.
-     * @param n A tárgy neve
-     */
-	public Gas(String n) {
-		name=n;
-	}
-	
 	public void stun(Character character) {
-		ProtoUtil.printLog(name+".stun()");
-		ProtoUtil.increaseIndent();
-		character.getInventory();
-		if(ProtoUtil.binaryQuestion("Van-e maszkja?")) {
-			new Mask().use();
-		}else {
+		ProtoUtil.printLog("stun");
+		boolean hasDefence = false;
+		for (Item item: character.getInventory()) {
+			if(item instanceof Mask){
+				hasDefence = true;
+			}
+		}
+		if(!hasDefence) {
 			character.setStunned(true);
 		}
-		ProtoUtil.decreaseIndent();
 	}
-	
+
+	/**
+	 * Minden adott időben megpróbálja elkábítani, a vele egy szobában lévőket
+	 */
+	@Override
+	public void update() {
+		for(Character character: getLocation().getCharacters()){
+			stun(character);
+		}
+	}
 }

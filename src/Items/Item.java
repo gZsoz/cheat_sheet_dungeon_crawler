@@ -7,21 +7,30 @@ import ProtoUtil.ProtoUtil;
  */
 public abstract class Item {
 	/**
-	 * Az inicializálás tesztjéhez két azonos típusú változó megkülönböztetésére.
+	 * A tárgy ragacsosságát jelzi
 	 */
-	public String name;
-	
+	protected boolean sticky;
+
 	/**
-     * Az inicializálás tesztjéhez a konstruktor szimulálására.
-     */
-	public void create() {
-		ProtoUtil.printLog(name+".create()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+	 * Tárgy ragacsosságának lekérdezése
+	 * @return ragacsos-e a tárgy
+	 */
+	public boolean getSticky(){
+		ProtoUtil.printLog("getSticky");
+		return sticky;
 	}
-	
+
 	/**
-     * Egy tárgy felvételekor hívodik meg. A tárgyak a saját,egyedi módján kerül használatba, 
+	 * Tárgy ragacsosságának beállítása
+	 * @param s A beállítandó állapot
+	 */
+	public void setSticky(boolean s){
+		ProtoUtil.printLog("setSticky");
+		sticky=s;
+	}
+
+	/**
+     * Egy tárgy felvételekor hívodik meg. A tárgyak a saját,egyedi módján kerül használatba,
      * ezért ezt külön-külön valósítják meg a  leszármazottak.
      */
 	public abstract void onPickUp();
