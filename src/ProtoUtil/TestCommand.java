@@ -50,6 +50,30 @@ public class TestCommand {
 	public boolean runCommand(Labyrinth l, ArrayList<Character> characters, Character actor) {
 		switch (command) {
 		case "create_room":	// Balázs
+			Room room;
+			int capacity=Integer.parseInt(parameters[0]);
+			int neighbourcount=parameters.length-2;
+			if(l.getRooms().isEmpty()) {
+				if(parameters[1]=="0")
+					l.addRoom(new Room(capacity));
+				else
+					l.addRoom(new CursedRoom(capacity));
+				return true;
+			}
+			List<Room> neighbours = new ArrayList<Room>();
+			if(parameters[1]=="0")
+				room=new Room(neighbours, capacity);
+			else
+				room=new CursedRoom(neighbours, capacity);
+			if(neighbourcount == 0)
+				neighbours.add(l.getRooms().get(l.getRooms().size()-1));
+			else
+				for(int i=0;i<neighbourcount;i++)
+					neighbours.add(l.getRooms().get(Integer.parseInt(parameters[i+2])));
+			for(Room r : neighbours)
+				r.addNeighbour(room);
+			l.addRoom(room);
+			return true;
 			break;
 		case "create_item":
 			switch(parameters[0]){
