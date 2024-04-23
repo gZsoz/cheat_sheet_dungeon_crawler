@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import EnvironmentalFactor.Gas;
+import EnvironmentalFactor.Sticky;
 import Items.*;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
@@ -92,11 +94,11 @@ public class Labyrinth implements iTask{
 		}
 		rand=random.nextInt(old.getCharacters().size());
 		for(int i=0; i<rand; i++){
-			n.addCharacter(old.getCharacters().get(0));
-			old.removeCharacter(old.getCharacters().get(0));
+			old.getCharacters().get(i).enterRoom(n);
 		}
 		for(int i=0; i<old.getEnvironmentalFactors().size(); i++){
-			n.addEnvironmentalFactor(old.getEnvironmentalFactors().get(i));
+			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.addEnvironmentalFactor(new Gas(n));
+			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
 		}
 		Rooms.add(Rooms.indexOf(old), n);
     }
