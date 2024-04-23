@@ -48,6 +48,6 @@ public class WetCloth extends DecayingItems{
 		ProtoUtil.printLog("update");
 		if(isactive)
 		reduceDuration();
-		
+	}	
 
 }
