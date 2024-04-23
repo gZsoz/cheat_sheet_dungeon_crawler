@@ -9,20 +9,8 @@ import ProtoUtil.ProtoUtil;
  */
 public class WetCloth extends DecayingItems{
 	
-	/**
-     * Konstruktor egy tárgy létrehozásához. Wetcloth-ra állítja a nevet.
-     */
-	public WetCloth() {
-		name="Wetcloth";
-	}
 	
-	/**
-     * Konstruktor egy tárgy létrehozásához.
-     * @param n A tárgy neve
-     */
-	public WetCloth(String n) {
-		name=n;
-	}
+	
 	
 	/**
      * A WetCLoth tárgy használatakor elvégezendő műveleteket végzi
@@ -32,13 +20,14 @@ public class WetCloth extends DecayingItems{
 	
 	@Override
 	public void use() {
-    	ProtoUtil.printLog(name+".WetCloth.use()");
-		ProtoUtil.increaseIndent();
-    	new Room().getCharacters();
-    	if(ProtoUtil.binaryQuestion("Van a szobában tanár?"))
-    		new Teacher().setStunned(true);
-    	reduceDuration();
-		ProtoUtil.decreaseIndent();
+    	ProtoUtil.printLog("use()");
+		for(Character character: location.getCharacters) {
+			if(character instanceof Teacher) {
+				((Teacher) character).setStunned(true);
+			}
+		}
+    	setisactive(true);
+		
     }
 	/**
 	 * A trágy felvételekor elvégezendő feladatok
@@ -48,6 +37,12 @@ public class WetCloth extends DecayingItems{
 		ProtoUtil.printLog(name+".onPickUp()");
 		ProtoUtil.increaseIndent();
     	ProtoUtil.decreaseIndent();
+	}
+
+	@Override
+	public void update() {
+		
+		
 	}
 
 }

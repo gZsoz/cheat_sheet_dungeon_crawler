@@ -10,32 +10,34 @@ import ProtoUtil.ProtoUtil;
  */
 public class CabbageCamembert extends NumberOfUsesItem {
 
+	private Room location;
 	/**
      * Konstruktor egy tárgy létrehozásához. CabbageCamembert-ra állítja a nevet.
      */
 	public CabbageCamembert() {
-		name="CabbageCamembert";
+		location=null;
+		sticky=false;
+		RemainingUses=1;
 	}
-	
-	/**
-     * Konstruktor egy tárgy létrehozásához.
-     * @param n A tárgy neve
-     */
-	public CabbageCamembert(String n) {
-		name=n;
+		
+	public Room getLocation(){
+		return location;
 	}
-	
+
+	public void setLocation(Room l){
+		location=l;
+	}
+
 	/**
 	 * A camambert kinyitása. Amikor a hallgató használja, 
 	 * akkor gázt bocsát abba a szobába, melyben a hallgató van.
 	 */
     @Override
     public void use() {
-    	ProtoUtil.printLog(name+".use()");
-		ProtoUtil.increaseIndent();
-		new Gas().create();
-		new Room().addEnvironmentalFactor(new Gas());
-    	ProtoUtil.decreaseIndent();
+    	ProtoUtil.printLog("use");
+		Gas g=new Gas();
+		location.addEnvironmentalFactor(g);
+		this.setRemainingUses(getRemainingUses()-1);
     }
 
     /**
@@ -43,8 +45,6 @@ public class CabbageCamembert extends NumberOfUsesItem {
      */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog(name+".onPickUp()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+		ProtoUtil.printLog("onPickUp");
 	}
 }
