@@ -27,7 +27,7 @@ public class Beer extends DecayingItems {
         // Implementation
     	
 		ProtoUtil.printLog("use");
-		character.setHasDefense(true);
+		Owner.setHasDefense(true);
 		setisactive(true);
 		
     }
@@ -37,10 +37,19 @@ public class Beer extends DecayingItems {
 
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp()");
+		ProtoUtil.printLog("onPickUp");
 		ProtoUtil.increaseIndent();
 		use();
     	ProtoUtil.decreaseIndent();
+	}
+	
+	public void update() {
+		ProtoUtil.printLog("update");
+		reduceDuration();
+		if(!usable) {
+			Owner.setHasDefense(false);
+		}
+		
 	}
 
 }
