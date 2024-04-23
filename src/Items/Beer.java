@@ -27,8 +27,9 @@ public class Beer extends DecayingItems {
         // Implementation
     	
 		ProtoUtil.printLog("use");
+		character.setHasDefense(true);
 		setisactive(true);
-		reduceDuration();
+		
     }
 	/**
 	 * A tárgy felvételekor elindítja a használatot
