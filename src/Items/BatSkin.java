@@ -14,17 +14,10 @@ public class BatSkin extends NumberOfUsesItem {
      * Konstruktor egy tárgy létrehozásához. BatSkin-ra állítja a nevet.
      */
 	public BatSkin() {
-		name="BatSkin";
+		sticky=false;
+		RemainingUses=3;
 	}
-	
-	/**
-     * Konstruktor egy tárgy létrehozásához.
-     * @param n A tárgy neve
-     */
-	public BatSkin(String n) {
-		name=n;
-	}
-	
+		
 	/**
 	 * Megvédi a hallgatót az oktatókkal szemben. Automatikusan használódik, 
 	 * amikor a hallgatót kirúgnák az egyetemről és védelmet nyújt nekik 
@@ -32,18 +25,14 @@ public class BatSkin extends NumberOfUsesItem {
 	 */
 	@Override
     public void use() {
-    	ProtoUtil.printLog(name+".use()");
-		ProtoUtil.increaseIndent();
-		this.setRemainingUses();
-    	ProtoUtil.decreaseIndent();
+    	ProtoUtil.printLog("use");
+		this.setRemainingUses(getRemainingUses()-1);
     }
 	/**
      * Levon a fennmaradó használatok számából egyet.
      */
 	public void setRemainingUses() {
-		ProtoUtil.printLog(name+".setRemainingUses()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+		ProtoUtil.printLog("setRemainingUses");
 	}
 
 	/**
@@ -51,8 +40,6 @@ public class BatSkin extends NumberOfUsesItem {
      */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog(name+".onPickUp()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+		ProtoUtil.printLog("onPickUp");
 	}
 }
