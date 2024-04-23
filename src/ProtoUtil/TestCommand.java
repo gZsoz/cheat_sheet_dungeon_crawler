@@ -8,6 +8,17 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Items.AirFreshener;
+import Items.BatSkin;
+import Items.Beer;
+import Items.CabbageCamembert;
+import Items.FakeBatSkin;
+import Items.FakeMask;
+import Items.FakeSlideRule;
+import Items.Mask;
+import Items.SlideRule;
+import Items.Transistor;
+import Items.WetCloth;
 import Map.Labyrinth;
 
 public class TestCommand {
@@ -37,15 +48,55 @@ public class TestCommand {
 		switch (command) {
 		case "create_room":	// Balázs
 			break;
-		case "create_item": // Imi
+		case "create_item":
+			switch(parameters[0]){
+			case "airfreshener":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new AirFreshener());
+				break;
+			case "batskin":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new BatSkin());
+				break;
+			case "beer":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new Beer());
+				break;
+			case "cabbagecamembert":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new CabbageCamembert());
+				break;
+			case "fakebatskin":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new FakeBatSkin());
+				break;
+			case "fakemask":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new FakeMask());
+				break;
+			case "fakesliderule":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new FakeSlideRule());
+				break;
+			case "mask":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new Mask());
+				break;
+			case "sliderule":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new SlideRule());
+				break;
+			case "transistor":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new Transistor());
+				break;
+			case "wetcloth":
+				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new WetCloth());
+				break;
+			default:
+				System.out.println("Invalid command: " + command + " " + parameters[0]);
+				break;
+			}	
 			break;
 		case "create_factor": // Bence
 			break;
 		case "create_character": // Sam
 			break;
-		case "pickup_item": // Imi
+		case "pickup_item":
+			actor.putdownItem(actor.getInventory()[Integer.parseInt(parameters[0])]);
 			break;
-		case "throw_item": // Imi
+		case "throw_item":
+			actor.pickupItem(actor.getRoom().getItems()[Integer.parseInt(parameters[0])]);
 			break;
 		case "use_item": // Zsombor
 			break;
