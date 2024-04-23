@@ -8,6 +8,8 @@ import Items.*;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
 
+// Labyrinth
+
 /**
  * Osztály, mely reprezentálja a labirintust a játékban.
  */

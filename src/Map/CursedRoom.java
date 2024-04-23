@@ -6,6 +6,8 @@ import java.util.List;
 import Character.Character;
 import ProtoUtil.ProtoUtil;
 
+// Cursed Room
+
 /**
  * A CursedRoom osztály egy speciális típusú szobát reprezentál a játékban, amely az alap Room osztálytól származik.
  * Felelőssége megegyezik a szoba osztállyal, emellett felelőssége még az ajtók eltüntetése és megjelenítése.

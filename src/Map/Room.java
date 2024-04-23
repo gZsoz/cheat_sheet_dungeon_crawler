@@ -10,6 +10,8 @@ import java.util.List;
 
 import Character.Character;
 
+// Room
+
 /**
  * A Room osztály reprezentálja a játék világában található szobákat.
  * Tárolja a szomszédos szobák listáját (azok a szobák, melyekbe vezet ajtó az adott szobából),
