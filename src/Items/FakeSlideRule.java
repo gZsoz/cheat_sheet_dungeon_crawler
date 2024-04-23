@@ -12,7 +12,6 @@ public class FakeSlideRule extends SlideRule{
     @Override
     public void use() {
 		ProtoUtil.printLog("use");
-		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
     }
 
 }

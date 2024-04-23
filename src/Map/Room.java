@@ -205,7 +205,7 @@ public class Room implements iTask {
      * @return A szobában található karakterek egy listában.
      */
     public List<Character> getCharacters() {
-        ProtoUtil.printLog("getCarachters");
+        ProtoUtil.printLog("getCharacters");
         return characters;
     }
 

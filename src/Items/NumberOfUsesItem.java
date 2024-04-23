@@ -9,10 +9,8 @@ import ProtoUtil.ProtoUtil;
  */
 public abstract class NumberOfUsesItem extends Item {
 
-	
     protected int RemainingUses;
 
-    
     public int getRemainingUses(){
         ProtoUtil.printLog("getRemainingUses");
         return RemainingUses;

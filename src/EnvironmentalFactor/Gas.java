@@ -19,7 +19,7 @@ public class Gas extends EnvironmentalFactors {
 	 * @param r Adott szoba
 	 */
 	public Gas(Room r){
-		r.addEnvironmentalFactor(this);
+		location=r;
 	}
 
 	/**

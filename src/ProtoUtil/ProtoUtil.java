@@ -1,25 +1,23 @@
 package ProtoUtil;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.xml.stream.events.Characters;
+
+import Map.Labyrinth;
+import Character.Character;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-
-import Character.*;
-import EnvironmentalFactor.*;
-import Items.*;
-import Map.*;
 
 /**
  * A SkeletonUtil osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
@@ -31,25 +29,12 @@ public class ProtoUtil {
     public static final String GREEN = "\033[0;32m";   // GREEN
 	
 	private static final String dirName = "test/";
-    private static String testname = ""; // A naplófájl neve
+    private static PrintStream logOutput = System.out;
     
     public static void printLog(String str) {
-        String message=str;
-        System.out.println(message); // Üzenet kiírása a konzolra
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(dirName+"output/"+testname+"_output.txt", true);
-            fos.write((message+'\n').getBytes()); // Üzenet írása a naplófájlba
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    	logOutput.println(str);
     }
-    // csak azért vannak itt mert nem akartam belenyúlni az osztályokba
-    public static void increaseIndent(){}
-    public static void decreaseIndent(){}
+    
     /**
      * Bináris kérdést tesz fel a felhasználónak.
      * @param question A kérdés
@@ -79,7 +64,7 @@ public class ProtoUtil {
      * @param question A kérdés
      * @param opt A válaszlehetőségek tömbje
      * @return A felhasználó válasza
-     */
+     */    
     public static int question(String question, String[] opt) {
         int choice;
         Scanner sc = new Scanner(System.in);
@@ -100,22 +85,27 @@ public class ProtoUtil {
         } while(choice<1 || choice>opt.length);
         return choice;
     }
-    
+
     public static void runTest(InputStream input, OutputStream output) {
     	Scanner sc = new Scanner(input);
-    	PrintStream out = new PrintStream(output);
+    	logOutput = new PrintStream(output);
     	String line;
+    	Labyrinth l=new Labyrinth();
+    	ArrayList<Character> characters = new ArrayList<Character>();
+    	ArrayList<Character> actor = new ArrayList<Character>(1);
+    	actor.add(null);
     	while (sc.hasNextLine()) {
     	    line = sc.nextLine();
-    	    if (line.equals("quit"))
+    	    TestCommand tc= new TestCommand();
+    	    tc.readTestCommand(line);
+    	    if (!tc.runCommand(l, characters, actor))
     	        break; // this will exit the loop
-    	    out.println(line);
-    	    // !!!!!!! Ide jön majd a parancs felismerése, futtatása !!!!!!!
+    	    l.update(); l.update(); l.update();
     	}
 	    if(!input.equals(System.in))
 	    	sc.close();
 	    if(!output.equals(System.out))
-	    	out.close();
+	    	logOutput.close();
     }
     
 	private static boolean evaluateTest(InputStream output, InputStream expected) {
@@ -182,6 +172,24 @@ public class ProtoUtil {
      * @throws FileNotFoundException Ha a naplófájl nem található
      */
     public static void main(String[] args) throws FileNotFoundException {
+    	if(args.length==1 && args[0].equals("test")) {
+    		ArrayList<String> alltests=getTestNames();
+        	boolean success=true;
+        	for(String test : alltests) {
+        		runTestFromName(test);
+        		if(evaluateTestFromName(test))
+        			System.out.printf(GREEN+"%-30sSuccess\n"+RESET,test);
+        		else {
+        			System.out.printf(RED+"%-30sFailure\n"+RESET,test);
+        			success=false;
+        		}
+        	}
+        	if(success)
+    			System.out.println(GREEN+"\nMinden teszt sikeresen lefutott!"+RESET);
+    		else 
+    			System.out.println(RED+"\nEgy vagy több teszt hibás eredményt adott!"+RESET);
+        	return;
+    	}
         boolean quit=false; // Kilépési feltétel
         do {
             String[] opt={
@@ -204,9 +212,9 @@ public class ProtoUtil {
                 		break;
                 	runTestFromName(tests.get(selectedTest));
                 	if(evaluateTestFromName(tests.get(selectedTest)))
-            			System.out.printf(GREEN+"%-30sSuccess\n"+RESET,tests.get(selectedTest));
+            			System.out.printf("%-30s"+GREEN+"Success\n"+RESET,tests.get(selectedTest));
             		else
-            			System.out.printf(RED+"%-30sFailure\n"+RESET,tests.get(selectedTest));
+            			System.out.printf("%-30s"+RED+"Failure\n"+RESET,tests.get(selectedTest));
                     break;
                 case 3:
                 	ArrayList<String> alltests=getTestNames();
@@ -214,9 +222,9 @@ public class ProtoUtil {
                 	for(String test : alltests) {
                 		runTestFromName(test);
                 		if(evaluateTestFromName(test))
-                			System.out.printf(GREEN+"%-30sSuccess\n"+RESET,test);
+                			System.out.printf("%-30s"+GREEN+"Success\n"+RESET,test);
                 		else {
-                			System.out.printf(RED+"%-30sFailure\n"+RESET,test);
+                			System.out.printf("%-30s"+RED+"Failure\n"+RESET,test);
                 			success=false;
                 		}
                 	}

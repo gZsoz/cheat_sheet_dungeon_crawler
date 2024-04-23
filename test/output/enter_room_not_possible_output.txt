@@ -1,0 +1,10 @@
+addRoom
+addNeighbour
+addRoom
+getRoom
+addCharacter
+getRoom
+addCharacter
+enterRoom
+getCarachters
+getCapacity

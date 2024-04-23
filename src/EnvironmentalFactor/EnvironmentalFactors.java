@@ -11,7 +11,7 @@ public abstract class EnvironmentalFactors implements iTask {
 	/**
 	 * Melyik szobában van
 	 */
-	private Room location;
+	protected Room location;
 
 	/**
 	 * Beállítja a környezeti változó helyét egy adott szobába

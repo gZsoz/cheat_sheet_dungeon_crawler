@@ -13,8 +13,8 @@ import ProtoUtil.ProtoUtil;
  * Felelőssége megegyezik a szoba osztállyal, emellett felelőssége még az ajtók eltüntetése és megjelenítése.
  */
 public class CursedRoom extends Room{
-	int closeDuration=2;
-    boolean isOpen=true;
+	private int closeDuration=2;
+    private boolean isOpen=true;
 	
     /**
      * Konstruktor egy szoba létrehozásához.

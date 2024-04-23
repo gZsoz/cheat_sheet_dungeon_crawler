@@ -12,6 +12,5 @@ public class FakeBatSkin extends BatSkin{
     @Override
     public void use() {
     	ProtoUtil.printLog("use");
-		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
     }
 }

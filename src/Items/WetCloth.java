@@ -10,12 +10,6 @@ import ProtoUtil.ProtoUtil;
  * Class representing WetCLoth item.
  */
 public class WetCloth extends DecayingItems{
-	
-	
-	
-	
-
-
 	/**
      * A WetCLoth tárgy használatakor elvégezendő műveleteket végzi
      * Elkábítja abban a szobában tartozkodó tanárokat, ahol a tárgy használva volt
@@ -25,14 +19,12 @@ public class WetCloth extends DecayingItems{
 	@Override
 	public void use() {
     	ProtoUtil.printLog("use()");
-    	
 		for(Character character: owner.getRoom().getCharacters() ) {
 			if(character instanceof Teacher) {
-				((Teacher) character).setStunned(true);
+				character.setStunned(true);
 			}
 		}
-    	isActive=true;
-		
+    	isActive=true;	
     }
 	/**
 	 * A trágy felvételekor elvégezendő feladatok
@@ -40,7 +32,6 @@ public class WetCloth extends DecayingItems{
 	@Override
 	public void onPickUp() {
 		ProtoUtil.printLog("onPickUp)");
-		
 	}
 
 	@Override
@@ -50,5 +41,4 @@ public class WetCloth extends DecayingItems{
 			reduceDuration();
 		}
 	}	
-
 }

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import EnvironmentalFactor.Gas;
 import EnvironmentalFactor.Sticky;
@@ -33,40 +31,36 @@ public class TestCommand {
 	String command;
 	String[] parameters;
 
+	public TestCommand() {}
+	
 	public TestCommand(String command, String[] parameters) {
 		this.command = command;
 		this.parameters = parameters;
 	}
 
-	public void readTestCommand(InputStream in) {
-		try (Scanner scanner = new Scanner(in)) {
-			if (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				String[] temp = (line.split(" "));
-				parameters = Arrays.copyOfRange(temp, 1, temp.length);
-				command = temp[0];
-			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void readTestCommand(String line) {
+		String[] temp = (line.split(" "));
+		parameters = Arrays.copyOfRange(temp, 1, temp.length);
+		command = temp[0];
 	}
 	// returns false if quit
-	public boolean runCommand(Labyrinth l, ArrayList<Character> characters, Character actor) {
+	public boolean runCommand(Labyrinth l, ArrayList<Character> characters, ArrayList<Character> actorArr) {
+		Character actor=actorArr.get(0);
 		switch (command) {
 		case "create_room":	// Balázs
 			Room room;
 			int capacity=Integer.parseInt(parameters[0]);
 			int neighbourcount=parameters.length-2;
 			if(l.getRooms().isEmpty()) {
-				if(parameters[1]=="0")
+				if(parameters[1].equals("0")) {
 					l.addRoom(new Room(capacity));
+				}
 				else
 					l.addRoom(new CursedRoom(capacity));
 				return true;
 			}
 			List<Room> neighbours = new ArrayList<Room>();
-			if(parameters[1]=="0")
+			if(parameters[1].equals("0"))
 				room=new Room(neighbours, capacity);
 			else
 				room=new CursedRoom(neighbours, capacity);
@@ -122,41 +116,44 @@ public class TestCommand {
 		case "create_factor": // Bence
 			String type = parameters[0];
 			int roomIdx = Integer.parseInt(parameters[1]);
-			if(type == "gas"){
-				Gas gas = new Gas(l.getRooms().get(roomIdx));
+			if(type.equals("0")){
+				l.getRooms().get(roomIdx).addEnvironmentalFactor(new Gas(l.getRooms().get(roomIdx)));
 			}
-			if(type == "sticky"){
-				Sticky sticky = new Sticky(l.getRooms().get(roomIdx));
+			if(type.equals("1")){
+				l.getRooms().get(roomIdx).addEnvironmentalFactor(new Sticky(l.getRooms().get(roomIdx)));
 			}
 			break;
 		case "create_character": // Sam
+			Character temp=null;
 			switch(parameters[0]) {
 				case "0":
-					characters.add(new Student(l.getRooms().get(Integer.parseInt(parameters[1]))));
+					temp=new Student(l.getRooms().get(Integer.parseInt(parameters[1])));
 					break;
 				case "1":
-					characters.add(new Teacher(l.getRooms().get(Integer.parseInt(parameters[1]))));
+					temp=new Teacher(l.getRooms().get(Integer.parseInt(parameters[1])));
 					break;
 				case "2":
-					characters.add(new Cleaner(l.getRooms().get(Integer.parseInt(parameters[1]))));
+					temp=new Cleaner(l.getRooms().get(Integer.parseInt(parameters[1])));
 					break;
 				default:
 					System.out.println("Invalid command: " + command + " " + parameters[0]);
 					break;
 			}
+			characters.add(temp);
+			temp.getRoom().addCharacter(temp);
 			break;
 		case "pickup_item":
-			actor.putdownItem(actor.getInventory().get(Integer.parseInt(parameters[0])));
+			actor.pickupItem(actor.getRoom().getItems().get(Integer.parseInt(parameters[0])));
 			break;
 		case "throw_item":
-			actor.pickupItem(actor.getRoom().getItems().get(Integer.parseInt(parameters[0])));
+			actor.putdownItem(actor.getInventory().get(Integer.parseInt(parameters[0])));
 			break;
 		case "use_item": // Zsombor
 			int useIdx = Integer.parseInt(parameters[0]);
 			((Student)actor).activate(actor.getInventory().get(useIdx));
 			break;
 		case "enter_room": // Sam
-			actor.enterRoom(l.getRooms().get(Integer.parseInt(parameters[1])));
+			actor.enterRoom(l.getRooms().get(Integer.parseInt(parameters[0])));
 			break;
 		case "split": // Bence
 			int splitIdx = Integer.parseInt(parameters[0]);
@@ -171,7 +168,7 @@ public class TestCommand {
 			((Teacher) actor).kick((Student) characters.get(Integer.parseInt(parameters[0])));
 			break;
 		case "select_actor": // Balázs
-			actor=characters.get(Integer.parseInt(parameters[0]));
+			actorArr.set(0, characters.get(Integer.parseInt(parameters[0])));
 			break;
 		case "quit":
 			return false;

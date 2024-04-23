@@ -1,0 +1,6 @@
+create_room 1 0
+create_room 1 0
+create_character 0 0
+create_character 0 1
+select_actor 0
+enter_room 1

@@ -16,7 +16,7 @@ public class Sticky extends EnvironmentalFactors {
 	 * @param r Adott szoba
 	 */
 	public Sticky(Room r){
-		r.addEnvironmentalFactor(this);
+		location=r;
 	}
 	/**
 	 * A hátralévő emberek száma, amelyek után ragacsossá teszi a szobát
