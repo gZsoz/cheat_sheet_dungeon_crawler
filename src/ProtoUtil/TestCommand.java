@@ -51,37 +51,37 @@ public class TestCommand {
 		case "create_item":
 			switch(parameters[0]){
 			case "airfreshener":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new AirFreshener());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new AirFreshener());
 				break;
 			case "batskin":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new BatSkin());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new BatSkin());
 				break;
 			case "beer":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new Beer());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new Beer());
 				break;
 			case "cabbagecamembert":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new CabbageCamembert());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new CabbageCamembert());
 				break;
 			case "fakebatskin":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new FakeBatSkin());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new FakeBatSkin());
 				break;
 			case "fakemask":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new FakeMask());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new FakeMask());
 				break;
 			case "fakesliderule":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new FakeSlideRule());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new FakeSlideRule());
 				break;
 			case "mask":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new Mask());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new Mask());
 				break;
 			case "sliderule":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new SlideRule());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new SlideRule());
 				break;
 			case "transistor":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new Transistor());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new Transistor());
 				break;
 			case "wetcloth":
-				l.getRooms()[Integer.parseInt(parameters[1])].addItem(new WetCloth());
+				l.getRooms().get(Integer.parseInt(parameters[1])).addItem(new WetCloth());
 				break;
 			default:
 				System.out.println("Invalid command: " + command + " " + parameters[0]);
@@ -93,10 +93,10 @@ public class TestCommand {
 		case "create_character": // Sam
 			break;
 		case "pickup_item":
-			actor.putdownItem(actor.getInventory()[Integer.parseInt(parameters[0])]);
+			actor.putdownItem(actor.getInventory().get(Integer.parseInt(parameters[0])));
 			break;
 		case "throw_item":
-			actor.pickupItem(actor.getRoom().getItems()[Integer.parseInt(parameters[0])]);
+			actor.pickupItem(actor.getRoom().getItems().get(Integer.parseInt(parameters[0])));
 			break;
 		case "use_item": // Zsombor
 			break;

@@ -26,8 +26,13 @@ public class AirFreshener extends NumberOfUsesItem {
     @Override
     public void use() {
         ProtoUtil.printLog("use");
-		foreach(EnvironmentalFactors element : location.getEnvironmentalFactors())
-		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
+        if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
+		for(var a : location.getEnvironmentalFactors()){
+            if(a instanceof Gas){
+                location.getEnvironmentalFactors().remove(a);
+                return;
+            }
+        }
     }
 
     @Override
