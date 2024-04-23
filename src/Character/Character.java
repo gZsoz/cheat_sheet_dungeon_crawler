@@ -1,9 +1,11 @@
 package Character;
 
+import java.util.ArrayList;
 import Items.Item;
 import Items.Transistor;
-import Map.*;
-import ProtoUtil.*;
+import Map.Room;
+import ProtoUtil.ProtoUtil;
+import Time.iTask;
 
 /**
  * A Character egy absztrakt osztály, amely a hallgatók és az oktatók közös tulajdonságait
@@ -12,18 +14,58 @@ import ProtoUtil.*;
  * elájult), a pálya keretein belüli szabad mozgásukért, valamint tárgyak felvételéért és letételéért
  * a játék környezetében. A Character leszármazottai a Teacher és a Student.
  */
-public abstract class Character {
+public abstract class Character implements iTask {
 	
 	/**
-	 * Az inicializálás tesztjéhez két azonos típusú változó megkülönböztetésére.
+	 * A karakter birtokában található tárgyak
+	 * listája. Maximum 5 Item lehet benne. Nem lehet benne logarléc.
 	 */
-	public String name;
+	protected ArrayList<Item> inventory;
 	
 	/**
-	 * Az inicializálás tesztjéhez a konstruktor szimulálására.
+	 * Melyik szobában van éppen a karakter.
 	 */
-	public void create() {
-		ProtoUtil.printLog(name + ".create()");
+	protected Room currentRoom;
+
+	/**
+	 * El van-e kábítva a karakter.
+	 */
+	protected boolean stunned;
+	
+	/**
+	 * Inventory lekérdezése.
+	 * @return A karakter birtokában lévő tárgyak listája.
+	 */
+	public ArrayList<Item> getInventory(){
+		ProtoUtil.printLog("getInventory");
+		return inventory;
+	}
+	
+	/**
+	 * Szoba lekérdezése.
+	 * @return A karakter tartózkodási helye.
+	 */
+	public Room getRoom() {
+		ProtoUtil.printLog("getRoom");
+		return currentRoom;
+	}
+	
+	/**
+	 * Kábítás állapot lekérdezése.
+	 * @return A karakter kábultsági állapota.
+	 */
+	public boolean getStunned() {
+		ProtoUtil.printLog("getStunned");
+		return stunned;
+	}
+	
+	/**
+	 * Kábultsági állapotának beállítása.
+	 * @param s Ha elkábult a karakter, akkor igaz, egyébként hamis.
+	 */
+	public void setStunned(boolean s) {
+		ProtoUtil.printLog("setStunned");
+		stunned = s;
 	}
 
     /**
@@ -32,39 +74,42 @@ public abstract class Character {
      * @return Ha a karakter befér az új szobába, akkor a művelet sikeres és igaz értékkel tér vissza a függvény, egyébként hamissal.
      */
     public boolean enterRoom(Room r) {
-    	ProtoUtil.printLog(name + ".enterRoom(" + r.name + ")");
-    	ProtoUtil.increaseIndent();
-    	if(ProtoUtil.binaryQuestion("Befér-e a szobába?")) {
-    		new Room().getCapacity();
-    		new Room().getCharacters();
-    		if(ProtoUtil.binaryQuestion("Elátkozott-e a szoba?")) {
-    			new CursedRoom().addCharacter(this);
-				new Room().removeCharacter(this);
-    		} else {
-    			new Room().addCharacter(this);
-				new Room().removeCharacter(this);
-    		}
+    	ProtoUtil.printLog("enterRoom");
+    	if(r.getCharacters().size() < r.getCapacity()) {
+    		currentRoom.removeCharacter(this);
+    		r.addCharacter(this);
+    		currentRoom = r;
+    		return true;
     	}
-    	ProtoUtil.decreaseIndent();
-		return false;
+    	return false;
     }
 
     /**
      * A paraméterül kapott tárgy felvételét valósítja meg.
      * @param i A felvevendő tárgy.
-     * @return Ha az inventory-ban van hely, akkor a művelet sikeres és igaz értékkel tér vissza afüggvény, egyébként hamissal.
+     * @return Ha az inventory-ban van hely, akkor a művelet sikeres és igaz értékkel tér vissza a függvény, ha egy párral rendelkező tranzisztort venne fel, illetve egyéb esetben hamissal.
      */
     public boolean pickupItem(Item i) {
-    	ProtoUtil.printLog(name + ".pickupItem(" + i.name + ")");
-		ProtoUtil.increaseIndent();
-		this.getInventory();
-		if(ProtoUtil.binaryQuestion("Van hely a karakternél a tárgy számára?")) {
-			new Room().removeItem(i);
-			i.onPickUp();
-		} else {
-		}
-		ProtoUtil.decreaseIndent();
-		return false;
+    	ProtoUtil.printLog("pickupItem");
+    	if(inventory.size() < 5 ) {
+    		if(i instanceof Transistor) {
+    			Transistor transistorInRoom = (Transistor) i;
+    			if(transistorInRoom.getPair() != null) return false; 
+    			for(int j = 0; j < inventory.size(); j++) {
+    				if(inventory.get(j) instanceof Transistor) {
+    					Transistor transistorAtDisposal = (Transistor) inventory.get(j);
+    					if(transistorAtDisposal.getPair() == null) {
+    						transistorAtDisposal.connect(transistorInRoom);
+    					}
+    				}
+    			}
+    		} else {
+    			currentRoom.removeItem(i);
+        		i.onPickUp();
+    		}
+    		return true;
+    	}
+    	return false;
     }
 
     /**
@@ -72,22 +117,13 @@ public abstract class Character {
      * @param i A tárgy, amit le akar tenni.
      */
     public void putdownItem(Item i) {
-    	ProtoUtil.printLog(name + "putdownItem(" + i.name + ")");
-		ProtoUtil.increaseIndent();
-		
-		if(ProtoUtil.binaryQuestion("Ez egy tranzisztor?")) {
-			if(ProtoUtil.binaryQuestion("Ez a tranzisztor össze van kötve egy másikkal?")) {
-				if(ProtoUtil.binaryQuestion("Ez lesz közülük a második, amit letesz?")) {
-					if(ProtoUtil.binaryQuestion("Aktiválva van?")) {
-						new Transistor("tranzisztor_második").onDrop(this);
-					}
-				} else {
-					new Transistor("tranzisztor_első").setLocation(new Room());
-				}
-			}
-		}
-		new Room().addItem(i);
-		ProtoUtil.decreaseIndent();
+    	ProtoUtil.printLog("putdownItem");
+    	inventory.remove(i);
+    	currentRoom.addItem(i);
+    	if(i instanceof Transistor) {
+    		Transistor transistorDropped = (Transistor) i;
+    		transistorDropped.onDrop(this);
+    	}
     }
 
     /**
@@ -95,21 +131,5 @@ public abstract class Character {
      */
     public void update() {
     }
-    
-	/**
-	 * Visszaadja a karakter inventory-ját.
-	 */
-	public void getInventory() {
-		ProtoUtil.printLog("getInventory");
-	}
 
-	/**
-	 * Beállítja a karakter stunned állapotát.
-	 * @param b Ha elkábult a karakter, akkor igaz, egyébként hamis.
-	 */
-	public void setStunned(boolean b) {
-		ProtoUtil.printLog(name + ".setStunned(" + b + ")");
-		ProtoUtil.increaseIndent();
-		ProtoUtil.decreaseIndent();
-	}
 }

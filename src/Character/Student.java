@@ -8,30 +8,35 @@ import ProtoUtil.ProtoUtil;
  */
 public class Student extends Character {
 	
-	
 	/**
-	 * Konstruktor egy hallgató létrehozásához. Student-re állítja a nevet.
+	 * A hallgató érinthetetlensége.
 	 */
-	public Student() {
-		name = "Student";
-	}
-	
-	/**
-	 * Konstruktor egy hallgató létrehozásához.
-	 * @param name A hallgató neve.
-	 */
-	public Student(String name) {
-		this.name = name;
-	}
-	
-    /**
-     * A paraméterül kapott tárgy hatásának megkezdése.
-     * @param i A tárgy.
-     */
-    public void activate(Item i) {
-    	ProtoUtil.printLog(name + ".activate(" + i.name + ")");
-		ProtoUtil.increaseIndent();
-		i.use();
-		ProtoUtil.decreaseIndent();
-    }
+	 private boolean invincible;
+	 
+	 /**
+	  * Érinthetetlenség lekérdezése.
+	  * @return A hallgató érinthetetlenségi állapota.
+	  */
+	 public boolean getInvincible() {
+		 ProtoUtil.printLog("getInvincible");
+		 return invincible;
+	 }
+	 
+	 /**
+	  * Érinthetetlenség beállítása.
+	  * @param state Ha érinthetetlen a karakter, akkor igaz, egyébként hamis.
+	  */
+	 public void setInvincible(boolean state) {
+		 ProtoUtil.printLog("setInvincible");
+		 invincible = state;
+	 }
+	 
+	 /**
+	  * A paraméterül kapott tárgy hatásának megkezdése.
+	  * @param i A tárgy.
+	  */
+	 public void activate(Item i) {
+		 ProtoUtil.printLog("activate");
+		 i.use();
+	 }
 }
