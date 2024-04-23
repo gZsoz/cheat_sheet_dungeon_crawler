@@ -5,6 +5,7 @@ import ProtoUtil.ProtoUtil;
 import Time.iTask;
 import EnvironmentalFactor.EnvironmentalFactors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Character.Character;
@@ -19,24 +20,42 @@ import Character.Character;
 public class Room implements iTask {
     
     /** A szoba kapacitása */
-    protected int capacity;
+    protected int capacity=1;
     
     /** A szomszéd szobák listája */
-    protected List<Room> neighbours;
+    protected List<Room> neighbours = new ArrayList<Room>();
     
     /** A szobában található tárgyak listája */
-    protected List<Item> items;
+    protected List<Item> items = new ArrayList<Item>();
     
     /** A szobában található karakterek listája */
-    protected List<Character> characters;
+    protected List<Character> characters = new ArrayList<Character>();
     
     /** A szoba környezeti tényezőinek listája */
-    protected List<EnvironmentalFactors> envFactors;
+    protected List<EnvironmentalFactors> envFactors = new ArrayList<EnvironmentalFactors>();
 
     /**
-     * Konstruktor egy szoba létrehozásához. Room-ra állítja a nevet.
+     * Konstruktor egy szoba létrehozásához.
      */
     public Room() {
+    }
+    
+    /**
+     * Konstruktor egy szoba létrehozásához.
+     * @param neighbours a szoba szomszédai
+     * @param capacity kapacitás
+     */
+    public Room(List<Room> neighbours, int capacity) {
+    	this.neighbours = neighbours;
+    	this.capacity = capacity;
+    }
+    
+    /**
+     * Konstruktor egy szoba létrehozásához.
+     * @param capacity kapacitás
+     */
+    public Room(int capacity) {
+    	this.capacity = capacity;
     }
 
     /**
@@ -172,6 +191,11 @@ public class Room implements iTask {
     public int getCapacity() {
         ProtoUtil.printLog("getCapacity");
         return capacity;
+    }
+    
+    public void setCapacity(int capacity) {
+        ProtoUtil.printLog("setCapacity");
+        this.capacity=capacity;
     }
 
     /**

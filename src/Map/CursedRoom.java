@@ -15,6 +15,30 @@ public class CursedRoom extends Room{
     boolean isOpen=true;
 	
     /**
+     * Konstruktor egy szoba létrehozásához.
+     */
+    public CursedRoom() {
+    	super();
+    }
+    
+    /**
+     * Konstruktor egy szoba létrehozásához.
+     * @param neighbours a szoba szomszédai
+     * @param capacity kapacitás
+     */
+    public CursedRoom(List<Room> neighbours, int capacity) {
+    	super(neighbours, capacity);
+    }
+    
+    /**
+     * Konstruktor egy szoba létrehozásához.
+     * @param capacity kapacitás
+     */
+    public CursedRoom(int capacity) {
+		super(capacity);
+	}
+
+	/**
      * Beállítja az ajtók állapotát zártnak és inicializálja a closeDuration-t a definiált kezdőértékre.
      */
     public void hideDoors() {
