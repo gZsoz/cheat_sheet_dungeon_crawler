@@ -7,20 +7,9 @@ import ProtoUtil.ProtoUtil;
  */
 public class Mask extends DecayingItems {
     
-	/**
-     * Konstruktor egy tárgy létrehozásához. Mask-ra állítja a nevet.
-     */
-	public Mask() {
-		name="Mask";
-	}
 	
-	/**
-     * Konstruktor egy tárgy létrehozásához.
-     * @param n A tárgy neve
-     */
-	public Mask(String n) {
-		name=n;
-	}
+	
+	
 	
 	/**
      * A gáz által aktivált maszk elvégezendő műveleteit végzi
@@ -30,19 +19,18 @@ public class Mask extends DecayingItems {
 	
 	@Override
     public void use() {
-    	ProtoUtil.printLog(name+".use()");
-		ProtoUtil.increaseIndent();
-		reduceDuration();
-    	ProtoUtil.decreaseIndent();
+    	ProtoUtil.printLog("use()");
+    	isactive=true;
+		
     }
 	/**
 	 * A trágy felvételekor elvégezendő feladatok
 	 */
+
 	@Override
-	public void onPickUp() {
-		ProtoUtil.printLog(name+".onPickUp()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
-	}
+	public void onPickUp() {}
+	
+
+	
 	
 }
