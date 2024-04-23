@@ -13,10 +13,10 @@ public abstract class EnvironmentalFactors implements iTask {
 	 */
 	private Room location;
 
-    /**
-     * Beállítja a környezeti változó helyét egy adott szobába
-     * @param room a szoba ahová a környezeti változó elhelyezendő
-     */
+	/**
+	 * Beállítja a környezeti változó helyét egy adott szobába
+	 * @param room a szoba ahová a környezeti változó elhelyezendő
+	 */
 	public void setLocation(Room room) {
 		ProtoUtil.printLog("setLocation");
 		location = room;
