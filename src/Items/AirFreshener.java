@@ -7,29 +7,19 @@ import ProtoUtil.ProtoUtil;
 
 public class AirFreshener extends NumberOfUsesItem {
 
-    private Room location;
-
     public AirFreshener() {
-		location=null;
+		Owner=null;
 		sticky=false;
 		RemainingUses=1;
-	}
-
-    public Room getLocation(){
-		return location;
-	}
-
-	public void setLocation(Room l){
-		location=l;
 	}
 
     @Override
     public void use() {
         ProtoUtil.printLog("use");
         if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
-		for(var a : location.getEnvironmentalFactors()){
+		for(EnvironmentalFactors a : Owner.getRoom().getEnvironmentalFactors()){
             if(a instanceof Gas){
-                location.getEnvironmentalFactors().remove(a);
+                Owner.getRoom().getEnvironmentalFactors().remove(a);
                 return;
             }
         }
