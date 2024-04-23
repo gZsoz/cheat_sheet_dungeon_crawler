@@ -32,11 +32,11 @@ public class Gas extends EnvironmentalFactors {
 			if(item instanceof Mask){
 				item.use();
 				if(((Mask) item).getisactive()){
-					character.setDefense(true);
+					character.setHasDefense(true);
 				}
 			}
 		}
-		if(!character.getDefense()) {
+		if(!character.getHasDefense()) {
 			character.setStunned(true);
 		}
 	}
