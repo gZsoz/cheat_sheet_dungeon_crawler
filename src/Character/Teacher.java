@@ -28,6 +28,7 @@ public class Teacher extends Character {
 	 */
     @Override
     public void update() {
+    	super.update();
 		checkCollision();
     }
 

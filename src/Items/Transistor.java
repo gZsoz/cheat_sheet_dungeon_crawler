@@ -2,7 +2,6 @@ package Items;
 
 import Map.Room;
 import ProtoUtil.ProtoUtil;
-import Character.*;
 import Character.Character;
 
 /**
@@ -41,7 +40,7 @@ public class Transistor extends Item {
 	 * Beállítja ennek a Transistornak a párját.
 	 * @param t A Tranzisztor akivel párosul
 	 */
-	private void setPair(Transistor t){
+	public void setPair(Transistor t){
 		ProtoUtil.printLog("setPair");
 		pair=t;
 	}
@@ -78,7 +77,7 @@ public class Transistor extends Item {
 	/**
 	 * Beállítja a Transistor állapotát, aktív=true, inaktív=false
 	 */
-	private void setActive(boolean state){
+	public void setActive(boolean state){
 		ProtoUtil.printLog("setActive");
 		active = state;
 	}
@@ -91,7 +90,7 @@ public class Transistor extends Item {
 	@Override
 	public void use() {
 		ProtoUtil.printLog("use");
-		setActive(!getActive());
+		active = !active;
 	}
 
     /**
@@ -101,10 +100,24 @@ public class Transistor extends Item {
      */
     public void onDrop(Character c) {
     	ProtoUtil.printLog("onDrop");
-		if(pair!=null && pair.location!=null){
-			c.enterRoom(pair.getLocation());
+		if (active) {
+			if (pair != null) { // van párja
+				if(pair.location == null) { // nincs letéve a párja, ez az első közülük, amit letesz
+					location = c.getRoom();
+				} else { // le van téve a párja, ez a második közülük, amit letesz
+					c.enterRoom(pair.location);
+					
+					// a felhasznált tranzisztorok defaultra állítása és szétválasztása
+					pair.location = null;
+					pair.active = false;
+					pair.pair = null;
+					pair = null;
+					active = false;
+				}
+			} else { // nincs párja
+				active = false;
+			}
 		}
-		setActive(false);
     }
 
     /**
@@ -116,4 +129,8 @@ public class Transistor extends Item {
 		setPair(t);
 		t.setPair(this);
     }
+
+	@Override
+	public void onPickUp() {
+	}
 }

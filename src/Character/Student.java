@@ -39,4 +39,12 @@ public class Student extends Character {
 		 ProtoUtil.printLog("activate");
 		 i.use();
 	 }
+	 
+	 /**
+	  * Ugyanaz mint a Character-nek.
+	  */
+	 @Override
+	 public void update() {
+		 super.update();
+	 }
 }

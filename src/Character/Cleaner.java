@@ -55,4 +55,12 @@ public class Cleaner extends Character {
     	}
     	return false;
 	}
+	
+	/**
+	 * Ugyanaz mint a karakternek.
+	 */
+	@Override
+	public void update() {
+		super.update();
+	}
 }

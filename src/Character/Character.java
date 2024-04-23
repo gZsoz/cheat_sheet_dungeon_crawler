@@ -130,6 +130,12 @@ public abstract class Character implements iTask {
      * A karakter időérzékeny műveleteit végzi (mozgás).
      */
     public void update() {
+    	for(int i = 0; i < inventory.size(); i++) {
+    		Item currentItem = inventory.get(i);
+    		if(currentItem instanceof iTask) {
+    			((iTask) currentItem).update();
+    		}
+    	}
     }
 
 }
