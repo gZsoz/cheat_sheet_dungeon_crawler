@@ -1,11 +1,15 @@
 package Items;
 
+import Character.Character;
 import ProtoUtil.ProtoUtil;
 
 /**
  * Absztrakt osztály, ebből származnak le a különböző tárgyak.
  */
 public abstract class Item {
+	
+	protected Character Owner;
+	
 	/**
 	 * A tárgy ragacsosságát jelzi
 	 */
@@ -19,7 +23,15 @@ public abstract class Item {
 		ProtoUtil.printLog("getSticky");
 		return sticky;
 	}
-
+	
+	public void setOwner(Character o) {
+		Owner=o;
+		
+	}
+	
+	public Character getOwner() {
+		return Owner;
+	}
 	/**
 	 * Tárgy ragacsosságának beállítása
 	 * @param s A beállítandó állapot
