@@ -13,26 +13,18 @@ public class SlideRule extends NumberOfUsesItem {
      * Konstruktor egy tárgy létrehozásához. SlideRule-ra állítja a nevet.
      */
 	public SlideRule() {
-		name="SlideRule";
+		sticky=false;
+		RemainingUses=1;
 	}
-	
-	/**
-     * Konstruktor egy tárgy létrehozásához.
-     * @param n A tárgy neve
-     */
-	public SlideRule(String n) {
-		name=n;
-	}
-	
+		
 	/**
 	 * A logarléc használata. Ezzel a játékot megnyerik a hallgatók.
 	 */
 	@Override
     public void use() {
-		ProtoUtil.printLog(name+".use()");
-		ProtoUtil.increaseIndent();
-		ProtoUtil.printLog("Vége a játéknak!!!");
-    	ProtoUtil.decreaseIndent();
+		ProtoUtil.printLog("use");
+		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
+		ProtoUtil.printLog("Game over");
     }
 	
 	/**
@@ -40,9 +32,7 @@ public class SlideRule extends NumberOfUsesItem {
      */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog(name+".onPickUp()");
-		ProtoUtil.increaseIndent();
+		ProtoUtil.printLog("onPickUp");
 		use();
-    	ProtoUtil.decreaseIndent();
 	}
 }

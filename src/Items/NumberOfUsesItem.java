@@ -1,4 +1,7 @@
 package Items;
+
+import ProtoUtil.ProtoUtil;
+
 /**
  * Ebből az osztályból származnak le azok a tárgyak, 
  * amiket csak bizonyos számú alkalommal lehet használni. 
@@ -6,6 +9,17 @@ package Items;
  */
 public abstract class NumberOfUsesItem extends Item {
 
+    protected int RemainingUses;
+
+    public int getRemainingUses(){
+        ProtoUtil.printLog("getRemainingUses");
+        return RemainingUses;
+    }
+
+    public void setRemainingUses(int x){
+        ProtoUtil.printLog("setRemainingUses");
+        RemainingUses=x;
+    }
     /**
      * Egy tárgy használata. A tárgyak a saját, egyedi módjukon kerülnek használatba, 
      * ezért ezt külön-külön valósítják meg a  leszármazottak.
