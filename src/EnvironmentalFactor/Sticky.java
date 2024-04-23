@@ -3,6 +3,7 @@ package EnvironmentalFactor;
 import Character.Character;
 import Items.Item;
 import Items.Mask;
+import Map.Room;
 import ProtoUtil.ProtoUtil;
 
 /**
@@ -10,6 +11,13 @@ import ProtoUtil.ProtoUtil;
  */
 public class Sticky extends EnvironmentalFactors {
 
+	/**
+	 * Kontruktor létrehozza, a sticky objektumot és beállítja az adott szobába a környezeti változót
+	 * @param r Adott szoba
+	 */
+	public Sticky(Room r){
+		r.addEnvironmentalFactor(this);
+	}
 	/**
 	 * A hátralévő emberek száma, amelyek után ragacsossá teszi a szobát
 	 */

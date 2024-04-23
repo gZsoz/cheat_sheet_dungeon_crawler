@@ -14,8 +14,12 @@ import java.util.ArrayList;
  */
 public class Gas extends EnvironmentalFactors {
 
+	/**
+	 * Kontruktor létrehozza, a gáz objektumot és beállítja az adott szobába a környezeti változót
+	 * @param r Adott szoba
+	 */
 	public Gas(Room r){
-		setLocation(r);
+		r.addEnvironmentalFactor(this);
 	}
 
 	/**
@@ -24,19 +28,19 @@ public class Gas extends EnvironmentalFactors {
 	 */
 	public void stun(Character character) {
 		ProtoUtil.printLog("stun");
-		boolean hasDefence = false;
 		for (Item item: character.getInventory()) {
 			if(item instanceof Mask){
 				item.use();
 				if(((Mask) item).getisactive()){
-					hasDefence = true;
+					character.setDefense(true);
 				}
 			}
 		}
-		if(!hasDefence) {
+		if(!character.getDefense()) {
 			character.setStunned(true);
 		}
 	}
+
 
 	/**
 	 * Minden adott időben megpróbálja elkábítani, a vele egy szobában lévőket
