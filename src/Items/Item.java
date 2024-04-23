@@ -23,13 +23,21 @@ public abstract class Item {
 		ProtoUtil.printLog("getSticky");
 		return sticky;
 	}
-	
+
+	/**
+	 * Beállítja a tárgy tulajdonosát
+	 * @param o - tárgy tulajdonosa
+	 */
 	public void setOwner(Character o) {
+		ProtoUtil.printLog("setOwner");
 		Owner=o;
-		
 	}
-	
+	/**
+	 * Lekérdezi a tárgy tulajdonosát
+	 * tárgy tulajdonosa
+	 */
 	public Character getOwner() {
+		ProtoUtil.printLog("getOwner");
 		return Owner;
 	}
 	/**

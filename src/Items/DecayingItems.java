@@ -31,7 +31,9 @@ public abstract class DecayingItems extends Item {
 	 * A tárgy aktív állapotának lekérdezése
 	 * @return A tárgy aktív állapota
 	 */
-	public boolean getisactive(){return isactive;}
+	public boolean getisactive(){
+		ProtoUtil.printLog("getisactive");
+		return isactive;}
    
     /**
      * a gyermekosztályok által leírt tárgyak használatát és hatását elindító függvény, 
@@ -39,12 +41,8 @@ public abstract class DecayingItems extends Item {
      */
     public abstract void use();
     public void update() {
-    	ProtoUtil.printLog("update()");
 		if(isactive)
     	reduceDuration();
-		ProtoUtil.increaseIndent();
-		ProtoUtil.printLog("ReduceDuration()");
-		ProtoUtil.decreaseIndent();
     };
 
 }

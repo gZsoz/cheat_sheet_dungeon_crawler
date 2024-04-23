@@ -31,7 +31,6 @@ public class Mask extends DecayingItems {
 	
 
 	public void update(){
-		ProtoUtil.printLog("update");
 		reduceDuration();
 		
 	}
