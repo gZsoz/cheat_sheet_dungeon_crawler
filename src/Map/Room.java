@@ -1,13 +1,14 @@
 package Map;
+
 import Items.Item;
 import ProtoUtil.ProtoUtil;
+import Time.iTask;
 import EnvironmentalFactor.EnvironmentalFactors;
-import EnvironmentalFactor.Gas;
 
 import java.util.List;
 
-import Character.*;
 import Character.Character;
+
 /**
  * A Room osztály reprezentálja a játék világában található szobákat.
  * Tárolja a szomszédos szobák listáját (azok a szobák, melyekbe vezet ajtó az adott szobából),
@@ -15,44 +16,36 @@ import Character.Character;
  * Nyilvántartja a szoba befogadóképességét, ami alapján ellenőrzi, hogy a szoba befogad-e további karaktereket.
  * Kezeli a szoba állapotát (gázos-e).
  */
-public class Room {
-	
-	/** A szoba neve csak a Skeletonban lesz szerepe.*/
-    public String name;
+public class Room implements iTask {
+    
+    /** A szoba kapacitása */
+    protected int capacity;
+    
+    /** A szomszéd szobák listája */
+    protected List<Room> neighbours;
+    
+    /** A szobában található tárgyak listája */
+    protected List<Item> items;
+    
+    /** A szobában található karakterek listája */
+    protected List<Character> characters;
+    
+    /** A szoba környezeti tényezőinek listája */
+    protected List<EnvironmentalFactors> envFactors;
 
     /**
      * Konstruktor egy szoba létrehozásához. Room-ra állítja a nevet.
      */
     public Room() {
-    	name="Room";
     }
-    
+
     /**
-     * Konstruktor egy szoba létrehozásához.
-     * @param name A szoba neve
-     */
-	public Room(String name) {
-		this.name = name;
-	}
-	
-	/**
-    * A konstruktort szimbolizálja a skeleton programban.
-    */
-	public void create() {
-		ProtoUtil.printLog(name+".create()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
-	}
-	
-	/**
      * Lerakja a paraméterként kapott tárgyat a szobába.
      * @param a A lerakandó tárgy
      */
     public void spawnItem(Item a) {
-    	ProtoUtil.printLog(name+".spawnItem("+a.name+")");
-		ProtoUtil.increaseIndent();
-		addItem(a);
-    	ProtoUtil.decreaseIndent();
+        ProtoUtil.printLog("spawnItem");
+        addItem(a);
     }
     
     /**
@@ -60,13 +53,8 @@ public class Room {
      * @param c A hozzáadandó karakter
      */
     public void addCharacter(Character character) {
-    	ProtoUtil.printLog(name+".addCharacter("+character.name+")");
-		ProtoUtil.increaseIndent();
-		if(ProtoUtil.binaryQuestion("Gázos-e a szoba?")) {
-			new Gas().stun(character);
-		}else {
-		}
-    	ProtoUtil.decreaseIndent();
+        ProtoUtil.printLog("addCharacter");
+        characters.add(character);
     }
     
     /**
@@ -74,9 +62,8 @@ public class Room {
      * @param i A hozzáadandó tárgy
      */
     public void addItem(Item i) {
-    	ProtoUtil.printLog(name+".addItem("+i.name+")");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+        ProtoUtil.printLog("addItem");
+        items.add(i);
     }
     
     /**
@@ -84,9 +71,9 @@ public class Room {
      * @param c Az eltávolítandó karakter
      */
     public void removeCharacter(Character character) {
-		ProtoUtil.printLog(name+".removeCharacter("+character.name+")");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+        ProtoUtil.printLog("removeCharacter");
+        if (!characters.remove(character))
+            System.out.println("Olyan karakterre lett meghívva a removeCharacter, ami nincs a listában!!!");
     }
     
     /**
@@ -94,9 +81,9 @@ public class Room {
      * @param i Az eltávolítandó tárgy
      */
     public void removeItem(Item i) {
-    	ProtoUtil.printLog(name+".removeItem("+i.name+")");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+        ProtoUtil.printLog("removeItem");
+        if (!items.remove(i))
+            System.out.println("Olyan Itemre lett meghívva a removeItem, ami nincs a listában!!!");
     }
     
     /**
@@ -104,9 +91,8 @@ public class Room {
      * @param r A hozzáadandó szomszédos szoba
      */
     public void addNeighbour(Room r) {
-    	ProtoUtil.printLog(name+".addNeighbour("+r.name+")");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+        ProtoUtil.printLog("addNeighbour");
+        neighbours.add(r);
     }
     
     /**
@@ -114,9 +100,9 @@ public class Room {
      * @param r Az eltávolítandó szomszédos szoba
      */
     public void removeNeighbour(Room r) {
-    	ProtoUtil.printLog(name+".removeNeighbour("+r.name+")");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+        ProtoUtil.printLog("removeNeighbour");
+        if (!neighbours.remove(r))
+            System.out.println("Olyan Roomra lett meghívva a removeNeighbour ami nincs a listában!!!");
     }
     
     /**
@@ -124,10 +110,20 @@ public class Room {
      * @param ef A hozzáadandó környezeti tényező
      */
     public void addEnvironmentalFactor(EnvironmentalFactors ef) {
-    	ProtoUtil.printLog(name+".addEnvironmentalFactor("+ef.name+")");
-		ProtoUtil.increaseIndent();
-		ef.setLocation(this);
-    	ProtoUtil.decreaseIndent();
+        ProtoUtil.printLog("addEnvironmentalFactor");
+        ef.setLocation(this);
+        for (EnvironmentalFactors e : envFactors )
+            if (e.getClass().equals(ef.getClass()))
+                return;
+        envFactors.add(ef);
+    }
+    
+    /**
+     * Visszaadja a szoba környezeti tényezőit.
+     * @return A szoba környezeti tényezőinek listája
+     */
+    public List<EnvironmentalFactors> getEnvironmentalFactors() {
+        return envFactors;
     }
     
     /**
@@ -135,10 +131,8 @@ public class Room {
      * @return A szobában tartózkodó karakterek száma
      */
     public int currentNumOfPlayers() {
-    	ProtoUtil.printLog(name+".currentNumOfPlayers()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
-		return 0;
+        ProtoUtil.printLog("currentNumOfPlayers");
+        return characters.size();
     }
     
     /**
@@ -146,49 +140,66 @@ public class Room {
      * @param r Az összeolvasztandó szoba
      */
     public void merge(Room r) {
-    	ProtoUtil.printLog(name+".merge("+r.name+")");
-		ProtoUtil.increaseIndent();
-		r.getNeighbours();
-		if(ProtoUtil.binaryQuestion("Legyen Szoba_Új a szomszédja "+r.name+"-nek?")) {
-			Room temp = new Room("Szoba_Új");
-			addNeighbour(temp);
-			temp.addNeighbour(this);
-			temp.removeNeighbour(r);
-		}else {
-		}
-    	ProtoUtil.decreaseIndent();
+        ProtoUtil.printLog("merge");
+        for (Room current : r.getNeighbours()) {
+            if (!neighbours.contains(current)) {
+                addNeighbour(current);
+                current.addNeighbour(this);
+                current.removeNeighbour(r);
+            }
+        }
+        for (Item i : r.getItems()) {
+            addItem(i);
+        }
+        for (Character c : r.getCharacters()) {
+            addCharacter(c);
+        }
     }
 
     /**
      * Visszaadja, a szoba szomszédait.
      * @return A szoba szomszédai egy listában.
      */
-	public List<Room> getNeighbours() {
-		ProtoUtil.printLog(name+".getNeighbours()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
-		return null;
-	}
-	
-	/**
+    public List<Room> getNeighbours() {
+        ProtoUtil.printLog("getNeighbours");
+        return neighbours;
+    }
+    
+    /**
      * Visszaadja, a szoba kapcitását.
      * @return A szoba kapacitása.
      */
-	public int getCapacity() {
-		ProtoUtil.printLog(name+".getCapacity()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
-		return 0;
-	}
+    public int getCapacity() {
+        ProtoUtil.printLog("getCapacity");
+        return capacity;
+    }
 
-	/**
+    /**
      * Visszaadja, a szobában található karaktereket.
      * @return A szobában található karakterek egy listában.
      */
-	public List<Character> getCharacters() {
-		ProtoUtil.printLog(name+".getCarachters()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
-		return null;
-	}
+    public List<Character> getCharacters() {
+        ProtoUtil.printLog("getCarachters");
+        return characters;
+    }
+
+    /**
+     * Visszaadja, a szobában található tárgyakat.
+     * @return A szobában található tárgyak egy listában.
+     */
+    public List<Item> getItems() {
+        ProtoUtil.printLog("getItems");
+        return items;
+    }
+
+    /**
+     * Meghívja a tárolt Character-ek és EnvironmentalFactorok update() metódusát
+     */
+    @Override
+    public void update() {
+        for (Character c : characters)
+            c.update();
+        for (EnvironmentalFactors env : envFactors)
+            env.update();
+    }
 }
