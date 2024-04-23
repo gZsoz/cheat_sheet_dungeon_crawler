@@ -22,6 +22,8 @@ import Items.SlideRule;
 import Items.Transistor;
 import Items.WetCloth;
 import Map.Labyrinth;
+import Map.Room;
+import Map.CursedRoom;
 import Character.Student;
 
 public class TestCommand {
