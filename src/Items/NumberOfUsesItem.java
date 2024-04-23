@@ -9,17 +9,22 @@ import ProtoUtil.ProtoUtil;
  */
 public abstract class NumberOfUsesItem extends Item {
 
+	
     protected int RemainingUses;
 
+    
     public int getRemainingUses(){
         ProtoUtil.printLog("getRemainingUses");
         return RemainingUses;
     }
 
+    
     public void setRemainingUses(int x){
         ProtoUtil.printLog("setRemainingUses");
         RemainingUses=x;
+        if(RemainingUses == 0) owner.getInventory().remove(this);
     }
+    
     /**
      * Egy tárgy használata. A tárgyak a saját, egyedi módjukon kerülnek használatba, 
      * ezért ezt külön-külön valósítják meg a  leszármazottak.

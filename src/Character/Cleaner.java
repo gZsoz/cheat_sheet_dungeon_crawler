@@ -1,10 +1,12 @@
 package Character;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import EnvironmentalFactor.Gas;
 import EnvironmentalFactor.Sticky;
+import Items.Item;
 import Map.Room;
 import ProtoUtil.ProtoUtil;
 
@@ -12,6 +14,16 @@ import ProtoUtil.ProtoUtil;
  * A szobák takarítását ez osztály végzi.
  */
 public class Cleaner extends Character {
+	
+	/**
+	 * Kostruktor.
+	 * @param currentRoom Melyik szobában van éppen a takarító.
+	 */
+	public Cleaner(Room currentRoom) {
+		this.currentRoom = currentRoom;
+		this.inventory = new ArrayList<Item>();
+		this.stunned = false;
+	}
 	
 	/**
 	 * Kiszellőztet egy szobában, ezzel megszüntetve a szoba gázosságát, emellett a szobában található összes karaktert, akik nincsenek stunolva átlépteti egy szomszédos szobába és elhelyez egy Sticky EnvironmentalFactor-t a szobában.
@@ -34,7 +46,7 @@ public class Cleaner extends Character {
 		r.getEnvironmentalFactors().removeIf(n -> n.getClass().equals(Gas.class)); // gáz megszűntetése
 		
 		// új ragacsosság betétele
-		Sticky st = new Sticky();
+		Sticky st = new Sticky(currentRoom);
 		r.addEnvironmentalFactor(st);
 	}
 	

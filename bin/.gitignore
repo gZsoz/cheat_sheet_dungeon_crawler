@@ -1,7 +1,8 @@
+/.classpath
+/.project
+/Character/
 /EnvironmentalFactor/
 /Items/
-/Character/
 /Map/
-/SkeletonUtil/
 /ProtoUtil/
-/iTask.class
+/Time/

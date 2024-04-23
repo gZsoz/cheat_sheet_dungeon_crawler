@@ -8,47 +8,34 @@ import ProtoUtil.ProtoUtil;
 public class Beer extends DecayingItems {
 	
 	/**
-     * Konstruktor egy tárgy létrehozásához. Beer-ra állítja a nevet.
-     */
-	
-	/**
-     * Konstruktor egy tárgy létrehozásához.
-     * @param n A tárgy neve
-     */
-	
-	
-	/**
-     * Sör használatakor (felvételekor) végrehajtandó műveleteket végzi
-     * Immunitást ad a használónak,
-     * Minden másodpercben csökkenti a hatás időtartamát
+     * Sör használatakor (felvételekor) végrehajtandó műveleteket végzi, 
+     * immunitást ad a használónak, minden másodpercben csökkenti a hatás időtartamát.
      */
 	@Override
     public void use() {
-        // Implementation
-    	
 		ProtoUtil.printLog("use");
-		Owner.setHasDefense(true);
-		setisactive(true);
-		
+		owner.setHasDefense(true);
+		setIsActive(true);
     }
+	
 	/**
-	 * A tárgy felvételekor elindítja a használatot
+	 * A tárgy felvételekor elindítja a használatot.
 	 */
-
 	@Override
 	public void onPickUp() {
 		ProtoUtil.printLog("onPickUp");
 		use();
-    	
 	}
 	
+	/**
+	 * Ugyanaz mint a DecayingItems-nek, plusz még 
+	 */
+	@Override
 	public void update() {
-		ProtoUtil.printLog("update");
-		reduceDuration();
+		super.update();
 		if(!usable) {
-			Owner.setHasDefense(false);
+			owner.setHasDefense(false);
 		}
-		
 	}
 
 }

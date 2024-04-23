@@ -25,7 +25,9 @@ import Map.Labyrinth;
 import Map.Room;
 import Map.CursedRoom;
 import Character.Student;
+import Character.Teacher;
 import Character.Character;
+import Character.Cleaner;
 
 public class TestCommand {
 	String command;
@@ -128,6 +130,20 @@ public class TestCommand {
 			}
 			break;
 		case "create_character": // Sam
+			switch(parameters[0]) {
+				case "0":
+					characters.add(new Student(l.getRooms().get(Integer.parseInt(parameters[1]))));
+					break;
+				case "1":
+					characters.add(new Teacher(l.getRooms().get(Integer.parseInt(parameters[1]))));
+					break;
+				case "2":
+					characters.add(new Cleaner(l.getRooms().get(Integer.parseInt(parameters[1]))));
+					break;
+				default:
+					System.out.println("Invalid command: " + command + " " + parameters[0]);
+					break;
+			}
 			break;
 		case "pickup_item":
 			actor.putdownItem(actor.getInventory().get(Integer.parseInt(parameters[0])));
@@ -140,6 +156,7 @@ public class TestCommand {
 			((Student)actor).activate(actor.getInventory().get(useIdx));
 			break;
 		case "enter_room": // Sam
+			actor.enterRoom(l.getRooms().get(Integer.parseInt(parameters[1])));
 			break;
 		case "split": // Bence
 			int splitIdx = Integer.parseInt(parameters[0]);
@@ -151,6 +168,7 @@ public class TestCommand {
 			l.mergeRoom(l.getRooms().get(dstIdx), l.getRooms().get(srcIdx));
 			break;
 		case "kick": // Sam
+			((Teacher) actor).kick((Student) characters.get(Integer.parseInt(parameters[0])));
 			break;
 		case "select_actor": // Balázs
 			actor=characters.get(Integer.parseInt(parameters[0]));

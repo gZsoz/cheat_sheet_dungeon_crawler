@@ -14,7 +14,7 @@ public class CabbageCamembert extends NumberOfUsesItem {
      * Konstruktor egy tárgy létrehozásához. CabbageCamembert-ra állítja a nevet.
      */
 	public CabbageCamembert() {
-		Owner=null;
+		owner=null;
 		sticky=false;
 		RemainingUses=1;
 	}
@@ -26,8 +26,8 @@ public class CabbageCamembert extends NumberOfUsesItem {
     @Override
     public void use() {
     	ProtoUtil.printLog("use");
-		Gas g=new Gas(Owner.getRoom());
-		Owner.getRoom().addEnvironmentalFactor(g);
+		Gas g=new Gas(owner.getRoom());
+		owner.getRoom().addEnvironmentalFactor(g);
 		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
     }
 

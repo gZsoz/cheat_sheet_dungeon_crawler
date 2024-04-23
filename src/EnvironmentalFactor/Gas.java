@@ -31,7 +31,7 @@ public class Gas extends EnvironmentalFactors {
 		for (Item item: character.getInventory()) {
 			if(item instanceof Mask){
 				item.use();
-				if(((Mask) item).getisactive()){
+				if(((Mask) item).getIsActive()){
 					character.setHasDefense(true);
 				}
 			}

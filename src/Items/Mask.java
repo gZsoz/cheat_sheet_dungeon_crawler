@@ -19,7 +19,7 @@ public class Mask extends DecayingItems {
 	@Override
     public void use() {
     	ProtoUtil.printLog("use");
-    	isactive=true;
+    	isActive=true;
 		
     }
 	/**

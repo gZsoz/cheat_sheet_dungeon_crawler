@@ -24,16 +24,10 @@ public class BatSkin extends NumberOfUsesItem {
 	 * amíg az adott szobából ki nem mennek, hogy legyen esélyük elmenekülni az oktató elől.
 	 */
 	@Override
-    public void use() {
-    	ProtoUtil.printLog("use");
-		this.setRemainingUses(getRemainingUses()-1);
+	public void use() {
+        ProtoUtil.printLog("use");
+        if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
     }
-	/**
-     * Levon a fennmaradó használatok számából egyet.
-     */
-	public void setRemainingUses() {
-		ProtoUtil.printLog("setRemainingUses");
-	}
 
 	/**
      * Végrehajtja azokat a tevékenységeket, amiknek a tárgy felvevésénél kell megtörténnie.

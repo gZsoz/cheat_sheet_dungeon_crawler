@@ -8,7 +8,7 @@ import ProtoUtil.ProtoUtil;
  */
 public abstract class Item {
 	
-	protected Character Owner;
+	protected Character owner;
 	
 	/**
 	 * A tárgy ragacsosságát jelzi
@@ -30,7 +30,7 @@ public abstract class Item {
 	 */
 	public void setOwner(Character o) {
 		ProtoUtil.printLog("setOwner");
-		Owner=o;
+		owner=o;
 	}
 	/**
 	 * Lekérdezi a tárgy tulajdonosát
@@ -38,7 +38,7 @@ public abstract class Item {
 	 */
 	public Character getOwner() {
 		ProtoUtil.printLog("getOwner");
-		return Owner;
+		return owner;
 	}
 	/**
 	 * Tárgy ragacsosságának beállítása

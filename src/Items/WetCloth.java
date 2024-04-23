@@ -26,12 +26,12 @@ public class WetCloth extends DecayingItems{
 	public void use() {
     	ProtoUtil.printLog("use()");
     	
-		for(Character character: Owner.getRoom().getCharacters() ) {
+		for(Character character: owner.getRoom().getCharacters() ) {
 			if(character instanceof Teacher) {
 				((Teacher) character).setStunned(true);
 			}
 		}
-    	isactive=true;
+    	isActive=true;
 		
     }
 	/**
@@ -46,7 +46,7 @@ public class WetCloth extends DecayingItems{
 	@Override
 	public void update() {
 		ProtoUtil.printLog("update");
-		if(isactive) {
+		if(isActive) {
 			reduceDuration();
 		}
 	}	

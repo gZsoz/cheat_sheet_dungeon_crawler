@@ -1,9 +1,12 @@
 package Character;
 
+import java.util.ArrayList;
+
 import Items.BatSkin;
 import Items.Beer;
 import Items.Item;
 import Items.Transistor;
+import Map.Room;
 import ProtoUtil.ProtoUtil;
 
 /**
@@ -11,6 +14,15 @@ import ProtoUtil.ProtoUtil;
  */
 public class Teacher extends Character {
 	
+	/**
+	 * Kostruktor.
+	 * @param currentRoom Melyik szobában van éppen a tanár.
+	 */
+	public Teacher(Room currentRoom) {
+		this.currentRoom = currentRoom;
+		this.inventory = new ArrayList<Item>();
+		this.stunned = false;
+	}
 	
     /**
      * Megvizsgálja, hogy van-e hallgató a szobában.
