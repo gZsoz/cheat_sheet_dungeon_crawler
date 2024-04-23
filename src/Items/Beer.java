@@ -38,9 +38,8 @@ public class Beer extends DecayingItems {
 	@Override
 	public void onPickUp() {
 		ProtoUtil.printLog("onPickUp");
-		ProtoUtil.increaseIndent();
 		use();
-    	ProtoUtil.decreaseIndent();
+    	
 	}
 	
 	public void update() {

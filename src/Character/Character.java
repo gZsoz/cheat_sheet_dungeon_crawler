@@ -16,6 +16,8 @@ import Time.iTask;
  */
 public abstract class Character implements iTask {
 	
+	protected boolean HasDefense=false;
+	
 	/**
 	 * A karakter birtokában található tárgyak
 	 * listája. Maximum 5 Item lehet benne. Nem lehet benne logarléc.
@@ -59,6 +61,7 @@ public abstract class Character implements iTask {
 		return stunned;
 	}
 	
+	
 	/**
 	 * Kábultsági állapotának beállítása.
 	 * @param s Ha elkábult a karakter, akkor igaz, egyébként hamis.
@@ -67,7 +70,12 @@ public abstract class Character implements iTask {
 		ProtoUtil.printLog("setStunned");
 		stunned = s;
 	}
-
+	public boolean getHasDefense() {
+		return HasDefense;
+	}
+	public void setHasDefense(boolean b) {
+		HasDefense=b;
+	}
     /**
      * Akkor hívódik meg, amikor egy karakter át akar menni egyik szobából a másikba.
      * @param r A szoba, amelybe be akar menni.
@@ -137,5 +145,7 @@ public abstract class Character implements iTask {
     		}
     	}
     }
+
+	
 
 }

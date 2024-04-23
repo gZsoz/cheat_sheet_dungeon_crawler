@@ -8,9 +8,9 @@ import ProtoUtil.ProtoUtil;
 public abstract class DecayingItems extends Item {
 
     
-	int duration=5;
-	boolean usable=true;
-	boolean isactive=false;
+	protected int duration=5;
+	protected boolean usable=true;
+	protected boolean isactive=false;
 	
 	
 	/**
@@ -22,15 +22,14 @@ public abstract class DecayingItems extends Item {
     	if(duration>0 && usable==true)
     		duration-=1;
     	else
+    		isactive=false;
     		usable=false;
     	ProtoUtil.printLog("reduceDuration()");
 		ProtoUtil.increaseIndent();
     	ProtoUtil.decreaseIndent();
     }
     
-    public boolean getisactive() {
-    	return isactive;
-    }
+   
     /**
      * a gyermekosztályok által leírt tárgyak használatát és hatását elindító függvény, 
      * gyermekosztályok implementálják. Item ősosztályból örökölt metódus
