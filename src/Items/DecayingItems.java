@@ -8,7 +8,7 @@ import ProtoUtil.ProtoUtil;
 public abstract class DecayingItems extends Item {
 
     
-	int duration;
+	int duration=5;
 	boolean usable=true;
 	boolean isactive=false;
 	

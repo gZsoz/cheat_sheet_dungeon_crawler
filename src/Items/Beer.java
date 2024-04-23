@@ -10,17 +10,12 @@ public class Beer extends DecayingItems {
 	/**
      * Konstruktor egy tárgy létrehozásához. Beer-ra állítja a nevet.
      */
-	public Beer() {
-		name="Beer";
-	}
 	
 	/**
      * Konstruktor egy tárgy létrehozásához.
      * @param n A tárgy neve
      */
-	public Beer(String n) {
-		name=n;
-	}
+	
 	
 	/**
      * Sör használatakor (felvételekor) végrehajtandó műveleteket végzi
@@ -30,10 +25,10 @@ public class Beer extends DecayingItems {
 	@Override
     public void use() {
         // Implementation
-    	ProtoUtil.printLog(name+".use()");
-		ProtoUtil.increaseIndent();
+    	
+		ProtoUtil.printLog("use");
+		setisactive(true);
 		reduceDuration();
-    	ProtoUtil.decreaseIndent();
     }
 	/**
 	 * A tárgy felvételekor elindítja a használatot
@@ -41,7 +36,7 @@ public class Beer extends DecayingItems {
 
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog(name+".onPickUp()");
+		ProtoUtil.printLog("onPickUp()");
 		ProtoUtil.increaseIndent();
 		use();
     	ProtoUtil.decreaseIndent();
