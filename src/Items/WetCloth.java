@@ -31,7 +31,7 @@ public class WetCloth extends DecayingItems{
 				((Teacher) character).setStunned(true);
 			}
 		}
-    	setisactive(true);
+    	isactive=true;
 		
     }
 	/**
@@ -39,15 +39,15 @@ public class WetCloth extends DecayingItems{
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp()");
-		ProtoUtil.increaseIndent();
-    	ProtoUtil.decreaseIndent();
+		ProtoUtil.printLog("onPickUp)");
+		
 	}
 
 	@Override
 	public void update() {
+		ProtoUtil.printLog("update");
+		if(isactive)
+		reduceDuration();
 		
-		
-	}
 
 }

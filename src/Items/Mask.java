@@ -18,7 +18,7 @@ public class Mask extends DecayingItems {
 	
 	@Override
     public void use() {
-    	ProtoUtil.printLog("use()");
+    	ProtoUtil.printLog("use");
     	isactive=true;
 		
     }
@@ -30,6 +30,10 @@ public class Mask extends DecayingItems {
 	public void onPickUp() {}
 	
 
-	
+	public void update(){
+		ProtoUtil.printLog("update");
+		reduceDuration();
+		
+	}
 	
 }
