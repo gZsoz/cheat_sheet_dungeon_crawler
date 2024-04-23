@@ -8,6 +8,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import EnvironmentalFactor.Gas;
+import EnvironmentalFactor.Sticky;
 import Items.AirFreshener;
 import Items.BatSkin;
 import Items.Beer;
@@ -20,6 +22,7 @@ import Items.SlideRule;
 import Items.Transistor;
 import Items.WetCloth;
 import Map.Labyrinth;
+import Character.Student;
 
 public class TestCommand {
 	String command;
@@ -89,6 +92,14 @@ public class TestCommand {
 			}	
 			break;
 		case "create_factor": // Bence
+			String type = parameters[0];
+			int roomIdx = Integer.parseInt(parameters[1]);
+			if(type == "gas"){
+				Gas gas = new Gas(l.getRooms()[roomIdx]);
+			}
+			if(type == "sticky"){
+				Sticky sticky = new Sticky(l.getRooms()[roomIdx]);
+			}
 			break;
 		case "create_character": // Sam
 			break;
@@ -99,16 +110,25 @@ public class TestCommand {
 			actor.pickupItem(actor.getRoom().getItems().get(Integer.parseInt(parameters[0])));
 			break;
 		case "use_item": // Zsombor
+			int useIdx = Integer.parseInt(parameters[0]);
+			actor.use(actor.getInventory()[itemIdx]);
 			break;
 		case "enter_room": // Sam
 			break;
 		case "split": // Bence
+			int splitIdx = Integer.parseInt(parameters[0]);
+			l.splitRoom(l.getRooms()[splitIdx]);
 			break;
 		case "merge": // Bence
+			int dstIdx = Integer.parseInt(parameters[0]);
+			int srcIdx = Integer.parseInt(parameters[1]);
+			l.mergeRoom(l.getRooms()[dstIdx],l.getRooms()[srcIdx]);
 			break;
 		case "kick": // Sam
 			break;
 		case "activate": // Bence
+			int itemIdx = Integer.parseInt(parameters[0]);
+			(Student) actor.activate(actor.getInventory()[itemIdx]);
 			break;
 		case "select_actor": // Balázs
 			actor=characters.get(Integer.parseInt(parameters[0]));
