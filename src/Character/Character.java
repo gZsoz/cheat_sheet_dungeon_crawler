@@ -116,7 +116,7 @@ public abstract class Character implements iTask {
     	if(inventory.size() < 5 ) {
     		if(i instanceof Transistor) {
     			Transistor transistorInRoom = (Transistor) i;
-    			if(transistorInRoom.getPair() != null) return false; 
+    			if(transistorInRoom.getPair() != null) return false; // párosított tranzisztort nem vehetünk fel
     			for(int j = 0; j < inventory.size(); j++) {
     				if(inventory.get(j) instanceof Transistor) {
     					Transistor transistorAtDisposal = (Transistor) inventory.get(j);
@@ -125,10 +125,11 @@ public abstract class Character implements iTask {
     					}
     				}
     			}
-    		} else {
-    			currentRoom.removeItem(i);
-        		i.onPickUp();
     		}
+			currentRoom.removeItem(i);
+			inventory.add(i);
+			i.setOwner(this);
+    		i.onPickUp();
     		return true;
     	}
     	return false;
