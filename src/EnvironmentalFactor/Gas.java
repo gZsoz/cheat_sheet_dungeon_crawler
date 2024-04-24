@@ -15,11 +15,11 @@ import java.util.ArrayList;
 public class Gas extends EnvironmentalFactors {
 
 	/**
-	 * Kontruktor létrehozza, a gáz objektumot és beállítja az adott szobába a környezeti változót
+	 * Kontruktor létrehozza, a gáz objektumot
 	 * @param r Adott szoba
 	 */
 	public Gas(Room r){
-		location=r;
+		location = r;
 	}
 
 	/**

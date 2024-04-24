@@ -6,5 +6,5 @@ addCharacter
 getRoom
 addCharacter
 enterRoom
-getCarachters
+getCharacters
 getCapacity

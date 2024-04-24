@@ -1,5 +1,6 @@
 package Character;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -30,21 +31,26 @@ public class Cleaner extends Character {
 	 * @param r A kitakarítandó szoba.
 	 */
 	public void clean(Room r) {
-		ProtoUtil.printLog("enterRoom");
+		ProtoUtil.printLog("clean");
 		
 		// nem kábult karakterek kitessékelése
 		Random rand = new Random();
 		for(int i = 0; i < r.getCharacters().size(); i++) {
 			Character currentCharacter = r.getCharacters().get(i);
-			if(currentCharacter.getStunned() == false) {
+			if(!currentCharacter.getClass().equals(Cleaner.class) && !currentCharacter.getStunned()) {
 				List<Room> roomsToMove = r.getNeighbours();
-				int idx = rand.nextInt(r.getCharacters().size()); // milyen indexű szobába tegyük a karaktert
+				int idx = rand.nextInt(roomsToMove.size()); // milyen indexű szobába tegyük a karaktert
 				currentCharacter.enterRoom(roomsToMove.get(idx));
 			}
 		}
-		
-		r.getEnvironmentalFactors().removeIf(n -> n.getClass().equals(Gas.class)); // gáz megszűntetése
-		
+
+		boolean roomHasGas = r.getEnvironmentalFactors().stream().anyMatch(n -> n.getClass().equals(Gas.class));
+		if(roomHasGas){
+			r.getEnvironmentalFactors().removeIf(n -> n.getClass().equals(Gas.class)); // gáz megszűntetése
+			ProtoUtil.printLog("removeEnvironmentalFactor");
+		}
+
+
 		// új ragacsosság betétele
 		Sticky st = new Sticky(currentRoom);
 		r.addEnvironmentalFactor(st);

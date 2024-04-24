@@ -1,0 +1,8 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Αγ²Ήϋÿÿÿÿ8‚ΐ„επ1
+©
+java:S2681"†This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.(­’Ύ­ωÿÿÿÿ8‚ΐ„επ1
+D
+java:S1125"'Remove the unnecessary boolean literal.(ªσª8†ΐ„επ1
+>
+java:S11166"Remove this empty statement.(τμϊÿÿÿÿ8ΐ„επ1

@@ -12,11 +12,11 @@ import ProtoUtil.ProtoUtil;
 public class Sticky extends EnvironmentalFactors {
 
 	/**
-	 * Kontruktor létrehozza, a sticky objektumot és beállítja az adott szobába a környezeti változót
+	 * Kontruktor létrehozza, a sticky objektumot
 	 * @param r Adott szoba
 	 */
 	public Sticky(Room r){
-		location=r;
+		location = r;
 	}
 	/**
 	 * A hátralévő emberek száma, amelyek után ragacsossá teszi a szobát

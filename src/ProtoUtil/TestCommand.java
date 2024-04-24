@@ -116,10 +116,10 @@ public class TestCommand {
 		case "create_factor": // Bence
 			String type = parameters[0];
 			int roomIdx = Integer.parseInt(parameters[1]);
-			if(type.equals("0")){
+			if(type.equals("gas")){
 				l.getRooms().get(roomIdx).addEnvironmentalFactor(new Gas(l.getRooms().get(roomIdx)));
 			}
-			if(type.equals("1")){
+			if(type.equals("sticky")){
 				l.getRooms().get(roomIdx).addEnvironmentalFactor(new Sticky(l.getRooms().get(roomIdx)));
 			}
 			break;

@@ -1,0 +1,36 @@
+
+{
+java:S2293B"YReplace the type specification in this constructor call with the diamond operator ("<>").(œŞ¦ìøÿÿÿÿ8÷ïèãğ1
+‡
+java:S13195"jThe type of "characters" should be an interface such as "List" rather than the implementation "ArrayList".(Íü»Ú8øïèãğ1
+^
+java:S4973<"<Strings and Boxed types should be compared using "equals()".(ÈœĞ­øÿÿÿÿ8ùïèãğ1
+^
+java:S4973C"<Strings and Boxed types should be compared using "equals()".(ÈœĞ­øÿÿÿÿ8ùïèãğ1
+^
+java:S4973{"<Strings and Boxed types should be compared using "equals()".(Å¦¦áÿÿÿÿÿ8úïèãğ1
+Y
+java:S4973~"<Strings and Boxed types should be compared using "equals()".(ìÛ™8úïèãğ1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿İ„ãûÿÿÿÿ8ûïèãğ1
+T
+java:S11350"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ8ˆğèãğ1
+o
+java:S37765"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(Íü»Ú8‰ğèãğ1
+T
+java:S1854|"7Remove this useless assignment to local variable "gas".(ùÊÇ8Šğèãğ1
+\
+java:S1854":Remove this useless assignment to local variable "sticky".(´¤ùÔûÿÿÿÿ8Šğèãğ1
+\
+java:S1854œ"9Remove this useless assignment to local variable "actor".(¤Š«úÿÿÿÿ8Šğèãğ1
+G	java:S106t"+Replace this use of System.out by a logger.(Õ¥ÒÓ8’ğèãğ1
+E
+java:S1481|"(Remove this unused "gas" local variable.(ùÊÇ8“ğèãğ1
+M
+java:S1481"+Remove this unused "sticky" local variable.(´¤ùÔûÿÿÿÿ8”ğèãğ1
+H	java:S106¡"+Replace this use of System.out by a logger.(‹ªó—8–ğèãğ1
+Q
+java:S1128"4Remove this unused import 'java.util.regex.Matcher'.(ëÅ›ã8ı‹‡åğ1
+V
+java:S1128	"4Remove this unused import 'java.util.regex.Pattern'.(Ã•…Äúÿÿÿÿ8ı‹‡åğ1
+ä
+java:S65415"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 113 to 64, Complexity from 33 to 14, Nesting Level from 3 to 2, Number of Variables from 17 to 6.(Íü»Ú8—ğèãğ1
