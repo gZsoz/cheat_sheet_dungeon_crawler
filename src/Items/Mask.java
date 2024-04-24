@@ -15,7 +15,6 @@ public class Mask extends DecayingItems {
     public void use() {
     	ProtoUtil.printLog("use");
     	isActive=true;
-		
     }
 	/**
 	 * A trágy felvételekor elvégezendő feladatok
@@ -26,8 +25,9 @@ public class Mask extends DecayingItems {
 	
 
 	public void update(){
-		reduceDuration();
-		
+		if(isActive){
+			reduceDuration();
+		}
 	}
 	
 }

@@ -167,9 +167,6 @@ public class TestCommand {
 			int srcIdx = Integer.parseInt(parameters[1]);
 			l.mergeRoom(l.getRooms().get(dstIdx), l.getRooms().get(srcIdx));
 			break;
-		case "kick":
-			((Teacher) actor).kick((Student) characters.get(Integer.parseInt(parameters[0])));
-			break;
 		case "select_actor":
 			actorArr.set(0, characters.get(Integer.parseInt(parameters[0])));
 			break;

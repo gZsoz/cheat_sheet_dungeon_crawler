@@ -5,7 +5,9 @@ import ProtoUtil.ProtoUtil;
 import Time.iTask;
 import EnvironmentalFactor.EnvironmentalFactors;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import Character.Character;
@@ -89,7 +91,7 @@ public class Room implements iTask {
     
     /**
      * Eltávolítja a paraméterként kapott karaktert a szobából.
-     * @param c Az eltávolítandó karakter
+     * @param character Az eltávolítandó karakter
      */
     public void removeCharacter(Character character) {
         ProtoUtil.printLog("removeCharacter");
@@ -223,8 +225,9 @@ public class Room implements iTask {
      */
     @Override
     public void update() {
-        for (Character c : characters)
-            c.update();
+        for(Character character: new ArrayList<Character>(characters)){
+            character.update();
+        }
         for (EnvironmentalFactors env : envFactors)
             env.update();
     }

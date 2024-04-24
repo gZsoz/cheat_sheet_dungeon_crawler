@@ -30,8 +30,9 @@ public class Teacher extends Character {
 	public void checkCollision() {
 		ProtoUtil.printLog("checkCollision");
 		for(int i = 0; i < currentRoom.getCharacters().size(); i++) {
-			Student studentForKick = (Student) currentRoom.getCharacters().get(i);
-			if(studentForKick instanceof Student) kick(studentForKick);
+			if(currentRoom.getCharacters().get(i) instanceof Student){
+				kick((Student) currentRoom.getCharacters().get(i)); // kirugni azt a hallgatot
+			}
 		}
     }
 
@@ -76,7 +77,6 @@ public class Teacher extends Character {
     					t.setLocation(null);
     				}
     				s.putdownItem(currentItem);
-    				currentRoom.addItem(currentItem);
     			}
     			
     			currentRoom.removeCharacter(s); // diák eltávolítása
