@@ -63,6 +63,50 @@ public class Labyrinth implements iTask{
 			this.removeRoom(merging);
 		}
     }
+	
+    /**
+     * Egy szoba kettéosztása a labirintusban a tesztprogramhoz determisztikus
+     * @param r A szétosztandó szoba.
+     */
+	public void splitRoomTest(Room old, int neighbourcnt, int itemcnt, int charactercnt) {
+		ProtoUtil.printLog("splitRoom");
+		Room n;
+		if(old instanceof CursedRoom) {
+			n=new CursedRoom(old.getCapacity());
+		}
+		else {
+			n=new Room(old.getCapacity());
+		}
+		for(int i=0; i<neighbourcnt; i++){
+			n.addNeighbour(old.getNeighbours().get(0));
+			old.getNeighbours().get(0).addNeighbour(n);
+			old.getNeighbours().get(0).removeNeighbour(old);
+			old.removeNeighbour(old.getNeighbours().get(0));
+		}
+		old.addNeighbour(n);
+		n.addNeighbour(old);
+		for(int i=0; i<itemcnt; i++){
+			n.addItem(old.getItems().get(0));
+			old.removeItem(old.getItems().get(0));
+		}
+		for(int i=0; i<charactercnt; i++){
+			old.getCharacters().get(i).enterRoom(n);
+		}
+		for(int i=0; i<old.getEnvironmentalFactors().size(); i++){
+			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.addEnvironmentalFactor(new Gas(n));
+			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
+		}
+		Rooms.add(Rooms.indexOf(old), n);
+		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
+		ProtoUtil.printLog("Neighbours of new room: "+n.getNeighbours().size());
+		ProtoUtil.printLog("Items of old room: "+old.getItems().size());
+		ProtoUtil.printLog("Items of new room: "+n.getItems().size());
+		ProtoUtil.printLog("Characters of old room: "+old.getCharacters().size());
+		ProtoUtil.printLog("Characters of new room: "+n.getCharacters().size());
+		ProtoUtil.printLog("EnvironmentalFactors of old room: "+old.getEnvironmentalFactors().size());
+		ProtoUtil.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
+		
+    }
 
     /**
      * Egy szoba kettéosztása a labirintusban.
@@ -101,6 +145,14 @@ public class Labyrinth implements iTask{
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
 		}
 		Rooms.add(Rooms.indexOf(old), n);
+		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
+		ProtoUtil.printLog("Neighbours of new room: "+n.getNeighbours().size());
+		ProtoUtil.printLog("Items of old room: "+old.getItems().size());
+		ProtoUtil.printLog("Items of new room: "+n.getItems().size());
+		ProtoUtil.printLog("Characters of old room: "+old.getCharacters().size());
+		ProtoUtil.printLog("Characters of new room: "+n.getCharacters().size());
+		ProtoUtil.printLog("EnvironmentalFactors of old room: "+old.getEnvironmentalFactors().size());
+		ProtoUtil.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
     }
 
 	private Item itemPicker(){

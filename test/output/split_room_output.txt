@@ -1,0 +1,47 @@
+addRoom
+addNeighbour
+addRoom
+addNeighbour
+addRoom
+getRoom
+addCharacter
+getRoom
+addCharacter
+addItem
+addItem
+splitRoom
+getCapacity
+getNeighbours
+addNeighbour
+getNeighbours
+addNeighbour
+getNeighbours
+removeNeighbour
+getNeighbours
+removeNeighbour
+addNeighbour
+addNeighbour
+getItems
+addItem
+getItems
+removeItem
+getCharacters
+enterRoom
+getCharacters
+getCapacity
+removeCharacter
+addCharacter
+getNeighbours
+Neighbours of old room: 2
+getNeighbours
+Neighbours of new room: 2
+getItems
+Items of old room: 1
+getItems
+Items of new room: 1
+getCharacters
+Characters of old room: 1
+getCharacters
+Characters of new room: 1
+EnvironmentalFactors of old room: 0
+EnvironmentalFactors of new room: 0

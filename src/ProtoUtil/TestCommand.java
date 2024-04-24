@@ -47,7 +47,7 @@ public class TestCommand {
 	public boolean runCommand(Labyrinth l, ArrayList<Character> characters, ArrayList<Character> actorArr) {
 		Character actor=actorArr.get(0);
 		switch (command) {
-		case "create_room":	// Balázs
+		case "create_room":
 			Room room;
 			int capacity=Integer.parseInt(parameters[0]);
 			int neighbourcount=parameters.length-2;
@@ -113,7 +113,7 @@ public class TestCommand {
 				break;
 			}	
 			break;
-		case "create_factor": // Bence
+		case "create_factor":
 			String type = parameters[0];
 			int roomIdx = Integer.parseInt(parameters[1]);
 			if(type.equals("gas")){
@@ -123,7 +123,7 @@ public class TestCommand {
 				l.getRooms().get(roomIdx).addEnvironmentalFactor(new Sticky(l.getRooms().get(roomIdx)));
 			}
 			break;
-		case "create_character": // Sam
+		case "create_character":
 			Character temp=null;
 			switch(parameters[0]) {
 				case "0":
@@ -148,26 +148,29 @@ public class TestCommand {
 		case "throw_item":
 			actor.putdownItem(actor.getInventory().get(Integer.parseInt(parameters[0])));
 			break;
-		case "use_item": // Zsombor
+		case "use_item":
 			int useIdx = Integer.parseInt(parameters[0]);
 			((Student)actor).activate(actor.getInventory().get(useIdx));
 			break;
-		case "enter_room": // Sam
+		case "enter_room":
 			actor.enterRoom(l.getRooms().get(Integer.parseInt(parameters[0])));
 			break;
-		case "split": // Bence
+		case "split":
 			int splitIdx = Integer.parseInt(parameters[0]);
-			l.splitRoom(l.getRooms().get(splitIdx));
+			if(parameters.length>1)
+				l.splitRoomTest(l.getRooms().get(splitIdx),Integer.parseInt(parameters[1]),Integer.parseInt(parameters[2]),Integer.parseInt(parameters[3]));
+			else
+				l.splitRoom(l.getRooms().get(splitIdx));
 			break;
-		case "merge": // Bence
+		case "merge":
 			int dstIdx = Integer.parseInt(parameters[0]);
 			int srcIdx = Integer.parseInt(parameters[1]);
 			l.mergeRoom(l.getRooms().get(dstIdx), l.getRooms().get(srcIdx));
 			break;
-		case "kick": // Sam
+		case "kick":
 			((Teacher) actor).kick((Student) characters.get(Integer.parseInt(parameters[0])));
 			break;
-		case "select_actor": // Balázs
+		case "select_actor":
 			actorArr.set(0, characters.get(Integer.parseInt(parameters[0])));
 			break;
 		case "quit":

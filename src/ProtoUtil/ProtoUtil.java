@@ -70,7 +70,7 @@ public class ProtoUtil {
         Scanner sc = new Scanner(System.in);
         do {
             try {
-                System.out.println('\n'+question);
+                System.out.println(question);
                 for(int i=0;i<opt.length;i++)
                     System.out.println((i+1)+") "+opt[i]);
                 choice=sc.nextInt();
@@ -178,9 +178,9 @@ public class ProtoUtil {
         	for(String test : alltests) {
         		runTestFromName(test);
         		if(evaluateTestFromName(test))
-        			System.out.printf(GREEN+"%-30sSuccess\n"+RESET,test);
+        			System.out.printf(GREEN+"%-40sSuccess\n"+RESET,test);
         		else {
-        			System.out.printf(RED+"%-30sFailure\n"+RESET,test);
+        			System.out.printf(RED+"%-40sFailure\n"+RESET,test);
         			success=false;
         		}
         	}
@@ -212,9 +212,9 @@ public class ProtoUtil {
                 		break;
                 	runTestFromName(tests.get(selectedTest));
                 	if(evaluateTestFromName(tests.get(selectedTest)))
-            			System.out.printf("%-30s"+GREEN+"Success\n"+RESET,tests.get(selectedTest));
+            			System.out.printf("%-40s"+GREEN+"Success\n"+RESET,tests.get(selectedTest));
             		else
-            			System.out.printf("%-30s"+RED+"Failure\n"+RESET,tests.get(selectedTest));
+            			System.out.printf("%-40s"+RED+"Failure\n"+RESET,tests.get(selectedTest));
                     break;
                 case 3:
                 	ArrayList<String> alltests=getTestNames();
@@ -222,9 +222,9 @@ public class ProtoUtil {
                 	for(String test : alltests) {
                 		runTestFromName(test);
                 		if(evaluateTestFromName(test))
-                			System.out.printf("%-30s"+GREEN+"Success\n"+RESET,test);
+                			System.out.printf("%-40s"+GREEN+"Success\n"+RESET,test);
                 		else {
-                			System.out.printf("%-30s"+RED+"Failure\n"+RESET,test);
+                			System.out.printf("%-40s"+RED+"Failure\n"+RESET,test);
                 			success=false;
                 		}
                 	}

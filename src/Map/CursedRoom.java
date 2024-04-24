@@ -13,7 +13,7 @@ import ProtoUtil.ProtoUtil;
  * Felelőssége megegyezik a szoba osztállyal, emellett felelőssége még az ajtók eltüntetése és megjelenítése.
  */
 public class CursedRoom extends Room{
-	private int closeDuration=2;
+	private int closeDuration=0;
     private boolean isOpen=true;
 	
     /**
@@ -46,6 +46,7 @@ public class CursedRoom extends Room{
     public void hideDoors() {
         ProtoUtil.printLog("hideDoors");
         removeAllDoors();
+        closeDuration=5;
     }
     
     /**
@@ -73,11 +74,13 @@ public class CursedRoom extends Room{
      * Csökkenti a szoba zárva maradásának idejét.
      */
     public void reduceDuration() {
-        ProtoUtil.printLog("reduceDuration");
         if (closeDuration > 0) {
+        	ProtoUtil.printLog("reduceDurationCursed");
             closeDuration--;
-            if (closeDuration == 0)
+            if (closeDuration == 0) {
                 isOpen = true;
+                ProtoUtil.printLog("Doors_opened");
+            }
         }
     }
     
@@ -100,6 +103,7 @@ public class CursedRoom extends Room{
     @Override
     public void update() {
         super.update();
-        reduceDuration();
+        if(!isOpen)
+        	reduceDuration();
     }
 }

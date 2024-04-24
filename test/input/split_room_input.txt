@@ -1,0 +1,8 @@
+create_room 1 0
+create_room 1 0 0
+create_room 1 0 0
+create_character 0 0
+create_character 0 0
+create_item batskin 0
+create_item batskin 0
+split 0 1 1 1
