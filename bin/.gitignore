@@ -1,4 +1,8 @@
+/.classpath
+/.project
+/Character/
+/EnvironmentalFactor/
+/Items/
+/Map/
 /ProtoUtil/
 /Time/
-/Items/
-/Character/
