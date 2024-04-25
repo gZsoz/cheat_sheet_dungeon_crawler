@@ -65,7 +65,6 @@ public class CursedRoom extends Room{
      */
     @Override
     public void addCharacter(Character character) {
-        ProtoUtil.printLog("addCharacter");
         super.addCharacter(character);
         hideDoors();
     }
