@@ -1,0 +1,1 @@
+contains "pickupItem" 5 m

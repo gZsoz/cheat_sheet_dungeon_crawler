@@ -1,0 +1,13 @@
+addRoom
+addItem
+addItem
+getRoom
+addCharacter
+getRoom
+getItems
+pickupItem
+getPair
+removeItem
+setOwner
+getRoom
+getItems

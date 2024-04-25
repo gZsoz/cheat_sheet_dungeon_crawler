@@ -1,0 +1,5 @@
+contains "pickupItem
+removeItem"
+contains "onPickUp
+use"
+contains "Game over"
