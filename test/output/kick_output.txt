@@ -29,6 +29,7 @@ getItems
 pickupItem
 removeItem
 setOwner
+Successfully picked up item
 checkCollision
 getCharacters
 checkCollision

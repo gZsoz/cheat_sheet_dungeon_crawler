@@ -13,38 +13,44 @@ pickupItem
 removeItem
 setOwner
 onPickUp
+Successfully picked up item
 getRoom
 getItems
 pickupItem
 removeItem
 setOwner
 onPickUp
+Successfully picked up item
 getRoom
 getItems
 pickupItem
 removeItem
 setOwner
-getRoom
-getItems
-pickupItem
-removeItem
-setOwner
-onPickUp
-update
-update
-update
+Successfully picked up item
 getRoom
 getItems
 pickupItem
 removeItem
 setOwner
 onPickUp
+Successfully picked up item
 update
 update
 update
 getRoom
 getItems
 pickupItem
+removeItem
+setOwner
+onPickUp
+Successfully picked up item
+update
+update
+update
+getRoom
+getItems
+pickupItem
+Could not pick up item
 update
 update
 update

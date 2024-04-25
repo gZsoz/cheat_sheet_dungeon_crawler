@@ -1,0 +1,8 @@
+create_room 2 0
+create_room 2 0 0
+create_room 1 0 1
+create_character 0 1
+create_character 0 1
+create_item batskin 1
+create_factor gas 1
+merge 0 1

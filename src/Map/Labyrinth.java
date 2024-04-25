@@ -55,7 +55,7 @@ public class Labyrinth implements iTask{
 		int bigger;
 		if(result.getCapacity()>merging.getCapacity()) bigger=result.getCapacity();
 		else bigger=merging.getCapacity();
-		if(result.getCharacters().size()+merging.getCharacters().size()<bigger){
+		if(result.getCharacters().size()+merging.getCharacters().size()>bigger){
 			return;
 		}else{
 			result.setCapacity(bigger);

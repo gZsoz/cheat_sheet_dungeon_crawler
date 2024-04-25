@@ -12,3 +12,4 @@ use
 setRemainingUses
 getInventory
 Game over
+Successfully picked up item

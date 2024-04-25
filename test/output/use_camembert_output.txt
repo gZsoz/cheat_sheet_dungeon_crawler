@@ -8,6 +8,7 @@ pickupItem
 removeItem
 setOwner
 onPickUp
+Successfully picked up item
 getInventory
 activate
 use

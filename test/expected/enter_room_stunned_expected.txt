@@ -1,4 +1,2 @@
-contains "create
-create"
-notcontains "eger vara"
-contains "move" 3 l
+contains "stun"
+contains "setStunned"

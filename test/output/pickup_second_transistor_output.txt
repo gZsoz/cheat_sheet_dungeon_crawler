@@ -9,6 +9,7 @@ pickupItem
 getPair
 removeItem
 setOwner
+Successfully picked up item
 getRoom
 getItems
 pickupItem
@@ -19,3 +20,4 @@ setPair
 setPair
 removeItem
 setOwner
+Successfully picked up item

@@ -1,1 +1,3 @@
-contains "pickupItem" 5 m
+contains "pickupItem" 6
+contains "Successfully picked up item" 5
+contains "Could not pick up item" 1
