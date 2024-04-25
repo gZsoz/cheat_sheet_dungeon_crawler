@@ -100,23 +100,23 @@ public class Transistor extends Item {
      */
     public void onDrop(Character c) {
     	ProtoUtil.printLog("onDrop");
-		if (active) {
-			if (pair != null) { // van párja
-				if(pair.location == null) { // nincs letéve a párja, ez az első közülük, amit letesz
-					location = c.getRoom();
-				} else { // le van téve a párja, ez a második közülük, amit letesz
+		if (pair != null) { // van párja
+			if(pair.location == null) { // nincs letéve a párja, ez az első közülük, amit letesz
+				setLocation(c.getRoom());
+			} else { // le van téve a párja, ez a második közülük, amit letesz
+				if (active) {
 					c.enterRoom(pair.location);
-					
-					// a felhasznált tranzisztorok defaultra állítása és szétválasztása
-					pair.location = null;
-					pair.active = false;
-					pair.pair = null;
-					pair = null;
-					active = false;
 				}
-			} else { // nincs párja
+				
+				// a tranzisztorok defaultra állítása és szétválasztása
+				pair.location = null;
+				pair.active = false;
+				pair.pair = null;
+				pair = null;
 				active = false;
 			}
+		} else { // nincs párja
+			active = false;
 		}
     }
 
@@ -132,5 +132,6 @@ public class Transistor extends Item {
 
 	@Override
 	public void onPickUp() {
+		ProtoUtil.printLog("onPickUp");
 	}
 }

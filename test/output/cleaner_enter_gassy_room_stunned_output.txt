@@ -74,11 +74,7 @@ removeCharacter
 addCharacter
 clean
 getCharacters
-getCharacters
 getStunned
-getCharacters
-getCharacters
-getCharacters
 removeEnvironmentalFactor
 addEnvironmentalFactor
 setLocation

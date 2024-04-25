@@ -223,6 +223,7 @@ public class Room implements iTask {
     /**
      * Meghívja a tárolt Character-ek és EnvironmentalFactorok update() metódusát
      */
+    @Override
     public void update() {
         for(Character character: new ArrayList<Character>(characters)){
             character.update();

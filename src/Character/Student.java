@@ -24,6 +24,7 @@ public class Student extends Character {
 		this.currentRoom = currentRoom;
 		this.inventory = new ArrayList<Item>();
 		this.stunned = false;
+		this.hasDefense = false;
 		this.invincible = false;
 	}
 	

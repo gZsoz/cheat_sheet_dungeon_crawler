@@ -1,5 +1,6 @@
 package Items;
 
+import Character.Student;
 import ProtoUtil.ProtoUtil;
 
 /**
@@ -14,7 +15,7 @@ public class Beer extends DecayingItems {
 	@Override
     public void use() {
 		ProtoUtil.printLog("use");
-		owner.setHasDefense(true);
+		if(owner instanceof Student) ((Student)owner).setInvincible(true);
 		setIsActive(true);
     }
 	
@@ -34,7 +35,7 @@ public class Beer extends DecayingItems {
 	public void update() {
 		super.update();
 		if(!usable) {
-			owner.setHasDefense(false);
+			if(owner instanceof Student) ((Student)owner).setInvincible(false);
 		}
 	}
 

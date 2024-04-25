@@ -23,3 +23,9 @@ removeItem
 setOwner
 onPickUp
 Successfully picked up item
+getInventory
+putdownItem
+addItem
+onDrop
+getRoom
+setLocation

@@ -24,7 +24,7 @@ public class WetCloth extends DecayingItems{
 				character.setStunned(true);
 			}
 		}
-    	isActive=true;	
+    	setIsActive(true);	
     }
 	/**
 	 * A trágy felvételekor elvégezendő feladatok
@@ -38,6 +38,7 @@ public class WetCloth extends DecayingItems{
 	public void update() {
 		ProtoUtil.printLog("update");
 		if(isActive) {
+			use();
 			reduceDuration();
 		}
 	}	

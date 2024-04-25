@@ -1,0 +1,5 @@
+create_room 1 0
+create_item beer 0
+create_character 0 0
+select_actor 0
+pickup_item 0

@@ -1,0 +1,14 @@
+addRoom
+addItem
+getRoom
+addCharacter
+getRoom
+getItems
+pickupItem
+removeItem
+setOwner
+onPickUp
+Successfully picked up item
+getInventory
+putdownItem
+addItem

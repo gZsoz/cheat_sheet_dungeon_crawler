@@ -76,9 +76,9 @@ public class ProtoUtil {
                 choice=sc.nextInt();
                 sc.nextLine();	// a \n beolvasása
                 if(choice<1 || choice>opt.length)
-                    System.out.println("Hibás input!\n Válasszon a fenti opciók közül!");
+                    System.out.println("Hibás input!\nVálasszon a fenti opciók közül!\n");
             } catch(InputMismatchException e) {
-                System.out.println("Hibás input!\n Válasszon a fenti opciók közül, csak egy számot írjon be!");
+                System.out.println("Hibás input!\nVálasszon a fenti opciók közül, csak egy számot írjon be!\n");
                 sc.nextLine();
                 choice=0;
             }

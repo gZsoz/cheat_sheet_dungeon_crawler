@@ -1,0 +1,17 @@
+addRoom
+addItem
+getRoom
+addCharacter
+getRoom
+getItems
+pickupItem
+removeItem
+setOwner
+onPickUp
+use
+setInvincible
+setIsActive
+Successfully picked up item
+reduceDuration
+reduceDuration
+reduceDuration

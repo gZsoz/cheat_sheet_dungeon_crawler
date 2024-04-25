@@ -26,6 +26,7 @@ getItems
 pickupItem
 removeItem
 setOwner
+onPickUp
 Successfully picked up item
 getRoom
 getItems
