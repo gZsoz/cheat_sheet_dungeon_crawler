@@ -29,9 +29,9 @@ public class Teacher extends Character {
      */
 	public void checkCollision() {
 		ProtoUtil.printLog("checkCollision");
-		for(int i = 0; i < currentRoom.getCharacters().size(); i++) {
-			if(currentRoom.getCharacters().get(i) instanceof Student){
-				kick((Student) currentRoom.getCharacters().get(i)); // kirugni azt a hallgatot
+		for(Character temp : new ArrayList<Character>(currentRoom.getCharacters())) {
+			if(temp instanceof Student){
+				kick((Student) temp); // kirugni azt a hallgatot
 			}
 		}
     }
