@@ -12,36 +12,36 @@ getItems
 pickupItem
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp
 getRoom
 getItems
 pickupItem
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp
 getRoom
 getItems
 pickupItem
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp
 getRoom
 getItems
 pickupItem
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp
 getRoom
 getItems
 pickupItem
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp
 getRoom
 getItems
 pickupItem

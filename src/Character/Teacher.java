@@ -66,8 +66,7 @@ public class Teacher extends Character {
     		} else { // nem volt sör és denevérbőr sem
     			
     			// kirúgás előtt a diák összes tárgyát lerakatjuk vele a szobába
-    			for(int i = 0; i < s.getInventory().size(); i++){
-    				Item currentItem = s.getInventory().get(i);
+    			for(Item currentItem : new ArrayList<Item>(s.getInventory())){
     				if(currentItem instanceof Transistor) { // ha tranzisztor, annak az értékeit default-ra állítjuk
     					Transistor t = (Transistor) currentItem;
     					t.getPair().setLocation(null);
@@ -81,6 +80,7 @@ public class Teacher extends Character {
     			}
     			
     			currentRoom.removeCharacter(s); // diák eltávolítása
+    			ProtoUtil.printLog("student removed from game");
     		}
     	}
     }

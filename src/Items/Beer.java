@@ -1,6 +1,9 @@
 package Items;
 
+import java.util.Random;
+
 import Character.Student;
+import Map.Room;
 import ProtoUtil.ProtoUtil;
 
 /**
@@ -26,17 +29,26 @@ public class Beer extends DecayingItems {
 	public void onPickUp() {
 		ProtoUtil.printLog("onPickUp");
 		use();
-	}
-	
-	/**
-	 * Ugyanaz mint a DecayingItems-nek, plusz még 
-	 */
-	@Override
-	public void update() {
-		super.update();
-		if(!usable) {
-			if(owner instanceof Student) ((Student)owner).setInvincible(false);
+		if(!owner.getInventory().isEmpty()) {
+			int rand=new Random().nextInt(owner.getInventory().size());
+			owner.putdownItem(owner.getInventory().get(rand));
 		}
 	}
-
+	
+	@Override
+	public void onDrop() {
+		ProtoUtil.printLog("onDrop");
+		isActive=false;
+		boolean beer=false;
+		for(Item i : owner.getInventory()) {
+			if(i instanceof Beer) {
+				beer=true;
+				break;
+			}
+		}
+		if((!beer) && owner instanceof Student) ((Student)owner).setInvincible(false);
+		
+		super.onDrop();
+	}
+	
 }

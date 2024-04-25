@@ -1,4 +1,5 @@
 contains "pickupItem"
 contains "onPickUp"
 contains "use"
-contains "reduceDuration"
+contains "putdownItem"
+contains "Dropped"

@@ -9,8 +9,8 @@ pickupItem
 getPair
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp
 getRoom
 getItems
 pickupItem
@@ -21,5 +21,5 @@ setPair
 setPair
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp

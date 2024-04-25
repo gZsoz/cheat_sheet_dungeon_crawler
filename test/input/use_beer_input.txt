@@ -1,0 +1,10 @@
+create_room 1 0
+create_room 2 0 0
+create_item beer 0
+create_item mask 0
+create_character 0 0
+create_character 1 1
+select_actor 0
+pickup_item 1
+pickup_item 0
+enter_room 1

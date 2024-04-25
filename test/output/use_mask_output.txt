@@ -35,8 +35,8 @@ getItems
 pickupItem
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp
 getLocation
 getCharacters
 getLocation
@@ -53,18 +53,16 @@ getCharacters
 stun
 getInventory
 use
-setIsActive
 reduceDuration
 getLocation
 getCharacters
 stun
 getInventory
 use
-setIsActive
 reduceDuration
 getLocation
 getCharacters
 stun
 getInventory
 use
-setIsActive
+reduceDuration

@@ -7,9 +7,9 @@ getItems
 pickupItem
 removeItem
 setOwner
+Successfully picked up item
 onPickUp
 use
 setRemainingUses
 getInventory
 Game over
-Successfully picked up item

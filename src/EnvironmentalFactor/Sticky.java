@@ -21,7 +21,7 @@ public class Sticky extends EnvironmentalFactors {
 	/**
 	 * A hátralévő emberek száma, amelyek után ragacsossá teszi a szobát
 	 */
-	private int remainingEntries;
+	private int remainingEntries=2;
 
 	/**
 	 * Lekérdezi a hátralévő emberek számát, amelyek után ragacsossá teszi a szobát
@@ -36,9 +36,9 @@ public class Sticky extends EnvironmentalFactors {
 	 * Beállítja a hátralévő emberek számát, amelyek után ragacsossá teszi a szobát
 	 * @param re A beállítandó emberek száma
 	 */
-	private void setRemainingEntries(int re){
+	public void reduceRemainingEntries(){
 		ProtoUtil.printLog("setRemainingEntries");
-		remainingEntries = re;
+		remainingEntries--;
 	}
 
 	/**

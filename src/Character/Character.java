@@ -3,6 +3,7 @@ package Character;
 import java.util.ArrayList;
 import java.util.List;
 
+import Items.Beer;
 import Items.Item;
 import Items.Transistor;
 import Map.Room;
@@ -134,8 +135,8 @@ public abstract class Character implements iTask {
 			currentRoom.removeItem(i);
 			inventory.add(i);
 			i.setOwner(this);
+			ProtoUtil.printLog("Successfully picked up item");
     		i.onPickUp();
-    		ProtoUtil.printLog("Successfully picked up item");
     		return true;
     	}
     	ProtoUtil.printLog("Could not pick up item");
@@ -150,10 +151,7 @@ public abstract class Character implements iTask {
     	ProtoUtil.printLog("putdownItem");
     	inventory.remove(i);
     	currentRoom.addItem(i);
-    	if(i instanceof Transistor) {
-    		Transistor transistorDropped = (Transistor) i;
-    		transistorDropped.onDrop(this);
-    	}
+    	i.onDrop();
     }
 
     /**

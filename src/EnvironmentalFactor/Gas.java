@@ -28,14 +28,27 @@ public class Gas extends EnvironmentalFactors {
 	 */
 	public void stun(Character character) {
 		ProtoUtil.printLog("stun");
-		for (Item item: character.getInventory()) {
-			if(item instanceof Mask){
-				character.setHasDefense(true);
-				item.use();
-			}
-		}
 		if(!character.getHasDefense()) {
 			character.setStunned(true);
+			for(Item currentItem : new ArrayList<Item>(character.getInventory())){
+				if(currentItem instanceof Transistor) { // ha tranzisztor, annak az értékeit default-ra állítjuk
+					Transistor t = (Transistor) currentItem;
+					t.getPair().setLocation(null);
+					t.getPair().setActive(false);
+					t.getPair().setPair(null);
+					t.setPair(null);
+					t.setActive(false);
+					t.setLocation(null);
+				}
+				character.putdownItem(currentItem);
+			}
+			return;
+		}
+		for (Item item: character.getInventory()) {
+			if(item instanceof Mask) {
+				item.use();
+				break;
+			}
 		}
 	}
 

@@ -55,6 +55,11 @@ public abstract class Item {
      */
 	public abstract void onPickUp();
 	
+	public void onDrop() {
+		ProtoUtil.printLog("Dropped");
+		owner=null;
+	}
+	
 	/**
      * Egy tárgy használata. A tárgyak a saját,egyedi módján kerül használatba, 
      * ezért ezt külön-külön valósítják meg a  leszármazottak.

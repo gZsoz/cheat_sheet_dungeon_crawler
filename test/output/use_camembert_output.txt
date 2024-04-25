@@ -7,8 +7,8 @@ getItems
 pickupItem
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp
 getInventory
 activate
 use
@@ -21,15 +21,15 @@ getInventory
 getLocation
 getCharacters
 stun
-getInventory
 setStunned
+getInventory
 getLocation
 getCharacters
 stun
-getInventory
 setStunned
+getInventory
 getLocation
 getCharacters
 stun
-getInventory
 setStunned
+getInventory

@@ -1,0 +1,3 @@
+contains "Successfully picked up item" 2
+contains "onDrop"
+notcontains "student removed from game"

@@ -24,8 +24,8 @@ getItems
 pickupItem
 removeItem
 setOwner
-onPickUp
 Successfully picked up item
+onPickUp
 checkCollision
 getCharacters
 checkCollision
@@ -37,30 +37,30 @@ getItems
 pickupItem
 removeItem
 setOwner
+Successfully picked up item
 onPickUp
 use
+setIsActive
 getRoom
 getCharacters
-setIsActive
-Successfully picked up item
 use
+setIsActive
 getRoom
 getCharacters
-setIsActive
 reduceDuration
 checkCollision
 getCharacters
 use
+setIsActive
 getRoom
 getCharacters
-setIsActive
 reduceDuration
 checkCollision
 getCharacters
 use
+setIsActive
 getRoom
 getCharacters
-setIsActive
 reduceDuration
 checkCollision
 getCharacters
@@ -81,10 +81,10 @@ getInventory
 use
 setRemainingUses
 use
+setIsActive
 getRoom
 getCharacters
 setStunned
-setIsActive
 reduceDuration
 checkCollision
 getCharacters
@@ -98,10 +98,10 @@ getInventory
 use
 setRemainingUses
 use
+setIsActive
 getRoom
 getCharacters
 setStunned
-setIsActive
 reduceDuration
 checkCollision
 getCharacters
@@ -116,9 +116,12 @@ use
 setRemainingUses
 getInventory
 use
+setIsActive
 getRoom
 getCharacters
 setStunned
-setIsActive
 reduceDuration
 getInventory
+onDrop
+Dropped
+Decaying item expired and removed.

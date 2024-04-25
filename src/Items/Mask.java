@@ -1,5 +1,6 @@
 package Items;
 
+import Character.Student;
 import ProtoUtil.ProtoUtil;
 
 /**
@@ -14,22 +15,36 @@ public class Mask extends DecayingItems {
 	@Override
     public void use() {
     	ProtoUtil.printLog("use");
-    	setIsActive(true);
+    	isActive=true;
+    	reduceDuration();
     }
 	
 	/**
-	 * A trágy felvételekor elvégezendő feladatok
+	 * A tárgy felvételekor elvégezendő feladatok
 	 */
 	@Override
 	public void onPickUp() {
 		ProtoUtil.printLog("onPickUp");
+		owner.setHasDefense(true);
 	}
 	
 	@Override
-	public void update(){
-		if(isActive){
-			reduceDuration();
+	public void onDrop() {
+		ProtoUtil.printLog("onDrop");
+		isActive=false;
+		boolean mask=false;
+		for(Item i : owner.getInventory()) {
+			if(i instanceof Mask) {
+				mask=true;
+				break;
+			}
 		}
+		if(!mask) owner.setHasDefense(false);
+		
+		super.onDrop();
 	}
+	
+	@Override
+	public void update(){}
 	
 }

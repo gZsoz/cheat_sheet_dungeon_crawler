@@ -7,11 +7,17 @@ getItems
 pickupItem
 removeItem
 setOwner
+Successfully picked up item
 onPickUp
 use
 setInvincible
 setIsActive
-Successfully picked up item
-reduceDuration
-reduceDuration
-reduceDuration
+getInventory
+getInventory
+getInventory
+putdownItem
+addItem
+onDrop
+getInventory
+setInvincible
+Dropped

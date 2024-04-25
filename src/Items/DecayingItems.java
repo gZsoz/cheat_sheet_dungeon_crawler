@@ -11,12 +11,7 @@ public abstract class DecayingItems extends Item implements iTask {
 	/**
 	 * Milyen hoszzú ideig jó a tárgy.
 	 */
-	protected int duration = 5;
-	
-	/**
-	 * Használható-e a tárgy.
-	 */
-	protected boolean usable = true;
+	protected int duration = 6;
 	
 	/**
 	 * Aktív-e a tárgy.
@@ -29,16 +24,14 @@ public abstract class DecayingItems extends Item implements iTask {
      * ha a duration eléri a 0-t.
      */
     public void reduceDuration() {
-    	ProtoUtil.printLog("reduceDuration");
-    	if(duration>0 && usable==true)
-    		duration-=1;
-    	else {
-    		isActive=false;
-    		usable=false;
-    		owner.setHasDefense(false);
-    		owner.getInventory().remove(this);
-    	}
-    }
+		ProtoUtil.printLog("reduceDuration");
+		duration--;
+		if(duration==0) {
+			owner.getInventory().remove(this);
+			onDrop();
+			ProtoUtil.printLog("Decaying item expired and removed.");
+		}
+	}
 
 	/**
 	 * A tárgy aktív állapotának lekérdezése.
@@ -69,8 +62,7 @@ public abstract class DecayingItems extends Item implements iTask {
      */
     @Override
     public void update() {
-		if(isActive)
-			reduceDuration();
+    	if(duration>0 && isActive) reduceDuration();
     };
 
 }

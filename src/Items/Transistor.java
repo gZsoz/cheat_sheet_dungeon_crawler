@@ -98,14 +98,15 @@ public class Transistor extends Item {
      * egyébként nem csinál semmit.
      * @param c A Karakter akit teleportál
      */
-    public void onDrop(Character c) {
+	@Override
+    public void onDrop() {
     	ProtoUtil.printLog("onDrop");
 		if (pair != null) { // van párja
 			if(pair.location == null) { // nincs letéve a párja, ez az első közülük, amit letesz
-				setLocation(c.getRoom());
+				setLocation(owner.getRoom());
 			} else { // le van téve a párja, ez a második közülük, amit letesz
 				if (active) {
-					c.enterRoom(pair.location);
+					owner.enterRoom(pair.location);
 				}
 				
 				// a tranzisztorok defaultra állítása és szétválasztása
