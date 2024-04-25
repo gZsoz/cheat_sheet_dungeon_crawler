@@ -201,6 +201,7 @@ public class ProtoUtil {
             int ans=question("Mit szeretnél tesztelni?", opt); // Felhasználói választás bekérése
             switch(ans) {
                 case 1:
+					System.out.println("Írd be a teszthez szükséges parancsokat kézzel. Kilépési parancs: quit");
                     runTest(System.in,System.out);
                     break;
                 case 2:
