@@ -30,7 +30,7 @@ public class Teacher extends Character {
 	public void checkCollision() {
 		ProtoUtil.printLog("checkCollision");
 		for(Character temp : new ArrayList<Character>(currentRoom.getCharacters())) {
-			if(temp instanceof Student){
+			if((Object)temp instanceof Student){
 				kick((Student) temp); // kirugni azt a hallgatot
 			}
 		}
