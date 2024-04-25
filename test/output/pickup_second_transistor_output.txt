@@ -11,3 +11,11 @@ removeItem
 setOwner
 getRoom
 getItems
+pickupItem
+getPair
+getPair
+connect
+setPair
+setPair
+removeItem
+setOwner

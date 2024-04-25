@@ -29,7 +29,7 @@ getItems
 pickupItem
 removeItem
 setOwner
-onPickUp)
+onPickUp
 update
 update
 update
