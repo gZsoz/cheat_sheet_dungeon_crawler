@@ -1,4 +1,4 @@
-contains "create
-create"
-notcontains "eger vara"
-contains "move" 3 m
+contains "addCharacter" 2
+contains "enterRoom"
+contains "getCapacity"
+contains "getCharacters"
