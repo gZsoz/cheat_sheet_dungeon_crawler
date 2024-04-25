@@ -35,9 +35,6 @@ removeItem
 setOwner
 onPickUp
 Successfully picked up item
-update
-update
-update
 getRoom
 getItems
 pickupItem
@@ -45,13 +42,7 @@ removeItem
 setOwner
 onPickUp
 Successfully picked up item
-update
-update
-update
 getRoom
 getItems
 pickupItem
 Could not pick up item
-update
-update
-update

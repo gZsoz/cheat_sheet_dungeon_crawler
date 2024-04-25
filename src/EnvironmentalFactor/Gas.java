@@ -30,10 +30,8 @@ public class Gas extends EnvironmentalFactors {
 		ProtoUtil.printLog("stun");
 		for (Item item: character.getInventory()) {
 			if(item instanceof Mask){
+				character.setHasDefense(true);
 				item.use();
-				if(((Mask) item).getIsActive()){
-					character.setHasDefense(true);
-				}
 			}
 		}
 		if(!character.getHasDefense()) {

@@ -2,7 +2,7 @@ create_room 1 0
 create_item cabbagecamembert 0
 create_item batskin 0
 create_item mask 0
-create_item wetcloth 0
+create_item mask 0
 create_item batskin 0
 create_item cabbagecamembert 0
 create_character 0 0

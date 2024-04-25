@@ -35,6 +35,7 @@ public abstract class DecayingItems extends Item implements iTask {
     	else {
     		isActive=false;
     		usable=false;
+    		owner.setHasDefense(false);
     		owner.getInventory().remove(this);
     	}
     }

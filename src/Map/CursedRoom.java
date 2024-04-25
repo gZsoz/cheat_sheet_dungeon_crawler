@@ -79,7 +79,7 @@ public class CursedRoom extends Room{
             closeDuration--;
             if (closeDuration == 0) {
                 isOpen = true;
-                ProtoUtil.printLog("Doors_opened");
+                ProtoUtil.printLog("bringbackDoors");
             }
         }
     }
