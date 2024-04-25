@@ -31,7 +31,7 @@ public class WetCloth extends DecayingItems{
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp)");
+		ProtoUtil.printLog("onPickUp");
 	}
 
 	@Override
