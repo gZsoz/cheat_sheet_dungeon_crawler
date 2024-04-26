@@ -1,5 +1,6 @@
 package Items;
 
+import Character.Student;
 import ProtoUtil.ProtoUtil;
 
 /**
@@ -26,6 +27,7 @@ public class BatSkin extends NumberOfUsesItem {
 	@Override
 	public void use() {
         ProtoUtil.printLog("use");
+        if(owner instanceof Student) ((Student)owner).setInvincible(true);
         if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
     }
 

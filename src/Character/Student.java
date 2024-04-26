@@ -23,7 +23,7 @@ public class Student extends Character {
 	public Student(Room currentRoom) {
 		this.currentRoom = currentRoom;
 		this.inventory = new ArrayList<Item>();
-		this.stunned = false;
+		this.stunned = 0;
 		this.hasDefense = false;
 		this.invincible = false;
 	}

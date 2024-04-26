@@ -1,0 +1,4 @@
+notcontains "student removed from game"
+contains "use" 1
+contains "setRemainingUses" 1
+contains "kick"

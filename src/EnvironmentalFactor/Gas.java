@@ -29,7 +29,7 @@ public class Gas extends EnvironmentalFactors {
 	public void stun(Character character) {
 		ProtoUtil.printLog("stun");
 		if(!character.getHasDefense()) {
-			character.setStunned(true);
+			if(character.getStunned()==0) character.setStunned(4);
 			for(Item currentItem : new ArrayList<Item>(character.getInventory())){
 				if(currentItem instanceof Transistor) { // ha tranzisztor, annak az értékeit default-ra állítjuk
 					Transistor t = (Transistor) currentItem;

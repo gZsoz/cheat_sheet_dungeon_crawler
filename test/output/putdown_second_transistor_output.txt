@@ -37,6 +37,7 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setInvincible
 getInventory
 activate
 use
@@ -49,3 +50,4 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setInvincible

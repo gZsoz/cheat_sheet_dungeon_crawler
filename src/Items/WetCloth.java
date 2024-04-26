@@ -21,7 +21,7 @@ public class WetCloth extends DecayingItems{
     	setIsActive(true);
 		for(Character character: owner.getRoom().getCharacters() ) {
 			if(character instanceof Teacher) {
-				character.setStunned(true);
+				if(character.getStunned()==0) character.setStunned(4);
 			}
 		}
     }

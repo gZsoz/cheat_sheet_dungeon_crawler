@@ -21,7 +21,7 @@ public class Teacher extends Character {
 	public Teacher(Room currentRoom) {
 		this.currentRoom = currentRoom;
 		this.inventory = new ArrayList<Item>();
-		this.stunned = false;
+		this.stunned = 0;
 		this.hasDefense = false;
 	}
 	

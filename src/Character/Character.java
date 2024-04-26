@@ -2,6 +2,8 @@ package Character;
 
 import java.util.ArrayList;
 
+import Items.BatSkin;
+import Items.Beer;
 import Items.Item;
 import Items.Transistor;
 import Map.Room;
@@ -31,7 +33,7 @@ public abstract class Character implements iTask {
 	/**
 	 * El van-e kábítva a karakter.
 	 */
-	protected boolean stunned;
+	protected int stunned;
 	
 	/**
 	 * Van-e védelme a karakternek kábítás ellen.
@@ -60,7 +62,7 @@ public abstract class Character implements iTask {
 	 * Kábítás állapot lekérdezése.
 	 * @return A karakter kábultsági állapota.
 	 */
-	public boolean getStunned() {
+	public int getStunned() {
 		ProtoUtil.printLog("getStunned");
 		return stunned;
 	}
@@ -70,9 +72,14 @@ public abstract class Character implements iTask {
 	 * Kábultsági állapotának beállítása.
 	 * @param s Ha kábult a karakter, akkor igaz, egyébként hamis.
 	 */
-	public void setStunned(boolean s) {
+	public void setStunned(int s) {
 		ProtoUtil.printLog("setStunned");
 		stunned = s;
+	}
+	
+	public void reduceStunned() {
+		ProtoUtil.printLog("reduceStunned");
+		stunned--;
 	}
 	
 	/**
@@ -102,6 +109,12 @@ public abstract class Character implements iTask {
     		currentRoom.removeCharacter(this);
     		r.addCharacter(this);
     		currentRoom = r;
+    		stunned = 0;
+    		boolean b=false;
+    		for(Item i : inventory) {
+    			if(i instanceof Beer) b=true;
+    		}
+    		if((!b) && this instanceof Student) ((Student)this).setInvincible(false);
     		return true;
     	}
     	return false;
@@ -148,6 +161,14 @@ public abstract class Character implements iTask {
      * A karakter időérzékeny műveleteit végzi (mozgás).
      */
     public void update() {
+    	if(0 < stunned && stunned <= 4) {
+    		reduceStunned();
+    		if(stunned==0) stunned=10;
+    	}
+    	if(4<stunned) {
+    		reduceStunned();
+    		if(stunned==4) stunned=0;
+    	}
     	for(Item temp : new ArrayList<Item>(inventory)) {
 			if(temp instanceof iTask) {
 				((iTask) temp).update();

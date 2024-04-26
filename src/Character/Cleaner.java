@@ -23,7 +23,7 @@ public class Cleaner extends Character {
 	public Cleaner(Room currentRoom) {
 		this.currentRoom = currentRoom;
 		this.inventory = new ArrayList<Item>();
-		this.stunned = false;
+		this.stunned = 0;
 		this.hasDefense = false;
 	}
 	
@@ -38,7 +38,7 @@ public class Cleaner extends Character {
 		Random rand = new Random();
 		
 		for(Character temp : new ArrayList<Character>(currentRoom.getCharacters())) {
-			if(!temp.getClass().equals(Cleaner.class) && !temp.getStunned()) {
+			if(!temp.getClass().equals(Cleaner.class) && (temp.getStunned()==0 || temp.getStunned()>4)) {
 				List<Room> roomsToMove = r.getNeighbours();
 				int idx = rand.nextInt(roomsToMove.size()); // milyen indexű szobába tegyük a karaktert
 				temp.enterRoom(roomsToMove.get(idx));

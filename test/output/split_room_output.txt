@@ -31,6 +31,7 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setInvincible
 getNeighbours
 Neighbours of old room: 2
 getNeighbours

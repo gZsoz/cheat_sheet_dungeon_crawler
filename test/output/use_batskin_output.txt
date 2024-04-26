@@ -2,7 +2,6 @@ addRoom
 addNeighbour
 addRoom
 addItem
-addItem
 getRoom
 addCharacter
 getRoom
@@ -26,31 +25,6 @@ removeItem
 setOwner
 Successfully picked up item
 onPickUp
-checkCollision
-getCharacters
-checkCollision
-getCharacters
-checkCollision
-getCharacters
-getRoom
-getItems
-pickupItem
-removeItem
-setOwner
-Successfully picked up item
-onPickUp
-use
-setInvincible
-setIsActive
-getInventory
-getInventory
-getInventory
-putdownItem
-addItem
-onDrop
-getInventory
-setInvincible
-Dropped
 checkCollision
 getCharacters
 checkCollision
@@ -70,15 +44,14 @@ getInvincible
 getInventory
 getInventory
 getInventory
-getInventory
-putdownItem
-addItem
-onDrop
-getInventory
-Dropped
-removeCharacter
-student removed from game
+use
+setInvincible
+setRemainingUses
 checkCollision
 getCharacters
+kick
+getInvincible
 checkCollision
 getCharacters
+kick
+getInvincible
