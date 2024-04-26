@@ -50,11 +50,14 @@ public abstract class Item {
 	}
 
 	/**
-     * Egy tárgy felvételekor hívodik meg. A tárgyak a saját,egyedi módján kerül használatba,
-     * ezért ezt külön-külön valósítják meg a  leszármazottak.
+     * Egy tárgy felvételekor hívódik meg. A tárgyak a saját, egyedi módján kerül használatba,
+     * ezért ezt külön-külön valósítják meg a leszármazottak.
      */
 	public abstract void onPickUp();
 	
+	/**
+     * Egy tárgy letételekor hívódik meg, ekkor a tárgynak nem lesz tulajdonosa.
+     */
 	public void onDrop() {
 		ProtoUtil.printLog("Dropped");
 		owner=null;

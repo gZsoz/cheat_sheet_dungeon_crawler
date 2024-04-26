@@ -11,18 +11,19 @@ removeItem
 setOwner
 Successfully picked up item
 onPickUp
+getInventory
 getRoom
 getItems
 pickupItem
 getPair
-getPair
-connect
-setPair
-setPair
 removeItem
 setOwner
 Successfully picked up item
 onPickUp
+getInventory
+connect
+setPair
+setPair
 getInventory
 putdownItem
 addItem

@@ -32,18 +32,9 @@ public class Teacher extends Character {
 		ProtoUtil.printLog("checkCollision");
 		for(Character temp : new ArrayList<Character>(currentRoom.getCharacters())) {
 			if((Object)temp instanceof Student){
-				kick((Student) temp); // kirugni azt a hallgatot
+				kick((Student) temp); // ha találunk, kirúgjuk a hallgatót
 			}
 		}
-    }
-
-	/**
-	 * Ugyanaz mint a Character-nek, plusz még meghívja a checkCollision() függvényt.
-	 */
-    @Override
-    public void update() {
-    	super.update();
-		checkCollision();
     }
 
     /**
@@ -83,5 +74,14 @@ public class Teacher extends Character {
     			ProtoUtil.printLog("student removed from game");
     		}
     	}
+    }
+
+	/**
+	 * Ugyanaz mint a Character-nek, plusz még meghívja a checkCollision() függvényt.
+	 */
+    @Override
+    public void update() {
+    	super.update();
+		checkCollision();
     }
 }

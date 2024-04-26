@@ -1,8 +1,9 @@
 package Items;
 
+import java.util.ArrayList;
+
 import Map.Room;
 import ProtoUtil.ProtoUtil;
-import Character.Character;
 
 /**
  * Felelős egy másik ugyanilyen tárggyal való összekapcsolódásért, 
@@ -131,8 +132,21 @@ public class Transistor extends Item {
 		t.setPair(this);
     }
 
+    /**
+     * Az inventory-ban található tranzisztorokat kettesével összepárosítja
+     */
 	@Override
 	public void onPickUp() {
 		ProtoUtil.printLog("onPickUp");
+		ArrayList<Transistor> transistorsInInventory = new ArrayList<>();
+		for(Item i: owner.getInventory()) {
+			if(i instanceof Transistor) {
+				Transistor transistorAtDisposal = (Transistor) i;
+				transistorsInInventory.add(transistorAtDisposal);
+			}
+		}
+		for(int j = 0; j + 1 < transistorsInInventory.size(); j += 2) {
+			transistorsInInventory.get(j).connect(transistorsInInventory.get(j + 1));
+		}
 	}
 }

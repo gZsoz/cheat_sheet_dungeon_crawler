@@ -1,9 +1,7 @@
 package Character;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import Items.Beer;
 import Items.Item;
 import Items.Transistor;
 import Map.Room;
@@ -122,14 +120,6 @@ public abstract class Character implements iTask {
     			if(transistorInRoom.getPair() != null) {
     				ProtoUtil.printLog("Could not pick up item");
     				return false; // párosított tranzisztort nem vehetünk fel
-    			}
-    			for(int j = 0; j < inventory.size(); j++) {
-    				if(inventory.get(j) instanceof Transistor) {
-    					Transistor transistorAtDisposal = (Transistor) inventory.get(j);
-    					if(transistorAtDisposal.getPair() == null) {
-    						transistorAtDisposal.connect(transistorInRoom);
-    					}
-    				}
     			}
     		}
 			currentRoom.removeItem(i);
