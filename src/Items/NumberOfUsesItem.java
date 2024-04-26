@@ -9,23 +9,30 @@ import ProtoUtil.ProtoUtil;
  */
 public abstract class NumberOfUsesItem extends Item {
 
-    protected int RemainingUses;
+    protected int RemainingUses; // A maradék használatok száma
 
+    /**
+     * A maradék használatok számának lekérdezése.
+     * @return A maradék használatok száma
+     */
     public int getRemainingUses(){
-        ProtoUtil.printLog("getRemainingUses");
+        ProtoUtil.printLog("getRemainingUses"); // Logolás
         return RemainingUses;
     }
 
-    
+    /**
+     * A maradék használatok számának beállítása.
+     * @param x Az új maradék használatok száma
+     */
     public void setRemainingUses(int x){
-        ProtoUtil.printLog("setRemainingUses");
+        ProtoUtil.printLog("setRemainingUses"); // Logolás
         RemainingUses=x;
-        if(RemainingUses == 0) owner.getInventory().remove(this);
+        if(RemainingUses == 0) owner.getInventory().remove(this); // Ha elfogytak a használatok, távolítsa el a tárgyat az inventáriumból
     }
     
     /**
      * Egy tárgy használata. A tárgyak a saját, egyedi módjukon kerülnek használatba, 
-     * ezért ezt külön-külön valósítják meg a  leszármazottak.
+     * ezért ezt külön-külön valósítják meg a leszármazottak.
      */
-	public abstract void use();
+    public abstract void use();
 }

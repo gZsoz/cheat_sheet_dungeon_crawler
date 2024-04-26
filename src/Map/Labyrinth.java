@@ -71,12 +71,14 @@ public class Labyrinth implements iTask{
 	public void splitRoomTest(Room old, int neighbourcnt, int itemcnt, int charactercnt) {
 		ProtoUtil.printLog("splitRoom");
 		Room n;
+		// Az új szoba típusa a régi szobától függ
 		if(old instanceof CursedRoom) {
 			n=new CursedRoom(old.getCapacity());
 		}
 		else {
 			n=new Room(old.getCapacity());
 		}
+		// Szomszédok hozzáadása
 		for(int i=0; i<neighbourcnt; i++){
 			n.addNeighbour(old.getNeighbours().get(0));
 			old.getNeighbours().get(0).addNeighbour(n);
@@ -85,13 +87,16 @@ public class Labyrinth implements iTask{
 		}
 		old.addNeighbour(n);
 		n.addNeighbour(old);
+		// Tárgyak hozzáadása
 		for(int i=0; i<itemcnt; i++){
 			n.addItem(old.getItems().get(0));
 			old.removeItem(old.getItems().get(0));
 		}
+		// Karakterek hozzáadása
 		for(int i=0; i<charactercnt; i++){
 			old.getCharacters().get(i).enterRoom(n);
 		}
+		// Környezeti tényezők hozzáadása
 		for(int i=0; i<old.getEnvironmentalFactors().size(); i++){
 			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.addEnvironmentalFactor(new Gas(n));
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
@@ -115,12 +120,14 @@ public class Labyrinth implements iTask{
 	public void splitRoom(Room old) {
 		ProtoUtil.printLog("splitRoom");
 		Room n;
+		// Az új szoba típusa a régi szobától függ
 		if(old instanceof CursedRoom) {
 			n=new CursedRoom(old.getCapacity());
 		}
 		else {
 			n=new Room(old.getCapacity());
 		}
+		// Szomszédok hozzáadása
 		Random random=new Random();
 		int rand=random.nextInt(old.getNeighbours().size());
 		for(int i=0; i<rand; i++){
@@ -131,15 +138,18 @@ public class Labyrinth implements iTask{
 		}
 		old.addNeighbour(n);
 		n.addNeighbour(old);
+		// Tárgyak hozzáadása
 		rand=random.nextInt(old.getItems().size());
 		for(int i=0; i<rand; i++){
 			n.addItem(old.getItems().get(0));
 			old.removeItem(old.getItems().get(0));
 		}
+		// Karakterek hozzáadása
 		rand=random.nextInt(old.getCharacters().size());
 		for(int i=0; i<rand; i++){
 			old.getCharacters().get(i).enterRoom(n);
 		}
+		// Környezeti tényezők hozzáadása
 		for(int i=0; i<old.getEnvironmentalFactors().size(); i++){
 			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.addEnvironmentalFactor(new Gas(n));
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
@@ -155,6 +165,12 @@ public class Labyrinth implements iTask{
 		ProtoUtil.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
     }
 
+	
+	/**
+	 * Véletlenszerűen kiválaszt egy tárgyat a megadott típusok közül.
+	 * 
+	 * @return A véletlenszerűen kiválasztott tárgy.
+	 */
 	private Item itemPicker(){
 		int rand=new Random().nextInt(11);
 		switch(rand){
@@ -194,9 +210,16 @@ public class Labyrinth implements iTask{
 
 	@Override
 	public void update() {
-		//Ide kellenek majd a random események pl.: merge, split
+		// A random események végrehajtása pl.: merge, split
+		Random rand=new Random();
+		if(ProtoUtil.random.nextInt(1000, -1)==0)
+			mergeRoom(Rooms.get(rand.nextInt(Rooms.size())),Rooms.get(rand.nextInt(Rooms.size())));
+		if(ProtoUtil.random.nextInt(1000, -1)==0)
+			splitRoom(Rooms.get(rand.nextInt(Rooms.size())));
 		for(Room r : Rooms){
-			//Ide kell majd a random item generálás: r.addItem(itemPicker());
+			// Random item generálása
+			if(ProtoUtil.random.nextInt(1000, -1)==0)
+				r.addItem(itemPicker());
 			r.update();
 		}
 	}

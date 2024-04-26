@@ -6,15 +6,16 @@ import java.util.List;
 import Character.Character;
 import ProtoUtil.ProtoUtil;
 
-// Cursed Room
-
 /**
  * A CursedRoom osztály egy speciális típusú szobát reprezentál a játékban, amely az alap Room osztálytól származik.
  * Felelőssége megegyezik a szoba osztállyal, emellett felelőssége még az ajtók eltüntetése és megjelenítése.
  */
 public class CursedRoom extends Room{
-	private int closeDuration=0;
-    private boolean isOpen=true;
+	
+	public static int defaultCloseDuration=5;
+	
+	private int closeDuration=0; // A Szoba zárva tartásának ideje
+	private boolean isOpen=true; // A Szoba állapota: nyitva vagy zárva
 	
     /**
      * Konstruktor egy szoba létrehozásához.
@@ -46,7 +47,7 @@ public class CursedRoom extends Room{
     public void hideDoors() {
         ProtoUtil.printLog("hideDoors");
         removeAllDoors();
-        closeDuration=5;
+        closeDuration=defaultCloseDuration;
     }
     
     /**

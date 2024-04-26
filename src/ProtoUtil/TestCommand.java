@@ -1,10 +1,8 @@
 package ProtoUtil;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import EnvironmentalFactor.Gas;
 import EnvironmentalFactor.Sticky;
@@ -27,23 +25,87 @@ import Character.Teacher;
 import Character.Character;
 import Character.Cleaner;
 
+/**
+ * A tesztparancsok kezeléséért felelős osztály. A tesztparancsoknak megfelelő műveleteket hajt végre a labirintuson, karaktereken és tárgyakon.
+ */
 public class TestCommand {
 	String command;
 	String[] parameters;
 
+	/**
+	 * Konstruktor a tesztparancsok inicializálásához.
+	 */
 	public TestCommand() {}
 	
+	/**
+	 * Konstruktor a tesztparancsok inicializálásához.
+	 * 
+	 * @param command A parancs neve.
+	 * @param parameters A parancs paraméterei.
+	 */
 	public TestCommand(String command, String[] parameters) {
 		this.command = command;
 		this.parameters = parameters;
 	}
+	
+	private void help() {
+		System.out.println("Create_Room <capacity> <type> [<neighbors>]\n"
+				+ "    Új szobát vagy elátkozott szobát hoz létre, opcionálisan megadva a szomszédos szobákat.\n"
+				+ "\n"
+				+ "Create_Item <type> <room_number>\n"
+				+ "    Létrehoz és elhelyez egy tárgyat adott szobában.\n"
+				+ "\n"
+				+ "Create_Factor <type> <room_number>\n"
+				+ "    Környezeti anomáliákat (gázt vagy ragacsot) hoz létre adott szobában.\n"
+				+ "\n"
+				+ "Create_Character <type> <room_number>\n"
+				+ "    Létrehoz egy tanárt vagy egy hallgatót, majd elhelyezi egy adott szobában.\n"
+				+ "\n"
+				+ "Pickup_item <item_number>\n"
+				+ "    Felvehető tárgyak közül választhat egyet, hogy azt az inventoryban tárolja.\n"
+				+ "\n"
+				+ "Throw_item <item_number>\n"
+				+ "    Elhajíthat egy tárgyat az inventoryból.\n"
+				+ "\n"
+				+ "Use_item <item_number>\n"
+				+ "    Használhat egy tárgyat az inventoryból.\n"
+				+ "\n"
+				+ "split <room_number> [<number_of_neighbours_to_move> <number_of_items_to_move> <number_of_characters_to_move>]\n"
+				+ "    Kettéoszt egy már létező szobát az új szoba szon szoba mögé kerül a labirintus listájában, melyre meghívjuk a split commandot. Opcionális paramétereiben meg lehet adni, hogy hány elemet kapjon az új szoba az adott játék elemekből.\n"
+				+ "\n"
+				+ "merge <room_to_merge_into> <room_to_merge>"
+				+ "    Összeolvasztja a paraméterként kapott szobákakat, a szobákat számokkal lehet megadni.\n"
+				+ "\n"
+				+ "Enter_Room <room_number>\n"
+				+ "    Belépés egy adott szobába a szomszédos szobák közül választva.\n"
+				+ "\n"
+				+ "update\n"
+				+ "    Futtat 3 update() ciklust a játékon.\n"
+				+ "\n"
+				+ "quit\n"
+				+ "    A parancs, melynek segítségével kiléphetsz konzolról teszteléskor."
+				);
+	}
 
+	/**
+	 * Beolvassa a tesztparancsot a megadott sorból.
+	 * 
+	 * @param line A beolvasandó sor.
+	 */
 	public void readTestCommand(String line) {
 		String[] temp = (line.split(" "));
 		parameters = Arrays.copyOfRange(temp, 1, temp.length);
 		command = temp[0];
 	}
-	// returns false if quit
+	// visszatér false értékkel, ha quit
+	/**
+	 * Végrehajtja a megadott tesztparancsot a labirintuson, karaktereken és tárgyakon.
+	 * 
+	 * @param l A labirintus, amelyen a műveletek végrehajtódnak.
+	 * @param characters A karakterek listája, amelyen a műveletek végrehajtódnak.
+	 * @param actorArr A cselekvő karakter tömbje.
+	 * @return Visszatérési érték igaz, ha a művelet sikeresen lefutott, különben hamis.
+	 */
 	public boolean runCommand(Labyrinth l, ArrayList<Character> characters, ArrayList<Character> actorArr) {
 		Character actor=actorArr.get(0);
 		switch (command) {
@@ -170,6 +232,11 @@ public class TestCommand {
 		case "select_actor":
 			actorArr.set(0, characters.get(Integer.parseInt(parameters[0])));
 			break;
+		case "update":
+			return true;
+		case "help":
+			help();
+			return true;
 		case "quit":
 			return false;
 		default:

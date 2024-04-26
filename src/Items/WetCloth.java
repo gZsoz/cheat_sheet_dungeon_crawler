@@ -19,7 +19,7 @@ public class WetCloth extends DecayingItems{
     	setIsActive(true);
 		for(Character character: owner.getRoom().getCharacters() ) {
 			if(character instanceof Teacher) {
-				if(character.getStunned()==0) character.setStunned(4);
+				if(character.getStunned()==0) character.setStunned(Character.stunTime);
 			}
 		}
     }
@@ -32,7 +32,9 @@ public class WetCloth extends DecayingItems{
 		ProtoUtil.printLog("onPickUp");
 		use();
 	}
-	
+	/**
+	 * A tárgy eldobásakor végrehajtott műveletek.
+	 */
 	@Override
 	public void onDrop() {
 		ProtoUtil.printLog("onDrop");

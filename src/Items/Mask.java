@@ -3,34 +3,37 @@ package Items;
 import ProtoUtil.ProtoUtil;
 
 /**
- * Class representing a Mask item in the game.
+ * Az osztály egy maszk tárgyat reprezentál a játékban.
  */
 public class Mask extends DecayingItems {
 	
 	/**
-     * A gáz által aktivált maszk elvégezendő műveleteit végzi
-     * A tárgyat aktívvá teszi, ezzel lehetővé téve a védelmet és az időtartam csökkenését
+     * A maszk használatának metódusa.
+     * Aktiválja a tárgyat, lehetővé téve a védelmet és az időtartam csökkenését.
      */
 	@Override
     public void use() {
-    	ProtoUtil.printLog("use");
-    	isActive=true;
-    	reduceDuration();
+    	ProtoUtil.printLog("use"); // Logolás
+    	isActive=true; // Aktiválás jelzése
+    	reduceDuration(); // Időtartam csökkentése
     }
 	
 	/**
-	 * A tárgy felvételekor elvégezendő feladatok
+	 * A tárgy felvételekor végrehajtott műveletek.
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp");
-		owner.setHasDefense(true);
+		ProtoUtil.printLog("onPickUp"); // Logolás
+		owner.setHasDefense(true); // Védelem beállítása
 	}
 	
+	/**
+	 * A tárgy eldobásakor végrehajtott műveletek.
+	 */
 	@Override
 	public void onDrop() {
-		ProtoUtil.printLog("onDrop");
-		isActive=false;
+		ProtoUtil.printLog("onDrop"); // Logolás
+		isActive=false; // Aktiválás kikapcsolása
 		boolean mask=false;
 		for(Item i : owner.getInventory()) {
 			if(i instanceof Mask) {
@@ -38,7 +41,7 @@ public class Mask extends DecayingItems {
 				break;
 			}
 		}
-		if(!mask) owner.setHasDefense(false);
+		if(!mask) owner.setHasDefense(false); // Védelem kikapcsolása
 		
 		super.onDrop();
 	}

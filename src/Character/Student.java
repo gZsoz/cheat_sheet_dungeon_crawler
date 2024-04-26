@@ -52,7 +52,7 @@ public class Student extends Character {
 	 */
 	public void activate(Item i) {
 		ProtoUtil.printLog("activate");
-		if (!(stunned > 0 && stunned <= 4)) {
+		if (!(stunned > 0 && stunned <= stunTime)) {
 			i.use();
 		}
 	}

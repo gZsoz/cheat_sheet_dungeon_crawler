@@ -9,13 +9,15 @@ import ProtoUtil.ProtoUtil;
  */
 public class CabbageCamembert extends NumberOfUsesItem {
 
+	public static int defaultRemainingUses = 1;
+	
 	/**
      * Konstruktor egy tárgy létrehozásához. CabbageCamembert-ra állítja a nevet.
      */
 	public CabbageCamembert() {
 		owner=null;
 		sticky=false;
-		RemainingUses=1;
+		RemainingUses=defaultRemainingUses;
 	}
 		
 	/**

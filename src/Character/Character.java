@@ -19,7 +19,8 @@ import Time.iTask;
  * a játék környezetében. A Character leszármazottai a Teacher és a Student.
  */
 public abstract class Character implements iTask {
-	
+	public static int stunTime=4;
+	public static int restTime=10;
 	/**
 	 * A karakter birtokában található tárgyak
 	 * listája. Maximum 5 Item lehet benne. Nem lehet benne logarléc.
@@ -106,7 +107,7 @@ public abstract class Character implements iTask {
      */
     public boolean enterRoom(Room r) {
     	ProtoUtil.printLog("enterRoom");
-    	if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= 4)) {
+    	if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= stunTime)) {
     		currentRoom.removeCharacter(this);
     		r.addCharacter(this);
     		currentRoom = r;
@@ -138,7 +139,7 @@ public abstract class Character implements iTask {
      */
     public boolean pickupItem(Item i) {
     	ProtoUtil.printLog("pickupItem");
-    	if(inventory.size() < 5 && !(stunned > 0 && stunned <= 4)) {
+    	if(inventory.size() < 5 && !(stunned > 0 && stunned <= stunTime)) {
     		if(i instanceof Transistor) {
     			Transistor transistorInRoom = (Transistor) i;
     			if(transistorInRoom.getPair() != null) {
@@ -172,13 +173,13 @@ public abstract class Character implements iTask {
      * A karakter időérzékeny műveleteit végzi.
      */
     public void update() {
-    	if(0 < stunned && stunned <= 4) {
+    	if(0 < stunned && stunned <= stunTime) {
     		reduceStunned();
-    		if(stunned==0) stunned=10;
+    		if(stunned==0) stunned=restTime;
     	}
-    	if(4<stunned) {
+    	if(stunTime<stunned) {
     		reduceStunned();
-    		if(stunned==4) stunned=0;
+    		if(stunned==stunTime) stunned=0;
     	}
     	for(Item temp : new ArrayList<Item>(inventory)) {
 			if(temp instanceof iTask) {

@@ -8,7 +8,7 @@ import ProtoUtil.ProtoUtil;
  * Class representing gas environmental factor in the game.
  */
 public class Sticky extends EnvironmentalFactors {
-
+	public static int defaultRemainingEntries=2;
 	/**
 	 * Kontruktor létrehozza, a sticky objektumot
 	 * @param r Adott szoba
@@ -19,7 +19,7 @@ public class Sticky extends EnvironmentalFactors {
 	/**
 	 * A hátralévő emberek száma, amelyek után ragacsossá teszi a szobát
 	 */
-	private int remainingEntries=2;
+	private int remainingEntries=defaultRemainingEntries;
 
 	/**
 	 * Lekérdezi a hátralévő emberek számát, amelyek után ragacsossá teszi a szobát

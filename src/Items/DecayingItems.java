@@ -8,10 +8,12 @@ import Time.iTask;
  */
 public abstract class DecayingItems extends Item implements iTask {
     
+	public static int defaultDuration = 6;
+	
 	/**
 	 * Milyen hoszzú ideig jó a tárgy.
 	 */
-	protected int duration = 6;
+	protected int duration = defaultDuration;
 	
 	/**
 	 * Aktív-e a tárgy.

@@ -10,13 +10,15 @@ import ProtoUtil.ProtoUtil;
  * használhatatlanná kell tegye magát.
  */
 public class BatSkin extends NumberOfUsesItem {
-    
+	
+	public static int defaultRemainingUses = 3;
+	
 	/**
      * Konstruktor egy tárgy létrehozásához. BatSkin-ra állítja a nevet.
      */
 	public BatSkin() {
 		sticky=false;
-		RemainingUses=3;
+		RemainingUses=defaultRemainingUses;
 	}
 		
 	/**

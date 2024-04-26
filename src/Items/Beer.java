@@ -1,43 +1,44 @@
 package Items;
 
-import java.util.Random;
-
 import Character.Student;
 import ProtoUtil.ProtoUtil;
 
 /**
- * Osztály a Beer tárgy reprezentálására
+ * Az osztály a Beer tárgy reprezentálására szolgál.
  */
 public class Beer extends DecayingItems {
 	
 	/**
-     * Sör használatakor (felvételekor) végrehajtandó műveleteket végzi, 
-     * immunitást ad a használónak, minden másodpercben csökkenti a hatás időtartamát.
+     * Sör használatakor (felvételekor) végrehajtott műveletek,
+     * amelyek immunitást adnak a használónak, és minden másodpercben csökkentik a hatás időtartamát.
      */
 	@Override
     public void use() {
 		ProtoUtil.printLog("use");
-		if(owner instanceof Student) ((Student)owner).setInvincible(true);
-		setIsActive(true);
+		if(owner instanceof Student) ((Student)owner).setInvincible(true); // Immunitás adása
+		setIsActive(true); // Aktiválás jelzése
     }
 	
 	/**
-	 * A tárgy felvételekor elindítja a használatot.
+	 * A tárgy felvételekor végrehajtott műveletek.
 	 */
 	@Override
 	public void onPickUp() {
 		ProtoUtil.printLog("onPickUp");
-		use();
+		use(); // Használat elindítása
 		if(!owner.getInventory().isEmpty()) {
-			int rand=new Random().nextInt(owner.getInventory().size());
-			owner.putdownItem(owner.getInventory().get(rand));
+			int rand=ProtoUtil.random.nextInt(owner.getInventory().size(),0);
+			owner.putdownItem(owner.getInventory().get(rand)); // Véletlenszerű tárgy eldobása
 		}
 	}
 	
+	/**
+	 * A tárgy eldobásakor végrehajtott műveletek.
+	 */
 	@Override
 	public void onDrop() {
 		ProtoUtil.printLog("onDrop");
-		isActive=false;
+		isActive=false; // Aktiválás kikapcsolása
 		boolean beer=false;
 		for(Item i : owner.getInventory()) {
 			if(i instanceof Beer) {
@@ -45,9 +46,8 @@ public class Beer extends DecayingItems {
 				break;
 			}
 		}
-		if((!beer) && owner instanceof Student) ((Student)owner).setInvincible(false);
+		if((!beer) && owner instanceof Student) ((Student)owner).setInvincible(false); // Immunitás kikapcsolása
 		
 		super.onDrop();
 	}
-	
 }

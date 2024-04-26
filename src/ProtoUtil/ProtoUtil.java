@@ -10,27 +10,37 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.xml.stream.events.Characters;
-
+import Map.CursedRoom;
 import Map.Labyrinth;
 import Character.Character;
+import EnvironmentalFactor.Sticky;
+import Items.AirFreshener;
+import Items.BatSkin;
+import Items.CabbageCamembert;
+import Items.DecayingItems;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 /**
- * A SkeletonUtil osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
+ * A ProtoUtil osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
  */
 public class ProtoUtil {
-	public static final String RESET = "\033[0m";  // Text Reset
-
-    public static final String RED = "\033[0;31m";     // RED
-    public static final String GREEN = "\033[0;32m";   // GREEN
+	private static final String RESET = "";//"\033[0m";  // Text Reset
+    private static final String RED = "";//"\033[0;31m";     // RED
+    private static final String GREEN = "";//"\033[0;32m";   // GREEN
 	
 	private static final String dirName = "test/";
     private static PrintStream logOutput = System.out;
     
+    public static MyRandom random;
+    
+    /**
+     * A beállított OutputStreambe írja az a tesztprogram logokat.
+     * @param question A kérdés
+     */
     public static void printLog(String str) {
     	logOutput.println(str);
     }
@@ -86,6 +96,11 @@ public class ProtoUtil {
         return choice;
     }
 
+    /**
+     * Teszt futtatása bemenetről és kimenetre.
+     * @param input A bemeneti adatfolyam
+     * @param output A kimeneti adatfolyam
+     */
     public static void runTest(InputStream input, OutputStream output) {
     	Scanner sc = new Scanner(input);
     	logOutput = new PrintStream(output);
@@ -99,7 +114,7 @@ public class ProtoUtil {
     	    TestCommand tc= new TestCommand();
     	    tc.readTestCommand(line);
     	    if (!tc.runCommand(l, characters, actor))
-    	        break; // this will exit the loop
+    	        break; // kilépés a ciklusból
     	    l.update(); l.update(); l.update();
     	}
 	    if(!input.equals(System.in))
@@ -108,6 +123,12 @@ public class ProtoUtil {
 	    	logOutput.close();
     }
     
+    /**
+     * Teszt kiértékelése az elvárt kimenettel.
+     * @param output A teszt kimenete
+     * @param expected Az elvárt kimenet
+     * @return Igaz, ha a teszt sikeresen kiértékelhető, különben hamis
+     */
 	private static boolean evaluateTest(InputStream output, InputStream expected) {
 		Scanner scanner = new Scanner( output );
 		String text = scanner.useDelimiter("\\A").next();
@@ -120,6 +141,10 @@ public class ProtoUtil {
 		return true;
 	}
 	
+    /**
+     * Tesztfájlok neveinek lekérdezése.
+     * @return A tesztfájlok neveinek listája
+     */
 	private static ArrayList<String> getTestNames() {
 		File folder = new File(dirName+"input");
 		File[] listOfFiles = folder.listFiles();
@@ -135,6 +160,10 @@ public class ProtoUtil {
 		return names;
 	}
 	
+    /**
+     * Teszt futtatása név alapján.
+     * @param name A teszt neve
+     */
 	private static void runTestFromName(String name) {
 		try {
 			File output = new File(dirName+"output/"+name+"_output.txt");
@@ -147,11 +176,16 @@ public class ProtoUtil {
 			inStream.close();
 			outStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// Hibaüzenet kezelése
 			e.printStackTrace();
 		};
 	}
 	
+    /**
+     * Teszt kiértékelése név alapján.
+     * @param name A teszt neve
+     * @return Igaz, ha a teszt sikeresen kiértékelhető, különben hamis
+     */
 	private static boolean evaluateTestFromName(String name) {
 		boolean result=false;
 		try {
@@ -161,17 +195,27 @@ public class ProtoUtil {
 			output.close();
 			expected.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// Hibaüzenet kezelése
 			e.printStackTrace();
 		}
 		return result;
 	}
+    
     /**
      * A program belépési pontja.
      * @param args A program argumentumai
      * @throws FileNotFoundException Ha a naplófájl nem található
      */
     public static void main(String[] args) throws FileNotFoundException {
+    	Character.restTime=10;
+    	Character.stunTime=4;
+    	Sticky.defaultRemainingEntries=2;
+    	AirFreshener.defaultRemainingUses=1;
+    	BatSkin.defaultRemainingUses=3;
+    	DecayingItems.defaultDuration=6;
+    	CabbageCamembert.defaultRemainingUses=1;
+    	CursedRoom.defaultCloseDuration=5;
+    	random=new MyRandom(true);
     	if(args.length==1 && args[0].equals("test")) {
     		ArrayList<String> alltests=getTestNames();
         	boolean success=true;
@@ -201,7 +245,7 @@ public class ProtoUtil {
             int ans=question("Mit szeretnél tesztelni?", opt); // Felhasználói választás bekérése
             switch(ans) {
                 case 1:
-					System.out.println("Írd be a teszthez szükséges parancsokat kézzel. Kilépési parancs: quit");
+					System.out.println("Írd be a teszthez szükséges parancsokat kézzel.\n\tInformáció a parancsokról: help\n\tKilépési parancs: quit");
                     runTest(System.in,System.out);
                     break;
                 case 2:
@@ -242,4 +286,3 @@ public class ProtoUtil {
         } while(!quit);
     }
 }
-

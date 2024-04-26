@@ -1,0 +1,3 @@
+contains "removeAllDoors" 1
+notcontains "bringbackDoors"
+contains "reduceDurationCursed"
