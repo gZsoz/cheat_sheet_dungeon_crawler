@@ -21,10 +21,13 @@ cd cheat_sheet_dungeon_crawler\src
 A program osztályait le kell fordítani, majd ez után futtatható lesz:
 ```bash
 javac Character\*.java EnvironmentalFactor\*.java Items\*.java Map\*.java Time\*.java ProtoUtil\ProtoUtil.java
-
+```
 TesztProgram futtatása
+```bash
   java ProtoUtil.ProtoUtil
+```
 Összes teszt futtatása:
+```bash
   java ProtoUtil.ProtoUtil test
 ```
 
