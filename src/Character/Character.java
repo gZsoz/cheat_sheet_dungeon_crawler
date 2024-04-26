@@ -2,7 +2,8 @@ package Character;
 
 import java.util.ArrayList;
 
-import Items.BatSkin;
+import EnvironmentalFactor.EnvironmentalFactors;
+import EnvironmentalFactor.Sticky;
 import Items.Beer;
 import Items.Item;
 import Items.Transistor;
@@ -105,16 +106,26 @@ public abstract class Character implements iTask {
      */
     public boolean enterRoom(Room r) {
     	ProtoUtil.printLog("enterRoom");
-    	if(r.getCharacters().size() < r.getCapacity()) {
+    	if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= 4)) {
     		currentRoom.removeCharacter(this);
     		r.addCharacter(this);
     		currentRoom = r;
     		stunned = 0;
-    		boolean b=false;
-    		for(Item i : inventory) {
-    			if(i instanceof Beer) b=true;
+    		for(EnvironmentalFactors ef: currentRoom.getEnvironmentalFactors()) {
+    			if(ef instanceof Sticky) {
+    				((Sticky) ef).reduceRemainingEntries();
+    				break;
+    			}
     		}
-    		if((!b) && this instanceof Student) ((Student)this).setInvincible(false);
+    		
+    		boolean hasBeer=false;
+    		for(Item i : inventory) {
+    			if(i instanceof Beer) {
+    				hasBeer=true;
+    				break;
+    			}
+    		}
+    		if((!hasBeer) && this instanceof Student) ((Student)this).setInvincible(false); // a denevérbőr ne védjen tovább
     		return true;
     	}
     	return false;
@@ -127,7 +138,7 @@ public abstract class Character implements iTask {
      */
     public boolean pickupItem(Item i) {
     	ProtoUtil.printLog("pickupItem");
-    	if(inventory.size() < 5 ) {
+    	if(inventory.size() < 5 && !(stunned > 0 && stunned <= 4)) {
     		if(i instanceof Transistor) {
     			Transistor transistorInRoom = (Transistor) i;
     			if(transistorInRoom.getPair() != null) {
@@ -158,7 +169,7 @@ public abstract class Character implements iTask {
     }
 
     /**
-     * A karakter időérzékeny műveleteit végzi (mozgás).
+     * A karakter időérzékeny műveleteit végzi.
      */
     public void update() {
     	if(0 < stunned && stunned <= 4) {

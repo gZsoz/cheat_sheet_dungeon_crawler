@@ -1,7 +1,6 @@
 package Items;
 
 import EnvironmentalFactor.Gas;
-import Map.Room;
 import ProtoUtil.ProtoUtil;
 
 /**

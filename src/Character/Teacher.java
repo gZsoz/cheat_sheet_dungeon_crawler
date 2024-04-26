@@ -45,7 +45,7 @@ public class Teacher extends Character {
      */
     public void kick(Student s) {
     	ProtoUtil.printLog("kick");
-    	if(!s.getInvincible()) {
+    	if(!s.getInvincible() && !(stunned > 0 && stunned <= 4)) {
     		BatSkin b = null;
     		for(int i = 0; i < s.getInventory().size(); i++){
     			Item currentItem = s.getInventory().get(i);

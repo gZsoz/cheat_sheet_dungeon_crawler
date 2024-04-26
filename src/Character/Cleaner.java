@@ -1,6 +1,5 @@
 package Character;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -36,7 +35,6 @@ public class Cleaner extends Character {
 		
 		// nem kábult karakterek kitessékelése
 		Random rand = new Random();
-		
 		for(Character temp : new ArrayList<Character>(currentRoom.getCharacters())) {
 			if(!temp.getClass().equals(Cleaner.class) && (temp.getStunned()==0 || temp.getStunned()>4)) {
 				List<Room> roomsToMove = r.getNeighbours();
@@ -51,8 +49,7 @@ public class Cleaner extends Character {
 			ProtoUtil.printLog("removeEnvironmentalFactor");
 		}
 
-
-		// új ragacsosság betétele
+		// új ragacsosság betétele ha még nincs benne
 		Sticky st = new Sticky(currentRoom);
 		r.addEnvironmentalFactor(st);
 	}
@@ -65,10 +62,11 @@ public class Cleaner extends Character {
 	@Override
 	public boolean enterRoom(Room r) {
 		ProtoUtil.printLog("enterRoom");
-		if(r.getCharacters().size() < r.getCapacity()) {
+		if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= 4)) {
     		currentRoom.removeCharacter(this);
     		r.addCharacter(this);
     		currentRoom = r;
+    		stunned = 0;
     		clean(r);
     		return true;
     	}

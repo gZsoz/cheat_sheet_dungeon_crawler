@@ -135,9 +135,9 @@ public class Transistor extends Item {
     /**
      * Az inventory-ban található tranzisztorokat kettesével összepárosítja
      */
-	@Override
-	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp");
+    @Override
+    public void onPickUp() {
+    	ProtoUtil.printLog("onPickUp");
 		ArrayList<Transistor> transistorsInInventory = new ArrayList<>();
 		for(Item i: owner.getInventory()) {
 			if(i instanceof Transistor) {

@@ -1,9 +1,7 @@
 package Items;
 
 import Character.Character;
-import Character.Student;
 import Character.Teacher;
-import Map.Room;
 import ProtoUtil.ProtoUtil;
 
 /**

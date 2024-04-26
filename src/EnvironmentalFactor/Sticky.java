@@ -1,8 +1,6 @@
 package EnvironmentalFactor;
 
-import Character.Character;
 import Items.Item;
-import Items.Mask;
 import Map.Room;
 import ProtoUtil.ProtoUtil;
 

@@ -2,7 +2,6 @@ package Items;
 
 import EnvironmentalFactor.EnvironmentalFactors;
 import EnvironmentalFactor.Gas;
-import Map.Room;
 import ProtoUtil.ProtoUtil;
 
 public class AirFreshener extends NumberOfUsesItem {
