@@ -30,6 +30,7 @@ public class AirFreshener extends NumberOfUsesItem {
         for(EnvironmentalFactors a : owner.getRoom().getEnvironmentalFactors()){
             if(a instanceof Gas){
                 owner.getRoom().getEnvironmentalFactors().remove(a); // Távolítja el a gázt a szobából
+                ProtoUtil.printLog("airfreshener removed gas");
                 return;
             }
         }

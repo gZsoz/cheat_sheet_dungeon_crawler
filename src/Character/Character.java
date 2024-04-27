@@ -139,7 +139,7 @@ public abstract class Character implements iTask {
      */
     public boolean pickupItem(Item i) {
     	ProtoUtil.printLog("pickupItem");
-    	if(inventory.size() < 5 && !(stunned > 0 && stunned <= stunTime)) {
+    	if(inventory.size() < 5 && !(stunned > 0 && stunned <= stunTime) && !i.getSticky()) {
     		if(i instanceof Transistor) {
     			Transistor transistorInRoom = (Transistor) i;
     			if(transistorInRoom.getPair() != null) {

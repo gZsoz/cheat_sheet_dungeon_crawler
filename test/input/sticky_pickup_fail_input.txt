@@ -1,0 +1,11 @@
+create_room 1 normal
+create_room 2 normal 0
+create_factor sticky 1
+create_item batskin 1
+create_character student 0
+create_character student 0
+select_actor 0
+enter_room 1
+select_actor 1
+enter_room 1
+pickup_item 0

@@ -1,5 +1,4 @@
-contains "pickupItem
-removeItem"
+contains "pickupItem"
 contains "onPickUp
 use"
 contains "Game over"

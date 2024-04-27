@@ -45,7 +45,6 @@ public abstract class Item {
 	 * @param s A beállítandó állapot
 	 */
 	public void setSticky(boolean s){
-		ProtoUtil.printLog("setSticky");
 		sticky=s;
 	}
 

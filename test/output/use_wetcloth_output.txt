@@ -22,6 +22,7 @@ getCharacters
 getRoom
 getItems
 pickupItem
+getSticky
 removeItem
 setOwner
 Successfully picked up item
@@ -35,6 +36,7 @@ getCharacters
 getRoom
 getItems
 pickupItem
+getSticky
 removeItem
 setOwner
 Successfully picked up item

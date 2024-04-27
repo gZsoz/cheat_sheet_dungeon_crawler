@@ -47,7 +47,7 @@ public class Sticky extends EnvironmentalFactors {
 		ProtoUtil.printLog("makeSticky");
 		i.setSticky(true);
 	}
-
+	
 	/**
      * Minden adott időben, ha elértük, hogy elég ember megforduljon a szobában,
 	 * akkor ragacsossá teszi az összes itemet a szobában
@@ -57,6 +57,8 @@ public class Sticky extends EnvironmentalFactors {
 		for(Item item: getLocation().getItems()){
 			if(remainingEntries <= 0){
 				makeSticky(item);
+			}else {
+				item.setSticky(false);
 			}
 		}
 	}

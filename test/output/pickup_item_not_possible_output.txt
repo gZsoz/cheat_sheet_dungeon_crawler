@@ -10,6 +10,7 @@ addCharacter
 getRoom
 getItems
 pickupItem
+getSticky
 removeItem
 setOwner
 Successfully picked up item
@@ -17,6 +18,7 @@ onPickUp
 getRoom
 getItems
 pickupItem
+getSticky
 removeItem
 setOwner
 Successfully picked up item
@@ -24,6 +26,7 @@ onPickUp
 getRoom
 getItems
 pickupItem
+getSticky
 removeItem
 setOwner
 Successfully picked up item
@@ -31,6 +34,7 @@ onPickUp
 getRoom
 getItems
 pickupItem
+getSticky
 removeItem
 setOwner
 Successfully picked up item
@@ -38,6 +42,7 @@ onPickUp
 getRoom
 getItems
 pickupItem
+getSticky
 removeItem
 setOwner
 Successfully picked up item

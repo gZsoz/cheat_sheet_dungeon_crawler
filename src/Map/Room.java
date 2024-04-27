@@ -133,9 +133,13 @@ public class Room implements iTask {
     public void addEnvironmentalFactor(EnvironmentalFactors ef) {
         ProtoUtil.printLog("addEnvironmentalFactor");
         ef.setLocation(this);
-        for (EnvironmentalFactors e : envFactors )
-            if (e.getClass().equals(ef.getClass()))
-                return;
+        EnvironmentalFactors temp=null;
+        for (EnvironmentalFactors e : envFactors ) {
+            if (e.getClass().equals(ef.getClass())) {
+            	temp=e;
+            }
+        }
+        if(temp!=null) envFactors.remove(temp);
         envFactors.add(ef);
     }
     

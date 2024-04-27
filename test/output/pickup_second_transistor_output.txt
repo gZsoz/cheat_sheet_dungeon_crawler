@@ -6,6 +6,7 @@ addCharacter
 getRoom
 getItems
 pickupItem
+getSticky
 getPair
 removeItem
 setOwner
@@ -15,6 +16,7 @@ getInventory
 getRoom
 getItems
 pickupItem
+getSticky
 getPair
 removeItem
 setOwner
