@@ -110,21 +110,21 @@ public class TestCommand {
 		Character actor=actorArr.get(0);
 		switch (command) {
 		case "create_room":
-			Room room;
+			Room room=null;
 			int capacity=Integer.parseInt(parameters[0]);
 			int neighbourcount=parameters.length-2;
 			if(l.getRooms().isEmpty()) {
-				if(parameters[1].equals("0")) {
+				if(parameters[1].equals("normal")) {
 					l.addRoom(new Room(capacity));
 				}
-				else
+				else if(parameters[1].equals("cursed"))
 					l.addRoom(new CursedRoom(capacity));
 				return true;
 			}
 			List<Room> neighbours = new ArrayList<Room>();
-			if(parameters[1].equals("0"))
+			if(parameters[1].equals("normal"))
 				room=new Room(neighbours, capacity);
-			else
+			else if(parameters[1].equals("cursed"))
 				room=new CursedRoom(neighbours, capacity);
 			if(neighbourcount == 0)
 				neighbours.add(l.getRooms().get(l.getRooms().size()-1));
@@ -188,13 +188,13 @@ public class TestCommand {
 		case "create_character":
 			Character temp=null;
 			switch(parameters[0]) {
-				case "0":
+				case "student":
 					temp=new Student(l.getRooms().get(Integer.parseInt(parameters[1])));
 					break;
-				case "1":
+				case "teacher":
 					temp=new Teacher(l.getRooms().get(Integer.parseInt(parameters[1])));
 					break;
-				case "2":
+				case "cleaner":
 					temp=new Cleaner(l.getRooms().get(Integer.parseInt(parameters[1])));
 					break;
 				default:

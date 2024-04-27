@@ -1,7 +1,7 @@
-create_room 2 0
-create_character 0 0
+create_room 2 normal
+create_character student 0
 create_factor gas 0
-create_room 1 0
-create_character 2 1
+create_room 1 normal
+create_character cleaner 1
 select_actor 1
 enter_room 0
