@@ -28,9 +28,9 @@ import java.io.FileOutputStream;
  * A ProtoUtil osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
  */
 public class ProtoUtil {
-	private static final String RESET = "";//"\033[0m";  // Text Reset
-    private static final String RED = "";//"\033[0;31m";     // RED
-    private static final String GREEN = "";//"\033[0;32m";   // GREEN
+	private static final String RESET = "\033[0m";  // Text Reset
+    private static final String RED = "\033[0;31m";     // RED
+    private static final String GREEN = "\033[0;32m";   // GREEN
 	
 	private static final String dirName = "test/";
     private static PrintStream logOutput = System.out;
