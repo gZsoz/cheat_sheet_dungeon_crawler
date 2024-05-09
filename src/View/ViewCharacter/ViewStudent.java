@@ -1,4 +1,4 @@
-package View;
+package View.ViewCharacter;
 
 import Character.Student;
 import View.ViewCharacter.ViewCharacter;
