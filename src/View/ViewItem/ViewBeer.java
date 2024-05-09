@@ -2,6 +2,8 @@ package View.ViewItem;
 
 import Items.Beer;
 
+import java.awt.*;
+
 /**
  * A sör kirajzolásáért felelős.
  */
@@ -16,7 +18,7 @@ public class ViewBeer extends ViewDecayingItem {
 	 * Sör kirajzolása a megadott koordinátákra.
 	 */
 	@Override
-	public void paint() {
+	public void paint(Graphics g) {
 	    // TODO Auto-generated method stub
 	}
 	

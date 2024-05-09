@@ -6,6 +6,7 @@ import View.Utils.Size;
 import View.Utils.Subscriber;
 import View.Utils.View;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -23,7 +24,7 @@ public class ViewLabyrinth implements View, Subscriber {
 	/**
 	 * A labirintus hátterének megjelenítendő képe.
 	 */
-	private ImageIO background;
+	private Image background;
 	
 	/**
 	 * A labirintus háttérképének mérete.
@@ -38,13 +39,17 @@ public class ViewLabyrinth implements View, Subscriber {
 	/**
 	 * A labirintusban megjelenítendő szobák.
 	 */
-	private ArrayList<ViewRoom> roomsInLabyrinth;
+	private ArrayList<ViewRoom> roomsInLabyrinth = new ArrayList<>();
 	
 	/**
 	 * A szomszédos szobák közti összeköttetés koordinátái.
 	 */
 	private ArrayList<ArrayList<Coordinates>> routesBetweenRooms;
-	
+
+	public ViewLabyrinth(){
+		roomsInLabyrinth.add(new ViewRoom());
+	}
+
 	@Override
 	public void propertyChanged(String property) {
 	    // TODO document why this method is empty
@@ -54,7 +59,9 @@ public class ViewLabyrinth implements View, Subscriber {
 	 * A labirintus háttere és a szobák közti utak kirajzolása.
 	 */
 	@Override
-	public void paint() {
-	    // TODO document why this method is empty
+	public void paint(Graphics g) {
+	    for(ViewRoom vroom : roomsInLabyrinth){
+			vroom.paint(g);
+		}
 	}
 }

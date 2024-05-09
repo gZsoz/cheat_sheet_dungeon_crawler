@@ -8,6 +8,8 @@ import View.ViewMap.ViewLabyrinth;
 import View.Utils.ActionState;
 import View.Utils.View;
 
+import java.awt.*;
+
 /**
  * Felelősség: A felhasználók bemeneteinek értelmezése és a model ezek szerinti formázása.
  */
@@ -52,5 +54,5 @@ public class PlayerController implements View {
     /**
      * Kirajzolja a játékos által irányított karakter információs ablakát.
      */
-    public void paint() {}
+    public void paint(Graphics g) {}
 }

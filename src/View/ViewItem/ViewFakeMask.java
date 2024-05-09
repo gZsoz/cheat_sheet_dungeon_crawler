@@ -2,6 +2,8 @@ package View.ViewItem;
 
 import Items.FakeMask;
 
+import java.awt.*;
+
 /**
  * A hamis maszk kirajzolásáért felelős.
  */
@@ -16,7 +18,7 @@ public class ViewFakeMask extends ViewMask {
 	 * Hamis maszk kirajzolása a megadott koordinátákra.
 	 */
 	@Override
-	public void paint() {
+	public void paint(Graphics g) {
 	    // TODO Auto-generated method stub
 	}
 	

@@ -2,6 +2,8 @@ package View.ViewItem;
 
 import Items.FakeSlideRule;
 
+import java.awt.*;
+
 /**
  * A logarléc kirajzolásáért felelős.
  */
@@ -16,7 +18,7 @@ public class ViewSlideRule extends ViewNumberOfUsesItem {
 	 * Kirajzoló függvény, megfelelő koordinátákra helyezi a tárgy képét.
 	 */
 	@Override
-	public void paint() {
+	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}

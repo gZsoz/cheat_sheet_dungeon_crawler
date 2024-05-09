@@ -4,14 +4,27 @@ package View.Utils;
  * Az x és y koordináták tárolása.
  */
 public class Coordinates {
-	
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	/**
 	 * X koordináta a képernyőn.
 	 */
-	int x;
+	private int x;
 	
 	/**
 	 * Y koordináta a képernyőn.
 	 */
-	int y;
+	private int y;
+
+	public Coordinates(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
 }

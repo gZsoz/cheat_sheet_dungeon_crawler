@@ -4,14 +4,36 @@ package View.Utils;
  * A képek méretének tárolására használt osztály.
  */
 public class Size {
-	
+
+	/**
+	 * Szélesség lekérdezése
+	 * @return szélesség
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * Magasság lekérdezése
+	 * @return magasság
+	 */
+	public int getHeight() {
+		return height;
+	}
+
 	/**
 	 * A kép szélessége.
 	 */
-	int width;
+	private int width;
 	
 	/**
 	 * A kép magassága.
 	 */
-	int height;
+	private int height;
+
+	public Size(int w,int h){
+		width = w;
+		height = h;
+	}
+
 }

@@ -2,6 +2,8 @@ package View.ViewItem;
 
 import Items.Transistor;
 
+import java.awt.*;
+
 /**
  * A tranzisztor kirajzolásáért felelős.
  */
@@ -19,7 +21,7 @@ public class ViewTransistor extends ViewItem {
 	}
 	
 	@Override
-	public void paint() {
+	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}

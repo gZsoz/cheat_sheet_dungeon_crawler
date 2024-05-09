@@ -2,6 +2,8 @@ package View.ViewCharacter;
 
 import Character.Teacher;
 
+import java.awt.*;
+
 /**
  * A tanár kirajzolásáért felelős osztály.
  */
@@ -19,7 +21,7 @@ public class ViewTeacher extends ViewCharacter {
 	}
 
 	@Override
-	public void paint() {
+	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 
 	}

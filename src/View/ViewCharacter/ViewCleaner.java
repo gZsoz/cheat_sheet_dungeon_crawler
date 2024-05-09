@@ -2,6 +2,8 @@ package View.ViewCharacter;
 
 import Character.Cleaner;
 
+import java.awt.*;
+
 /**
  * A takarító kirajzolásáért felelős osztály.
  */
@@ -19,7 +21,7 @@ public class ViewCleaner extends ViewCharacter {
 	}
 
 	@Override
-	public void paint() {
+	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 
 	}

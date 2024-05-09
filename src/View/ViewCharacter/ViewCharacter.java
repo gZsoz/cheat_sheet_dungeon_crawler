@@ -5,9 +5,9 @@ import View.Utils.Size;
 import View.Utils.Subscriber;
 import View.Utils.View;
 import View.ViewItem.ViewItem;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * A különböző karakterek grafikus osztályának az ősosztálya.
@@ -17,7 +17,7 @@ public abstract class ViewCharacter implements View, Subscriber {
 	/**
 	 * A karakter képe, ami megjelenik.
 	 */
-	protected ImageIO image;
+	protected Image image;
 	
 	/**
 	 * A karakter képének mérete.

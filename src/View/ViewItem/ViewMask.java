@@ -2,6 +2,8 @@ package View.ViewItem;
 
 import Items.Mask;
 
+import java.awt.*;
+
 /**
  * A maszk kirajzolásáért felelős.
  */
@@ -16,7 +18,7 @@ public class ViewMask extends ViewDecayingItem {
 	 * Maszk kirajzolása a megadott koordinátákra.
 	 */
 	@Override
-	public void paint() {
+	public void paint(Graphics g) {
 	    // TODO Auto-generated method stub
 	}
 	

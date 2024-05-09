@@ -1,8 +1,8 @@
 package View.ViewItem;
 
-import javax.imageio.ImageIO;
-
 import View.Utils.*;
+
+import java.awt.*;
 
 /**
  * A különböző tárgyak grafikus osztályának az ősosztálya.
@@ -12,7 +12,7 @@ public abstract class ViewItem implements View, Subscriber {
 	/**
 	 * A tárgy képe, ami megjelenik.
 	 */
-	protected ImageIO image;
+	protected Image image;
 	
 	/**
 	 * A tárgy képének mérete.

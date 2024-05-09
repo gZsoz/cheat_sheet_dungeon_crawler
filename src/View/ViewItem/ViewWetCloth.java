@@ -2,6 +2,8 @@ package View.ViewItem;
 
 import Items.WetCloth;
 
+import java.awt.*;
+
 /**
  * A nedves törlőrongy kirajzolásáért felelős.
  */
@@ -16,7 +18,7 @@ public class ViewWetCloth extends ViewDecayingItem {
 	 * Nedves törlőrongy kirajzolása a megadott koordinátákra.
 	 */
     @Override
-    public void paint() {
+    public void paint(Graphics g) {
         // TODO Auto-generated method stub
     }
 

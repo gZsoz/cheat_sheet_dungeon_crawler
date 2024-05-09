@@ -3,12 +3,12 @@ package View.ViewMap;
 import Map.Room;
 import View.Utils.*;
 import View.ViewCharacter.ViewCharacter;
+import View.ViewCharacter.ViewStudent;
 import View.ViewEnvironmentalFactor.ViewEnvironmentalFactors;
 import View.ViewItem.ViewItem;
 
+import java.awt.*;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 /**
  * A szoba grafikus osztálya.
@@ -23,7 +23,7 @@ public class ViewRoom implements View, Subscriber {
 	/**
 	 * A szoba képe, ami megjelenik.
 	 */
-	protected ImageIO image;
+	protected Image image;
 	
 	/**
 	 * A szoba képének mérete.
@@ -43,7 +43,7 @@ public class ViewRoom implements View, Subscriber {
 	/**
 	 * A szobában megjelenítendő karakterek.
 	 */
-	protected ArrayList<ViewCharacter> charactersInRoom;
+	protected ArrayList<ViewCharacter> charactersInRoom = new ArrayList<>();
 	
 	/**
 	 * A szobában megjelenítendő környezeti tényezők.
@@ -54,7 +54,11 @@ public class ViewRoom implements View, Subscriber {
 	 * Kijelölt-e az adott szoba (szoba váltásnál) és ha igen milyen színnel.
 	 */
 	protected SelectionColor selected;
-	
+
+	public ViewRoom(){
+		charactersInRoom.add(new ViewStudent());
+	}
+
 	@Override
 	public void propertyChanged(String property) {
 	    // TODO document why this method is empty
@@ -64,7 +68,15 @@ public class ViewRoom implements View, Subscriber {
 	 * A szoba és benne lévő tárgyak, környezeti változók és karakterek kirajzolása.
 	 */
 	@Override
-	public void paint() {
-	    // TODO document why this method is empty
+	public void paint(Graphics g) {
+		for(ViewCharacter vcharacter : charactersInRoom){
+			vcharacter.paint(g);
+		}
+		for(ViewItem vitem : itemsInRoom){
+			vitem.paint(g);
+		}
+		for(ViewEnvironmentalFactors venvfact : environmentalFactorsInRoom){
+			venvfact.paint(g);
+		}
 	}
 }
