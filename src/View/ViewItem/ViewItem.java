@@ -1,8 +1,8 @@
 package View.ViewItem;
 
-import View.Utils.*;
-
 import java.awt.Image;
+
+import View.Utils.*;
 
 /**
  * A különböző tárgyak grafikus osztályának az ősosztálya.
@@ -12,20 +12,20 @@ public abstract class ViewItem implements View, Subscriber {
 	/**
 	 * A tárgy képe, ami megjelenik.
 	 */
-	Image image;
+	protected Image image;
 	
 	/**
 	 * A tárgy képének mérete.
 	 */
-	Size size;
+	protected Size size;
 	
 	/**
 	 * A képernyőn megjelenítendő x és y koordináták.
 	 */
-	Coordinates coordinates;
+	protected Coordinates coordinates;
 	
 	/**
-	 * Kijelölt-e az adott tárgy (letevésnél, felvevésnél vagy használatnál) és ha igen milyen színnel.
+	 * Kijelölt-e az adott tárgy (letevésnél, felvevésnél vagy használatnál) és ha igen, milyen színnel.
 	 */
-	SelectionColor selected;
+	protected SelectionColor selected;
 }

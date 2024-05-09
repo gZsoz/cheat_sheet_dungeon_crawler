@@ -6,14 +6,17 @@ import Map.Labyrinth;
  * Felelősség: A felhasználók bemeneteinek értelmezése és a model ezek szerinti formázása.
  */
 public class Controller {
+	
     /**
      * Az első játékos vezérlője.
      */
     private PlayerController player1;
+    
     /**
      * A második játékos vezérlője.
      */
     private PlayerController player2;
+    
     /**
      * A modellben értelmezett labirintus.
      */

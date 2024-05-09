@@ -10,7 +10,7 @@ public class ViewCleaner extends ViewCharacter {
 	/**
 	 * A modellbeli takarító, amit reprezentál.
 	 */
-	Cleaner character;
+	private Cleaner character;
 	
 	@Override
 	public void propertyChanged(String property) {

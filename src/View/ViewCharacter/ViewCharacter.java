@@ -16,20 +16,20 @@ public abstract class ViewCharacter implements View, Subscriber {
 	/**
 	 * A karakter képe, ami megjelenik.
 	 */
-	Image image;
+	protected Image image;
 	
 	/**
 	 * A karakter képének mérete.
 	 */
-	Size size;
+	protected Size size;
 	
 	/**
 	 * A képernyőn megjelenítendő x és y koordináták.
 	 */
-	Coordinates coordinates;
+	protected Coordinates coordinates;
 	
 	/**
 	 * Az inventory-ban megjelenítendő tárgyak.
 	 */
-	ArrayList<ViewItem> itemsInInventory;
+	protected ArrayList<ViewItem> itemsInInventory;
 }

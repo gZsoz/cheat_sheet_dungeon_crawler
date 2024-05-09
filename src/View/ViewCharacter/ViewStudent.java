@@ -11,7 +11,7 @@ public class ViewStudent extends ViewCharacter {
 	/**
 	 * A modellbeli diák, amit reprezentál.
 	 */
-	Student character;
+	private Student character;
 
 	@Override
 	public void propertyChanged(String property) {
