@@ -1,6 +1,6 @@
 package View.ViewItem;
 
-import java.awt.Image;
+import javax.imageio.ImageIO;
 
 import View.Utils.*;
 
@@ -12,7 +12,7 @@ public abstract class ViewItem implements View, Subscriber {
 	/**
 	 * A tárgy képe, ami megjelenik.
 	 */
-	protected Image image;
+	protected ImageIO image;
 	
 	/**
 	 * A tárgy képének mérete.

@@ -6,8 +6,9 @@ import View.ViewCharacter.ViewCharacter;
 import View.ViewEnvironmentalFactor.ViewEnvironmentalFactors;
 import View.ViewItem.ViewItem;
 
-import java.awt.*;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 /**
  * A szoba grafikus osztálya.
@@ -22,7 +23,7 @@ public class ViewRoom implements View, Subscriber {
 	/**
 	 * A szoba képe, ami megjelenik.
 	 */
-	protected Image image;
+	protected ImageIO image;
 	
 	/**
 	 * A szoba képének mérete.

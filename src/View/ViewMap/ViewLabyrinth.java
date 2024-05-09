@@ -6,8 +6,9 @@ import View.Utils.Size;
 import View.Utils.Subscriber;
 import View.Utils.View;
 
-import java.awt.*;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 /**
  * A labirintus grafikus osztálya.
@@ -22,7 +23,7 @@ public class ViewLabyrinth implements View, Subscriber {
 	/**
 	 * A labirintus hátterének megjelenítendő képe.
 	 */
-	private Image background;
+	private ImageIO background;
 	
 	/**
 	 * A labirintus háttérképének mérete.

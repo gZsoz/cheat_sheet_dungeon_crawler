@@ -1,6 +1,6 @@
 package View.ViewEnvironmentalFactor;
 
-import java.awt.Image;
+import javax.imageio.ImageIO;
 
 import View.Utils.Coordinates;
 import View.Utils.Size;
@@ -14,7 +14,7 @@ public abstract class ViewEnvironmentalFactors implements View {
 	/**
 	 * A környezeti változó képe, ami megjelenik.
 	 */
-	protected Image image;
+	protected ImageIO image;
 	
 	/**
 	 * A környezeti változó képének mérete.
