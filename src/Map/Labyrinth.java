@@ -9,6 +9,7 @@ import EnvironmentalFactor.Sticky;
 import Items.*;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
+import View.Utils.Subscriber;
 
 // Labyrinth
 
@@ -17,11 +18,24 @@ import Time.iTask;
  */
 public class Labyrinth implements iTask{
 
+	/** A labirintus változásaira feliratkozott osztályok*/
+	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
+	
 	private List<Room> Rooms;
 
 	public Labyrinth(){
 		Rooms=new ArrayList<Room>();
 	}
+	
+    /**
+     * meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
+     *  függvényüket a paraméterként kapott Stringgel
+     * @param str
+     */
+    public void notifySubsribers(String str) {
+    	for(Subscriber sub : subscribers)
+    		sub.propertyChanged(str);
+    }
 
 	public List<Room> getRooms(){
 		return Rooms;

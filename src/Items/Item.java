@@ -1,12 +1,19 @@
 package Items;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Character.Character;
 import ProtoUtil.ProtoUtil;
+import View.Utils.Subscriber;
 
 /**
  * Absztrakt osztály, ebből származnak le a különböző tárgyak.
  */
 public abstract class Item {
+	
+	/** Az item változásaira feliratkozott osztályok*/
+	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	
 	protected Character owner;
 	
@@ -15,6 +22,16 @@ public abstract class Item {
 	 */
 	protected boolean sticky;
 
+	/**
+     * meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
+     *  függvényüket a paraméterként kapott Stringgel
+     * @param str
+     */
+    public void notifySubsribers(String str) {
+    	for(Subscriber sub : subscribers)
+    		sub.propertyChanged(str);
+    }
+	
 	/**
 	 * Tárgy ragacsosságának lekérdezése
 	 * @return ragacsos-e a tárgy

@@ -1,6 +1,7 @@
 package Character;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import EnvironmentalFactor.EnvironmentalFactors;
 import EnvironmentalFactor.Sticky;
@@ -10,6 +11,7 @@ import Items.Transistor;
 import Map.Room;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
+import View.Utils.Subscriber;
 
 /**
  * A Character egy absztrakt osztály, amely a hallgatók és az oktatók közös tulajdonságait
@@ -21,6 +23,10 @@ import Time.iTask;
 public abstract class Character implements iTask {
 	public static int stunTime=4;
 	public static int restTime=10;
+	
+	/** A karakter változásaira feliratkozott osztályok*/
+	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
+	
 	/**
 	 * A karakter birtokában található tárgyak
 	 * listája. Maximum 5 Item lehet benne. Nem lehet benne logarléc.
@@ -41,6 +47,16 @@ public abstract class Character implements iTask {
 	 * Van-e védelme a karakternek kábítás ellen.
 	 */
 	protected boolean hasDefense;
+	
+    /**
+     * meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
+     *  függvényüket a paraméterként kapott Stringgel
+     * @param str
+     */
+    public void notifySubsribers(String str) {
+    	for(Subscriber sub : subscribers)
+    		sub.propertyChanged(str);
+    }
 	
 	/**
 	 * Inventory lekérdezése.

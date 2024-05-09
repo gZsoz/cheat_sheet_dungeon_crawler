@@ -3,6 +3,7 @@ package Map;
 import Items.Item;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
+import View.Utils.Subscriber;
 import EnvironmentalFactor.EnvironmentalFactors;
 
 import java.util.ArrayList;
@@ -20,7 +21,10 @@ import Character.Character;
  * Kezeli a szoba állapotát (gázos-e).
  */
 public class Room implements iTask {
-    
+	
+    /** A szoba változásaira feliratkozott osztályok*/
+	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
+	
     /** A szoba kapacitása */
     protected int capacity=1;
     
@@ -60,6 +64,16 @@ public class Room implements iTask {
     	this.capacity = capacity;
     }
 
+    /**
+     * meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
+     *  függvényüket a paraméterként kapott Stringgel
+     * @param str
+     */
+    public void notifySubsribers(String str) {
+    	for(Subscriber sub : subscribers)
+    		sub.propertyChanged(str);
+    }
+    
     /**
      * Lerakja a paraméterként kapott tárgyat a szobába.
      * @param a A lerakandó tárgy
