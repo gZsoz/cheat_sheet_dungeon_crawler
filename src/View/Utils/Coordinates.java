@@ -1,4 +1,4 @@
-package View;
+package View.Utils;
 
 /**
  * Az x és y koordináták tárolása.

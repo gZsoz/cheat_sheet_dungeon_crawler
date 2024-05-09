@@ -1,6 +1,7 @@
 package View;
 
 import Character.Student;
+import View.ViewCharacter.ViewCharacter;
 
 /**
  * A diák kirajzolásáért felelős osztály.

@@ -1,4 +1,4 @@
-package View;
+package View.Utils;
 
 /**
  * A képek méretének tárolására használt osztály.

@@ -1,6 +1,7 @@
-package View;
+package View.ViewItem;
 
 import Items.Transistor;
+import View.ViewItem.ViewItem;
 
 /**
  * A tranzisztor kirajzolásáért felelős.

@@ -1,5 +1,10 @@
-package View;
+package View.ViewCharacter;
 
+import View.Utils.Coordinates;
+import View.Utils.Size;
+import View.Utils.Subscriber;
+import View.Utils.View;
+import View.ViewItem.ViewItem;
 import java.awt.Image;
 import java.util.ArrayList;
 

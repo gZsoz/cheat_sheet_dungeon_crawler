@@ -1,4 +1,4 @@
-package View;
+package View.Utils;
 
 /**
  * Tárgyak és szobák kijelöléséhez használt szín.

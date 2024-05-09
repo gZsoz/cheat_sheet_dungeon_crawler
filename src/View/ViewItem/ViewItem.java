@@ -1,4 +1,6 @@
-package View;
+package View.ViewItem;
+
+import View.Utils.*;
 
 import java.awt.Image;
 
