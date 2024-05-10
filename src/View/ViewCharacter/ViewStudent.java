@@ -4,10 +4,9 @@ import Character.Student;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
 import View.Utils.Size;
-import View.ViewCharacter.ViewCharacter;
 
 import java.awt.*;
-import java.io.File;
+import java.io.Console;
 
 /**
  * A diák kirajzolásáért felelős osztály.
@@ -17,12 +16,13 @@ public class ViewStudent extends ViewCharacter {
 	/**
 	 * A modellbeli diák, amit reprezentál.
 	 */
-	private Student character;
+	private Student charachter;
 
-	public ViewStudent(){
+	public ViewStudent(Student stud, Coordinates pos){
+		charachter = stud;
 		image = ImageReader.loadImage("res/images/test/testpic.png");
-		size = new Size(320,320);
-		coordinates = new Coordinates(100,200);
+		size = new Size(160,160);
+		coordinates = new Coordinates(pos.getX(), pos.getY());
 	}
 
 	@Override
@@ -32,6 +32,7 @@ public class ViewStudent extends ViewCharacter {
 
 	@Override
 	public void paint(Graphics g) {
+		super.paint(g);
 		Graphics2D g2D = (Graphics2D) g;
 		// példa
 		g2D.drawImage(image, coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);

@@ -12,8 +12,12 @@ public class ViewCleaner extends ViewCharacter {
 	/**
 	 * A modellbeli takarító, amit reprezentál.
 	 */
-	private Cleaner character;
-	
+	private Cleaner charachter;
+
+	public ViewCleaner(Cleaner clean){
+		charachter = clean;
+	}
+
 	@Override
 	public void propertyChanged(String property) {
 		// TODO Auto-generated method stub

@@ -1,14 +1,13 @@
 package View.ViewEnvironmentalFactor;
 
 import EnvironmentalFactor.Sticky;
-import View.Utils.View;
 
 import java.awt.*;
 
 /**
  * A ragacs grafikus osztálya.
  */
-public class ViewSticky extends ViewEnvironmentalFactors implements View {
+public class ViewSticky extends ViewEnvironmentalFactors {
 	
 	/**
 	 * A modellbeli ragacs, amit reprezentál.

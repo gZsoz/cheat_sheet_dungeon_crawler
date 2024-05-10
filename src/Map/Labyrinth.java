@@ -10,6 +10,7 @@ import Items.*;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
 import View.Utils.Subscriber;
+import Character.*;
 
 // Labyrinth
 
@@ -220,6 +221,24 @@ public class Labyrinth implements iTask{
      */
 	public void generateRooms() {
 		ProtoUtil.printLog("generateRooms");
+		Room r1 = new Room(2);
+		Room r2 = new Room(2);
+		Room r3 = new Room(2);
+		Room r4 = new Room(2);
+		Room r5 = new Room(2);
+		Room r6 = new Room(2);
+		Room r7 = new Room(2);
+		Room r8 = new Room(2);
+		Rooms.add(r1);
+		Rooms.add(r2);
+		Rooms.add(r3);
+		Rooms.add(r4);
+		Rooms.add(r5);
+		Rooms.add(r6);
+		Rooms.add(r7);
+		Rooms.add(r8);
+		Student s = new Student(r4);
+		r4.addCharacter(s);
     }
 
 	@Override

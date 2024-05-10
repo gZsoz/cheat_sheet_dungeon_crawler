@@ -1,19 +1,19 @@
 package View.Controller;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 import Character.Student;
 import View.ViewCharacter.ViewStudent;
 import View.ViewMap.ViewLabyrinth;
 import View.Utils.ActionState;
-import View.Utils.View;
 
 import java.awt.*;
 
 /**
  * Felelősség: A felhasználók bemeneteinek értelmezése és a model ezek szerinti formázása.
  */
-public class PlayerController implements View {
+public class PlayerController extends JComponent {
 	
     /**
      * Az egyik játékos által irányított hallgató.

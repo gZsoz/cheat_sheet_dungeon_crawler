@@ -2,12 +2,13 @@ package View.ViewItem;
 
 import View.Utils.*;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
  * A különböző tárgyak grafikus osztályának az ősosztálya.
  */
-public abstract class ViewItem implements View, Subscriber {
+public abstract class ViewItem extends JComponent implements Subscriber {
 	
 	/**
 	 * A tárgy képe, ami megjelenik.

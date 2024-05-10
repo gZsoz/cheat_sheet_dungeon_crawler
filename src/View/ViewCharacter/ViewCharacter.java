@@ -3,16 +3,16 @@ package View.ViewCharacter;
 import View.Utils.Coordinates;
 import View.Utils.Size;
 import View.Utils.Subscriber;
-import View.Utils.View;
 import View.ViewItem.ViewItem;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 /**
  * A különböző karakterek grafikus osztályának az ősosztálya.
  */
-public abstract class ViewCharacter implements View, Subscriber {
+public abstract class ViewCharacter extends JComponent implements Subscriber {
 	
 	/**
 	 * A karakter képe, ami megjelenik.

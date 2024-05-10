@@ -12,8 +12,12 @@ public class ViewTeacher extends ViewCharacter {
 	/**
 	 * A modellbeli tanár, amit reprezentál.
 	 */
-	private Teacher character;
-	
+	private Teacher charachter;
+
+	public ViewTeacher(Teacher teach){
+		charachter = teach;
+	}
+
 	@Override
 	public void propertyChanged(String property) {
 		// TODO Auto-generated method stub

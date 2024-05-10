@@ -2,14 +2,14 @@ package View.ViewEnvironmentalFactor;
 
 import View.Utils.Coordinates;
 import View.Utils.Size;
-import View.Utils.View;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
  * A környezeti változók grafikus osztályának ősosztálya.
  */
-public abstract class ViewEnvironmentalFactors implements View {
+public abstract class ViewEnvironmentalFactors extends JComponent {
 	
 	/**
 	 * A környezeti változó képe, ami megjelenik.
@@ -32,5 +32,6 @@ public abstract class ViewEnvironmentalFactors implements View {
 	@Override
 	public void paint(Graphics g) {
 	    // TODO document why this method is empty
+		super.paint(g);
 	}
 }

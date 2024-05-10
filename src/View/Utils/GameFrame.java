@@ -22,6 +22,7 @@ public class GameFrame extends JFrame implements Runnable {
 
 	@Override
 	public void paint(Graphics g){
+		super.paint(g);
 		viewLabyrinth.paint(g);
 	}
 
