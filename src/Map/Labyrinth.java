@@ -221,14 +221,16 @@ public class Labyrinth implements iTask{
      */
 	public void generateRooms() {
 		ProtoUtil.printLog("generateRooms");
-		Room r1 = new Room(2);
-		Room r2 = new Room(2);
-		Room r3 = new Room(2);
-		Room r4 = new Room(2);
-		Room r5 = new Room(2);
-		Room r6 = new Room(2);
-		Room r7 = new Room(2);
-		Room r8 = new Room(2);
+		Room r1 = new Room(4);
+		Room r2 = new Room(4);
+		Room r3 = new Room(4);
+		Room r4 = new Room(4);
+		Room r5 = new Room(4);
+		Room r6 = new Room(4);
+		Room r7 = new Room(4);
+		Room r8 = new Room(4);
+		Room r9 = new Room(4);
+		Room r10 = new Room(4);
 		Rooms.add(r1);
 		Rooms.add(r2);
 		Rooms.add(r3);
@@ -237,6 +239,8 @@ public class Labyrinth implements iTask{
 		Rooms.add(r6);
 		Rooms.add(r7);
 		Rooms.add(r8);
+		Rooms.add(r9);
+		Rooms.add(r10);
 		Student s = new Student(r4);
 		r4.addCharacter(s);
     }

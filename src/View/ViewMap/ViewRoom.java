@@ -70,6 +70,8 @@ public class ViewRoom extends JComponent implements Subscriber {
 	public ViewRoom(Room r, Coordinates pos){
 		room = r;
 		coordinates = pos;
+		image = ImageReader.loadImage("res/images/test/testroom.png");
+		size = new Size(100 + r.getCapacity() * 68,220);
 		initRoom();
 		// room.subscribe(this);
 	}
@@ -121,6 +123,9 @@ public class ViewRoom extends JComponent implements Subscriber {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		Graphics2D g2D = (Graphics2D) g;
+		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
+
 		for(ViewEnvironmentalFactors venvfact : environmentalFactorsInRoom){
 			venvfact.paint(g);
 		}

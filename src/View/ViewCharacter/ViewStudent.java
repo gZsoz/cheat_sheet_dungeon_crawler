@@ -21,8 +21,8 @@ public class ViewStudent extends ViewCharacter {
 	public ViewStudent(Student stud, Coordinates pos){
 		charachter = stud;
 		image = ImageReader.loadImage("res/images/test/testpic.png");
-		size = new Size(160,160);
-		coordinates = new Coordinates(pos.getX(), pos.getY());
+		size = new Size(60,200);
+		coordinates = new Coordinates(pos.getX() + 15, pos.getY() - 20);
 	}
 
 	@Override

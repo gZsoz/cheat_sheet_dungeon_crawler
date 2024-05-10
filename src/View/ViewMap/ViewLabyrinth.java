@@ -43,9 +43,9 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	/**
 	 * Az összes lehetséges szoba pozíciója
 	 */
-	private Coordinates[] fixedRoomPositions = {new Coordinates(30,20), new Coordinates(220,10), new Coordinates(420,10), new Coordinates(840,20),
-														new Coordinates(200,250), new Coordinates(400,220), new Coordinates(700,250),
-													new Coordinates(200,250), new Coordinates(400,220), new Coordinates(700,250)
+	private Coordinates[] fixedRoomPositions = {new Coordinates(40,70), new Coordinates(486,50), new Coordinates(932,50), new Coordinates(1378,70),
+														new Coordinates(220,340), new Coordinates(720,300), new Coordinates(1220,340),
+													new Coordinates(300,620), new Coordinates(720,556), new Coordinates(1140,620)
 	};
 
 	/**
