@@ -55,7 +55,7 @@ public abstract class Character implements iTask {
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : subscribers)
-    		sub.propertyChanged(str); // lehetséges értékek: "stun", "inventory", studentnél "invincible"
+    		sub.propertyChanged(str); // lehetséges értékek: "stun", "inventory", "invincible"
     }
 	
     /**
