@@ -39,10 +39,12 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setStunned
 setInvincible
 getInventory
 activate
 use
+setActive
 getInventory
 putdownItem
 addItem
@@ -52,4 +54,9 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setStunned
 setInvincible
+setActive
+setPair
+setPair
+setActive

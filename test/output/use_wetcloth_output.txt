@@ -71,6 +71,7 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setStunned
 setInvincible
 checkCollision
 getCharacters
@@ -115,5 +116,6 @@ getStunned
 reduceDuration
 getInventory
 onDrop
+setIsActive
 Dropped
 Decaying item expired and removed.

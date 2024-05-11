@@ -38,7 +38,7 @@ public class WetCloth extends DecayingItems{
 	@Override
 	public void onDrop() {
 		ProtoUtil.printLog("onDrop");
-		isActive=false;
+		setIsActive(false);
 		super.onDrop();
 	}
 

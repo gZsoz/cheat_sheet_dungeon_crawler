@@ -59,8 +59,10 @@ stun
 getStunned
 getInventory
 reduceStunned
+setStunned
 reduceStunned
 reduceStunned
+setStunned
 reduceStunned
 getLocation
 getCharacters

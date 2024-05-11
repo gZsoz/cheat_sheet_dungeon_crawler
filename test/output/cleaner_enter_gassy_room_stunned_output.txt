@@ -30,6 +30,7 @@ stun
 getStunned
 getInventory
 reduceStunned
+setStunned
 reduceStunned
 getLocation
 getCharacters
@@ -63,6 +64,7 @@ stun
 getStunned
 getInventory
 reduceStunned
+setStunned
 getLocation
 getCharacters
 stun
@@ -86,6 +88,7 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setStunned
 clean
 getCharacters
 getStunned
@@ -97,6 +100,7 @@ reduceStunned
 getLocation
 getItems
 reduceStunned
+setStunned
 reduceStunned
 getLocation
 getItems

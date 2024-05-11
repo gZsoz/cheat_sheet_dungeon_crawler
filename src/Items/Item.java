@@ -29,9 +29,27 @@ public abstract class Item {
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : subscribers)
-    		sub.propertyChanged(str);
+    		sub.propertyChanged(str); // lehetséges értékek: "sticky", "remaininguses", "isactive", "duration", "pair"
     }
 	
+    /**
+     * hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához
+     * ezzentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik
+     * @param sub
+     */
+    public void subscribe(Subscriber sub) {
+    	subscribers.add(sub);
+    }
+    
+    /**
+     * eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából
+     * ezzentúl nem kap értesítést, ha az osztály belső állapota megváltozik
+     * @param sub
+     */
+    public void unsubscribe(Subscriber sub) {
+    	subscribers.remove(sub);
+    }
+    
 	/**
 	 * Tárgy ragacsosságának lekérdezése
 	 * @return ragacsos-e a tárgy
@@ -42,6 +60,15 @@ public abstract class Item {
 	}
 
 	/**
+	 * Tárgy ragacsosságának beállítása
+	 * @param s A beállítandó állapot
+	 */
+	public void setSticky(boolean s){
+		sticky=s;
+		notifySubsribers("sticky");
+	}
+	
+	/**
 	 * Beállítja a tárgy tulajdonosát
 	 * @param o - tárgy tulajdonosa
 	 */
@@ -49,6 +76,7 @@ public abstract class Item {
 		ProtoUtil.printLog("setOwner");
 		owner=o;
 	}
+	
 	/**
 	 * Lekérdezi a tárgy tulajdonosát
 	 * tárgy tulajdonosa
@@ -56,13 +84,6 @@ public abstract class Item {
 	public Character getOwner() {
 		ProtoUtil.printLog("getOwner");
 		return owner;
-	}
-	/**
-	 * Tárgy ragacsosságának beállítása
-	 * @param s A beállítandó állapot
-	 */
-	public void setSticky(boolean s){
-		sticky=s;
 	}
 
 	/**

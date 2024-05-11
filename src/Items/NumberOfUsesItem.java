@@ -27,7 +27,11 @@ public abstract class NumberOfUsesItem extends Item {
     public void setRemainingUses(int x){
         ProtoUtil.printLog("setRemainingUses"); // Logolás
         RemainingUses=x;
-        if(RemainingUses == 0) owner.getInventory().remove(this); // Ha elfogytak a használatok, távolítsa el a tárgyat az inventáriumból
+        notifySubsribers("remaininguses");
+        if(RemainingUses == 0) {
+        	owner.getInventory().remove(this); // Ha elfogytak a használatok, távolítsa el a tárgyat az inventáriumból
+        	owner.notifySubsribers("inventory");
+        }
     }
     
     /**

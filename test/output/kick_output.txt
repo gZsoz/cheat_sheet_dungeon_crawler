@@ -49,6 +49,7 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setStunned
 checkCollision
 getCharacters
 kick

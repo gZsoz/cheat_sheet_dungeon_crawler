@@ -35,6 +35,7 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setStunned
 setRemainingEntries
 setInvincible
 getLocation

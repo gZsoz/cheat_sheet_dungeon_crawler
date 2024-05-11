@@ -43,6 +43,7 @@ public class Transistor extends Item {
 	 */
 	public void setPair(Transistor t){
 		ProtoUtil.printLog("setPair");
+		notifySubsribers("pair");
 		pair=t;
 	}
 
@@ -80,6 +81,7 @@ public class Transistor extends Item {
 	 */
 	public void setActive(boolean state){
 		ProtoUtil.printLog("setActive");
+		notifySubsribers("isactive");
 		active = state;
 	}
 
@@ -91,7 +93,7 @@ public class Transistor extends Item {
 	@Override
 	public void use() {
 		ProtoUtil.printLog("use");
-		active = !active;
+		setActive(!active);
 	}
 
     /**
@@ -112,13 +114,13 @@ public class Transistor extends Item {
 				
 				// a tranzisztorok defaultra állítása és szétválasztása
 				pair.location = null;
-				pair.active = false;
-				pair.pair = null;
-				pair = null;
-				active = false;
+				pair.setActive(false);
+				pair.setPair(null);
+				setPair(null);
+				setActive(false);
 			}
 		} else { // nincs párja
-			active = false;
+			setActive(false);
 		}
     }
 

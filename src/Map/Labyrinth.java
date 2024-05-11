@@ -35,7 +35,25 @@ public class Labyrinth implements iTask{
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : subscribers)
-    		sub.propertyChanged(str);
+    		sub.propertyChanged(str); // lehetséges értékek: "merge <indexOf(result)> <indexOf(merging)>", "split <indexOf(old)>"
+    }
+    
+    /**
+     * hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához
+     * ezzentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik
+     * @param sub
+     */
+    public void subscribe(Subscriber sub) {
+    	subscribers.add(sub);
+    }
+    
+    /**
+     * eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából
+     * ezzentúl nem kap értesítést, ha az osztály belső állapota megváltozik
+     * @param sub
+     */
+    public void unsubscribe(Subscriber sub) {
+    	subscribers.remove(sub);
     }
 
 	public List<Room> getRooms(){
@@ -73,6 +91,7 @@ public class Labyrinth implements iTask{
 		if(result.getCharacters().size()+merging.getCharacters().size()>bigger){
 			return;
 		}else{
+			notifySubsribers("merge "+Rooms.indexOf(result)+" "+Rooms.indexOf(merging));
 			result.setCapacity(bigger);
 			result.merge(merging);
 			this.removeRoom(merging);
@@ -116,7 +135,7 @@ public class Labyrinth implements iTask{
 			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.addEnvironmentalFactor(new Gas(n));
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
 		}
-		Rooms.add(Rooms.indexOf(old), n);
+		Rooms.add(Rooms.indexOf(old)+1, n);
 		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
 		ProtoUtil.printLog("Neighbours of new room: "+n.getNeighbours().size());
 		ProtoUtil.printLog("Items of old room: "+old.getItems().size());
@@ -169,7 +188,7 @@ public class Labyrinth implements iTask{
 			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.addEnvironmentalFactor(new Gas(n));
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
 		}
-		Rooms.add(Rooms.indexOf(old), n);
+		Rooms.add(Rooms.indexOf(old)+1, n);
 		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
 		ProtoUtil.printLog("Neighbours of new room: "+n.getNeighbours().size());
 		ProtoUtil.printLog("Items of old room: "+old.getItems().size());
@@ -178,6 +197,7 @@ public class Labyrinth implements iTask{
 		ProtoUtil.printLog("Characters of new room: "+n.getCharacters().size());
 		ProtoUtil.printLog("EnvironmentalFactors of old room: "+old.getEnvironmentalFactors().size());
 		ProtoUtil.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
+		notifySubsribers("split "+Rooms.indexOf(old));
     }
 
 	

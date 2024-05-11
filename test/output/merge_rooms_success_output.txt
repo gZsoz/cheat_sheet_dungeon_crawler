@@ -64,8 +64,10 @@ removeRoom
 reduceStunned
 reduceStunned
 reduceStunned
+setStunned
 reduceStunned
 reduceStunned
+setStunned
 reduceStunned
 reduceStunned
 reduceStunned

@@ -70,6 +70,7 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setStunned
 setInvincible
 getLocation
 getCharacters
@@ -94,6 +95,5 @@ activate
 use
 setRemainingUses
 getInventory
-getRoom
 getRoom
 airfreshener removed gas

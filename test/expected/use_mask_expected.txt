@@ -1,2 +1,4 @@
-notcontains "setStunned"
+notcontains "stun
+getStunned
+setStunned"
 contains "stun"

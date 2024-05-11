@@ -37,6 +37,7 @@ getCharacters
 getCapacity
 removeCharacter
 addCharacter
+setStunned
 setInvincible
 checkCollision
 getCharacters

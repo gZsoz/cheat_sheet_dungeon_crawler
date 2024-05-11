@@ -46,6 +46,7 @@ public class Cleaner extends Character {
 		boolean roomHasGas = r.getEnvironmentalFactors().stream().anyMatch(n -> n.getClass().equals(Gas.class));
 		if(roomHasGas){
 			r.getEnvironmentalFactors().removeIf(n -> n.getClass().equals(Gas.class)); // gáz megszűntetése
+			r.notifySubsribers("factors");
 			ProtoUtil.printLog("removeEnvironmentalFactor");
 		}
 
@@ -66,7 +67,7 @@ public class Cleaner extends Character {
     		currentRoom.removeCharacter(this);
     		r.addCharacter(this);
     		currentRoom = r;
-    		stunned = 0;
+    		setStunned(0);
     		clean(r);
     		return true;
     	}

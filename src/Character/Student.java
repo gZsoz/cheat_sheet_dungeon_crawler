@@ -43,6 +43,7 @@ public class Student extends Character {
 	 */
 	public void setInvincible(boolean state) {
 		ProtoUtil.printLog("setInvincible");
+		notifySubsribers("invincible");
 		invincible = state;
 	}
 	 

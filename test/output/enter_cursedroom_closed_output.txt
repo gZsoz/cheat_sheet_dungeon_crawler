@@ -10,6 +10,7 @@ removeCharacter
 addCharacter
 hideDoors
 removeAllDoors
+setStunned
 setInvincible
 reduceDurationCursed
 reduceDurationCursed

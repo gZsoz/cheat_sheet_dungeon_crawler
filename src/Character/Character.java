@@ -55,9 +55,27 @@ public abstract class Character implements iTask {
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : subscribers)
-    		sub.propertyChanged(str);
+    		sub.propertyChanged(str); // lehetséges értékek: "stun", "inventory", studentnél "invincible"
     }
 	
+    /**
+     * hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához
+     * ezzentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik
+     * @param sub
+     */
+    public void subscribe(Subscriber sub) {
+    	subscribers.add(sub);
+    }
+    
+    /**
+     * eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából
+     * ezzentúl nem kap értesítést, ha az osztály belső állapota megváltozik
+     * @param sub
+     */
+    public void unsubscribe(Subscriber sub) {
+    	subscribers.remove(sub);
+    }
+    
 	/**
 	 * Inventory lekérdezése.
 	 * @return A karakter birtokában lévő tárgyak listája.
@@ -92,11 +110,13 @@ public abstract class Character implements iTask {
 	 */
 	public void setStunned(int s) {
 		ProtoUtil.printLog("setStunned");
+		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 		stunned = s;
 	}
 	
 	public void reduceStunned() {
 		ProtoUtil.printLog("reduceStunned");
+		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 		stunned--;
 	}
 	
@@ -127,7 +147,7 @@ public abstract class Character implements iTask {
     		currentRoom.removeCharacter(this);
     		r.addCharacter(this);
     		currentRoom = r;
-    		stunned = 0;
+    		setStunned(0);
     		for(EnvironmentalFactors ef: currentRoom.getEnvironmentalFactors()) {
     			if(ef instanceof Sticky) {
     				((Sticky) ef).reduceRemainingEntries();
@@ -165,6 +185,7 @@ public abstract class Character implements iTask {
     		}
 			currentRoom.removeItem(i);
 			inventory.add(i);
+			notifySubsribers("inventory");
 			i.setOwner(this);
 			ProtoUtil.printLog("Successfully picked up item");
     		i.onPickUp();
@@ -181,6 +202,7 @@ public abstract class Character implements iTask {
     public void putdownItem(Item i) {
     	ProtoUtil.printLog("putdownItem");
     	inventory.remove(i);
+    	notifySubsribers("inventory");
     	currentRoom.addItem(i);
     	i.onDrop();
     }
@@ -191,11 +213,11 @@ public abstract class Character implements iTask {
     public void update() {
     	if(0 < stunned && stunned <= stunTime) {
     		reduceStunned();
-    		if(stunned==0) stunned=restTime;
+    		if(stunned==0) setStunned(restTime);
     	}
     	if(stunTime<stunned) {
     		reduceStunned();
-    		if(stunned==stunTime) stunned=0;
+    		if(stunned==stunTime) setStunned(0);
     	}
     	for(Item temp : new ArrayList<Item>(inventory)) {
 			if(temp instanceof iTask) {

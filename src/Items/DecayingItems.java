@@ -28,8 +28,10 @@ public abstract class DecayingItems extends Item implements iTask {
     public void reduceDuration() {
 		ProtoUtil.printLog("reduceDuration");
 		duration--;
+		notifySubsribers("duration");
 		if(duration==0) {
 			owner.getInventory().remove(this);
+			owner.notifySubsribers("inventory");
 			onDrop();
 			ProtoUtil.printLog("Decaying item expired and removed.");
 		}
@@ -50,6 +52,7 @@ public abstract class DecayingItems extends Item implements iTask {
 	 */
 	public void setIsActive(boolean isactive) {
 		ProtoUtil.printLog("setIsActive");
+		notifySubsribers("isactive");
 		this.isActive = isactive;
 	}
    

@@ -36,6 +36,7 @@ public class Sticky extends EnvironmentalFactors {
 	 */
 	public void reduceRemainingEntries(){
 		ProtoUtil.printLog("setRemainingEntries");
+		location.notifySubsribers("factors");
 		remainingEntries--;
 	}
 

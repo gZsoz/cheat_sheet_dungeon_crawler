@@ -71,7 +71,25 @@ public class Room implements iTask {
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : subscribers)
-    		sub.propertyChanged(str);
+    		sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity"
+    }
+    
+    /**
+     * hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához
+     * ezzentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik
+     * @param sub
+     */
+    public void subscribe(Subscriber sub) {
+    	subscribers.add(sub);
+    }
+    
+    /**
+     * eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából
+     * ezzentúl nem kap értesítést, ha az osztály belső állapota megváltozik
+     * @param sub
+     */
+    public void unsubscribe(Subscriber sub) {
+    	subscribers.remove(sub);
     }
     
     /**
@@ -90,6 +108,7 @@ public class Room implements iTask {
     public void addCharacter(Character character) {
         ProtoUtil.printLog("addCharacter");
         characters.add(character);
+        notifySubsribers("characters");
     }
     
     /**
@@ -99,6 +118,7 @@ public class Room implements iTask {
     public void addItem(Item i) {
         ProtoUtil.printLog("addItem");
         items.add(i);
+        notifySubsribers("items");
     }
     
     /**
@@ -109,6 +129,7 @@ public class Room implements iTask {
         ProtoUtil.printLog("removeCharacter");
         if (!characters.remove(character))
             System.out.println("Olyan karakterre lett meghívva a removeCharacter, ami nincs a listában!!!");
+        notifySubsribers("characters");
     }
     
     /**
@@ -119,6 +140,7 @@ public class Room implements iTask {
         ProtoUtil.printLog("removeItem");
         if (!items.remove(i))
             System.out.println("Olyan Itemre lett meghívva a removeItem, ami nincs a listában!!!");
+        notifySubsribers("items");
     }
     
     /**
@@ -155,6 +177,7 @@ public class Room implements iTask {
         }
         if(temp!=null) envFactors.remove(temp);
         envFactors.add(ef);
+        notifySubsribers("factors");
     }
     
     /**
@@ -216,6 +239,7 @@ public class Room implements iTask {
     public void setCapacity(int capacity) {
         ProtoUtil.printLog("setCapacity");
         this.capacity=capacity;
+        notifySubsribers("capacity");
     }
 
     /**

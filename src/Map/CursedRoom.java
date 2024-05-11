@@ -47,7 +47,12 @@ public class CursedRoom extends Room{
     public void hideDoors() {
         ProtoUtil.printLog("hideDoors");
         removeAllDoors();
-        closeDuration=defaultCloseDuration;
+        setCloseDuration(defaultCloseDuration);
+    }
+    
+    private void setCloseDuration(int duration){
+    	closeDuration=duration;
+    	notifySubsribers("closeDuration");
     }
     
     /**
@@ -76,7 +81,7 @@ public class CursedRoom extends Room{
     public void reduceDuration() {
         if (closeDuration > 0) {
         	ProtoUtil.printLog("reduceDurationCursed");
-            closeDuration--;
+            setCloseDuration(closeDuration-1);
             if (closeDuration == 0) {
                 isOpen = true;
                 ProtoUtil.printLog("bringbackDoors");
