@@ -16,7 +16,7 @@ public class Main {
 
 
 
-        Timer timer = new Timer(1000, _ ->
+        Timer timer = new Timer(1000, a ->
                 System.out.println("update()")
         );
         //timer.start();
