@@ -10,8 +10,13 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+
 import Map.CursedRoom;
 import Map.Labyrinth;
+import View.Utils.GameFrame;
+import View.ViewMap.ViewLabyrinth;
 import Character.Character;
 import EnvironmentalFactor.Sticky;
 import Items.AirFreshener;
@@ -33,7 +38,7 @@ public class ProtoUtil {
     private static final String GREEN = "\033[0;32m";   // GREEN
 	
 	private static final String dirName = "test/";
-    private static PrintStream logOutput = System.out;
+    private static PrintStream logOutput = null;
     
     public static MyRandom random;
     
@@ -42,7 +47,8 @@ public class ProtoUtil {
      * @param question A kérdés
      */
     public static void printLog(String str) {
-    	logOutput.println(str);
+    	if(logOutput!=null)
+    		logOutput.println(str);
     }
     
     /**
@@ -200,13 +206,8 @@ public class ProtoUtil {
 		}
 		return result;
 	}
-    
-    /**
-     * A program belépési pontja.
-     * @param args A program argumentumai
-     * @throws FileNotFoundException Ha a naplófájl nem található
-     */
-    public static void main(String[] args) throws FileNotFoundException {
+	
+	private static void test(String[] args) {
     	Character.restTime=10;
     	Character.stunTime=4;
     	Sticky.defaultRemainingEntries=2;
@@ -216,7 +217,7 @@ public class ProtoUtil {
     	CabbageCamembert.defaultRemainingUses=1;
     	CursedRoom.defaultCloseDuration=5;
     	random=new MyRandom(true);
-    	if(args.length==1 && args[0].equals("test")) {
+    	if(args.length==2 && args[1].equals("all")) {
     		ArrayList<String> alltests=getTestNames();
         	boolean success=true;
         	for(String test : alltests) {
@@ -284,5 +285,30 @@ public class ProtoUtil {
             }
             System.out.println(); // Üres sor a jobb olvashatóság érdekében
         } while(!quit);
+	}
+    
+    /**
+     * A program belépési pontja.
+     * @param args A program argumentumai
+     * @throws FileNotFoundException Ha a naplófájl nem található
+     */
+    public static void main(String[] args) throws FileNotFoundException {
+    	if(args.length>0 && args[0].equals("test"))
+    		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
+    	else {
+            Labyrinth labyrinth = new Labyrinth();
+            labyrinth.generateRooms();
+            ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
+
+
+            SwingUtilities.invokeLater(new GameFrame(viewLabyrinth));
+
+
+
+            Timer timer = new Timer(1000, a ->
+                    System.out.println("update()")
+            );
+            //timer.start();
+    	}
     }
 }
