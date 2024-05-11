@@ -1,9 +1,6 @@
 package View.ViewMap;
 
-import Items.AirFreshener;
-import Items.BatSkin;
-import Items.Item;
-import Items.NumberOfUsesItem;
+import Items.*;
 import Map.Room;
 import View.Utils.*;
 import View.ViewCharacter.ViewCharacter;
@@ -18,6 +15,8 @@ import Character.Character;
 import Character.Student;
 import Character.Teacher;
 import Character.Cleaner;
+import View.ViewItem.ViewSlideRule;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -51,6 +50,8 @@ public class ViewRoom extends JComponent implements Subscriber {
 	 * A szobában megjelenítendő tárgyak.
 	 */
 	protected ArrayList<ViewItem> itemsInRoom = new ArrayList<>();
+
+	protected Coordinates[] fixedItemPositions;
 	
 	/**
 	 * A szobában megjelenítendő karakterek.
@@ -72,8 +73,20 @@ public class ViewRoom extends JComponent implements Subscriber {
 		coordinates = pos;
 		image = ImageReader.loadImage("res/images/test/testroom.png");
 		size = new Size(100 + r.getCapacity() * 68,220);
+		setFixedItemPositions();
 		initRoom();
 		// room.subscribe(this);
+	}
+
+	private void setFixedItemPositions() {
+		if(!room.getItems().isEmpty()){
+			fixedItemPositions = new Coordinates[room.getItems().size()];
+			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getItems().size() * 40 + 15)) / 2;
+			for(int i = 0; i<room.getItems().size(); i++){
+				startingXPos += 5;
+				fixedItemPositions[i] = new Coordinates(startingXPos + i * 40, coordinates.getY() + size.getHeight() * 7/9);
+			}
+		}
 	}
 
 	private void initRoom() {
@@ -91,6 +104,10 @@ public class ViewRoom extends JComponent implements Subscriber {
 			}
 			else if(item instanceof BatSkin){
 				//itemsInRoom.add(new ViewBatSkin((BatSkin) item));
+			}
+
+			else if(item instanceof SlideRule){
+				itemsInRoom.add(new ViewSlideRule((SlideRule) item, fixedItemPositions[i]));
 			}
 		}
 	}

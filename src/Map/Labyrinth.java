@@ -262,6 +262,10 @@ public class Labyrinth implements iTask{
 		Rooms.add(r9);
 		Rooms.add(r10);
 		Student s = new Student(r4);
+		SlideRule sr1 = new SlideRule();
+		r4.addItem(sr1);
+		r4.addItem(sr1);
+		r4.addItem(sr1);
 		r4.addCharacter(s);
     }
 

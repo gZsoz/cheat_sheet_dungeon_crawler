@@ -1,6 +1,9 @@
 package View.ViewItem;
 
-import Items.FakeSlideRule;
+import Items.SlideRule;
+import View.Utils.Coordinates;
+import View.Utils.ImageReader;
+import View.Utils.Size;
 
 import java.awt.*;
 
@@ -12,15 +15,22 @@ public class ViewSlideRule extends ViewNumberOfUsesItem {
 	/*
 	 * A modellbeli logarléc, amit reprezentál.
 	 */
-	private FakeSlideRule item;
+	private SlideRule item;
 	
 	/*
 	 * Kirajzoló függvény, megfelelő koordinátákra helyezi a tárgy képét.
 	 */
+
+	public ViewSlideRule(SlideRule sr, Coordinates pos){
+		item = sr;
+		image = ImageReader.loadImage("res/images/test/items/testitem.png");
+		coordinates = pos;
+		size = new Size(40,40);
+	}
 	@Override
 	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		Graphics2D g2D = (Graphics2D) g;
+		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
 	}
 	
 	@Override
