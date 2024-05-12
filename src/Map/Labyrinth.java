@@ -22,10 +22,10 @@ public class Labyrinth implements iTask{
 	/** A labirintus változásaira feliratkozott osztályok*/
 	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	
-	private List<Room> Rooms;
+	private List<Room> rooms;
 
 	public Labyrinth(){
-		Rooms=new ArrayList<Room>();
+		rooms=new ArrayList<Room>();
 	}
 	
     /**
@@ -57,7 +57,7 @@ public class Labyrinth implements iTask{
     }
 
 	public List<Room> getRooms(){
-		return Rooms;
+		return rooms;
 	}
 
     /**
@@ -66,7 +66,7 @@ public class Labyrinth implements iTask{
      */
 	public void addRoom(Room r) {
 		ProtoUtil.printLog("addRoom");
-		Rooms.add(r);
+		rooms.add(r);
     }
 
 	/**
@@ -75,7 +75,7 @@ public class Labyrinth implements iTask{
 	 */
 	public void removeRoom(Room r) {
 		ProtoUtil.printLog("removeRoom");
-		Rooms.remove(r);
+		rooms.remove(r);
 	}
 
     /**
@@ -91,7 +91,7 @@ public class Labyrinth implements iTask{
 		if(result.getCharacters().size()+merging.getCharacters().size()>bigger){
 			return;
 		}else{
-			notifySubsribers("merge "+Rooms.indexOf(result)+" "+Rooms.indexOf(merging));
+			notifySubsribers("merge "+rooms.indexOf(result)+" "+rooms.indexOf(merging));
 			result.setCapacity(bigger);
 			result.merge(merging);
 			this.removeRoom(merging);
@@ -135,7 +135,7 @@ public class Labyrinth implements iTask{
 			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.addEnvironmentalFactor(new Gas(n));
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
 		}
-		Rooms.add(Rooms.indexOf(old)+1, n);
+		rooms.add(rooms.indexOf(old)+1, n);
 		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
 		ProtoUtil.printLog("Neighbours of new room: "+n.getNeighbours().size());
 		ProtoUtil.printLog("Items of old room: "+old.getItems().size());
@@ -188,7 +188,7 @@ public class Labyrinth implements iTask{
 			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.addEnvironmentalFactor(new Gas(n));
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
 		}
-		Rooms.add(Rooms.indexOf(old)+1, n);
+		rooms.add(rooms.indexOf(old)+1, n);
 		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
 		ProtoUtil.printLog("Neighbours of new room: "+n.getNeighbours().size());
 		ProtoUtil.printLog("Items of old room: "+old.getItems().size());
@@ -197,18 +197,16 @@ public class Labyrinth implements iTask{
 		ProtoUtil.printLog("Characters of new room: "+n.getCharacters().size());
 		ProtoUtil.printLog("EnvironmentalFactors of old room: "+old.getEnvironmentalFactors().size());
 		ProtoUtil.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
-		notifySubsribers("split "+Rooms.indexOf(old));
+		notifySubsribers("split "+rooms.indexOf(old));
     }
 
 	
 	/**
 	 * Véletlenszerűen kiválaszt egy tárgyat a megadott típusok közül.
-	 * 
 	 * @return A véletlenszerűen kiválasztott tárgy.
 	 */
 	private Item itemPicker(){
-		int rand=new Random().nextInt(11);
-		switch(rand){
+		switch(ProtoUtil.random.nextInt(11, -1)){
 		case 1:
 			return new AirFreshener();
 		case 2:
@@ -241,46 +239,94 @@ public class Labyrinth implements iTask{
      */
 	public void generateRooms() {
 		ProtoUtil.printLog("generateRooms");
-		Room r1 = new Room(4);
-		Room r2 = new Room(4);
-		Room r3 = new Room(4);
-		Room r4 = new Room(4);
-		Room r5 = new Room(4);
-		Room r6 = new Room(4);
-		Room r7 = new Room(4);
-		Room r8 = new Room(4);
-		Room r9 = new Room(4);
-		Room r10 = new Room(4);
-		Rooms.add(r1);
-		Rooms.add(r2);
-		Rooms.add(r3);
-		Rooms.add(r4);
-		Rooms.add(r5);
-		Rooms.add(r6);
-		Rooms.add(r7);
-		Rooms.add(r8);
-		Rooms.add(r9);
-		Rooms.add(r10);
-		Student s = new Student(r4);
-		SlideRule sr1 = new SlideRule();
-		r4.addItem(sr1);
-		r4.addItem(sr1);
-		r4.addItem(sr1);
-		r4.addCharacter(s);
+		
+		// szobák legenerálása
+		Room r1 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r2 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r3 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r4 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r5 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r6 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r7 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r8 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r9 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r10 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		rooms.add(r1);
+		rooms.add(r2);
+		rooms.add(r3);
+		rooms.add(r4);
+		rooms.add(r5);
+		rooms.add(r6);
+		rooms.add(r7);
+		rooms.add(r8);
+		rooms.add(r9);
+		rooms.add(r10);
+		
+		// szomszédos szobák beállítása
+		
+		
+		// tárgyak legenerálása
+		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(9, -1));
+		roomWithSlideRule.addItem(new SlideRule()); // logarléc betétele egy random szobába
+		
+		int numberOfItemsInRoomWithSlideRule = ProtoUtil.random.nextInt(4, -1);
+		for(int i = 0; i < numberOfItemsInRoomWithSlideRule; i++) { // random mennyiségű tárgy legenerálása a logarléces szobába
+			roomWithSlideRule.spawnItem();
+		}
+		
+		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a többi szobába
+			int numberOfItems = ProtoUtil.random.nextInt(5, -1);
+			for(int i = 0; i < numberOfItems; i++) {
+				r.spawnItem();
+			}
+		}
+		
+		// diákok legenerálása
+		List<Room> roomsWithStudents = new ArrayList<Room>();
+		
+		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(9, -1));
+		roomOfFirstStudent.addCharacter(new Student(roomOfFirstStudent)); // első diák betétele egy random szobába
+		roomsWithStudents.add(roomOfFirstStudent);
+		
+		Room roomOfSecondStudent = null;
+		while(roomOfSecondStudent == null) {
+			int roomidx = ProtoUtil.random.nextInt(9, -1);
+			if(!(rooms.get(roomidx).equals(roomOfFirstStudent) && roomOfFirstStudent.getCapacity() == 1)) {
+				roomOfSecondStudent = rooms.get(roomidx);
+			}
+		}
+		roomOfSecondStudent.addCharacter(new Student(roomOfSecondStudent)); // második diák betétele egy random szabad helyre
+		roomsWithStudents.add(roomOfSecondStudent);
+		
+		List<Room> roomsWithoutStudents = new ArrayList<Room>(rooms);
+		roomsWithoutStudents.removeAll(roomsWithStudents);
+		
+		// tanár legenerálása
+		Room roomOfTeacher = roomsWithoutStudents.get(ProtoUtil.random.nextInt(roomsWithoutStudents.size() - 1, -1));
+		roomOfTeacher.addCharacter(new Teacher(roomOfTeacher)); // tanár betétele egy diákmentes szobába
+		
+		// takarító legenerálása
+		Room roomOfCleaner = null;
+		while(roomOfCleaner == null) {
+			int roomidx = ProtoUtil.random.nextInt(9, -1);
+			if(rooms.get(roomidx).getCapacity() != rooms.get(roomidx).currentNumOfPlayers()) {
+				roomOfCleaner = rooms.get(roomidx);
+			}
+		}
+		roomOfCleaner.addCharacter(new Cleaner(roomOfCleaner)); // takarító betétele egy random szabad helyre
     }
 
 	@Override
 	public void update() {
-		// A random események végrehajtása pl.: merge, split
+		// a random események végrehajtása
 		Random rand=new Random();
 		if(ProtoUtil.random.nextInt(1000, -1)==0)
-			mergeRoom(Rooms.get(rand.nextInt(Rooms.size())),Rooms.get(rand.nextInt(Rooms.size())));
+			mergeRoom(rooms.get(rand.nextInt(rooms.size())), rooms.get(rand.nextInt(rooms.size()))); // merge
 		if(ProtoUtil.random.nextInt(1000, -1)==0)
-			splitRoom(Rooms.get(rand.nextInt(Rooms.size())));
-		for(Room r : Rooms){
-			// Random item generálása
+			splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
+		for(Room r : rooms){
 			if(ProtoUtil.random.nextInt(1000, -1)==0)
-				r.addItem(itemPicker());
+				r.spawnItem(); // item legenerálása
 			r.update();
 		}
 	}

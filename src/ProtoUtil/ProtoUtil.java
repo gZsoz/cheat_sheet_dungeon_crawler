@@ -216,7 +216,6 @@ public class ProtoUtil {
     	DecayingItems.defaultDuration=6;
     	CabbageCamembert.defaultRemainingUses=1;
     	CursedRoom.defaultCloseDuration=5;
-    	random=new MyRandom(true);
     	if(args.length==2 && args[1].equals("all")) {
     		ArrayList<String> alltests=getTestNames();
         	boolean success=true;
@@ -293,18 +292,19 @@ public class ProtoUtil {
      * @throws FileNotFoundException Ha a naplófájl nem található
      */
     public static void main(String[] args) throws FileNotFoundException {
-    	if(args.length>0 && args[0].equals("test"))
+    	if(args.length>0 && args[0].equals("test")) {
+    		random = new MyRandom(true);
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
+    	}
     	else {
+    		random = new MyRandom();
+    		
             Labyrinth labyrinth = new Labyrinth();
             labyrinth.generateRooms();
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
 
-
             SwingUtilities.invokeLater(new GameFrame(viewLabyrinth));
-
-
-
+            
             Timer timer = new Timer(1000, a ->
                     System.out.println("update()")
             );

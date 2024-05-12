@@ -25,7 +25,7 @@ public class ViewAirFreshener extends ViewNumberOfUsesItem {
 		size= new Size(64,64);
 		coordinates = coor;
 		selected= SelectionColor.Empty;
-		}
+	}
 
 	/**
 	 * Kirajzoló függvény, megfelelő koordinátákra helyezi a tárgy képét.

@@ -100,7 +100,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 		for(int i = 0; i < room.getItems().size(); i++){
 			Item item = room.getItems().get(i);
 			if(item instanceof AirFreshener){
-				itemsInRoom.add(new ViewAirFreshener((AirFreshener) item));
+				itemsInRoom.add(new ViewAirFreshener((AirFreshener) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
 			}
 			else if(item instanceof BatSkin){
 				//itemsInRoom.add(new ViewBatSkin((BatSkin) item));
