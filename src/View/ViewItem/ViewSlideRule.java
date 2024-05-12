@@ -1,8 +1,10 @@
 package View.ViewItem;
 
+import Items.AirFreshener;
 import Items.SlideRule;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
+import View.Utils.SelectionColor;
 import View.Utils.Size;
 
 import java.awt.*;
@@ -17,6 +19,14 @@ public class ViewSlideRule extends ViewNumberOfUsesItem {
 	 */
 	private SlideRule item;
 	
+	public ViewSlideRule(SlideRule sr, String path,Coordinates coor) {
+		item = sr;
+		ImageReader ir=new ImageReader();
+		image=ir.loadImage(path);
+		size= new Size(64,64);
+		coordinates = coor;
+		selected= SelectionColor.Empty;
+		}
 	/*
 	 * Kirajzoló függvény, megfelelő koordinátákra helyezi a tárgy képét.
 	 */
