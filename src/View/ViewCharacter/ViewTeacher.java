@@ -2,11 +2,10 @@ package View.ViewCharacter;
 
 import Character.Teacher;
 import View.Utils.Coordinates;
+import View.Utils.ImageReader;
 import View.Utils.Size;
 
 import java.awt.*;
-
-import javax.imageio.ImageReader;
 
 /**
  * A tanár kirajzolásáért felelős osztály.

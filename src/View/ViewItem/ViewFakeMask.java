@@ -20,6 +20,7 @@ public class ViewFakeMask extends ViewMask {
 	private FakeMask item;
 	
 	public ViewFakeMask(FakeMask fm, String path,Coordinates coor) {
+		super(fm, path, coor);
 		item = fm;
 		ImageReader ir=new ImageReader();
 		image=ir.loadImage(path);

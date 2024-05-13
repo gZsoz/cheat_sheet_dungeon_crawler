@@ -46,7 +46,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 
 	protected Coordinates[] fixedItemPositions;
 
-	protected Coordinates[] fixedCharacterPositions;
+	protected Coordinates[] fixedCharacterPositions = {new Coordinates(1,2), new Coordinates(1,2), new Coordinates(1,2), new Coordinates(1,2)};
 	
 	/**
 	 * A szobában megjelenítendő karakterek.
@@ -151,7 +151,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 	private void createViewEnvFactors() {
 		charactersInRoom.clear();
 		// View Környezeti tényezők létrehozása
-		for(int i = 0; i < room.getCharacters().size(); i++){
+		for(int i = 0; i < room.getEnvironmentalFactors().size(); i++){
 			EnvironmentalFactors factor = room.getEnvironmentalFactors().get(i);
 			if(factor instanceof Gas){
 				environmentalFactorsInRoom.add(new ViewGas((Gas) factor, coordinates));
