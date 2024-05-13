@@ -137,7 +137,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 		for(int i = 0; i < room.getCharacters().size(); i++){
 			Character character = room.getCharacters().get(i);
 			if(character instanceof Student){
-				charactersInRoom.add(new ViewStudent((Student) character, coordinates));
+				charactersInRoom.add(new ViewStudent((Student) character, fixedCharacterPositions[i]));
 			}
 			else if(character instanceof Teacher){
 				charactersInRoom.add(new ViewTeacher((Teacher) character, fixedCharacterPositions[i]));

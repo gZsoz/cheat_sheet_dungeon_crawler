@@ -258,7 +258,7 @@ public class Labyrinth implements iTask{
 		rooms.add(r7);
 		rooms.add(r8);
 		rooms.add(r9);
-		//rooms.add(r10);
+		rooms.add(r10);
 		
 		// szomszédos szobák beállítása
 
