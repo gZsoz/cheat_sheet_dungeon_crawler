@@ -46,7 +46,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 
 	protected Coordinates[] fixedItemPositions;
 
-	protected Coordinates[] fixedCharacterPositions = {new Coordinates(1,2), new Coordinates(1,2), new Coordinates(1,2), new Coordinates(1,2)};
+	protected Coordinates[] fixedCharacterPositions = {new Coordinates(1,2), new Coordinates(1,2), new Coordinates(1,2)};
 	
 	/**
 	 * A szobában megjelenítendő karakterek.
@@ -72,7 +72,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 		initRoom();
 		// room.subscribe(this);
 	}
-
+	
 	private void setFixedItemPositions() {
 		if(!room.getItems().isEmpty()){
 			fixedItemPositions = new Coordinates[room.getItems().size()];
@@ -96,37 +96,37 @@ public class ViewRoom extends JComponent implements Subscriber {
 		for(int i = 0; i < room.getItems().size(); i++){
 			Item item = room.getItems().get(i);
 			if(item instanceof AirFreshener){
-				itemsInRoom.add(new ViewAirFreshener((AirFreshener) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewAirFreshener((AirFreshener) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof BatSkin){
-				itemsInRoom.add(new ViewBatSkin((BatSkin) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewBatSkin((BatSkin) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof Beer){
-				itemsInRoom.add(new ViewBeer((Beer) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewBeer((Beer) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof CabbageCamembert){
-				itemsInRoom.add(new ViewCabbageCamembert((CabbageCamembert) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewCabbageCamembert((CabbageCamembert) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof FakeBatSkin){
-				itemsInRoom.add(new ViewFakeBatSkin((FakeBatSkin) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewFakeBatSkin((FakeBatSkin) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof FakeMask){
-				itemsInRoom.add(new ViewFakeMask((FakeMask) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewFakeMask((FakeMask) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof FakeSlideRule){
-				itemsInRoom.add(new ViewFakeSlideRule((FakeSlideRule) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewFakeSlideRule((FakeSlideRule) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof Mask){
-				itemsInRoom.add(new ViewMask((Mask) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewMask((Mask) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof SlideRule){
-				itemsInRoom.add(new ViewSlideRule((SlideRule) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewSlideRule((SlideRule) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof Transistor){
-				itemsInRoom.add(new ViewTransistor((Transistor) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewTransistor((Transistor) item, fixedItemPositions[i]));
 			}
 			else if(item instanceof WetCloth){
-				itemsInRoom.add(new ViewWetCloth((WetCloth) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+				itemsInRoom.add(new ViewWetCloth((WetCloth) item, fixedItemPositions[i]));
 			}
 		}
 	}
@@ -137,7 +137,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 		for(int i = 0; i < room.getCharacters().size(); i++){
 			Character character = room.getCharacters().get(i);
 			if(character instanceof Student){
-				charactersInRoom.add(new ViewStudent((Student) character, fixedCharacterPositions[i]));
+				charactersInRoom.add(new ViewStudent((Student) character, coordinates));
 			}
 			else if(character instanceof Teacher){
 				charactersInRoom.add(new ViewTeacher((Teacher) character, fixedCharacterPositions[i]));

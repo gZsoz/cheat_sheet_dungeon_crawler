@@ -19,14 +19,11 @@ public class ViewBeer extends ViewDecayingItem {
 	 */
 	private Beer item;
 	
-	public ViewBeer(Beer beer, String path,Coordinates coor) {
+	public ViewBeer(Beer beer, Coordinates coor) {
+		super("testitem.png", coor);
 		item = beer;
-		ImageReader ir=new ImageReader();
-		image=ir.loadImage(path);
-		size= new Size(64,64);
-		coordinates = coor;
-		selected= SelectionColor.Empty;
-		}
+		item.subscribe(this);
+	}
 	/**
 	 * Sör kirajzolása a megadott koordinátákra.
 	 */

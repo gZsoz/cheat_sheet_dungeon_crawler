@@ -18,14 +18,12 @@ public class ViewWetCloth extends ViewDecayingItem {
      * A modellbeli nedves törlőrongy, amit reprezentál.
      */
     private WetCloth item;
-    public ViewWetCloth(WetCloth wc, String path,Coordinates coor) {
+    
+    public ViewWetCloth(WetCloth wc, Coordinates coor) {
+		super("testitem.png", coor);
 		item = wc;
-		ImageReader ir=new ImageReader();
-		image=ir.loadImage(path);
-		size= new Size(64,64);
-		coordinates = coor;
-		selected= SelectionColor.Empty;
-		}
+		item.subscribe(this);
+	}
 
     /**
 	 * Nedves törlőrongy kirajzolása a megadott koordinátákra.

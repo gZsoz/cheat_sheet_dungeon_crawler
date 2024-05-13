@@ -19,24 +19,15 @@ public class ViewSlideRule extends ViewNumberOfUsesItem {
 	 */
 	private SlideRule item;
 	
-	public ViewSlideRule(SlideRule sr, String path,Coordinates coor) {
+	public ViewSlideRule(SlideRule sr, Coordinates coor) {
+		super("testitem.png", coor);
 		item = sr;
-		ImageReader ir=new ImageReader();
-		image=ir.loadImage(path);
-		size= new Size(64,64);
-		coordinates = coor;
-		selected= SelectionColor.Empty;
-		}
+		item.subscribe(this);
+	}
+	
 	/*
 	 * Kirajzoló függvény, megfelelő koordinátákra helyezi a tárgy képét.
 	 */
-
-	public ViewSlideRule(SlideRule sr, Coordinates pos){
-		item = sr;
-		image = ImageReader.loadImage("res/images/test/items/testitem.png");
-		coordinates = pos;
-		size = new Size(40,40);
-	}
 	@Override
 	public void paint(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;

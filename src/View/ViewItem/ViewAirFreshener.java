@@ -18,13 +18,10 @@ public class ViewAirFreshener extends ViewNumberOfUsesItem {
 	 */
 	private AirFreshener item;
 
-	public ViewAirFreshener(AirFreshener air, String path,Coordinates coor) {
+	public ViewAirFreshener(AirFreshener air, Coordinates coor) {
+		super("testitem.png", coor);
 		item = air;
-		ImageReader ir=new ImageReader();
-		image=ir.loadImage(path);
-		size= new Size(64,64);
-		coordinates = coor;
-		selected= SelectionColor.Empty;
+		item.subscribe(this);
 	}
 
 	/**

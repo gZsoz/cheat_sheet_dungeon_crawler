@@ -1,6 +1,5 @@
 package View.ViewItem;
 
-import Items.AirFreshener;
 import Items.Mask;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
@@ -17,16 +16,13 @@ public class ViewMask extends ViewDecayingItem {
 	/**
 	 * A modellbeli hamis maszk, amit reprezentál.
 	 */
-	private Mask item;
+	protected Mask item;
 	
-	public ViewMask(Mask m, String path,Coordinates coor) {
+	public ViewMask(Mask m, Coordinates coor) {
+		super("testitem.png", coor);
 		item = m;
-		ImageReader ir=new ImageReader();
-		image=ir.loadImage(path);
-		size= new Size(64,64);
-		coordinates = coor;
-		selected= SelectionColor.Empty;
-		}
+		item.subscribe(this);
+	}
 	
 	/**
 	 * Maszk kirajzolása a megadott koordinátákra.

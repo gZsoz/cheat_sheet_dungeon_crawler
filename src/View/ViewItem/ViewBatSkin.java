@@ -19,14 +19,11 @@ public class ViewBatSkin extends ViewNumberOfUsesItem {
 	 */
 	private BatSkin item;
 	
-	public ViewBatSkin(BatSkin bat, String path,Coordinates coor) {
+	public ViewBatSkin(BatSkin bat, Coordinates coor) {
+		super("testitem.png", coor);
 		item = bat;
-		ImageReader ir=new ImageReader();
-		image=ir.loadImage(path);
-		size= new Size(64,64);
-		coordinates = coor;
-		selected= SelectionColor.Empty;
-		}
+		item.subscribe(this);
+	}
 	
 	/**
 	 * Kirajzoló függvény, megfelelő koordinátákra helyezi a tárgy képét.

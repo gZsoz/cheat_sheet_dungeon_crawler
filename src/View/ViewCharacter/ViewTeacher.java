@@ -1,5 +1,6 @@
 package View.ViewCharacter;
 
+import Character.Student;
 import Character.Teacher;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
@@ -17,11 +18,11 @@ public class ViewTeacher extends ViewCharacter {
 	 */
 	private Teacher character;
 
-	public ViewTeacher(Teacher teach, Coordinates pos){
-		character = teach;
-		image = ImageReader.loadImage("res/images/test/testpic.png");
-		size = new Size(60,200);
-		coordinates = new Coordinates(pos.getX() + 15, pos.getY() - 20);
+	
+	public ViewTeacher(Teacher teacher, Coordinates pos){
+		super("testpic.png", pos);
+		character = teacher;
+		character.subscribe(this);
 	}
 
 	@Override

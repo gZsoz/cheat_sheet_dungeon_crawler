@@ -18,10 +18,9 @@ public class ViewCleaner extends ViewCharacter {
 	private Cleaner character;
 
 	public ViewCleaner(Cleaner clean, Coordinates pos){
+		super("testpic.png", pos);
 		character = clean;
-		image = ImageReader.loadImage("res/images/test/testpic.png");
-		size = new Size(60,200);
-		coordinates = new Coordinates(pos.getX() + 15, pos.getY() - 20);
+		character.subscribe(this);
 	}
 
 	@Override
