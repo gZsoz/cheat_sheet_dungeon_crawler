@@ -16,10 +16,10 @@ public class ViewStudent extends ViewCharacter {
 	/**
 	 * A modellbeli diák, amit reprezentál.
 	 */
-	private Student charachter;
+	private Student character;
 
 	public ViewStudent(Student stud, Coordinates pos){
-		charachter = stud;
+		character = stud;
 		image = ImageReader.loadImage("res/images/test/testpic.png");
 		size = new Size(60,200);
 		coordinates = new Coordinates(pos.getX() + 15, pos.getY() - 20);

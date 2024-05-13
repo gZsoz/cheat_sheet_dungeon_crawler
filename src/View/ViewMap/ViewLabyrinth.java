@@ -1,5 +1,6 @@
 package View.ViewMap;
 
+import Map.CursedRoom;
 import Map.Labyrinth;
 import Map.Room;
 import View.Utils.Coordinates;
@@ -63,8 +64,15 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	 * Kezdő map generálás view szinten
 	 */
 	private void initLab() {
+		roomsInLabyrinth.clear();
 		for(int i = 0; i < labyrinth.getRooms().size(); i++){
-			roomsInLabyrinth.add(new ViewRoom(labyrinth.getRooms().get(i), fixedRoomPositions[i]));
+			Room room = labyrinth.getRooms().get(i);
+			if(room instanceof CursedRoom){
+				roomsInLabyrinth.add(new ViewCursedRoom( (CursedRoom) room, fixedRoomPositions[i]));
+			}
+			else if(room instanceof Room){
+				roomsInLabyrinth.add(new ViewRoom( (Room) room, fixedRoomPositions[i]));
+			}
 		}
 	}
 

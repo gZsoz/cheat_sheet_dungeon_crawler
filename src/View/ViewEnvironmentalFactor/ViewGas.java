@@ -1,6 +1,7 @@
 package View.ViewEnvironmentalFactor;
 
 import EnvironmentalFactor.Gas;
+import View.Utils.Coordinates;
 
 import java.awt.*;
 
@@ -14,6 +15,11 @@ public class ViewGas extends ViewEnvironmentalFactors {
 	 */
 	private Gas gas;
 	
+	public ViewGas(Gas g, Coordinates c){
+		gas=g;
+		coordinates=c;
+	}
+
 	/**
 	 * Gáz kirajzolása.
 	 */

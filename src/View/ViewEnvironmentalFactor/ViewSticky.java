@@ -1,6 +1,7 @@
 package View.ViewEnvironmentalFactor;
 
 import EnvironmentalFactor.Sticky;
+import View.Utils.Coordinates;
 
 import java.awt.*;
 
@@ -14,6 +15,11 @@ public class ViewSticky extends ViewEnvironmentalFactors {
 	 */
 	private Sticky sticky;
 	
+	public ViewSticky(Sticky s, Coordinates c){
+		sticky=s;
+		coordinates=c;
+	}
+
 	/**
 	 * Ragacs kirajzolása.
 	 */

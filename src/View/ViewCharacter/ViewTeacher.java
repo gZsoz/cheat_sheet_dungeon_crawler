@@ -1,8 +1,12 @@
 package View.ViewCharacter;
 
 import Character.Teacher;
+import View.Utils.Coordinates;
+import View.Utils.Size;
 
 import java.awt.*;
+
+import javax.imageio.ImageReader;
 
 /**
  * A tanár kirajzolásáért felelős osztály.
@@ -12,10 +16,13 @@ public class ViewTeacher extends ViewCharacter {
 	/**
 	 * A modellbeli tanár, amit reprezentál.
 	 */
-	private Teacher charachter;
+	private Teacher character;
 
-	public ViewTeacher(Teacher teach){
-		charachter = teach;
+	public ViewTeacher(Teacher teach, Coordinates pos){
+		character = teach;
+		image = ImageReader.loadImage("res/images/test/testpic.png");
+		size = new Size(60,200);
+		coordinates = new Coordinates(pos.getX() + 15, pos.getY() - 20);
 	}
 
 	@Override

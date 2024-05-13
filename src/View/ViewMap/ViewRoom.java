@@ -3,20 +3,13 @@ package View.ViewMap;
 import Items.*;
 import Map.Room;
 import View.Utils.*;
-import View.ViewCharacter.ViewCharacter;
-import View.ViewCharacter.ViewCleaner;
-import View.ViewCharacter.ViewStudent;
-import View.ViewCharacter.ViewTeacher;
-import View.ViewEnvironmentalFactor.ViewEnvironmentalFactors;
-import View.ViewItem.ViewAirFreshener;
-import View.ViewItem.ViewBatSkin;
-import View.ViewItem.ViewItem;
+import View.ViewCharacter.*;
+import View.ViewEnvironmentalFactor.*;
+import View.ViewItem.*;
+import Character.*;
 import Character.Character;
-import Character.Student;
-import Character.Teacher;
-import Character.Cleaner;
-import View.ViewItem.ViewSlideRule;
-
+import EnvironmentalFactor.*;
+import Character.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -52,6 +45,8 @@ public class ViewRoom extends JComponent implements Subscriber {
 	protected ArrayList<ViewItem> itemsInRoom = new ArrayList<>();
 
 	protected Coordinates[] fixedItemPositions;
+
+	protected Coordinates[] fixedCharacterPositions;
 	
 	/**
 	 * A szobában megjelenítendő karakterek.
@@ -92,6 +87,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 	private void initRoom() {
 		createViewCharacters();
 		createViewItems();
+		createViewEnvFactors();
 	}
 
 	private void createViewItems() {
@@ -103,11 +99,34 @@ public class ViewRoom extends JComponent implements Subscriber {
 				itemsInRoom.add(new ViewAirFreshener((AirFreshener) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
 			}
 			else if(item instanceof BatSkin){
-				//itemsInRoom.add(new ViewBatSkin((BatSkin) item));
+				itemsInRoom.add(new ViewBatSkin((BatSkin) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
 			}
-
+			else if(item instanceof Beer){
+				itemsInRoom.add(new ViewBeer((Beer) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+			}
+			else if(item instanceof CabbageCamembert){
+				itemsInRoom.add(new ViewCabbageCamembert((CabbageCamembert) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+			}
+			else if(item instanceof FakeBatSkin){
+				itemsInRoom.add(new ViewFakeBatSkin((FakeBatSkin) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+			}
+			else if(item instanceof FakeMask){
+				itemsInRoom.add(new ViewFakeMask((FakeMask) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+			}
+			else if(item instanceof FakeSlideRule){
+				itemsInRoom.add(new ViewFakeSlideRule((FakeSlideRule) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+			}
+			else if(item instanceof Mask){
+				itemsInRoom.add(new ViewMask((Mask) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+			}
 			else if(item instanceof SlideRule){
-				itemsInRoom.add(new ViewSlideRule((SlideRule) item, fixedItemPositions[i]));
+				itemsInRoom.add(new ViewSlideRule((SlideRule) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+			}
+			else if(item instanceof Transistor){
+				itemsInRoom.add(new ViewTransistor((Transistor) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
+			}
+			else if(item instanceof WetCloth){
+				itemsInRoom.add(new ViewWetCloth((WetCloth) item, "res/images/test/items/testitem.png", fixedItemPositions[i]));
 			}
 		}
 	}
@@ -118,13 +137,27 @@ public class ViewRoom extends JComponent implements Subscriber {
 		for(int i = 0; i < room.getCharacters().size(); i++){
 			Character character = room.getCharacters().get(i);
 			if(character instanceof Student){
-				charactersInRoom.add(new ViewStudent((Student) character, coordinates));
+				charactersInRoom.add(new ViewStudent((Student) character, fixedCharacterPositions[i]));
 			}
 			else if(character instanceof Teacher){
-				charactersInRoom.add(new ViewTeacher((Teacher) character));
+				charactersInRoom.add(new ViewTeacher((Teacher) character, fixedCharacterPositions[i]));
 			}
 			else if(character instanceof Cleaner){
-				charactersInRoom.add(new ViewCleaner((Cleaner) character));
+				charactersInRoom.add(new ViewCleaner((Cleaner) character, fixedCharacterPositions[i]));
+			}
+		}
+	}
+
+	private void createViewEnvFactors() {
+		charactersInRoom.clear();
+		// View Környezeti tényezők létrehozása
+		for(int i = 0; i < room.getCharacters().size(); i++){
+			EnvironmentalFactors factor = room.getEnvironmentalFactors().get(i);
+			if(factor instanceof Gas){
+				environmentalFactorsInRoom.add(new ViewGas((Gas) factor, coordinates));
+			}
+			else if(factor instanceof Sticky){
+				environmentalFactorsInRoom.add(new ViewSticky((Sticky) factor, coordinates));
 			}
 		}
 	}
