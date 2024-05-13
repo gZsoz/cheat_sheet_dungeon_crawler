@@ -206,28 +206,26 @@ public class Labyrinth implements iTask{
 	 * @return A véletlenszerűen kiválasztott tárgy.
 	 */
 	private Item itemPicker(){
-		switch(ProtoUtil.random.nextInt(11, -1)){
-		case 1:
+		switch(ProtoUtil.random.nextInt(10, 2)){
+		case 0:
 			return new AirFreshener();
-		case 2:
+		case 1:
 			return new BatSkin();
-		case 3:
+		case 2:
 			return new Beer();
-		case 4:
+		case 3:
 			return new CabbageCamembert();
-		case 5:
+		case 4:
 			return new FakeBatSkin();
-		case 6:
+		case 5:
 			return new FakeMask();
-		case 7:
+		case 6:
 			return new FakeSlideRule();
-		case 8:
+		case 7:
 			return new Mask();
-		case 9:
-			return new SlideRule();
-		case 10:
+		case 8:
 			return new Transistor();
-		case 11:
+		case 9:
 			return new WetCloth();
 		default:
 			return null;
@@ -241,16 +239,16 @@ public class Labyrinth implements iTask{
 		ProtoUtil.printLog("generateRooms");
 		
 		// szobák legenerálása
-		Room r1 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
-		Room r2 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
-		Room r3 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
-		Room r4 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
-		Room r5 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
-		Room r6 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
-		Room r7 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
-		Room r8 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
-		Room r9 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
-		Room r10 = new Room(ProtoUtil.random.nextInt(3, -1) + 1);
+		Room r1 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r2 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r3 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r4 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r5 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r6 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r7 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r8 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r9 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r10 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
 		rooms.add(r1);
 		rooms.add(r2);
 		rooms.add(r3);
@@ -260,37 +258,36 @@ public class Labyrinth implements iTask{
 		rooms.add(r7);
 		rooms.add(r8);
 		rooms.add(r9);
-		rooms.add(r10);
+		//rooms.add(r10);
 		
 		// szomszédos szobák beállítása
-		
+
 		
 		// tárgyak legenerálása
-		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(9, -1));
+		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(9, 0));
 		roomWithSlideRule.addItem(new SlideRule()); // logarléc betétele egy random szobába
 		
-		int numberOfItemsInRoomWithSlideRule = ProtoUtil.random.nextInt(4, -1);
+		/*int numberOfItemsInRoomWithSlideRule = ProtoUtil.random.nextInt(4, 2);
 		for(int i = 0; i < numberOfItemsInRoomWithSlideRule; i++) { // random mennyiségű tárgy legenerálása a logarléces szobába
-			roomWithSlideRule.spawnItem();
-		}
-		
+			roomWithSlideRule.spawnItem(itemPicker());
+		}*/
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a többi szobába
-			int numberOfItems = ProtoUtil.random.nextInt(5, -1);
+			int numberOfItems = ProtoUtil.random.nextInt(5, 4);
 			for(int i = 0; i < numberOfItems; i++) {
-				r.spawnItem();
+				r.spawnItem(itemPicker());
 			}
 		}
 		
 		// diákok legenerálása
 		List<Room> roomsWithStudents = new ArrayList<Room>();
 		
-		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(9, -1));
+		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(9, 2));
 		roomOfFirstStudent.addCharacter(new Student(roomOfFirstStudent)); // első diák betétele egy random szobába
 		roomsWithStudents.add(roomOfFirstStudent);
 		
 		Room roomOfSecondStudent = null;
 		while(roomOfSecondStudent == null) {
-			int roomidx = ProtoUtil.random.nextInt(9, -1);
+			int roomidx = ProtoUtil.random.nextInt(9, 3);
 			if(!(rooms.get(roomidx).equals(roomOfFirstStudent) && roomOfFirstStudent.getCapacity() == 1)) {
 				roomOfSecondStudent = rooms.get(roomidx);
 			}
@@ -302,13 +299,13 @@ public class Labyrinth implements iTask{
 		roomsWithoutStudents.removeAll(roomsWithStudents);
 		
 		// tanár legenerálása
-		Room roomOfTeacher = roomsWithoutStudents.get(ProtoUtil.random.nextInt(roomsWithoutStudents.size() - 1, -1));
+		Room roomOfTeacher = roomsWithoutStudents.get(ProtoUtil.random.nextInt(roomsWithoutStudents.size() - 1, 2));
 		roomOfTeacher.addCharacter(new Teacher(roomOfTeacher)); // tanár betétele egy diákmentes szobába
 		
 		// takarító legenerálása
 		Room roomOfCleaner = null;
 		while(roomOfCleaner == null) {
-			int roomidx = ProtoUtil.random.nextInt(9, -1);
+			int roomidx = ProtoUtil.random.nextInt(9, 3);
 			if(rooms.get(roomidx).getCapacity() != rooms.get(roomidx).currentNumOfPlayers()) {
 				roomOfCleaner = rooms.get(roomidx);
 			}
@@ -326,7 +323,7 @@ public class Labyrinth implements iTask{
 			splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
 		for(Room r : rooms){
 			if(ProtoUtil.random.nextInt(1000, -1)==0)
-				r.spawnItem(); // item legenerálása
+				r.spawnItem(itemPicker()); // item legenerálása
 			r.update();
 		}
 	}

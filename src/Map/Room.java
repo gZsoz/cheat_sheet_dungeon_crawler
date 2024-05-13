@@ -102,26 +102,6 @@ public class Room implements iTask {
 	}
 	
 	/**
-	 * Lerak egy random módon meghatározott tárgyat a szobába. Logarlécet nem rakhat le.
-	 */
-	public void spawnItem() {
-	    ProtoUtil.printLog("spawnItem");new MyRandom();
-	    switch(ProtoUtil.random.nextInt(9, -1)) {
-    	case 0: addItem(new AirFreshener());
-    	case 1: addItem(new BatSkin());
-    	case 2: addItem(new Beer());
-    	case 3: addItem(new CabbageCamembert());
-    	case 4: addItem(new FakeBatSkin());
-    	case 5: addItem(new FakeMask());
-    	case 6: addItem(new FakeSlideRule());
-    	case 7: addItem(new Mask());
-    	case 8: addItem(new Transistor());
-    	case 9: addItem(new WetCloth());
-    	default:
-	    }
-	}
-	
-	/**
 	 * Hozzáadja a paraméterként kapott karaktert a szobához.
 	 * @param c A hozzáadandó karakter
 	 */
@@ -246,6 +226,15 @@ public class Room implements iTask {
 	    ProtoUtil.printLog("getNeighbours");
 	    return neighbours;
 	}
+	
+    /**
+     * Lerakja a paraméterként kapott tárgyat a szobába.
+     * @param a A lerakandó tárgy
+     */
+    public void spawnItem(Item a) {
+        ProtoUtil.printLog("spawnItem");
+        addItem(a);
+    }
 	
 	/**
 	 * Visszaadja, a szoba kapcitását.

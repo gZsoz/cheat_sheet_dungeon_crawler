@@ -297,7 +297,7 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom();
+    		random = new MyRandom(true);
     		
             Labyrinth labyrinth = new Labyrinth();
             labyrinth.generateRooms();

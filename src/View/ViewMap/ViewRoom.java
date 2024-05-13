@@ -149,7 +149,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 	}
 
 	private void createViewEnvFactors() {
-		charactersInRoom.clear();
+		environmentalFactorsInRoom.clear();
 		// View Környezeti tényezők létrehozása
 		for(int i = 0; i < room.getEnvironmentalFactors().size(); i++){
 			EnvironmentalFactors factor = room.getEnvironmentalFactors().get(i);
