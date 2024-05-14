@@ -23,15 +23,20 @@ public class GameFrame extends JFrame {
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
-		viewLabyrinth.paint(g);
+		//viewLabyrinth.paint(g);
+		//viewLabyrinth.paintComponent(g);
+
 	}
 
 	public GameFrame(ViewLabyrinth vl){
 		super("cheat_sheet");
+		
+		
 		this.setResizable(false);
 		this.setPreferredSize(new Dimension(1820,980));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(Color.black);
+		
 		this.pack();
 		this.setLocationRelativeTo(null);
 		viewLabyrinth = vl;

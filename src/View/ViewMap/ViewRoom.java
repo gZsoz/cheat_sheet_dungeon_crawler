@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * A szoba grafikus osztálya.
  */
-public class ViewRoom extends JComponent implements Subscriber {
+public class ViewRoom extends JPanel implements Subscriber {
 	
 	/**
 	 * A modellbeli szoba, amit reprezentál.
@@ -37,12 +37,12 @@ public class ViewRoom extends JComponent implements Subscriber {
 	/**
 	 * A képernyőn megjelenítendő x és y koordináták.
 	 */
-	protected Coordinates coordinates;
+	public Coordinates coordinates;
 	
 	/**
 	 * A szobában megjelenítendő tárgyak.
 	 */
-	protected ArrayList<ViewItem> itemsInRoom = new ArrayList<>();
+	public ArrayList<ViewItem> itemsInRoom = new ArrayList<>();
 
 	protected Coordinates[] fixedItemPositions;
 
@@ -70,6 +70,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 		size = new Size(100 + r.getCapacity() * 68,220);
 		setFixedItemPositions();
 		initRoom();
+		this.setBackground(null);
 		// room.subscribe(this);
 	}
 	
@@ -167,6 +168,11 @@ public class ViewRoom extends JComponent implements Subscriber {
 	    // TODO document why this method is empty
 	}
 	
+	public void addview() {
+		for(ViewItem r:itemsInRoom)
+			add(r);
+	}
+	
 	/**
 	 * A szoba és benne lévő tárgyak, környezeti változók és karakterek kirajzolása.
 	 */
@@ -176,14 +182,21 @@ public class ViewRoom extends JComponent implements Subscriber {
 		Graphics2D g2D = (Graphics2D) g;
 		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
 
-		for(ViewEnvironmentalFactors venvfact : environmentalFactorsInRoom){
-			venvfact.paint(g);
-		}
+		
+		//for(ViewEnvironmentalFactors venvfact : environmentalFactorsInRoom){
+		//	venvfact.paint(g);
+		//}
 		for(ViewItem vitem : itemsInRoom){
 			vitem.paint(g);
 		}
-		for(ViewCharacter vcharacter : charactersInRoom){
-			vcharacter.paint(g);
-		}
+		//for(ViewCharacter vcharacter : charactersInRoom){
+		//	vcharacter.paint(g);
+		//}
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+	    
 	}
 }

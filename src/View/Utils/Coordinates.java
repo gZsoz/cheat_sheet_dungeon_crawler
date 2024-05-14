@@ -16,7 +16,7 @@ public class Coordinates {
 	/**
 	 * X koordináta a képernyőn.
 	 */
-	private int x;
+	public int x;
 	
 	/**
 	 * Y koordináta a képernyőn.

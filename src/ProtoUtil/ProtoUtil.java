@@ -24,6 +24,7 @@ import Items.BatSkin;
 import Items.CabbageCamembert;
 import Items.DecayingItems;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileInputStream;
@@ -298,23 +299,42 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom(false);
+    		random = new MyRandom(true);
     		
             Labyrinth labyrinth = new Labyrinth();
             labyrinth.generateRooms();
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
-
-        	EventQueue.invokeLater(new Runnable() {
+            //viewLabyrinth.setBackground(Color.BLACK);
+            viewLabyrinth.addview();
+            EventQueue.invokeLater(new Runnable() {
                 public void run() {
 		        	GameFrame mf=new GameFrame(viewLabyrinth);
+		        	mf.add(viewLabyrinth);
 		        	mf.setVisible(true);
                 }
         	});
+        	
+        	
+        	/*for(int i=0; i<100; i++) {
+        		viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=10;
+        		viewLabyrinth.repaint();
+        		try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}*/
             
-            Timer timer = new Timer(1000, a ->
-                    System.out.println("update()")
+            Timer timer = new Timer(8, a ->{
+                    //System.out.println("update()");
+                    viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=1;
+                    viewLabyrinth.roomsInLabyrinth.get(2).coordinates.x-=1;
+                    viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
+            		viewLabyrinth.repaint();
+            }
             );
-            //timer.start();
+            timer.start();
     	}
     }
 }

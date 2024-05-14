@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * A labirintus grafikus osztálya.
  */
-public class ViewLabyrinth extends JComponent implements Subscriber {
+public class ViewLabyrinth extends JPanel implements Subscriber {
 	
 	/**
 	 * A modellbeli, reprezentálandó labirintus.
@@ -39,7 +39,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	/**
 	 * A labirintusban megjelenítendő szobák.
 	 */
-	private ArrayList<ViewRoom> roomsInLabyrinth = new ArrayList<>();
+	public ArrayList<ViewRoom> roomsInLabyrinth = new ArrayList<>();
 
 	/**
 	 * Az összes lehetséges szoba pozíciója
@@ -57,6 +57,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	public ViewLabyrinth(Labyrinth lab){
 		labyrinth = lab;
 		initLab();
+		this.setBackground(null);
 		// lab.subscribe(this);
 	}
 
@@ -81,12 +82,28 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	    // TODO document why this method is empty
 	}
 	
+	public void addview() {
+		for(ViewRoom r:roomsInLabyrinth) {
+			r.addview();
+			add(r);
+			
+		}
+	}
+	
 	/**
 	 * A labirintus háttere és a szobák közti utak kirajzolása.
 	 */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+	    //for(ViewRoom vroom : roomsInLabyrinth){
+		//	vroom.paint(g);
+		//}
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 	    for(ViewRoom vroom : roomsInLabyrinth){
 			vroom.paint(g);
 		}

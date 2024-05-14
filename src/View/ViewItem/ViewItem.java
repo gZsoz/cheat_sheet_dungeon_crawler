@@ -33,7 +33,7 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	/**
 	 * A képernyőn megjelenítendő x és y koordináták.
 	 */
-	protected Coordinates coordinates;
+	public Coordinates coordinates;
 	
 	/**
 	 * Kijelölt-e az adott tárgy (letevésnél, felvevésnél vagy használatnál) és ha igen, milyen színnel.
