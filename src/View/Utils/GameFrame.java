@@ -17,7 +17,7 @@ import java.util.Objects;
  * Ősosztálya: javax.swing.JFrame
  */
 @SuppressWarnings("serial")
-public class GameFrame extends JFrame implements Runnable {
+public class GameFrame extends JFrame {
 	private ViewLabyrinth viewLabyrinth;
 
 	@Override
@@ -27,18 +27,13 @@ public class GameFrame extends JFrame implements Runnable {
 	}
 
 	public GameFrame(ViewLabyrinth vl){
-		super();
-		viewLabyrinth = vl;
-	}
-
-	@Override
-	public void run() {
+		super("cheat_sheet");
 		this.setResizable(false);
 		this.setPreferredSize(new Dimension(1820,980));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(Color.black);
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-    }
+		viewLabyrinth = vl;
+	}
 }

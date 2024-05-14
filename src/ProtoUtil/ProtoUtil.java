@@ -24,6 +24,7 @@ import Items.BatSkin;
 import Items.CabbageCamembert;
 import Items.DecayingItems;
 
+import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -303,7 +304,12 @@ public class ProtoUtil {
             labyrinth.generateRooms();
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
 
-            SwingUtilities.invokeLater(new GameFrame(viewLabyrinth));
+        	EventQueue.invokeLater(new Runnable() {
+                public void run() {
+		        	GameFrame mf=new GameFrame(viewLabyrinth);
+		        	mf.setVisible(true);
+                }
+        	});
             
             Timer timer = new Timer(1000, a ->
                     System.out.println("update()")
