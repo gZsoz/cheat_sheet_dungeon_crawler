@@ -1,5 +1,6 @@
 package View.Utils;
 
+import View.Controller.PlayerController;
 import View.ViewCharacter.ViewStudent;
 import View.ViewMap.ViewLabyrinth;
 
@@ -18,27 +19,28 @@ import java.util.Objects;
  */
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
-	private ViewLabyrinth viewLabyrinth;
 
-	@Override
-	public void paint(Graphics g){
-		super.paint(g);
-		//viewLabyrinth.paint(g);
-		//viewLabyrinth.paintComponent(g);
+	public JPanel container;
 
-	}
-
-	public GameFrame(ViewLabyrinth vl){
+	public GameFrame(ViewLabyrinth vl, PlayerController red, PlayerController blue){
 		super("cheat_sheet");
-		
-		
+
 		this.setResizable(false);
 		this.setPreferredSize(new Dimension(1820,980));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.getContentPane().setBackground(Color.black);
-		
+
+		container =  new JPanel();
+		container.setBackground(Color.black);
+		LayoutManager overlay = new OverlayLayout(container);
+		container.setLayout(overlay);
+		container.add(red);
+		container.add(blue);
+		container.add(vl);
+
+
+		this.add(container, BorderLayout.CENTER);
+
 		this.pack();
 		this.setLocationRelativeTo(null);
-		viewLabyrinth = vl;
 	}
 }

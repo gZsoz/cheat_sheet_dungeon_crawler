@@ -15,7 +15,9 @@ import javax.swing.Timer;
 
 import Map.CursedRoom;
 import Map.Labyrinth;
+import View.Controller.PlayerController;
 import View.Utils.GameFrame;
+import View.Utils.SelectionColor;
 import View.ViewMap.ViewLabyrinth;
 import Character.Character;
 import EnvironmentalFactor.Sticky;
@@ -304,34 +306,24 @@ public class ProtoUtil {
             Labyrinth labyrinth = new Labyrinth();
             labyrinth.generateRooms();
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
+			PlayerController red = new PlayerController(SelectionColor.Red);
+			PlayerController blue = new PlayerController(SelectionColor.Blue);
+			GameFrame mf = new GameFrame(viewLabyrinth,red,blue);
+
             //viewLabyrinth.setBackground(Color.BLACK);
             viewLabyrinth.addview();
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
-		        	GameFrame mf=new GameFrame(viewLabyrinth);
-		        	mf.add(viewLabyrinth);
 		        	mf.setVisible(true);
                 }
         	});
-        	
-        	
-        	/*for(int i=0; i<100; i++) {
-        		viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=10;
-        		viewLabyrinth.repaint();
-        		try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        	}*/
             
             Timer timer = new Timer(8, a ->{
                     //System.out.println("update()");
-                    viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=1;
-                    viewLabyrinth.roomsInLabyrinth.get(2).coordinates.x-=1;
-                    viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
-            		viewLabyrinth.repaint();
+                    //viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=1;
+                    //viewLabyrinth.roomsInLabyrinth.get(2).coordinates.x-=1;
+                    //viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
+					mf.container.repaint();
             }
             );
             timer.start();

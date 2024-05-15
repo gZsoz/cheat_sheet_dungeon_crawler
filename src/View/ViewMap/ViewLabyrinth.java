@@ -4,6 +4,7 @@ import Map.CursedRoom;
 import Map.Labyrinth;
 import Map.Room;
 import View.Utils.Coordinates;
+import View.Utils.ImageReader;
 import View.Utils.Size;
 import View.Utils.Subscriber;
 
@@ -44,9 +45,9 @@ public class ViewLabyrinth extends JPanel implements Subscriber {
 	/**
 	 * Az összes lehetséges szoba pozíciója
 	 */
-	private Coordinates[] fixedRoomPositions = {new Coordinates(40,70), new Coordinates(486,50), new Coordinates(932,50), new Coordinates(1378,70),
-														new Coordinates(220,340), new Coordinates(720,300), new Coordinates(1220,340),
-													new Coordinates(300,620), new Coordinates(720,556), new Coordinates(1140,620)
+	private Coordinates[] fixedRoomPositions = {new Coordinates(71,50), new Coordinates(542,30), new Coordinates(964,30), new Coordinates(1410,50),
+														new Coordinates(252,300), new Coordinates(752,300), new Coordinates(1252,300),
+													new Coordinates(332,590), new Coordinates(752,556), new Coordinates(1172,590)
 	};
 
 	/**
@@ -86,26 +87,35 @@ public class ViewLabyrinth extends JPanel implements Subscriber {
 		for(ViewRoom r:roomsInLabyrinth) {
 			r.addview();
 			add(r);
-			
 		}
 	}
 	
 	/**
 	 * A labirintus háttere és a szobák közti utak kirajzolása.
 	 */
+	/*
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 	    //for(ViewRoom vroom : roomsInLabyrinth){
 		//	vroom.paint(g);
 		//}
-	}
-	
+	}*/
+
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 	    for(ViewRoom vroom : roomsInLabyrinth){
 			vroom.paint(g);
 		}
+
+		Graphics2D g2D = (Graphics2D)g;
+		// Mode textbox
+		g2D.setColor(Color.white.darker());
+		g2D.drawImage(ImageReader.loadImage("res/images/test/testroom.png"),1820/2 - 240, 800, 480, 200,null);
+		g2D.fillRect(1820/2 - 200,
+				815,
+				400,112);
 	}
 }

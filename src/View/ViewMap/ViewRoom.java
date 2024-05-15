@@ -193,10 +193,4 @@ public class ViewRoom extends JPanel implements Subscriber {
 		//	vcharacter.paint(g);
 		//}
 	}
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-	    
-	}
 }
