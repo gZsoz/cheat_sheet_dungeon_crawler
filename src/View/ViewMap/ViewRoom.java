@@ -88,9 +88,9 @@ public class ViewRoom extends JPanel implements Subscriber {
 	private void setFixedCharacterPositions() {
 		if(!room.getCharacters().isEmpty()){
 			fixedCharacterPositions = new Coordinates[room.getCharacters().size()];
-			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getCharacters().size() * 100 + 15)) / 2;
+			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getCharacters().size() * 80 + 50)) / 2;
 			for(int i = 0; i<room.getCharacters().size(); i++){
-				startingXPos += 5;
+				startingXPos += 25;
 				fixedCharacterPositions[i] = new Coordinates(startingXPos + i * 80, coordinates.getY());
 			}
 		}

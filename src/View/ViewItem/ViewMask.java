@@ -15,7 +15,7 @@ public class ViewMask extends ViewDecayingItem {
 	protected Mask item;
 	
 	public ViewMask(Mask m, Coordinates coor) {
-		super("testitem.png", coor);
+		super("mask.png", coor);
 		item = m;
 		item.subscribe(this);
 	}

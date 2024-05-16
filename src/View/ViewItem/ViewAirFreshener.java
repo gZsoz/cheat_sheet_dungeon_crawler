@@ -15,7 +15,7 @@ public class ViewAirFreshener extends ViewNumberOfUsesItem {
 	private AirFreshener item;
 
 	public ViewAirFreshener(AirFreshener air, Coordinates coor) {
-		super("testitem.png", coor);
+		super("airfreshener.png", coor);
 		item = air;
 		item.subscribe(this);
 	}
