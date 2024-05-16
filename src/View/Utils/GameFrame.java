@@ -20,7 +20,7 @@ import java.util.Objects;
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
 
-	public JPanel container;
+	public static JPanel container;
 
 	public GameFrame(ViewLabyrinth vl, PlayerController red, PlayerController blue){
 		super("cheat_sheet");

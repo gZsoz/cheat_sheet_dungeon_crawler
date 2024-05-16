@@ -1,17 +1,6 @@
 package Map;
 
-import Items.AirFreshener;
-import Items.BatSkin;
-import Items.Beer;
-import Items.CabbageCamembert;
-import Items.FakeBatSkin;
-import Items.FakeMask;
-import Items.FakeSlideRule;
 import Items.Item;
-import Items.Mask;
-import Items.Transistor;
-import Items.WetCloth;
-import ProtoUtil.MyRandom;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
 import View.Utils.Subscriber;

@@ -2,9 +2,6 @@ package View.ViewCharacter;
 
 import Character.Cleaner;
 import View.Utils.Coordinates;
-import View.Utils.ImageReader;
-import View.Utils.Size;
-
 import java.awt.*;
 
 /**

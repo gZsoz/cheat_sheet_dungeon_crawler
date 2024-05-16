@@ -8,8 +8,6 @@ import View.ViewItem.ViewItem;
 
 import javax.swing.*;
 
-import Character.Cleaner;
-
 import java.awt.*;
 import java.util.ArrayList;
 

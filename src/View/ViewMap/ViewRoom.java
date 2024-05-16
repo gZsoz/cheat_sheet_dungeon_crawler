@@ -9,7 +9,6 @@ import View.ViewItem.*;
 import Character.*;
 import Character.Character;
 import EnvironmentalFactor.*;
-import Character.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

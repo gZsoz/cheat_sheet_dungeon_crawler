@@ -1,12 +1,7 @@
 package View.ViewItem;
 
-import Items.AirFreshener;
 import Items.BatSkin;
 import View.Utils.Coordinates;
-import View.Utils.ImageReader;
-import View.Utils.SelectionColor;
-import View.Utils.Size;
-
 import java.awt.*;
 
 /**

@@ -4,11 +4,7 @@ import Character.Student;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
 import View.Utils.SelectionColor;
-import View.Utils.Size;
-
 import java.awt.*;
-import java.io.Console;
-import java.util.Locale;
 
 /**
  * A diák kirajzolásáért felelős osztály.

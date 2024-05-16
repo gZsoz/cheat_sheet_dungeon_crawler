@@ -10,7 +10,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import Map.CursedRoom;
@@ -26,7 +25,6 @@ import Items.BatSkin;
 import Items.CabbageCamembert;
 import Items.DecayingItems;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileInputStream;
