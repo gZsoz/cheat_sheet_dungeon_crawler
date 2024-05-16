@@ -14,7 +14,7 @@ import java.awt.*;
 public abstract class ViewItem extends JComponent implements Subscriber {
 	
 	public ViewItem(String src_img,Coordinates coor) {
-		image=ImageReader.loadImage(ImageReader.path+"items/"+src_img);
+		image=ImageReader.loadImage(ImageReader.path+"Items/"+src_img);
 		size= new Size(40, 40);
 		coordinates = coor;
 		selected= SelectionColor.Empty;

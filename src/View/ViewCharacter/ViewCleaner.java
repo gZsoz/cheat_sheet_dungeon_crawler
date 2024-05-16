@@ -18,7 +18,7 @@ public class ViewCleaner extends ViewCharacter {
 	private Cleaner character;
 
 	public ViewCleaner(Cleaner clean, Coordinates pos){
-		super("testpic.png", pos);
+		super("cleaner.png", pos);
 		character = clean;
 		character.subscribe(this);
 	}
@@ -31,7 +31,10 @@ public class ViewCleaner extends ViewCharacter {
 
 	@Override
 	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
+		super.paint(g);
+		Graphics2D g2D = (Graphics2D) g;
+		// példa
+		g2D.drawImage(image, coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
 
 	}
 

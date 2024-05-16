@@ -1,6 +1,5 @@
 package View.Controller;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Character.Student;
@@ -68,6 +67,11 @@ public class PlayerController extends JComponent {
     public PlayerController(SelectionColor color){
         inventoryBackgroundImage = ImageReader.loadImage("res/images/test/testroom.png");
         this.color = color;
+    }
+
+    public void setPlayerView(ViewStudent pv){
+        playerView = pv;
+        playerView.setImage(color);
     }
 
     /**

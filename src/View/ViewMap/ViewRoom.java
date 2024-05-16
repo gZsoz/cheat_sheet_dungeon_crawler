@@ -46,7 +46,7 @@ public class ViewRoom extends JPanel implements Subscriber {
 
 	protected Coordinates[] fixedItemPositions;
 
-	protected Coordinates[] fixedCharacterPositions = {new Coordinates(1,2), new Coordinates(1,2), new Coordinates(1,2)};
+	protected Coordinates[] fixedCharacterPositions;
 	
 	/**
 	 * A szobában megjelenítendő karakterek.
@@ -69,6 +69,7 @@ public class ViewRoom extends JPanel implements Subscriber {
 		image = ImageReader.loadImage("res/images/test/testroom.png");
 		size = new Size(100 + r.getCapacity() * 68,220);
 		setFixedItemPositions();
+		setFixedCharacterPositions();
 		initRoom();
 		this.setBackground(null);
 		// room.subscribe(this);
@@ -81,6 +82,17 @@ public class ViewRoom extends JPanel implements Subscriber {
 			for(int i = 0; i<room.getItems().size(); i++){
 				startingXPos += 5;
 				fixedItemPositions[i] = new Coordinates(startingXPos + i * 40, coordinates.getY() + size.getHeight() * 7/9);
+			}
+		}
+	}
+
+	private void setFixedCharacterPositions() {
+		if(!room.getCharacters().isEmpty()){
+			fixedCharacterPositions = new Coordinates[room.getCharacters().size()];
+			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getCharacters().size() * 100 + 15)) / 2;
+			for(int i = 0; i<room.getCharacters().size(); i++){
+				startingXPos += 5;
+				fixedCharacterPositions[i] = new Coordinates(startingXPos + i * 80, coordinates.getY());
 			}
 		}
 	}
@@ -189,8 +201,8 @@ public class ViewRoom extends JPanel implements Subscriber {
 		for(ViewItem vitem : itemsInRoom){
 			vitem.paint(g);
 		}
-		//for(ViewCharacter vcharacter : charactersInRoom){
-		//	vcharacter.paint(g);
-		//}
+		for(ViewCharacter vcharacter : charactersInRoom){
+			vcharacter.paint(g);
+		}
 	}
 }

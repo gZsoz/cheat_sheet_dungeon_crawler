@@ -19,9 +19,9 @@ import java.util.ArrayList;
 public abstract class ViewCharacter extends JComponent implements Subscriber {
 	
 	public ViewCharacter(String src_img, Coordinates pos){
-		image = ImageReader.loadImage(ImageReader.path+src_img);
-		size = new Size(60,200);
-		coordinates = new Coordinates(pos.getX() + 15, pos.getY() - 20);
+		image = ImageReader.loadImage(ImageReader.path+"/Characters/"+src_img);
+		size = new Size(60,150);
+		coordinates = new Coordinates(pos.getX(), pos.getY() + 10);
 	}
 	
 	/**
