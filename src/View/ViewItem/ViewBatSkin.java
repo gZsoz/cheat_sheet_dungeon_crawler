@@ -20,7 +20,7 @@ public class ViewBatSkin extends ViewNumberOfUsesItem {
 	private BatSkin item;
 	
 	public ViewBatSkin(BatSkin bat, Coordinates coor) {
-		super("testitem.png", coor);
+		super("batskin.png", coor);
 		item = bat;
 		item.subscribe(this);
 	}

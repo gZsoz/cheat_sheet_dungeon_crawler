@@ -20,7 +20,7 @@ public class ViewCabbageCamembert extends ViewNumberOfUsesItem {
 	private CabbageCamembert item;
 	
 	public ViewCabbageCamembert(CabbageCamembert cc, Coordinates coor) {
-		super("testitem.png", coor);
+		super("camambert.png", coor);
 		item = cc;
 		item.subscribe(this);
 	}

@@ -20,7 +20,7 @@ public class ViewBeer extends ViewDecayingItem {
 	private Beer item;
 	
 	public ViewBeer(Beer beer, Coordinates coor) {
-		super("testitem.png", coor);
+		super("beer.png", coor);
 		item = beer;
 		item.subscribe(this);
 	}

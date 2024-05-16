@@ -20,7 +20,7 @@ public class ViewSlideRule extends ViewNumberOfUsesItem {
 	private SlideRule item;
 	
 	public ViewSlideRule(SlideRule sr, Coordinates coor) {
-		super("testitem.png", coor);
+		super("sliderule.png", coor);
 		item = sr;
 		item.subscribe(this);
 	}

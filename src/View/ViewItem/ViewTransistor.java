@@ -16,7 +16,7 @@ public class ViewTransistor extends ViewItem {
 	private Transistor item;
 	
 	public ViewTransistor(Transistor tr, Coordinates coor) {
-		super("testitem.png", coor);
+		super("transistor_on.png", coor);
 		item = tr;
 		item.subscribe(this);
 	}

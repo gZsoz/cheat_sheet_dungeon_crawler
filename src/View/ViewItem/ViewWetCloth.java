@@ -20,7 +20,7 @@ public class ViewWetCloth extends ViewDecayingItem {
     private WetCloth item;
     
     public ViewWetCloth(WetCloth wc, Coordinates coor) {
-		super("testitem.png", coor);
+		super("wetcloth.png", coor);
 		item = wc;
 		item.subscribe(this);
 	}
