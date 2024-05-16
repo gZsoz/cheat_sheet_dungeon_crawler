@@ -48,7 +48,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	 */
 	private Coordinates[] fixedRoomPositions = {new Coordinates(71,50), new Coordinates(542,30), new Coordinates(964,30), new Coordinates(1410,50),
 														new Coordinates(252,300), new Coordinates(752,300), new Coordinates(1252,300),
-													new Coordinates(332,590), new Coordinates(752,556), new Coordinates(1172,590)
+													new Coordinates(322,560), new Coordinates(742,556), new Coordinates(1132,560)
 	};
 
 	/**
@@ -118,5 +118,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 		g2D.fillRect(1820/2 - 200,
 				815,
 				400,112);
+		g2D.setColor(Color.black);
+		g2D.drawString("Valami",1820/2 - 200,815);
 	}
 }

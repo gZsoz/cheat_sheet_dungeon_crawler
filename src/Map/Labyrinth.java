@@ -241,16 +241,16 @@ public class Labyrinth implements iTask{
 		ProtoUtil.printLog("generateRooms");
 		
 		// szobák legenerálása
-		Room r1 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
-		Room r2 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
-		Room r3 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
-		Room r4 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
-		Room r5 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
-		Room r6 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
-		Room r7 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
-		Room r8 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
-		Room r9 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
-		Room r10 = new Room(ProtoUtil.random.nextInt(3, 2) + 1);
+		Room r1 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r2 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r3 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r4 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r5 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r6 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r7 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r8 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r9 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r10 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		rooms.add(r1);
 		rooms.add(r2);
 		rooms.add(r3);

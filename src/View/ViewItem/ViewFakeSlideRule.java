@@ -20,7 +20,7 @@ public class ViewFakeSlideRule extends ViewNumberOfUsesItem {
 	private FakeSlideRule item;
 	
 	public ViewFakeSlideRule(FakeSlideRule fsr, Coordinates coor) {
-		super("testitem.png", coor);
+		super("sliderule.png", coor);
 		item = fsr;
 		item.subscribe(this);
 	}

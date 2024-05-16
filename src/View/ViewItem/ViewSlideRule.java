@@ -27,6 +27,7 @@ public class ViewSlideRule extends ViewNumberOfUsesItem {
 	public void paint(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
 		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
+
 	}
 	
 	@Override

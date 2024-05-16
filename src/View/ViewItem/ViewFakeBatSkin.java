@@ -15,7 +15,7 @@ public class ViewFakeBatSkin extends ViewNumberOfUsesItem {
 	private FakeBatSkin item;
 	
 	public ViewFakeBatSkin(FakeBatSkin fbs, Coordinates coor) {
-		super("testitem.png", coor);
+		super("batskin.png", coor);
 		item = fbs;
 		item.subscribe(this);
 	}

@@ -67,7 +67,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 		room = r;
 		coordinates = pos;
 		image = ImageReader.loadImage("res/images/test/testroom.png");
-		size = new Size(100 + r.getCapacity() * 68,220);
+		size = new Size(r.getCapacity() * 90,220);
 		setFixedItemPositions();
 		setFixedCharacterPositions();
 		initRoom();
@@ -79,10 +79,11 @@ public class ViewRoom extends JComponent implements Subscriber {
 	private void setFixedItemPositions() {
 		if(!room.getItems().isEmpty()){
 			fixedItemPositions = new Coordinates[room.getItems().size()];
-			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getItems().size() * 40 + 15)) / 2;
+			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getItems().size() * 50 )) / 2;
 			for(int i = 0; i<room.getItems().size(); i++){
 				startingXPos += 5;
 				fixedItemPositions[i] = new Coordinates(startingXPos + i * 40, coordinates.getY() + size.getHeight() * 7/9);
+				startingXPos += 5;
 			}
 		}
 	}
@@ -90,10 +91,11 @@ public class ViewRoom extends JComponent implements Subscriber {
 	private void setFixedCharacterPositions() {
 		if(!room.getCharacters().isEmpty()){
 			fixedCharacterPositions = new Coordinates[room.getCharacters().size()];
-			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getCharacters().size() * 80 + 50)) / 2;
+			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getCharacters().size() * 84)) / 2;
 			for(int i = 0; i<room.getCharacters().size(); i++){
-				startingXPos += 25;
+				startingXPos += 10;
 				fixedCharacterPositions[i] = new Coordinates(startingXPos + i * 80, coordinates.getY()+10);
+
 			}
 		}
 	}

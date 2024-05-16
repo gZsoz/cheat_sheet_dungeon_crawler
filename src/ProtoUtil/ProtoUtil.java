@@ -39,7 +39,7 @@ public class ProtoUtil {
 	private static final String RESET = "\033[0m";  // Text Reset
     private static final String RED = "\033[0;31m";     // RED
     private static final String GREEN = "\033[0;32m";   // GREEN
-	public static boolean aa=true;
+	public static int aa=0;
 	private static final String dirName = "test/";
     private static PrintStream logOutput = null;
     
@@ -300,7 +300,7 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom(true);
+    		random = new MyRandom(false);
     		Student reds=new Student();
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);
@@ -318,18 +318,16 @@ public class ProtoUtil {
 		        	mf.setVisible(true);
                 }
         	});
-            Timer timer = new Timer(300, a ->{
+            Timer timer = new Timer(1000, a ->{
                     //System.out.println("update()");
                     //viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=1;
                     //viewLabyrinth.roomsInLabyrinth.get(2).coordinates.x-=1;
                     //viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
 					mf.container.repaint();
-					if(aa)
-					reds.enterRoom(labyrinth.getRooms().get(2));
-					else
-					reds.enterRoom(labyrinth.getRooms().get(3));
-					aa=!aa;
-					labyrinth.update();
+					reds.enterRoom(labyrinth.getRooms().get(aa++%10));
+
+
+					//labyrinth.update();
 					//labyrinth.update();
             }
             );
