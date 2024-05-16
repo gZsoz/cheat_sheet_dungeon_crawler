@@ -1,6 +1,7 @@
 package View.ViewCharacter;
 
 import Character.Teacher;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import java.awt.*;
 
@@ -19,6 +20,7 @@ public class ViewTeacher extends ViewCharacter {
 		super("teacher.png", pos);
 		character = teacher;
 		character.subscribe(this);
+		Controller.characters.put(character, this);
 	}
 
 	@Override

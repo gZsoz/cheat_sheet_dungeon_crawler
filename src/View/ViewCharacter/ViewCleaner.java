@@ -1,6 +1,7 @@
 package View.ViewCharacter;
 
 import Character.Cleaner;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class ViewCleaner extends ViewCharacter {
 		super("cleaner.png", pos);
 		character = clean;
 		character.subscribe(this);
+		Controller.characters.put(character, this);
 	}
 
 	@Override

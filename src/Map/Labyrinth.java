@@ -234,8 +234,10 @@ public class Labyrinth implements iTask{
 
     /**
      * A szobák generálása a labirintusban.
+     * @param blues 
+     * @param reds 
      */
-	public void generateRooms() {
+	public void generateRooms(Student reds, Student blues) {
 		ProtoUtil.printLog("generateRooms");
 		
 		// szobák legenerálása
@@ -277,12 +279,12 @@ public class Labyrinth implements iTask{
 				r.spawnItem(itemPicker());
 			}
 		}
-		
 		// diákok legenerálása
 		List<Room> roomsWithStudents = new ArrayList<Room>();
 		
 		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(9, 2));
-		roomOfFirstStudent.addCharacter(new Student(roomOfFirstStudent)); // első diák betétele egy random szobába
+		roomOfFirstStudent.addCharacter(reds); // első diák betétele egy random szobába
+		reds.setRoom(roomOfFirstStudent);
 		roomsWithStudents.add(roomOfFirstStudent);
 		
 		Room roomOfSecondStudent = null;
@@ -292,7 +294,8 @@ public class Labyrinth implements iTask{
 				roomOfSecondStudent = rooms.get(roomidx);
 			}
 		}
-		roomOfSecondStudent.addCharacter(new Student(roomOfSecondStudent)); // második diák betétele egy random szabad helyre
+		roomOfSecondStudent.addCharacter(blues); // második diák betétele egy random szabad helyre
+		blues.setRoom(roomOfSecondStudent);
 		roomsWithStudents.add(roomOfSecondStudent);
 		
 		List<Room> roomsWithoutStudents = new ArrayList<Room>(rooms);

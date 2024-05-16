@@ -1,6 +1,7 @@
 package View.ViewCharacter;
 
 import Character.Student;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
 import View.Utils.SelectionColor;
@@ -21,6 +22,7 @@ public class ViewStudent extends ViewCharacter {
 
 		character = stud;
 		character.subscribe(this);
+		Controller.characters.put(character, this);
 	}
 
 	public void setImage(SelectionColor color){

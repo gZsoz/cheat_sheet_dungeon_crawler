@@ -1,7 +1,9 @@
 package View.Controller;
 
 import Map.Labyrinth;
+import Map.Room;
 import View.ViewItem.ViewItem;
+import View.ViewMap.ViewRoom;
 
 import java.util.HashMap;
 
@@ -31,6 +33,7 @@ public class Controller {
 
     public static HashMap<Item, ViewItem> items= new HashMap<Item, ViewItem>();
     public static HashMap<Character, ViewCharacter> characters = new HashMap<Character, ViewCharacter>();
+    public static HashMap<Room, ViewRoom> rooms= new HashMap<>();
     
     /**
      * Meghívja a vezérelt játékosok action függvényét és a labyrinth update() függvényét.

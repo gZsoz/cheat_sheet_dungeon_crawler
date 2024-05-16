@@ -19,6 +19,7 @@ import View.Utils.GameFrame;
 import View.Utils.SelectionColor;
 import View.ViewMap.ViewLabyrinth;
 import Character.Character;
+import Character.Student;
 import EnvironmentalFactor.Sticky;
 import Items.AirFreshener;
 import Items.BatSkin;
@@ -38,7 +39,7 @@ public class ProtoUtil {
 	private static final String RESET = "\033[0m";  // Text Reset
     private static final String RED = "\033[0;31m";     // RED
     private static final String GREEN = "\033[0;32m";   // GREEN
-	
+	public static boolean aa=true;
 	private static final String dirName = "test/";
     private static PrintStream logOutput = null;
     
@@ -300,12 +301,14 @@ public class ProtoUtil {
     	}
     	else {
     		random = new MyRandom(true);
-    		
+    		Student reds=new Student();
+    		Student blues=new Student();
+    		PlayerController red = new PlayerController(SelectionColor.Red, reds);
+			PlayerController blue = new PlayerController(SelectionColor.Blue, blues);
             Labyrinth labyrinth = new Labyrinth();
-            labyrinth.generateRooms();
+            labyrinth.generateRooms(reds, blues);
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
-			PlayerController red = new PlayerController(SelectionColor.Red);
-			PlayerController blue = new PlayerController(SelectionColor.Blue);
+			
 			GameFrame mf = new GameFrame(viewLabyrinth,red,blue);
 
             //viewLabyrinth.setBackground(Color.BLACK);
@@ -315,13 +318,19 @@ public class ProtoUtil {
 		        	mf.setVisible(true);
                 }
         	});
-            
-            Timer timer = new Timer(8, a ->{
+            Timer timer = new Timer(300, a ->{
                     //System.out.println("update()");
                     //viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=1;
                     //viewLabyrinth.roomsInLabyrinth.get(2).coordinates.x-=1;
                     //viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
 					mf.container.repaint();
+					if(aa)
+					reds.enterRoom(labyrinth.getRooms().get(2));
+					else
+					reds.enterRoom(labyrinth.getRooms().get(3));
+					aa=!aa;
+					labyrinth.update();
+					//labyrinth.update();
             }
             );
             timer.start();

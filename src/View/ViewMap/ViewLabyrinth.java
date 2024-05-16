@@ -4,6 +4,7 @@ import Map.CursedRoom;
 import Map.Labyrinth;
 import Map.Room;
 import View.Utils.Coordinates;
+import View.Utils.GameFrame;
 import View.Utils.ImageReader;
 import View.Utils.Size;
 import View.Utils.Subscriber;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 /**
  * A labirintus grafikus osztálya.
  */
-public class ViewLabyrinth extends JPanel implements Subscriber {
+public class ViewLabyrinth extends JComponent implements Subscriber {
 	
 	/**
 	 * A modellbeli, reprezentálandó labirintus.
@@ -86,7 +87,7 @@ public class ViewLabyrinth extends JPanel implements Subscriber {
 	public void addview() {
 		for(ViewRoom r:roomsInLabyrinth) {
 			r.addview();
-			add(r);
+			GameFrame.container.add(r);
 		}
 	}
 	
@@ -106,9 +107,9 @@ public class ViewLabyrinth extends JPanel implements Subscriber {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-	    for(ViewRoom vroom : roomsInLabyrinth){
-			vroom.paint(g);
-		}
+	    //for(ViewRoom vroom : roomsInLabyrinth){
+		//	vroom.paint(g);
+		//}
 
 		Graphics2D g2D = (Graphics2D)g;
 		// Mode textbox

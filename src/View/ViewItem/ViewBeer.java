@@ -1,6 +1,7 @@
 package View.ViewItem;
 
 import Items.Beer;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class ViewBeer extends ViewDecayingItem {
 		super("beer.png", coor);
 		item = beer;
 		item.subscribe(this);
+		Controller.items.put(item, this);
 	}
 	/**
 	 * Sör kirajzolása a megadott koordinátákra.

@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import Character.Student;
 import View.Utils.Coordinates;
+import View.Utils.GameFrame;
 import View.Utils.ImageReader;
 import View.Utils.SelectionColor;
 import View.ViewCharacter.ViewStudent;
@@ -64,9 +65,12 @@ public class PlayerController extends JComponent {
      */
     private int selectedSlot;
 
-    public PlayerController(SelectionColor color){
+    public PlayerController(SelectionColor color, Student stud){
         inventoryBackgroundImage = ImageReader.loadImage("res/images/test/testroom.png");
         this.color = color;
+        player=stud;
+        playerView=new ViewStudent(player, new Coordinates(0,0));
+        playerView.setImage(color);
     }
 
     public void setPlayerView(ViewStudent pv){
@@ -134,4 +138,9 @@ public class PlayerController extends JComponent {
         }
 
     }
+
+	public ViewStudent getViewStudent() {
+		// TODO Auto-generated method stub
+		return playerView;
+	}
 }

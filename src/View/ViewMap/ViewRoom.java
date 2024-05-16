@@ -2,6 +2,7 @@ package View.ViewMap;
 
 import Items.*;
 import Map.Room;
+import View.Controller.Controller;
 import View.Utils.*;
 import View.ViewCharacter.*;
 import View.ViewEnvironmentalFactor.*;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 /**
  * A szoba grafikus osztálya.
  */
-public class ViewRoom extends JPanel implements Subscriber {
+public class ViewRoom extends JComponent implements Subscriber {
 	
 	/**
 	 * A modellbeli szoba, amit reprezentál.
@@ -71,7 +72,8 @@ public class ViewRoom extends JPanel implements Subscriber {
 		setFixedCharacterPositions();
 		initRoom();
 		this.setBackground(null);
-		// room.subscribe(this);
+		Controller.rooms.put(r, this);
+		room.subscribe(this);
 	}
 	
 	private void setFixedItemPositions() {
@@ -91,7 +93,7 @@ public class ViewRoom extends JPanel implements Subscriber {
 			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getCharacters().size() * 80 + 50)) / 2;
 			for(int i = 0; i<room.getCharacters().size(); i++){
 				startingXPos += 25;
-				fixedCharacterPositions[i] = new Coordinates(startingXPos + i * 80, coordinates.getY());
+				fixedCharacterPositions[i] = new Coordinates(startingXPos + i * 80, coordinates.getY()+10);
 			}
 		}
 	}
@@ -143,13 +145,20 @@ public class ViewRoom extends JPanel implements Subscriber {
 		}
 	}
 
+	private void setCharacterPositions() {
+		for(int i=0;i<room.getCharacters().size();i++) {
+			Controller.characters.get(room.getCharacters().get(i)).setCoordinates(fixedCharacterPositions[i]);
+		}
+	}
+	
 	private void createViewCharacters() {
 		charactersInRoom.clear();
 		// View Karakterek létrehozása
 		for(int i = 0; i < room.getCharacters().size(); i++){
 			Character character = room.getCharacters().get(i);
 			if(character instanceof Student){
-				charactersInRoom.add(new ViewStudent((Student) character, fixedCharacterPositions[i]));
+				//charactersInRoom.add(new ViewStudent((Student) character, fixedCharacterPositions[i]));
+				Controller.characters.get(character).setCoordinates(fixedCharacterPositions[i]);
 			}
 			else if(character instanceof Teacher){
 				charactersInRoom.add(new ViewTeacher((Teacher) character, fixedCharacterPositions[i]));
@@ -176,12 +185,17 @@ public class ViewRoom extends JPanel implements Subscriber {
 
 	@Override
 	public void propertyChanged(String property) {
-	    // TODO document why this method is empty
+	    if(property.equals("characters")) {
+	    	setFixedCharacterPositions();
+	    	setCharacterPositions();
+	    }
 	}
 	
 	public void addview() {
 		for(ViewItem r:itemsInRoom)
-			add(r);
+			GameFrame.container.add(r);
+		for(ViewCharacter r:charactersInRoom)
+			GameFrame.container.add(r);
 	}
 	
 	/**
@@ -197,11 +211,11 @@ public class ViewRoom extends JPanel implements Subscriber {
 		//for(ViewEnvironmentalFactors venvfact : environmentalFactorsInRoom){
 		//	venvfact.paint(g);
 		//}
-		for(ViewItem vitem : itemsInRoom){
-			vitem.paint(g);
-		}
-		for(ViewCharacter vcharacter : charactersInRoom){
-			vcharacter.paint(g);
-		}
+		//for(ViewItem vitem : itemsInRoom){
+		//	vitem.paint(g);
+		//}
+		//for(ViewCharacter vcharacter : charactersInRoom){
+		//	vcharacter.paint(g);
+		//}
 	}
 }

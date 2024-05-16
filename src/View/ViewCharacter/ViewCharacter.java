@@ -19,7 +19,7 @@ public abstract class ViewCharacter extends JComponent implements Subscriber {
 	public ViewCharacter(String src_img, Coordinates pos){
 		image = ImageReader.loadImage(ImageReader.path+"/Characters/"+src_img);
 		size = new Size(60,150);
-		coordinates = new Coordinates(pos.getX(), pos.getY() + 10);
+		coordinates = new Coordinates(pos.getX(), pos.getY());
 	}
 	
 	/**
@@ -36,6 +36,10 @@ public abstract class ViewCharacter extends JComponent implements Subscriber {
 	 * A képernyőn megjelenítendő x és y koordináták.
 	 */
 	protected Coordinates coordinates;
+	
+	public void setCoordinates(Coordinates c) {
+		coordinates=c;
+	}
 	
 	/**
 	 * Az inventory-ban megjelenítendő tárgyak.

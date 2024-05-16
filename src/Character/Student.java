@@ -16,6 +16,11 @@ public class Student extends Character {
 	 */
 	 private boolean invincible;
 	 
+	 
+	 public Student() {this.inventory = new ArrayList<Item>();
+		this.stunned = 0;
+		this.hasDefense = false;
+		this.invincible = false;}
 	/**
 	 * Kostruktor.
 	 * @param currentRoom Melyik szobában van éppen a hallgató.

@@ -94,6 +94,10 @@ public abstract class Character implements iTask {
 		return currentRoom;
 	}
 	
+	public void setRoom(Room r) {
+		currentRoom=r;
+	}
+	
 	/**
 	 * Kábítás állapot lekérdezése.
 	 * @return A karakter kábultsági állapota.
