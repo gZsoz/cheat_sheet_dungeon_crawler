@@ -240,7 +240,7 @@ public class Labyrinth implements iTask{
 	public void generateRooms(Student reds, Student blues) {
 		ProtoUtil.printLog("generateRooms");
 		
-		// szobák legenerálása
+		// szobák legenerálása (2-4 fősek)
 		Room r1 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r2 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r3 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
@@ -265,31 +265,30 @@ public class Labyrinth implements iTask{
 		// szomszédos szobák beállítása
 
 		
-		// tárgyak legenerálása
-		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(9, 0));
+		// tárgyak legenerálása (0, 1, ..., karakterkapacitás+1 db minden szobába)
+		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(10, 0));
 		roomWithSlideRule.addItem(new SlideRule()); // logarléc betétele egy random szobába
 		
-		/*int numberOfItemsInRoomWithSlideRule = ProtoUtil.random.nextInt(4, 2);
-		for(int i = 0; i < numberOfItemsInRoomWithSlideRule; i++) { // random mennyiségű tárgy legenerálása a logarléces szobába
-			roomWithSlideRule.spawnItem(itemPicker());
-		}*/
-		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a többi szobába
-			int numberOfItems = ProtoUtil.random.nextInt(5, 4);
-			for(int i = 0; i < numberOfItems; i++) {
+		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN TÁRGYAT BE LEHET RAKNI*/
+		
+		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba
+			int numberOfSpawnedItems = ProtoUtil.random.nextInt(r.getCapacity() + 2 - r.currentNumOfItems(), 4);
+			for(int i = 0; i < numberOfSpawnedItems; i++) {
 				r.spawnItem(itemPicker());
 			}
 		}
+		
 		// diákok legenerálása
 		List<Room> roomsWithStudents = new ArrayList<Room>();
 		
-		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(9, 2));
+		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(10, 2));
 		roomOfFirstStudent.addCharacter(reds); // első diák betétele egy random szobába
 		reds.setRoom(roomOfFirstStudent);
 		roomsWithStudents.add(roomOfFirstStudent);
 		
 		Room roomOfSecondStudent = null;
 		while(roomOfSecondStudent == null) {
-			int roomidx = ProtoUtil.random.nextInt(9, 3);
+			int roomidx = ProtoUtil.random.nextInt(10, 3);
 			if(!(rooms.get(roomidx).equals(roomOfFirstStudent) && roomOfFirstStudent.getCapacity() == 1)) {
 				roomOfSecondStudent = rooms.get(roomidx);
 			}
@@ -302,13 +301,13 @@ public class Labyrinth implements iTask{
 		roomsWithoutStudents.removeAll(roomsWithStudents);
 		
 		// tanár legenerálása
-		Room roomOfTeacher = roomsWithoutStudents.get(ProtoUtil.random.nextInt(roomsWithoutStudents.size() - 1, 2));
-		//roomOfTeacher.addCharacter(new Teacher(roomOfTeacher)); // tanár betétele egy diákmentes szobába
+		Room roomOfTeacher = roomsWithoutStudents.get(ProtoUtil.random.nextInt(roomsWithoutStudents.size(), 2));
+		//roomOfTeacher.addCharacter(new Teacher(roomOfTeacher)); // tanár betétele egy diákmentes szobába egy random szabad helyre
 		
 		// takarító legenerálása
 		Room roomOfCleaner = null;
 		while(roomOfCleaner == null) {
-			int roomidx = ProtoUtil.random.nextInt(9, 3);
+			int roomidx = ProtoUtil.random.nextInt(10, 3);
 			if(rooms.get(roomidx).getCapacity() != rooms.get(roomidx).currentNumOfPlayers()) {
 				roomOfCleaner = rooms.get(roomidx);
 			}

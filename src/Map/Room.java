@@ -179,7 +179,7 @@ public class Room implements iTask {
 	
 	/**
 	 * Visszaadja, hogy éppen hányan vannak a szobában.
-	 * @return A szobában tartózkodó karakterek száma
+	 * @return A szobában tartózkodó karakterek száma.
 	 */
 	public int currentNumOfPlayers() {
 	    ProtoUtil.printLog("currentNumOfPlayers");
@@ -187,8 +187,17 @@ public class Room implements iTask {
 	}
 	
 	/**
+	 * Visszaadja, hogy éppen hány tárgy van a szobában.
+	 * @return A szobában lévő tárgyak száma.
+	 */
+	public int currentNumOfItems() {
+	    ProtoUtil.printLog("currentNumOfItems");
+	    return items.size();
+	}
+	
+	/**
 	 * Összeolvasztja a paraméterként kapott szobát a jelenlegivel.
-	 * @param r Az összeolvasztandó szoba
+	 * @param r Az összeolvasztandó szoba.
 	 */
 	public void merge(Room r) {
 	    ProtoUtil.printLog("merge");
@@ -218,7 +227,7 @@ public class Room implements iTask {
 	
     /**
      * Lerakja a paraméterként kapott tárgyat a szobába.
-     * @param a A lerakandó tárgy
+     * @param a A lerakandó tárgy.
      */
     public void spawnItem(Item a) {
         ProtoUtil.printLog("spawnItem");
@@ -260,7 +269,7 @@ public class Room implements iTask {
 	}
 	
 	/**
-	 * Meghívja a tárolt Character-ek és EnvironmentalFactorok update() metódusát
+	 * Meghívja a tárolt Character-ek és EnvironmentalFactorok update() metódusát.
 	 */
 	    @Override
 	    public void update() {
