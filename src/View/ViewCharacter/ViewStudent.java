@@ -44,7 +44,9 @@ public class ViewStudent extends ViewCharacter {
 	public void propertyChanged(String property) {
 		if(property.equals("inventory")) {
 			setItemPositions();
-			
+		}
+		if(property.equals("kicked")) {
+			character.unsubscribe(this);
 		}
 	}
 

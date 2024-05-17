@@ -263,7 +263,10 @@ public class Labyrinth implements iTask{
 		rooms.add(r10);
 		
 		// szomszédos szobák beállítása
-
+		r3.addNeighbour(r1);
+		r1.addNeighbour(r3);
+		r1.addNeighbour(r5);
+		r5.addNeighbour(r1);
 		
 		// tárgyak legenerálása (0, 1, ..., karakterkapacitás+1 db minden szobába)
 		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(10, 0));
@@ -302,7 +305,7 @@ public class Labyrinth implements iTask{
 		
 		// tanár legenerálása
 		Room roomOfTeacher = roomsWithoutStudents.get(ProtoUtil.random.nextInt(roomsWithoutStudents.size(), 2));
-		//roomOfTeacher.addCharacter(new Teacher(roomOfTeacher)); // tanár betétele egy diákmentes szobába egy random szabad helyre
+		roomOfTeacher.addCharacter(new Teacher(roomOfTeacher)); // tanár betétele egy diákmentes szobába egy random szabad helyre
 		
 		// takarító legenerálása
 		Room roomOfCleaner = null;

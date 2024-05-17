@@ -8,6 +8,7 @@ import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
 import View.Utils.SelectionColor;
+import View.Utils.Subscriber;
 import View.ViewCharacter.ViewStudent;
 import View.ViewMap.ViewLabyrinth;
 import View.Utils.ActionState;
@@ -19,7 +20,7 @@ import java.awt.event.KeyListener;
 /**
  * Felelősség: A felhasználók bemeneteinek értelmezése és a model ezek szerinti formázása.
  */
-public class PlayerController extends JComponent implements KeyListener {
+public class PlayerController extends JComponent implements KeyListener, Subscriber {
 	
     /**
      * Az egyik játékos által irányított hallgató.
@@ -58,6 +59,8 @@ public class PlayerController extends JComponent implements KeyListener {
      */
     private ActionState state;
     
+    private boolean isStudentAlive=true;
+    
     /**
      * Az éppen kiválasztott elem amivel valamilyen műveletet szeretne végezni a játékos.
      */
@@ -67,6 +70,7 @@ public class PlayerController extends JComponent implements KeyListener {
         inventoryBackgroundImage = ImageReader.loadImage("res/images/test/testroom.png");
         this.color = color;
         player=stud;
+        player.subscribe(this);
         selectedSlot = 0;
         playerView=new ViewStudent(player, new Coordinates(0,0));
         playerView.setImage(color);
@@ -150,6 +154,8 @@ public class PlayerController extends JComponent implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+    	if(!isStudentAlive)
+    		return;
         if(color == SelectionColor.Red){
             switch (e.getKeyCode()){
                 case KeyEvent.VK_A:
@@ -169,6 +175,7 @@ public class PlayerController extends JComponent implements KeyListener {
                     System.out.println("S - Inventory kijelölő mód");
                     state = ActionState.InInventory;
                     selectedSlot = 0;
+                    break;
                 case KeyEvent.VK_W:
                     System.out.println("W - Szoba kijelölő mód");
                     state = ActionState.RoomPicker;
@@ -208,7 +215,7 @@ public class PlayerController extends JComponent implements KeyListener {
                     break;
                 case KeyEvent.VK_CONTROL:
                     System.out.println("Ctrl - Szobatárgy kijelölő mód");
-                    state = ActionState.InInventory;
+                    state = ActionState.ItemPicker;
                     selectedSlot = 0;
                     break;
             }
@@ -218,7 +225,7 @@ public class PlayerController extends JComponent implements KeyListener {
     private void useSelected() {
         System.out.println("\tuseSelected()");
         if(state == ActionState.RoomPicker && !player.getRoom().getNeighbours().isEmpty()){
-            player.enterRoom(player.getRoom().getNeighbours().get(selectedSlot));
+        	player.enterRoom(player.getRoom().getNeighbours().get(selectedSlot));
         }
         else if(state == ActionState.ItemPicker && !player.getRoom().getItems().isEmpty()){
             player.pickupItem(player.getRoom().getItems().get(selectedSlot));
@@ -278,4 +285,18 @@ public class PlayerController extends JComponent implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+
+	@Override
+	public void propertyChanged(String property) {
+		if(property.equals("kicked")) {
+			System.out.println("prop");
+			isStudentAlive=false;
+			GameFrame.viewCharacters.remove(Controller.characters.get(player));
+			GameFrame.container.remove(Controller.characters.get(player));
+			Controller.characters.remove(player);
+			player.unsubscribe(this);
+			
+		}
+		
+	}
 }

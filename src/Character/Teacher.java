@@ -73,6 +73,7 @@ public class Teacher extends Character {
     			}
     			
     			currentRoom.removeCharacter(s); // diák eltávolítása
+    			s.notifySubsribers("kicked");
     			ProtoUtil.printLog("student removed from game");
     		}
     	}

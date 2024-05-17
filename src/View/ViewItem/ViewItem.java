@@ -56,6 +56,7 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 			Controller.items.remove(item);
 			GameFrame.viewItems.remove(this);
 			GameFrame.container.remove(this);
+			item.unsubscribe(this);
 		}
 	}
 	
