@@ -2,10 +2,10 @@ package View.ViewCharacter;
 
 import Character.Student;
 import View.Controller.Controller;
-import View.Utils.Coordinates;
-import View.Utils.GameFrame;
-import View.Utils.ImageReader;
-import View.Utils.SelectionColor;
+import View.Controller.PlayerController;
+import View.Utils.*;
+import View.ViewItem.ViewItem;
+
 import java.awt.*;
 
 /**
@@ -17,6 +17,7 @@ public class ViewStudent extends ViewCharacter {
 	 * A modellbeli diák, amit reprezentál.
 	 */
 	private Student character;
+	private SelectionColor color;
 
 	public ViewStudent(Student stud, Coordinates pos){
 		super("student_blue.png", pos);
@@ -26,6 +27,7 @@ public class ViewStudent extends ViewCharacter {
 	}
 
 	public void setImage(SelectionColor color){
+		this.color = color;
 		if(color == SelectionColor.Blue){
 			image = ImageReader.loadImage("res/images/Characters/student_blue.png");
 		}
@@ -35,15 +37,30 @@ public class ViewStudent extends ViewCharacter {
 	}
 
 	private void setItemPositions() {
-		for(int i=0;i<character.getInventory().size();i++) {
-			Controller.items.get(character.getInventory().get(i)).setCoordinates(new Coordinates(100,800));
-		}
+
+			if(color == SelectionColor.Red){
+				for(int i=0;i<character.getInventory().size();i++) {
+					ViewItem item = Controller.items.get(character.getInventory().get(i));
+					item.setCoordinates(PlayerController.leftInventoryPositions[i]);
+					item.setItemSize(new Size(78,78));
+				}
+			}
+			else if(color == SelectionColor.Blue){
+				for(int i=0;i<character.getInventory().size();i++) {
+					ViewItem item = Controller.items.get(character.getInventory().get(i));
+					item.setCoordinates(PlayerController.rightInventoryPositions[i]);
+					item.setItemSize(new Size(78,78));
+				}
+			}
+
+
 	}
 	
 	@Override
 	public void propertyChanged(String property) {
 		if(property.equals("inventory")) {
 			setItemPositions();
+
 		}
 		if(property.equals("kicked")) {
 			character.unsubscribe(this);

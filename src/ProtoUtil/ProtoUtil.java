@@ -330,12 +330,12 @@ public class ProtoUtil {
 					//reds.pickupItem(reds.getRoom().getItems().get(0));
 					//if(!reds.getRoom().getItems().isEmpty())
 					//reds.pickupItem(reds.getRoom().getItems().get(0));
-					labyrinth.update();
+					//labyrinth.update();
 					//blues.enterRoom(labyrinth.getRooms().get(aa++%10));
 					//labyrinth.getRooms().get(0).spawnItem(new Transistor());
 					//reds.enterRoom(labyrinth.getRooms().get(aa++%10));
 					//reds.enterRoom(labyrinth.getRooms().get(4));
-					labyrinth.update();
+					//labyrinth.update();
 					//if(!reds.getInventory().isEmpty())
 					//reds.putdownItem(reds.getInventory().get(0));
 					

@@ -19,7 +19,7 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	
 	protected final String itemsPath = "Items/"; 
 	
-	public ViewItem(Item item,Coordinates coor) {
+	public ViewItem(Item item, Coordinates coor) {
 		this.item = item;
 		this.item.subscribe(this);
 		size= new Size(40, 40);
@@ -34,7 +34,15 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	 * A tárgy képe, ami megjelenik.
 	 */
 	protected Image image;
-	
+
+	public void setItemSize(Size size) {
+		this.size = size;
+	}
+
+	public Size getItemSize() {
+		return size;
+	}
+
 	/**
 	 * A tárgy képének mérete.
 	 */

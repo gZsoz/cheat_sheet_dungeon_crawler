@@ -44,12 +44,12 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 
     private SelectionColor color;
 
-    private Coordinates[] leftInventoryPositions = {new Coordinates(50,575),new Coordinates(150,575),
+    public static Coordinates[] leftInventoryPositions = {new Coordinates(50,575),new Coordinates(150,575),
                                                     new Coordinates(50,670),new Coordinates(150,670),
                                                     new Coordinates(50,765),new Coordinates(150,765)
     };
 
-    private Coordinates[] rightInventoryPositions = {new Coordinates(1578,575),new Coordinates(1678,575),
+    public static Coordinates[] rightInventoryPositions = {new Coordinates(1578,575),new Coordinates(1678,575),
                                                      new Coordinates(1578,670),new Coordinates(1678,670),
                                                      new Coordinates(1578,765),new Coordinates(1678,765)
     };
