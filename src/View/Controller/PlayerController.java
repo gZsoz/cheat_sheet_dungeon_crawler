@@ -3,6 +3,7 @@ package View.Controller;
 import javax.swing.*;
 
 import Character.Student;
+import Map.Labyrinth;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -30,15 +31,6 @@ public class PlayerController extends JComponent implements KeyListener {
      */
     private ViewStudent playerView;
 
-    public void setLabyrinthView(ViewLabyrinth labyrinthView) {
-        this.labyrinthView = labyrinthView;
-    }
-
-    /**
-     * A megjelenített labirintus osztály csak a kiválasztott szobák körvonalának beállítására kell.
-     */
-    private ViewLabyrinth labyrinthView;
-    
     /**
      * Az adott karakter arcképe.
      */
@@ -224,22 +216,22 @@ public class PlayerController extends JComponent implements KeyListener {
     }
 
     private void useSelected() {
-       /* System.out.println("\tuseSelected()");
-        if(state == ActionState.RoomPicker && !labyrinthView.getRoomsInLabyrinth().isEmpty()){
-            player.enterRoom(labyrinthView.getRoomsInLabyrinth().get(selectedSlot).getRoom());
+        System.out.println("\tuseSelected()");
+        if(state == ActionState.RoomPicker && !player.getRoom().getNeighbours().isEmpty()){
+            player.enterRoom(player.getRoom().getNeighbours().get(selectedSlot));
         }
         else if(state == ActionState.ItemPicker && !player.getRoom().getItems().isEmpty()){
             player.pickupItem(player.getRoom().getItems().get(selectedSlot));
         }
         else if(state == ActionState.InInventory && !player.getInventory().isEmpty()){
             player.activate(player.getInventory().get(selectedSlot));
-        }*/
+        }
     }
 
     private void increaseSelectedSlot() {
-        /*System.out.println("\tincreaseSelectedSlot()");
+        System.out.println("\tincreaseSelectedSlot()");
         if(state == ActionState.RoomPicker){
-            if(selectedSlot<labyrinthView.getRoomsInLabyrinth().size()){
+            if(selectedSlot<player.getRoom().getNeighbours().size()-1){
                 selectedSlot++;
             }
             else{
@@ -247,7 +239,7 @@ public class PlayerController extends JComponent implements KeyListener {
             }
         }
         else if(state == ActionState.ItemPicker){
-            if(selectedSlot<player.getRoom().getItems().size()){
+            if(selectedSlot<player.getRoom().getItems().size()-1){
                 selectedSlot++;
             }
             else{
@@ -255,31 +247,31 @@ public class PlayerController extends JComponent implements KeyListener {
             }
         }
         else if(state == ActionState.InInventory){
-            if(selectedSlot<player.getInventory().size()){
+            if(selectedSlot<player.getInventory().size()-1){
                 selectedSlot++;
             }
             else{
                 selectedSlot=0;
             }
-        }*/
+        }
     }
 
     private void decreaseSelectedSlot() {
-        /*System.out.println("\tdecreaseSelectedSlot()");
+        System.out.println("\tdecreaseSelectedSlot()");
         if(selectedSlot>0){
             selectedSlot--;
         }
         else{
             if(state == ActionState.RoomPicker){
-                selectedSlot=labyrinthView.getRoomsInLabyrinth().size();
+                selectedSlot=player.getRoom().getNeighbours().size()-1;
             }
             else if(state == ActionState.ItemPicker){
-                selectedSlot=player.getRoom().getItems().size();
+                selectedSlot=player.getRoom().getItems().size()-1;
             }
             else if(state == ActionState.InInventory){
-                selectedSlot=player.getInventory().size();
+                selectedSlot=player.getInventory().size()-1;
             }
-        }*/
+        }
     }
 
     @Override

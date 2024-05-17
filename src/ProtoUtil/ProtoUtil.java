@@ -307,11 +307,9 @@ public class ProtoUtil {
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);
 			PlayerController blue = new PlayerController(SelectionColor.Blue, blues);
-            Labyrinth labyrinth = new Labyrinth();
+			Labyrinth labyrinth = new Labyrinth();
             labyrinth.generateRooms(reds, blues);
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
-			red.setLabyrinthView(viewLabyrinth);
-			blue.setLabyrinthView(viewLabyrinth);
 
 			GameFrame mf = new GameFrame(viewLabyrinth,red,blue);
 
