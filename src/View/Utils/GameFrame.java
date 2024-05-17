@@ -1,5 +1,6 @@
 package View.Utils;
 
+import View.Controller.Controller;
 import View.Controller.PlayerController;
 import View.ViewCharacter.ViewCharacter;
 import View.ViewCharacter.ViewStudent;
@@ -45,6 +46,8 @@ public class GameFrame extends JFrame {
 		this.vl=vl;
 		this.red=red;
 		this.blue=blue;
+		this.addKeyListener(red);
+		this.addKeyListener(blue);
 		this.setResizable(false);
 		this.setPreferredSize(new Dimension(1820,980));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

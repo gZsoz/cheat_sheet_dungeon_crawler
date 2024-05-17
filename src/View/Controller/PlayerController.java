@@ -12,11 +12,13 @@ import View.ViewMap.ViewLabyrinth;
 import View.Utils.ActionState;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * Felelősség: A felhasználók bemeneteinek értelmezése és a model ezek szerinti formázása.
  */
-public class PlayerController extends JComponent {
+public class PlayerController extends JComponent implements KeyListener {
 	
     /**
      * Az egyik játékos által irányított hallgató.
@@ -27,7 +29,11 @@ public class PlayerController extends JComponent {
      * Az egyik játékos által irányított hallgató megjelenítéséért felelő része.
      */
     private ViewStudent playerView;
-    
+
+    public void setLabyrinthView(ViewLabyrinth labyrinthView) {
+        this.labyrinthView = labyrinthView;
+    }
+
     /**
      * A megjelenített labirintus osztály csak a kiválasztott szobák körvonalának beállítására kell.
      */
@@ -69,6 +75,7 @@ public class PlayerController extends JComponent {
         inventoryBackgroundImage = ImageReader.loadImage("res/images/test/testroom.png");
         this.color = color;
         player=stud;
+        selectedSlot = 0;
         playerView=new ViewStudent(player, new Coordinates(0,0));
         playerView.setImage(color);
     }
@@ -143,4 +150,140 @@ public class PlayerController extends JComponent {
 		// TODO Auto-generated method stub
 		return playerView;
 	}
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(color == SelectionColor.Red){
+            switch (e.getKeyCode()){
+                case KeyEvent.VK_A:
+                    System.out.println("A - Balra vált kijelölést");
+                    decreaseSelectedSlot();
+                    break;
+                case KeyEvent.VK_D:
+                    System.out.println("D - Jobbra vált kijelölést");
+                    increaseSelectedSlot();
+                    break;
+                case KeyEvent.VK_SPACE:
+                    System.out.println("Space - Kiválaszt");
+                    useSelected();
+                    selectedSlot = 0;
+                    break;
+                case KeyEvent.VK_S:
+                    System.out.println("S - Inventory kijelölő mód");
+                    state = ActionState.InInventory;
+                    selectedSlot = 0;
+                case KeyEvent.VK_W:
+                    System.out.println("W - Szoba kijelölő mód");
+                    state = ActionState.RoomPicker;
+                    selectedSlot = 0;
+                    break;
+                case KeyEvent.VK_E:
+                    System.out.println("E - Szobatárgy kijelölő mód");
+                    state = ActionState.ItemPicker;
+                    selectedSlot = 0;
+                    break;
+            }
+        }
+        if(color == SelectionColor.Blue){
+            switch (e.getKeyCode()){
+                case KeyEvent.VK_LEFT:
+                    System.out.println("⬅ - Balra vált kijelölést");
+                    decreaseSelectedSlot();
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    System.out.println("➡ - Jobbra vált kijelölést");
+                    increaseSelectedSlot();
+                    break;
+                case KeyEvent.VK_ENTER:
+                    System.out.println("Enter - Kiválaszt");
+                    useSelected();
+                    selectedSlot = 0;
+                    break;
+                case KeyEvent.VK_UP:
+                    System.out.println("⬆ - Szoba kijelölő mód");
+                    state = ActionState.RoomPicker;
+                    selectedSlot = 0;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    System.out.println("⬇ - Inventory kijelölő mód");
+                    state = ActionState.InInventory;
+                    selectedSlot = 0;
+                    break;
+                case KeyEvent.VK_CONTROL:
+                    System.out.println("Ctrl - Szobatárgy kijelölő mód");
+                    state = ActionState.InInventory;
+                    selectedSlot = 0;
+                    break;
+            }
+        }
+    }
+
+    private void useSelected() {
+        System.out.println("\tuseSelected()");
+        if(state == ActionState.RoomPicker && !labyrinthView.getRoomsInLabyrinth().isEmpty()){
+            player.enterRoom(labyrinthView.getRoomsInLabyrinth().get(selectedSlot).getRoom());
+        }
+        else if(state == ActionState.ItemPicker && !player.getRoom().getItems().isEmpty()){
+            player.pickupItem(player.getRoom().getItems().get(selectedSlot));
+        }
+        else if(state == ActionState.InInventory && !player.getInventory().isEmpty()){
+            player.activate(player.getInventory().get(selectedSlot));
+        }
+    }
+
+    private void increaseSelectedSlot() {
+        System.out.println("\tincreaseSelectedSlot()");
+        if(state == ActionState.RoomPicker){
+            if(selectedSlot<labyrinthView.getRoomsInLabyrinth().size()){
+                selectedSlot++;
+            }
+            else{
+                selectedSlot=0;
+            }
+        }
+        else if(state == ActionState.ItemPicker){
+            if(selectedSlot<player.getRoom().getItems().size()){
+                selectedSlot++;
+            }
+            else{
+                selectedSlot=0;
+            }
+        }
+        else if(state == ActionState.InInventory){
+            if(selectedSlot<player.getInventory().size()){
+                selectedSlot++;
+            }
+            else{
+                selectedSlot=0;
+            }
+        }
+    }
+
+    private void decreaseSelectedSlot() {
+        System.out.println("\tdecreaseSelectedSlot()");
+        if(selectedSlot>0){
+            selectedSlot--;
+        }
+        else{
+            if(state == ActionState.RoomPicker){
+                selectedSlot=labyrinthView.getRoomsInLabyrinth().size();
+            }
+            else if(state == ActionState.ItemPicker){
+                selectedSlot=player.getRoom().getItems().size();
+            }
+            else if(state == ActionState.InInventory){
+                selectedSlot=player.getInventory().size();
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }

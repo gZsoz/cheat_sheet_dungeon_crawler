@@ -37,7 +37,11 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	 * A képernyőn megjelenítendő x és y koordináták.
 	 */
 	private Coordinates coordinates;
-	
+
+	public ArrayList<ViewRoom> getRoomsInLabyrinth() {
+		return roomsInLabyrinth;
+	}
+
 	/**
 	 * A labirintusban megjelenítendő szobák.
 	 */

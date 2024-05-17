@@ -308,7 +308,9 @@ public class ProtoUtil {
             Labyrinth labyrinth = new Labyrinth();
             labyrinth.generateRooms(reds, blues);
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
-			
+			red.setLabyrinthView(viewLabyrinth);
+			blue.setLabyrinthView(viewLabyrinth);
+
 			GameFrame mf = new GameFrame(viewLabyrinth,red,blue);
 
             //viewLabyrinth.setBackground(Color.BLACK);

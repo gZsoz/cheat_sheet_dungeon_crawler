@@ -18,7 +18,11 @@ import java.util.ArrayList;
  * A szoba grafikus osztálya.
  */
 public class ViewRoom extends JComponent implements Subscriber {
-	
+
+	public Room getRoom() {
+		return room;
+	}
+
 	/**
 	 * A modellbeli szoba, amit reprezentál.
 	 */
