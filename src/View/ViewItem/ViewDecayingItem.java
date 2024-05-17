@@ -28,6 +28,7 @@ public abstract class ViewDecayingItem extends ViewItem {
 		g2D.setColor(Color.BLACK);
 		g2D.fillRect(coordinates.getX(), (int) (coordinates.getY() + size.getHeight() * 0.9), size.getWidth(),10);
 		g2D.setColor(Color.GREEN);
+
 		g2D.fillRect((int) (coordinates.getX()),
 				(int) (coordinates.getY() + size.getHeight() * 0.9),
 				(int)((((DecayingItems) item).getDuration() / (double) DecayingItems.defaultDuration) * size.getWidth()) ,
