@@ -206,7 +206,7 @@ public class Labyrinth implements iTask{
 	 * @return A véletlenszerűen kiválasztott tárgy.
 	 */
 	private Item itemPicker(){
-		switch(ProtoUtil.random.nextInt(10, 2)){
+		switch(ProtoUtil.random.nextInt(10, 5)){
 		case 0:
 			return new AirFreshener();
 		case 1:
@@ -303,7 +303,7 @@ public class Labyrinth implements iTask{
 		
 		// tanár legenerálása
 		Room roomOfTeacher = roomsWithoutStudents.get(ProtoUtil.random.nextInt(roomsWithoutStudents.size() - 1, 2));
-		roomOfTeacher.addCharacter(new Teacher(roomOfTeacher)); // tanár betétele egy diákmentes szobába
+		//roomOfTeacher.addCharacter(new Teacher(roomOfTeacher)); // tanár betétele egy diákmentes szobába
 		
 		// takarító legenerálása
 		Room roomOfCleaner = null;
@@ -325,8 +325,9 @@ public class Labyrinth implements iTask{
 		if(ProtoUtil.random.nextInt(1000, -1)==0)
 			splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
 		for(Room r : rooms){
-			if(ProtoUtil.random.nextInt(1000, -1)==0)
+			if(ProtoUtil.random.nextInt(1000, -1)==0) {
 				r.spawnItem(itemPicker()); // item legenerálása
+			}
 			r.update();
 		}
 	}

@@ -25,6 +25,8 @@ import Items.AirFreshener;
 import Items.BatSkin;
 import Items.CabbageCamembert;
 import Items.DecayingItems;
+import Items.FakeBatSkin;
+import Items.Transistor;
 
 import java.awt.EventQueue;
 import java.io.File;
@@ -300,7 +302,7 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom(false);
+    		random = new MyRandom(true);
     		Student reds=new Student();
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);
@@ -320,15 +322,17 @@ public class ProtoUtil {
 		        	mf.setVisible(true);
                 }
         	});
-            Timer timer = new Timer(1000, a ->{
+            Timer timer = new Timer(300, a ->{
                     //System.out.println("update()");
                     //viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=1;
                     //viewLabyrinth.roomsInLabyrinth.get(2).coordinates.x-=1;
                     //viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
 					mf.container.repaint();
 					reds.enterRoom(labyrinth.getRooms().get(aa++%10));
-
-
+					labyrinth.update();
+					labyrinth.getRooms().get(0).spawnItem(new Transistor());
+					labyrinth.update();
+					
 					//labyrinth.update();
 					//labyrinth.update();
             }

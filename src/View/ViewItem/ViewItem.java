@@ -39,4 +39,9 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	 * Kijelölt-e az adott tárgy (letevésnél, felvevésnél vagy használatnál) és ha igen, milyen színnel.
 	 */
 	protected SelectionColor selected;
+
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates=coordinates;
+		
+	}
 }

@@ -34,9 +34,18 @@ public class ViewStudent extends ViewCharacter {
 		}
 	}
 
+	private void setItemPositions() {
+		for(int i=0;i<character.getInventory().size();i++) {
+			Controller.items.get(character.getInventory().get(i)).setCoordinates(new Coordinates(100,100));
+		}
+	}
+	
 	@Override
 	public void propertyChanged(String property) {
-		// TODO Auto-generated method stub
+		if(property.equals("inventory")) {
+			setItemPositions();
+			
+		}
 	}
 
 	@Override

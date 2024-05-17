@@ -69,7 +69,7 @@ public class Room implements iTask {
 	 */
 	public void notifySubsribers(String str) {
 		for(Subscriber sub : subscribers)
-			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity"
+			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>"
 	}
 	
 	/**
@@ -222,7 +222,8 @@ public class Room implements iTask {
      */
     public void spawnItem(Item a) {
         ProtoUtil.printLog("spawnItem");
-        addItem(a);
+        items.add(a);
+        notifySubsribers("spawnitem "+(items.size()-1));
     }
 	
 	/**

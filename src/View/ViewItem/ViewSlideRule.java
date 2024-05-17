@@ -1,6 +1,7 @@
 package View.ViewItem;
 
 import Items.SlideRule;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class ViewSlideRule extends ViewNumberOfUsesItem {
 		super("sliderule.png", coor);
 		item = sr;
 		item.subscribe(this);
+		Controller.items.put(item, this);
 	}
 	
 	/*

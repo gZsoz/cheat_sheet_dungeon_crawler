@@ -1,6 +1,7 @@
 package View.ViewItem;
 
 import Items.Mask;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class ViewMask extends ViewDecayingItem {
 		super("mask.png", coor);
 		item = m;
 		item.subscribe(this);
+		Controller.items.put(item, this);
 	}
 	
 	/**

@@ -110,50 +110,60 @@ public class ViewRoom extends JComponent implements Subscriber {
 		createViewEnvFactors();
 	}
 
+	private void createViewItem(Item item, int i) {
+		if(item instanceof AirFreshener){
+			itemsInRoom.add(new ViewAirFreshener((AirFreshener) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof BatSkin){
+			itemsInRoom.add(new ViewBatSkin((BatSkin) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof Beer){
+			itemsInRoom.add(new ViewBeer((Beer) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof CabbageCamembert){
+			itemsInRoom.add(new ViewCabbageCamembert((CabbageCamembert) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof FakeBatSkin){
+			itemsInRoom.add(new ViewFakeBatSkin((FakeBatSkin) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof FakeMask){
+			itemsInRoom.add(new ViewFakeMask((FakeMask) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof FakeSlideRule){
+			itemsInRoom.add(new ViewFakeSlideRule((FakeSlideRule) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof Mask){
+			itemsInRoom.add(new ViewMask((Mask) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof SlideRule){
+			itemsInRoom.add(new ViewSlideRule((SlideRule) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof Transistor){
+			itemsInRoom.add(new ViewTransistor((Transistor) item, fixedItemPositions[i]));
+		}
+		else if(item instanceof WetCloth){
+			itemsInRoom.add(new ViewWetCloth((WetCloth) item, fixedItemPositions[i]));
+		}
+	}
+	
 	private void createViewItems() {
 		itemsInRoom.clear();
 		// View tárgyak (ami szobákban van)
 		for(int i = 0; i < room.getItems().size(); i++){
 			Item item = room.getItems().get(i);
-			if(item instanceof AirFreshener){
-				itemsInRoom.add(new ViewAirFreshener((AirFreshener) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof BatSkin){
-				itemsInRoom.add(new ViewBatSkin((BatSkin) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof Beer){
-				itemsInRoom.add(new ViewBeer((Beer) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof CabbageCamembert){
-				itemsInRoom.add(new ViewCabbageCamembert((CabbageCamembert) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof FakeBatSkin){
-				itemsInRoom.add(new ViewFakeBatSkin((FakeBatSkin) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof FakeMask){
-				itemsInRoom.add(new ViewFakeMask((FakeMask) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof FakeSlideRule){
-				itemsInRoom.add(new ViewFakeSlideRule((FakeSlideRule) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof Mask){
-				itemsInRoom.add(new ViewMask((Mask) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof SlideRule){
-				itemsInRoom.add(new ViewSlideRule((SlideRule) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof Transistor){
-				itemsInRoom.add(new ViewTransistor((Transistor) item, fixedItemPositions[i]));
-			}
-			else if(item instanceof WetCloth){
-				itemsInRoom.add(new ViewWetCloth((WetCloth) item, fixedItemPositions[i]));
-			}
+			createViewItem(item, i);
 		}
 	}
 
 	private void setCharacterPositions() {
 		for(int i=0;i<room.getCharacters().size();i++) {
 			Controller.characters.get(room.getCharacters().get(i)).setCoordinates(fixedCharacterPositions[i]);
+		}
+	}
+	
+	private void setItemPositions() {
+		for(int i=0;i<room.getItems().size();i++) {
+			Controller.items.get(room.getItems().get(i)).setCoordinates(fixedItemPositions[i]);
 		}
 	}
 	
@@ -194,6 +204,18 @@ public class ViewRoom extends JComponent implements Subscriber {
 	    if(property.equals("characters")) {
 	    	setFixedCharacterPositions();
 	    	setCharacterPositions();
+	    }
+	    else if(property.equals("items")) {
+	    	setFixedItemPositions();
+	    	setItemPositions();
+	    }
+	    else if(property.contains("spawnitem")) {
+	    	int idx = Integer.parseInt(property.split(" ")[1]);
+	    	setFixedItemPositions();
+	    	createViewItem(room.getItems().get(idx), idx);
+	    	GameFrame.container.add(itemsInRoom.get(itemsInRoom.size()-1));
+	    	GameFrame.viewItems.add(itemsInRoom.get(itemsInRoom.size()-1));
+	    	setItemPositions();
 	    }
 	}
 	

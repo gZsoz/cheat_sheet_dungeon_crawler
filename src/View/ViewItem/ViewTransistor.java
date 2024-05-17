@@ -1,6 +1,7 @@
 package View.ViewItem;
 
 import Items.Transistor;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 
 import java.awt.*;
@@ -17,8 +18,10 @@ public class ViewTransistor extends ViewItem {
 	
 	public ViewTransistor(Transistor tr, Coordinates coor) {
 		super("transistor_on.png", coor);
+		System.out.println("Hellolololol");
 		item = tr;
 		item.subscribe(this);
+		Controller.items.put(item, this);
 	}
 	
 	@Override
@@ -31,6 +34,7 @@ public class ViewTransistor extends ViewItem {
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		Graphics2D g2D = (Graphics2D) g;
+		System.out.println("paint");
     	g2D.drawImage(image,coordinates.getX(),coordinates.getY(), size.getWidth(),size.getHeight(),this);
 	}
 

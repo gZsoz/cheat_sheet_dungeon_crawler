@@ -1,6 +1,7 @@
 package View.ViewItem;
 
 import Items.WetCloth;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class ViewWetCloth extends ViewDecayingItem {
 		super("wetcloth.png", coor);
 		item = wc;
 		item.subscribe(this);
+		Controller.items.put(item, this);
 	}
 
     /**

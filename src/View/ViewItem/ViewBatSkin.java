@@ -1,6 +1,7 @@
 package View.ViewItem;
 
 import Items.BatSkin;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class ViewBatSkin extends ViewNumberOfUsesItem {
 		super("batskin.png", coor);
 		item = bat;
 		item.subscribe(this);
+		Controller.items.put(item, this);
 	}
 	
 	/**

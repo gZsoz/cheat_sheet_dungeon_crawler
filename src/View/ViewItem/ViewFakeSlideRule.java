@@ -2,6 +2,7 @@ package View.ViewItem;
 
 import Items.AirFreshener;
 import Items.FakeSlideRule;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
 import View.Utils.SelectionColor;
@@ -23,6 +24,7 @@ public class ViewFakeSlideRule extends ViewNumberOfUsesItem {
 		super("sliderule.png", coor);
 		item = fsr;
 		item.subscribe(this);
+		Controller.items.put(item, this);
 	}
 	
 	/**

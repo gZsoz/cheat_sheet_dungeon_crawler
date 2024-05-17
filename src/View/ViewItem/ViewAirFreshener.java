@@ -1,6 +1,7 @@
 package View.ViewItem;
 
 import Items.AirFreshener;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class ViewAirFreshener extends ViewNumberOfUsesItem {
 		super("airfreshener.png", coor);
 		item = air;
 		item.subscribe(this);
+		Controller.items.put(item, this);
 	}
 
 	/**
