@@ -29,7 +29,7 @@ public abstract class Item {
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : subscribers)
-    		sub.propertyChanged(str); // lehetséges értékek: "sticky", "remaininguses", "isactive", "duration", "pair"
+    		sub.propertyChanged(str); // lehetséges értékek: "sticky", "remaininguses", "isactive", "duration", "pair", "itemexpired"
     }
 	
     /**

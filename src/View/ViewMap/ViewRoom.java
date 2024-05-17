@@ -42,25 +42,10 @@ public class ViewRoom extends JComponent implements Subscriber {
 	 * A képernyőn megjelenítendő x és y koordináták.
 	 */
 	public Coordinates coordinates;
-	
-	/**
-	 * A szobában megjelenítendő tárgyak.
-	 */
-	public ArrayList<ViewItem> itemsInRoom = new ArrayList<>();
 
 	protected Coordinates[] fixedItemPositions;
 
 	protected Coordinates[] fixedCharacterPositions;
-	
-	/**
-	 * A szobában megjelenítendő karakterek.
-	 */
-	protected ArrayList<ViewCharacter> charactersInRoom = new ArrayList<>();
-	
-	/**
-	 * A szobában megjelenítendő környezeti tényezők.
-	 */
-	protected ArrayList<ViewEnvironmentalFactors> environmentalFactorsInRoom = new ArrayList<>();
 	
 	/**
 	 * Kijelölt-e az adott szoba (szoba váltásnál) és ha igen milyen színnel.
@@ -72,10 +57,9 @@ public class ViewRoom extends JComponent implements Subscriber {
 		coordinates = pos;
 		image = ImageReader.loadImage("res/images/test/testroom.png");
 		size = new Size(r.getCapacity() * 90,220);
-		setFixedItemPositions();
-		setFixedCharacterPositions();
-		initRoom();
 		this.setBackground(null);
+		GameFrame.container.add(this);
+    	GameFrame.viewRooms.add(this);
 		Controller.rooms.put(r, this);
 		room.subscribe(this);
 	}
@@ -104,51 +88,44 @@ public class ViewRoom extends JComponent implements Subscriber {
 		}
 	}
 
-	private void initRoom() {
-		createViewCharacters();
-		createViewItems();
-		createViewEnvFactors();
-	}
-
 	private void createViewItem(Item item, int i) {
 		if(item instanceof AirFreshener){
-			itemsInRoom.add(new ViewAirFreshener((AirFreshener) item, fixedItemPositions[i]));
+			new ViewAirFreshener((AirFreshener) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof BatSkin){
-			itemsInRoom.add(new ViewBatSkin((BatSkin) item, fixedItemPositions[i]));
+			new ViewBatSkin((BatSkin) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof Beer){
-			itemsInRoom.add(new ViewBeer((Beer) item, fixedItemPositions[i]));
+			new ViewBeer((Beer) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof CabbageCamembert){
-			itemsInRoom.add(new ViewCabbageCamembert((CabbageCamembert) item, fixedItemPositions[i]));
+			new ViewCabbageCamembert((CabbageCamembert) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof FakeBatSkin){
-			itemsInRoom.add(new ViewFakeBatSkin((FakeBatSkin) item, fixedItemPositions[i]));
+			new ViewFakeBatSkin((FakeBatSkin) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof FakeMask){
-			itemsInRoom.add(new ViewFakeMask((FakeMask) item, fixedItemPositions[i]));
+			new ViewFakeMask((FakeMask) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof FakeSlideRule){
-			itemsInRoom.add(new ViewFakeSlideRule((FakeSlideRule) item, fixedItemPositions[i]));
+			new ViewFakeSlideRule((FakeSlideRule) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof Mask){
-			itemsInRoom.add(new ViewMask((Mask) item, fixedItemPositions[i]));
+			new ViewMask((Mask) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof SlideRule){
-			itemsInRoom.add(new ViewSlideRule((SlideRule) item, fixedItemPositions[i]));
+			new ViewSlideRule((SlideRule) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof Transistor){
-			itemsInRoom.add(new ViewTransistor((Transistor) item, fixedItemPositions[i]));
+			new ViewTransistor((Transistor) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof WetCloth){
-			itemsInRoom.add(new ViewWetCloth((WetCloth) item, fixedItemPositions[i]));
+			new ViewWetCloth((WetCloth) item, fixedItemPositions[i]);
 		}
 	}
 	
 	private void createViewItems() {
-		itemsInRoom.clear();
-		// View tárgyak (ami szobákban van)
+		setFixedItemPositions();
 		for(int i = 0; i < room.getItems().size(); i++){
 			Item item = room.getItems().get(i);
 			createViewItem(item, i);
@@ -168,33 +145,32 @@ public class ViewRoom extends JComponent implements Subscriber {
 	}
 	
 	private void createViewCharacters() {
-		charactersInRoom.clear();
-		// View Karakterek létrehozása
+		setFixedCharacterPositions();
 		for(int i = 0; i < room.getCharacters().size(); i++){
 			Character character = room.getCharacters().get(i);
 			if(character instanceof Student){
 				//charactersInRoom.add(new ViewStudent((Student) character, fixedCharacterPositions[i]));
-				Controller.characters.get(character).setCoordinates(fixedCharacterPositions[i]);
+				ViewCharacter c=Controller.characters.get(character);
+				c.setCoordinates(fixedCharacterPositions[i]);
+				GameFrame.viewCharacters.add(c);
 			}
 			else if(character instanceof Teacher){
-				charactersInRoom.add(new ViewTeacher((Teacher) character, fixedCharacterPositions[i]));
+				new ViewTeacher((Teacher) character, fixedCharacterPositions[i]);
 			}
 			else if(character instanceof Cleaner){
-				charactersInRoom.add(new ViewCleaner((Cleaner) character, fixedCharacterPositions[i]));
+				new ViewCleaner((Cleaner) character, fixedCharacterPositions[i]);
 			}
 		}
 	}
 
 	private void createViewEnvFactors() {
-		environmentalFactorsInRoom.clear();
-		// View Környezeti tényezők létrehozása
 		for(int i = 0; i < room.getEnvironmentalFactors().size(); i++){
 			EnvironmentalFactors factor = room.getEnvironmentalFactors().get(i);
 			if(factor instanceof Gas){
-				environmentalFactorsInRoom.add(new ViewGas((Gas) factor, coordinates));
+				new ViewGas((Gas) factor, coordinates);
 			}
 			else if(factor instanceof Sticky){
-				environmentalFactorsInRoom.add(new ViewSticky((Sticky) factor, coordinates));
+				new ViewSticky((Sticky) factor, coordinates);
 			}
 		}
 	}
@@ -213,17 +189,14 @@ public class ViewRoom extends JComponent implements Subscriber {
 	    	int idx = Integer.parseInt(property.split(" ")[1]);
 	    	setFixedItemPositions();
 	    	createViewItem(room.getItems().get(idx), idx);
-	    	GameFrame.container.add(itemsInRoom.get(itemsInRoom.size()-1));
-	    	GameFrame.viewItems.add(itemsInRoom.get(itemsInRoom.size()-1));
 	    	setItemPositions();
 	    }
 	}
 	
 	public void addview() {
-		for(ViewItem r:itemsInRoom)
-			GameFrame.container.add(r);
-		for(ViewCharacter r:charactersInRoom)
-			GameFrame.container.add(r);
+		createViewCharacters();
+		createViewItems();
+		createViewEnvFactors();
 	}
 	
 	/**

@@ -30,6 +30,7 @@ public abstract class DecayingItems extends Item implements iTask {
 		duration--;
 		notifySubsribers("duration");
 		if(duration==0) {
+			notifySubsribers("itemexpired");
 			owner.getInventory().remove(this);
 			owner.notifySubsribers("inventory");
 			onDrop();

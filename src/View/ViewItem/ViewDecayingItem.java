@@ -1,5 +1,6 @@
 package View.ViewItem;
 
+import Items.Item;
 import View.Utils.Coordinates;
 
 /**
@@ -7,9 +8,14 @@ import View.Utils.Coordinates;
  */
 public abstract class ViewDecayingItem extends ViewItem {
 
-	public ViewDecayingItem(String path, Coordinates coor) {
-		super(path, coor);
-		// TODO Auto-generated constructor stub
+	public ViewDecayingItem(Item item, Coordinates coor) {
+		super(item, coor);
+	}
+	
+	@Override
+	public void propertyChanged(String property) {
+		super.propertyChanged(property);
+		// TODO Auto-generated method stub
 	}
     
 }

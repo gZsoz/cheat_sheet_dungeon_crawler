@@ -224,7 +224,7 @@ public class PlayerController extends JComponent implements KeyListener {
     }
 
     private void useSelected() {
-        System.out.println("\tuseSelected()");
+       /* System.out.println("\tuseSelected()");
         if(state == ActionState.RoomPicker && !labyrinthView.getRoomsInLabyrinth().isEmpty()){
             player.enterRoom(labyrinthView.getRoomsInLabyrinth().get(selectedSlot).getRoom());
         }
@@ -233,11 +233,11 @@ public class PlayerController extends JComponent implements KeyListener {
         }
         else if(state == ActionState.InInventory && !player.getInventory().isEmpty()){
             player.activate(player.getInventory().get(selectedSlot));
-        }
+        }*/
     }
 
     private void increaseSelectedSlot() {
-        System.out.println("\tincreaseSelectedSlot()");
+        /*System.out.println("\tincreaseSelectedSlot()");
         if(state == ActionState.RoomPicker){
             if(selectedSlot<labyrinthView.getRoomsInLabyrinth().size()){
                 selectedSlot++;
@@ -261,11 +261,11 @@ public class PlayerController extends JComponent implements KeyListener {
             else{
                 selectedSlot=0;
             }
-        }
+        }*/
     }
 
     private void decreaseSelectedSlot() {
-        System.out.println("\tdecreaseSelectedSlot()");
+        /*System.out.println("\tdecreaseSelectedSlot()");
         if(selectedSlot>0){
             selectedSlot--;
         }
@@ -279,7 +279,7 @@ public class PlayerController extends JComponent implements KeyListener {
             else if(state == ActionState.InInventory){
                 selectedSlot=player.getInventory().size();
             }
-        }
+        }*/
     }
 
     @Override

@@ -3,6 +3,8 @@ package View.ViewItem;
 import Items.Transistor;
 import View.Controller.Controller;
 import View.Utils.Coordinates;
+import View.Utils.GameFrame;
+import View.Utils.ImageReader;
 
 import java.awt.*;
 
@@ -11,31 +13,15 @@ import java.awt.*;
  */
 public class ViewTransistor extends ViewItem {
 	
-	/**
-	 * A modellbeli tranzisztor, amit reprezentál.
-	 */
-	private Transistor item;
-	
 	public ViewTransistor(Transistor tr, Coordinates coor) {
-		super("transistor_on.png", coor);
-		System.out.println("Hellolololol");
-		item = tr;
-		item.subscribe(this);
-		Controller.items.put(item, this);
+		super(tr, coor);
+		image=ImageReader.loadImage(ImageReader.path+itemsPath+"transistor_on.png");
 	}
 	
-	@Override
+	//@Override
 	public void propertyChanged(String property) {
+		super.propertyChanged(property);
 		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
-		Graphics2D g2D = (Graphics2D) g;
-		System.out.println("paint");
-    	g2D.drawImage(image,coordinates.getX(),coordinates.getY(), size.getWidth(),size.getHeight(),this);
 	}
 
 }

@@ -3,6 +3,7 @@ package View.ViewCharacter;
 import Character.Student;
 import View.Controller.Controller;
 import View.Utils.Coordinates;
+import View.Utils.GameFrame;
 import View.Utils.ImageReader;
 import View.Utils.SelectionColor;
 import java.awt.*;
@@ -19,7 +20,6 @@ public class ViewStudent extends ViewCharacter {
 
 	public ViewStudent(Student stud, Coordinates pos){
 		super("student_blue.png", pos);
-
 		character = stud;
 		character.subscribe(this);
 		Controller.characters.put(character, this);
@@ -36,7 +36,7 @@ public class ViewStudent extends ViewCharacter {
 
 	private void setItemPositions() {
 		for(int i=0;i<character.getInventory().size();i++) {
-			Controller.items.get(character.getInventory().get(i)).setCoordinates(new Coordinates(100,100));
+			Controller.items.get(character.getInventory().get(i)).setCoordinates(new Coordinates(100,800));
 		}
 	}
 	

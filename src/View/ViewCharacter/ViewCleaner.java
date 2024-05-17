@@ -3,6 +3,8 @@ package View.ViewCharacter;
 import Character.Cleaner;
 import View.Controller.Controller;
 import View.Utils.Coordinates;
+import View.Utils.GameFrame;
+
 import java.awt.*;
 
 /**
@@ -19,6 +21,8 @@ public class ViewCleaner extends ViewCharacter {
 		super("cleaner.png", pos);
 		character = clean;
 		character.subscribe(this);
+		GameFrame.container.add(this);
+    	GameFrame.viewCharacters.add(this);
 		Controller.characters.put(character, this);
 	}
 

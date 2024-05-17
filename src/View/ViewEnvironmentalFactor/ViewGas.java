@@ -1,7 +1,9 @@
 package View.ViewEnvironmentalFactor;
 
 import EnvironmentalFactor.Gas;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
+import View.Utils.GameFrame;
 
 import java.awt.*;
 
@@ -18,6 +20,9 @@ public class ViewGas extends ViewEnvironmentalFactors {
 	public ViewGas(Gas g, Coordinates c){
 		gas=g;
 		coordinates=c;
+		GameFrame.container.add(this);
+    	GameFrame.viewEnvs.add(this);
+    	Controller.envs.put(gas, this);
 	}
 
 	/**

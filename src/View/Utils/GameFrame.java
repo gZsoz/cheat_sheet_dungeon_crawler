@@ -56,17 +56,17 @@ public class GameFrame extends JFrame {
 			@Override
 			public void paint(Graphics g) {
 				super.paint(g);
-				//red.paint(g);
-				//blue.paint(g);
-				//for(ViewRoom i : viewRooms)
-					//i.paint(g);
-				//for(ViewEnvironmentalFactors i : viewEnvs)
-				//	i.paint(g);
+				red.paint(g);
+				blue.paint(g);
+				for(ViewRoom i : viewRooms)
+					i.paint(g);
+				for(ViewEnvironmentalFactors i : viewEnvs)
+					i.paint(g);
 				for(ViewItem i : viewItems)
 					i.paint(g);
-				//for(ViewCharacter i : viewCharacters)
-				//	i.paint(g);
-				//vl.paint(g);
+				for(ViewCharacter i : viewCharacters)
+					i.paint(g);
+				vl.paint(g);
 				
 			};
 		};

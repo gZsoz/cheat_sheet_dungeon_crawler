@@ -302,7 +302,7 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom(true);
+    		random = new MyRandom(false);
     		Student reds=new Student();
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);
@@ -315,23 +315,29 @@ public class ProtoUtil {
 
 			GameFrame mf = new GameFrame(viewLabyrinth,red,blue);
 
-            //viewLabyrinth.setBackground(Color.BLACK);
-            viewLabyrinth.addview();
+            viewLabyrinth.initLab();
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
 		        	mf.setVisible(true);
                 }
         	});
-            Timer timer = new Timer(300, a ->{
-                    //System.out.println("update()");
+            Timer timer = new Timer(1000, a ->{
+                    //System.out.printn("update()");
                     //viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=1;
                     //viewLabyrinth.roomsInLabyrinth.get(2).coordinates.x-=1;
                     //viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
 					mf.container.repaint();
+					labyrinth.update();
+					if(!reds.getRoom().getItems().isEmpty())
+					reds.pickupItem(reds.getRoom().getItems().get(0));
+					if(!reds.getRoom().getItems().isEmpty())
+					reds.pickupItem(reds.getRoom().getItems().get(0));
+					labyrinth.update();
+					//labyrinth.getRooms().get(0).spawnItem(new Transistor());
 					reds.enterRoom(labyrinth.getRooms().get(aa++%10));
 					labyrinth.update();
-					labyrinth.getRooms().get(0).spawnItem(new Transistor());
-					labyrinth.update();
+					if(!reds.getInventory().isEmpty())
+					reds.putdownItem(reds.getInventory().get(0));
 					
 					//labyrinth.update();
 					//labyrinth.update();

@@ -38,15 +38,6 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	 */
 	private Coordinates coordinates;
 
-	public ArrayList<ViewRoom> getRoomsInLabyrinth() {
-		return roomsInLabyrinth;
-	}
-
-	/**
-	 * A labirintusban megjelenítendő szobák.
-	 */
-	public ArrayList<ViewRoom> roomsInLabyrinth = new ArrayList<>();
-
 	/**
 	 * Az összes lehetséges szoba pozíciója
 	 */
@@ -62,25 +53,8 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 
 	public ViewLabyrinth(Labyrinth lab){
 		labyrinth = lab;
-		initLab();
 		this.setBackground(null);
 		// lab.subscribe(this);
-	}
-
-	/**
-	 * Kezdő map generálás view szinten
-	 */
-	private void initLab() {
-		roomsInLabyrinth.clear();
-		for(int i = 0; i < labyrinth.getRooms().size(); i++){
-			Room room = labyrinth.getRooms().get(i);
-			if(room instanceof CursedRoom){
-				roomsInLabyrinth.add(new ViewCursedRoom( (CursedRoom) room, fixedRoomPositions[i]));
-			}
-			else if(room instanceof Room){
-				roomsInLabyrinth.add(new ViewRoom( (Room) room, fixedRoomPositions[i]));
-			}
-		}
 	}
 
 	@Override
@@ -88,10 +62,20 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	    // TODO document why this method is empty
 	}
 	
-	public void addview() {
-		for(ViewRoom r:roomsInLabyrinth) {
+	/**
+	 * Kezdő map generálás view szinten
+	 */
+	public void initLab() {
+		for(int i = 0; i < labyrinth.getRooms().size(); i++){
+			Room room = labyrinth.getRooms().get(i);
+			ViewRoom r=null;
+			if(room instanceof CursedRoom){
+				r=new ViewCursedRoom( (CursedRoom) room, fixedRoomPositions[i]);
+			}
+			else if(room instanceof Room){
+				r=new ViewRoom( (Room) room, fixedRoomPositions[i]);
+			}
 			r.addview();
-			GameFrame.container.add(r);
 		}
 	}
 	

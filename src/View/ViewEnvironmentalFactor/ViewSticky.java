@@ -1,7 +1,9 @@
 package View.ViewEnvironmentalFactor;
 
 import EnvironmentalFactor.Sticky;
+import View.Controller.Controller;
 import View.Utils.Coordinates;
+import View.Utils.GameFrame;
 
 import java.awt.*;
 
@@ -18,6 +20,9 @@ public class ViewSticky extends ViewEnvironmentalFactors {
 	public ViewSticky(Sticky s, Coordinates c){
 		sticky=s;
 		coordinates=c;
+		GameFrame.container.add(this);
+    	GameFrame.viewEnvs.add(this);
+    	Controller.envs.put(sticky, this);
 	}
 
 	/**
