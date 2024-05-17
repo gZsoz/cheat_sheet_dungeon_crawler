@@ -154,37 +154,49 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 
     @Override
     public void keyPressed(KeyEvent e) {
-    	if(!isStudentAlive)
-    		return;
+        if(!isStudentAlive)
+            return;
         if(color == SelectionColor.Red){
             switch (e.getKeyCode()){
                 case KeyEvent.VK_A:
                     System.out.println("A - Balra vált kijelölést");
+                    clearColor();
                     decreaseSelectedSlot();
+                    setNewColor();
                     break;
                 case KeyEvent.VK_D:
                     System.out.println("D - Jobbra vált kijelölést");
+                    clearColor();
                     increaseSelectedSlot();
+                    setNewColor();
                     break;
                 case KeyEvent.VK_SPACE:
                     System.out.println("Space - Kiválaszt");
+                    clearColor();
                     useSelected();
                     selectedSlot = 0;
+                    setNewColor();
                     break;
                 case KeyEvent.VK_S:
                     System.out.println("S - Inventory kijelölő mód");
+                    clearColor();
                     state = ActionState.InInventory;
                     selectedSlot = 0;
+                    setNewColor();
                     break;
                 case KeyEvent.VK_W:
                     System.out.println("W - Szoba kijelölő mód");
+                    clearColor();
                     state = ActionState.RoomPicker;
                     selectedSlot = 0;
+                    setNewColor();
                     break;
                 case KeyEvent.VK_E:
                     System.out.println("E - Szobatárgy kijelölő mód");
+                    clearColor();
                     state = ActionState.ItemPicker;
                     selectedSlot = 0;
+                    setNewColor();
                     break;
             }
         }
@@ -192,51 +204,103 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
             switch (e.getKeyCode()){
                 case KeyEvent.VK_LEFT:
                     System.out.println("⬅ - Balra vált kijelölést");
+                    clearColor();
                     decreaseSelectedSlot();
+                    setNewColor();
                     break;
                 case KeyEvent.VK_RIGHT:
                     System.out.println("➡ - Jobbra vált kijelölést");
+                    clearColor();
                     increaseSelectedSlot();
+                    setNewColor();
                     break;
                 case KeyEvent.VK_ENTER:
                     System.out.println("Enter - Kiválaszt");
+                    clearColor();
                     useSelected();
                     selectedSlot = 0;
+                    setNewColor();
                     break;
                 case KeyEvent.VK_UP:
                     System.out.println("⬆ - Szoba kijelölő mód");
+                    clearColor();
                     state = ActionState.RoomPicker;
                     selectedSlot = 0;
+                    setNewColor();
                     break;
                 case KeyEvent.VK_DOWN:
                     System.out.println("⬇ - Inventory kijelölő mód");
+                    clearColor();
                     state = ActionState.InInventory;
                     selectedSlot = 0;
+                    setNewColor();
                     break;
                 case KeyEvent.VK_CONTROL:
                     System.out.println("Ctrl - Szobatárgy kijelölő mód");
+                    clearColor();
                     state = ActionState.ItemPicker;
                     selectedSlot = 0;
+                    setNewColor();
                     break;
             }
         }
     }
 
+    private void setNewColor() {
+        if(state==ActionState.RoomPicker && !player.getRoom().getNeighbours().isEmpty()){
+            // set color
+            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).setColor(color);
+        }
+        else if(state==ActionState.ItemPicker && !player.getRoom().getItems().isEmpty()){
+            //set color
+            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).setColor(color);
+        }
+        else if(state == ActionState.InInventory && !player.getInventory().isEmpty()){
+            //set color
+            Controller.items.get(player.getInventory().get(selectedSlot)).setColor(color);
+        }
+    }
+
+    private void clearColor() {
+        if(state == ActionState.RoomPicker){
+            //set prev empty color
+            if(player.getRoom().getNeighbours().isEmpty()){
+                return;
+            }
+            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).setColor(SelectionColor.Empty);
+        }
+        else if(state == ActionState.ItemPicker){
+            //set prev empty color
+            if(player.getRoom().getItems().isEmpty()){
+                return;
+            }
+            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).setColor(SelectionColor.Empty);
+        }
+        else if(state == ActionState.InInventory){
+            //set prev empty color
+            if(player.getInventory().isEmpty()){
+                return;
+            }
+            Controller.items.get(player.getInventory().get(selectedSlot)).setColor(SelectionColor.Empty);
+        }
+    }
+
     private void useSelected() {
-        System.out.println("\tuseSelected()");
         if(state == ActionState.RoomPicker && !player.getRoom().getNeighbours().isEmpty()){
-        	player.enterRoom(player.getRoom().getNeighbours().get(selectedSlot));
+            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).setColor(SelectionColor.Empty);
+            player.enterRoom(player.getRoom().getNeighbours().get(selectedSlot));
         }
         else if(state == ActionState.ItemPicker && !player.getRoom().getItems().isEmpty()){
+            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).setColor(SelectionColor.Empty);
             player.pickupItem(player.getRoom().getItems().get(selectedSlot));
         }
         else if(state == ActionState.InInventory && !player.getInventory().isEmpty()){
+            Controller.items.get(player.getInventory().get(selectedSlot)).setColor(SelectionColor.Empty);
             player.activate(player.getInventory().get(selectedSlot));
         }
     }
 
     private void increaseSelectedSlot() {
-        System.out.println("\tincreaseSelectedSlot()");
         if(state == ActionState.RoomPicker){
             if(selectedSlot<player.getRoom().getNeighbours().size()-1){
                 selectedSlot++;
@@ -264,20 +328,17 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
     }
 
     private void decreaseSelectedSlot() {
-        System.out.println("\tdecreaseSelectedSlot()");
         if(selectedSlot>0){
             selectedSlot--;
         }
-        else{
-            if(state == ActionState.RoomPicker){
-                selectedSlot=player.getRoom().getNeighbours().size()-1;
-            }
-            else if(state == ActionState.ItemPicker){
-                selectedSlot=player.getRoom().getItems().size()-1;
-            }
-            else if(state == ActionState.InInventory){
-                selectedSlot=player.getInventory().size()-1;
-            }
+        else if(state == ActionState.RoomPicker){
+            selectedSlot=player.getRoom().getNeighbours().size()-1;
+        }
+        else if(state == ActionState.ItemPicker){
+            selectedSlot=player.getRoom().getItems().size()-1;
+        }
+        else if(state == ActionState.InInventory){
+            selectedSlot=player.getInventory().size()-1;
         }
     }
 

@@ -57,6 +57,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 		coordinates = pos;
 		image = ImageReader.loadImage("res/images/test/testroom.png");
 		size = new Size(r.getCapacity() * 90,220);
+		selected = SelectionColor.Empty;
 		this.setBackground(null);
 		GameFrame.container.add(this);
     	GameFrame.viewRooms.add(this);
@@ -206,6 +207,15 @@ public class ViewRoom extends JComponent implements Subscriber {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2D = (Graphics2D) g;
+		if(selected == SelectionColor.Red){
+			g2D.setColor(Color.RED);
+			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+		}
+		else if(selected == SelectionColor.Blue){
+			g2D.setColor(Color.BLUE.brighter());
+			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+		}
+
 		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
 
 		
@@ -218,5 +228,9 @@ public class ViewRoom extends JComponent implements Subscriber {
 		//for(ViewCharacter vcharacter : charactersInRoom){
 		//	vcharacter.paint(g);
 		//}
+	}
+
+	public void setColor(SelectionColor selectionColor) {
+		selected = selectionColor;
 	}
 }

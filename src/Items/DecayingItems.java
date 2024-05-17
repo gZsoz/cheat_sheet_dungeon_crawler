@@ -3,13 +3,19 @@ package Items;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
 
+import java.awt.*;
+
 /**
  * Absztrakt osztály, amely összefoglalja az időérzékeny tárgyak közös tulajdonságait és metódusait.
  */
 public abstract class DecayingItems extends Item implements iTask {
     
 	public static int defaultDuration = 6;
-	
+
+	public int getDuration() {
+		return duration;
+	}
+
 	/**
 	 * Milyen hoszzú ideig jó a tárgy.
 	 */
@@ -70,5 +76,4 @@ public abstract class DecayingItems extends Item implements iTask {
     public void update() {
     	if(duration>0 && isActive) reduceDuration();
     };
-
 }

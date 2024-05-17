@@ -71,6 +71,18 @@ public abstract class ViewItem extends JComponent implements Subscriber {
     public void paint(Graphics g) {
         // TODO Auto-generated method stub
     	Graphics2D g2D = (Graphics2D) g;
+		if(selected == SelectionColor.Red){
+			g2D.setColor(Color.RED.darker());
+			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+		}
+		else if(selected == SelectionColor.Blue){
+			g2D.setColor(Color.BLUE.brighter());
+			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+		}
     	g2D.drawImage(image,coordinates.getX(),coordinates.getY(), size.getWidth(),size.getHeight(),this);
     }
+
+	public void setColor(SelectionColor selectionColor) {
+		selected = selectionColor;
+	}
 }

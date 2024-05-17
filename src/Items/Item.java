@@ -28,7 +28,7 @@ public abstract class Item {
      * @param str
      */
     public void notifySubsribers(String str) {
-    	for(Subscriber sub : subscribers)
+    	for(Subscriber sub : new ArrayList<>(subscribers))
     		sub.propertyChanged(str); // lehetséges értékek: "sticky", "remaininguses", "isactive", "duration", "pair", "itemexpired"
     }
 	
