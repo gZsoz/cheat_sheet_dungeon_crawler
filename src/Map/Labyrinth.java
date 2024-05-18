@@ -34,7 +34,7 @@ public class Labyrinth implements iTask{
      * @param str
      */
     public void notifySubsribers(String str) {
-    	for(Subscriber sub : subscribers)
+    	for(Subscriber sub : new ArrayList<>(subscribers))
     		sub.propertyChanged(str); // lehetséges értékek: "merge <indexOf(result)> <indexOf(merging)>", "split <indexOf(old)>"
     }
     
@@ -267,12 +267,15 @@ public class Labyrinth implements iTask{
 		r1.addNeighbour(r3);
 		r1.addNeighbour(r5);
 		r5.addNeighbour(r1);
+		r3.addNeighbour(r4);
+		r4.addNeighbour(r3);
 		
 		// tárgyak legenerálása (0, 1, ..., karakterkapacitás+1 db minden szobába)
 		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(10, 0));
 		roomWithSlideRule.addItem(new SlideRule()); // logarléc betétele egy random szobába
 		
 		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN TÁRGYAT BE LEHET RAKNI*/
+		r1.items.add(new WetCloth());
 		
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba
 			int numberOfSpawnedItems = ProtoUtil.random.nextInt(r.getCapacity() + 2 - r.currentNumOfItems(), 4);
@@ -291,7 +294,7 @@ public class Labyrinth implements iTask{
 		
 		Room roomOfSecondStudent = null;
 		while(roomOfSecondStudent == null) {
-			int roomidx = ProtoUtil.random.nextInt(10, 3);
+			int roomidx = ProtoUtil.random.nextInt(10, 0);
 			if(!(rooms.get(roomidx).equals(roomOfFirstStudent) && roomOfFirstStudent.getCapacity() == 1)) {
 				roomOfSecondStudent = rooms.get(roomidx);
 			}

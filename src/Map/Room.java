@@ -68,8 +68,8 @@ public class Room implements iTask {
 	 * @param str
 	 */
 	public void notifySubsribers(String str) {
-		for(Subscriber sub : subscribers)
-			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>"
+		for(Subscriber sub : new ArrayList<>(subscribers))
+			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx"
 	}
 	
 	/**
@@ -127,9 +127,10 @@ public class Room implements iTask {
 	 */
 	public void removeItem(Item i) {
 	    ProtoUtil.printLog("removeItem");
+	    int idx=items.indexOf(i);
 	    if (!items.remove(i))
 	        System.out.println("Olyan Itemre lett meghívva a removeItem, ami nincs a listában!!!");
-	    notifySubsribers("items");
+	    notifySubsribers("items removed "+idx);
 	}
 	
 	/**

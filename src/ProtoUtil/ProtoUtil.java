@@ -302,13 +302,15 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom(false);
+    		random = new MyRandom(true);
     		Student reds=new Student();
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);
 			PlayerController blue = new PlayerController(SelectionColor.Blue, blues);
 			Labyrinth labyrinth = new Labyrinth();
             labyrinth.generateRooms(reds, blues);
+            red.setRoomSubscribed();
+            blue.setRoomSubscribed();
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
 
 			GameFrame mf = new GameFrame(viewLabyrinth,red,blue);
@@ -326,6 +328,9 @@ public class ProtoUtil {
                     //viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
 					mf.container.repaint();
 					labyrinth.update();
+					if(aa++%10000==15) {
+						labyrinth.getRooms().get(3).getCharacters().get(0).enterRoom(labyrinth.getRooms().get(2));
+					}
 					//if(!reds.getRoom().getItems().isEmpty())
 					//reds.pickupItem(reds.getRoom().getItems().get(0));
 					//if(!reds.getRoom().getItems().isEmpty())

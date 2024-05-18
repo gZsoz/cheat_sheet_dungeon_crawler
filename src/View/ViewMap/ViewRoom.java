@@ -141,7 +141,9 @@ public class ViewRoom extends JComponent implements Subscriber {
 	
 	private void setItemPositions() {
 		for(int i=0;i<room.getItems().size();i++) {
-			Controller.items.get(room.getItems().get(i)).setCoordinates(fixedItemPositions[i]);
+			ViewItem item=Controller.items.get(room.getItems().get(i));
+			item.setCoordinates(fixedItemPositions[i]);
+			item.setItemSize(new Size(40, 40));
 		}
 	}
 	
@@ -182,7 +184,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 	    	setFixedCharacterPositions();
 	    	setCharacterPositions();
 	    }
-	    else if(property.equals("items")) {
+	    else if(property.contains("items")) {
 	    	setFixedItemPositions();
 	    	setItemPositions();
 	    }
@@ -215,6 +217,10 @@ public class ViewRoom extends JComponent implements Subscriber {
 			g2D.setColor(Color.BLUE.brighter());
 			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
 		}
+		else if(selected == SelectionColor.Both){
+			g2D.setColor(Color.GRAY);
+			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+		}
 
 		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
 
@@ -231,6 +237,20 @@ public class ViewRoom extends JComponent implements Subscriber {
 	}
 
 	public void setColor(SelectionColor selectionColor) {
-		selected = selectionColor;
+		if(selected==SelectionColor.Empty)
+			selected = selectionColor;
+		else if(selected!=selectionColor)
+			selected = SelectionColor.Both;
+	}
+	
+	public void removeColor(SelectionColor selectionColor) {
+		if(selected==selectionColor)
+			selected = SelectionColor.Empty;
+		else if(selected==SelectionColor.Both) {
+			if(selectionColor==SelectionColor.Blue)
+				selected=SelectionColor.Red;
+			else if(selectionColor==SelectionColor.Red)
+				selected=SelectionColor.Blue;	
+		}	
 	}
 }

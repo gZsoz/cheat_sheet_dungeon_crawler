@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import Character.Student;
 import Map.Labyrinth;
+import Map.Room;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -26,6 +27,11 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
      * Az egyik játékos által irányított hallgató.
      */
     private Student player;
+    
+    /**
+     * A szoba melyben a hallgató van.
+     */
+    private Room room;
     
     /**
      * Az egyik játékos által irányított hallgató megjelenítéséért felelő része.
@@ -57,7 +63,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
     /**
      * Az irányító játékos éppen melyik akció melyik részén áll.
      */
-    private ActionState state;
+    private ActionState state=ActionState.Empty;
     
     private boolean isStudentAlive=true;
     
@@ -79,6 +85,11 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
     public void setPlayerView(ViewStudent pv){
         playerView = pv;
         playerView.setImage(color);
+    }
+    
+    public void setRoomSubscribed() {
+    	room=player.getRoom();
+    	room.subscribe(this);
     }
 
     /**
@@ -267,35 +278,35 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
             if(player.getRoom().getNeighbours().isEmpty()){
                 return;
             }
-            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).setColor(SelectionColor.Empty);
+            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).removeColor(color);
         }
         else if(state == ActionState.ItemPicker){
             //set prev empty color
             if(player.getRoom().getItems().isEmpty()){
                 return;
             }
-            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).setColor(SelectionColor.Empty);
+            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).removeColor(color);
         }
         else if(state == ActionState.InInventory){
             //set prev empty color
             if(player.getInventory().isEmpty()){
                 return;
             }
-            Controller.items.get(player.getInventory().get(selectedSlot)).setColor(SelectionColor.Empty);
+            Controller.items.get(player.getInventory().get(selectedSlot)).removeColor(color);
         }
     }
 
     private void useSelected() {
         if(state == ActionState.RoomPicker && !player.getRoom().getNeighbours().isEmpty()){
-            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).setColor(SelectionColor.Empty);
+            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).removeColor(color);
             player.enterRoom(player.getRoom().getNeighbours().get(selectedSlot));
         }
         else if(state == ActionState.ItemPicker && !player.getRoom().getItems().isEmpty()){
-            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).setColor(SelectionColor.Empty);
+            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).removeColor(color);
             player.pickupItem(player.getRoom().getItems().get(selectedSlot));
         }
         else if(state == ActionState.InInventory && !player.getInventory().isEmpty()){
-            Controller.items.get(player.getInventory().get(selectedSlot)).setColor(SelectionColor.Empty);
+            Controller.items.get(player.getInventory().get(selectedSlot)).removeColor(color);
             player.activate(player.getInventory().get(selectedSlot));
         }
     }
@@ -350,14 +361,43 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 	@Override
 	public void propertyChanged(String property) {
 		if(property.equals("kicked")) {
-			System.out.println("prop");
 			isStudentAlive=false;
 			GameFrame.viewCharacters.remove(Controller.characters.get(player));
 			GameFrame.container.remove(Controller.characters.get(player));
 			Controller.characters.remove(player);
+			room.unsubscribe(this);
 			player.unsubscribe(this);
-			
-		}
-		
+		}else if(property.equals("characters")) {
+			if(!room.getCharacters().contains(player)) {
+				if(state==ActionState.ItemPicker) {
+					Controller.items.get(room.getItems().get(selectedSlot)).removeColor(color);
+					selectedSlot=0;
+				}else if(state==ActionState.RoomPicker) {
+					Controller.rooms.get(room.getNeighbours().get(selectedSlot)).removeColor(color);
+					selectedSlot=0;
+				}
+				room.unsubscribe(this);
+				setRoomSubscribed();
+				setNewColor();
+			}
+		}else if(property.equals("inventory")) { // ha elhasználódik egy decaying akkor a selectedSlot reagáljon rá
+			if(state==ActionState.InInventory) {
+				selectedSlot=0;
+				setNewColor();
+			}	
+		}else if(property.contains("items removed")) {
+			if(state==ActionState.ItemPicker) {
+				int idx=Integer.parseInt(property.split(" ")[2]);
+				if(idx>selectedSlot)
+					return;
+				else if(idx==selectedSlot){
+					selectedSlot=0;
+					setNewColor();
+				}else {
+					selectedSlot--;
+					setNewColor();
+				}
+			}
+		}	
 	}
 }

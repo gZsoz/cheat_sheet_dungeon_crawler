@@ -18,5 +18,10 @@ public enum SelectionColor {
 	/**
 	 * Kék kijelölés.
 	 */
-	Blue
+	Blue,
+	
+	/**
+	 * Egyszerre mindkettő kijelölés.
+	 */
+	Both
 }

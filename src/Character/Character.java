@@ -54,7 +54,7 @@ public abstract class Character implements iTask {
      * @param str
      */
     public void notifySubsribers(String str) {
-    	for(Subscriber sub : subscribers)
+    	for(Subscriber sub : new ArrayList<>(subscribers))
     		sub.propertyChanged(str); // lehetséges értékek: "stun", "inventory", "invincible", "kicked"
     }
 	
@@ -148,9 +148,10 @@ public abstract class Character implements iTask {
     public boolean enterRoom(Room r) {
     	ProtoUtil.printLog("enterRoom");
     	if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= stunTime)) {
-    		currentRoom.removeCharacter(this);
-    		r.addCharacter(this);
+    		Room temp=currentRoom;
     		currentRoom = r;
+    		temp.removeCharacter(this);
+    		r.addCharacter(this);
     		setStunned(0);
     		for(EnvironmentalFactors ef: currentRoom.getEnvironmentalFactors()) {
     			if(ef instanceof Sticky) {

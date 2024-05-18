@@ -36,7 +36,11 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	protected Image image;
 
 	public void setItemSize(Size size) {
+		if(size.getHeight()==78&&this.size.getHeight()!=78) {
+			selected=SelectionColor.Empty;
+		}
 		this.size = size;
+
 	}
 
 	public Size getItemSize() {
@@ -87,10 +91,31 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 			g2D.setColor(Color.BLUE.brighter());
 			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
 		}
+		else if(selected == SelectionColor.Both){
+    		g2D.setColor(Color.GRAY);
+			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+    	}
     	g2D.drawImage(image,coordinates.getX(),coordinates.getY(), size.getWidth(),size.getHeight(),this);
+    	
     }
 
 	public void setColor(SelectionColor selectionColor) {
-		selected = selectionColor;
+		if(selected==SelectionColor.Empty)
+			selected = selectionColor;
+		else if(selected!=selectionColor)
+			selected = SelectionColor.Both;
+	}
+	
+	public void removeColor(SelectionColor selectionColor) {
+		if(selected==selectionColor)
+			selected = SelectionColor.Empty;
+		else if(selected==SelectionColor.Both) {
+			if(selectionColor==SelectionColor.Blue)
+				selected=SelectionColor.Red;
+			else if(selectionColor==SelectionColor.Red)
+				selected=SelectionColor.Blue;	
+			else 
+				selected = SelectionColor.Empty;
+		}	
 	}
 }
