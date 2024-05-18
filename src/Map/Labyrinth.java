@@ -12,26 +12,31 @@ import Time.iTask;
 import View.Utils.Subscriber;
 import Character.*;
 
-// Labyrinth
-
 /**
  * Osztály, mely reprezentálja a labirintust a játékban.
  */
 public class Labyrinth implements iTask{
-
-	/** A labirintus változásaira feliratkozott osztályok*/
+	
+	/*
+	 * A labirintusban található szobák.
+	 */
+	private List<Room> rooms;
+	
+	/*
+	 * A labirintus változásaira feliratkozott osztályok.
+	 */
 	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	
-	private List<Room> rooms;
-
+	/**
+	 * Konstruktor egy labirintus létrehozásához.
+	 */
 	public Labyrinth(){
 		rooms=new ArrayList<Room>();
 	}
 	
     /**
-     * meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
-     *  függvényüket a paraméterként kapott Stringgel
-     * @param str
+     * Meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String) függvényüket a paraméterként kapott Stringgel.
+     * @param str amilyen eseménnyel értesíti a feliratkozókat
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : new ArrayList<>(subscribers))
@@ -39,30 +44,34 @@ public class Labyrinth implements iTask{
     }
     
     /**
-     * hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához
-     * ezzentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik
-     * @param sub
+     * Hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához,
+     * ezentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik.
+     * @param sub a feliratkozó
      */
     public void subscribe(Subscriber sub) {
     	subscribers.add(sub);
     }
     
     /**
-     * eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából
-     * ezzentúl nem kap értesítést, ha az osztály belső állapota megváltozik
-     * @param sub
+     * Eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából,
+     * ezentúl nem kap értesítést, ha az osztály belső állapota megváltozik.
+     * @param sub a feliratkozott
      */
     public void unsubscribe(Subscriber sub) {
     	subscribers.remove(sub);
     }
-
+    
+    /**
+	 * Visszaadja a labirintus szobáit.
+	 * @return a labirintus szobái
+	 */
 	public List<Room> getRooms(){
 		return rooms;
 	}
 
     /**
-     * Szobát add a labirintushoz.
-     * @param r A hozzáadandó szoba.
+     * Egy szoba hozzáadása a labirintushoz.
+     * @param r a hozzáadandó szoba
      */
 	public void addRoom(Room r) {
 		ProtoUtil.printLog("addRoom");
@@ -71,7 +80,7 @@ public class Labyrinth implements iTask{
 
 	/**
 	 * Egy szoba kitörlése a labirintusból.
-	 * @param r - A törlendő szoba.
+	 * @param r a törlendő szoba
 	 */
 	public void removeRoom(Room r) {
 		ProtoUtil.printLog("removeRoom");
@@ -80,8 +89,8 @@ public class Labyrinth implements iTask{
 
     /**
      * Összeolvaszt egy szobát egy másikkal a labirintusban.
-     * @param result Az összeolvadt szobák eredménye.
-     * @param merging A beolvasztandó szoba.
+     * @param result az összeolvadt szobák eredménye
+     * @param merging a beolvasztandó szoba
      */
 	public void mergeRoom(Room result, Room merging) {
 		ProtoUtil.printLog("mergeRoom");
@@ -99,8 +108,11 @@ public class Labyrinth implements iTask{
     }
 	
     /**
-     * Egy szoba kettéosztása a labirintusban a tesztprogramhoz determisztikus
-     * @param r A szétosztandó szoba.
+     * Egy szoba kettéosztása a labirintusban a tesztprogramhoz determisztikus.
+     * @param r a szétosztandó szoba
+     * @param neighbourcnt szomszédok száma
+     * @param itemcnt tárgyak száma
+     * @param charactercnt karakterek száma
      */
 	public void splitRoomTest(Room old, int neighbourcnt, int itemcnt, int charactercnt) {
 		ProtoUtil.printLog("splitRoom");
@@ -149,7 +161,7 @@ public class Labyrinth implements iTask{
 
     /**
      * Egy szoba kettéosztása a labirintusban.
-     * @param r A szétosztandó szoba.
+     * @param r a szétosztandó szoba
      */
 	public void splitRoom(Room old) {
 		ProtoUtil.printLog("splitRoom");
@@ -203,10 +215,10 @@ public class Labyrinth implements iTask{
 	
 	/**
 	 * Véletlenszerűen kiválaszt egy tárgyat a megadott típusok közül.
-	 * @return A véletlenszerűen kiválasztott tárgy.
+	 * @return a véletlenszerűen kiválasztott tárgy
 	 */
 	private Item itemPicker(){
-		switch(ProtoUtil.random.nextInt(10, 8)){
+		switch(ProtoUtil.random.nextInt(10, 7)){
 		case 0:
 			return new AirFreshener();
 		case 1:
@@ -231,13 +243,48 @@ public class Labyrinth implements iTask{
 			return null;
 		}
 	}
+	
+	/**
+     * Mélységi keresést hajt végre a szobákon, hogy ellenőrizze, elérhető-e minden szoba egy adott szobából.
+     * @param room a szoba, amelyből a mélységi keresést indítjuk
+     * @param rooms a labirintus szobái
+     * @param visited tömb annak számontartására, hogy mely szobákat jártuk be
+     */
+	private void dfs(Room room, List<Room> rooms, boolean[] visited) {
+        int index = rooms.indexOf(room);
+        visited[index] = true;
+        for (Room neighbour : room.getNeighbours()) {
+            int neighbourIndex = rooms.indexOf(neighbour);
+            if (!visited[neighbourIndex]) {
+                dfs(neighbour, rooms, visited);
+            }
+        }
+    }
+	
+	/**
+     * Leellenőrzi, hogy minden szobából minden szobába el lehet-e jutni a labirintusban.
+     * @param rooms a labirintus szobái 
+     * @return igaz, ha minden szobából minden szobába el lehet jutni a labirintusban, egyébként hamis
+     */
+	private boolean isStronglyConnected(List<Room> rooms) {
+        for (Room room : rooms) { // minden szobából mélységi keresést indítunk, hogy megnézzük, minden szoba elérhető-e belőle
+            boolean[] visited = new boolean[rooms.size()];
+            dfs(room, rooms, visited);
+            for (boolean v : visited) {
+                if (!v) { // ha bármelyik szoba nem elérhető valamelyik szobából, akkor még nem vagyunk készen 
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     /**
      * A szobák generálása a labirintusban.
-     * @param blues 
-     * @param reds 
+     * @param blue a kék diák
+     * @param red a piros diák
      */
-	public void generateRooms(Student reds, Student blues) {
+	public void generateRooms(Student red, Student blue) {
 		ProtoUtil.printLog("generateRooms");
 		
 		// szobák legenerálása (2-4 fősek)
@@ -262,32 +309,52 @@ public class Labyrinth implements iTask{
 		rooms.add(r9);
 		rooms.add(r10);
 		
-		// szomszédos szobák beállítása
-		for(Room room1 : rooms){
-			for(Room room2 : rooms){
-				if(!room1.equals(room2)){
-					if(ProtoUtil.random.nextInt(10,1) == 1){
-						room1.addNeighbour(room2);
-					}
-
-				}
+		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN KÖRNYEZETI VÁLTOZÓT BE LEHET RAKNI*/
+		//r1.envFactors.add(new Gas(r1));
+		//r1.envFactors.add(new Sticky(r1));
+		
+		// környezeti változók legenerálása a szobákba
+		int numberOfEnvFactors = ProtoUtil.random.nextInt(3, 2);
+		for (int i = 0; i < numberOfEnvFactors; i++) {
+			Room gassyRoom = rooms.get(ProtoUtil.random.nextInt(10, 2));
+			if (gassyRoom.getEnvironmentalFactors().size() == 0) {
+				gassyRoom.addEnvironmentalFactor(new Gas(gassyRoom));
 			}
 		}
+		
+		// szomszédos szobák beállítása
+		for (Room room : rooms) { // minden szobához végigiterálunk az összes szobán és vagy berakjuk a szomszédok közé vagy nem
+            for (Room otherRoom : rooms) {
+                if (room != otherRoom) { // saját magát nem rakjuk be semmiképpen
+                    if (ProtoUtil.random.nextInt(2, 0) == 0) {
+                        room.addNeighbour(otherRoom);
+                        otherRoom.addNeighbour(room);
+                    }
+                }
+            }
+        }
+		while (!isStronglyConnected(rooms)) { // addig adogatunk véletlenszerűen szomszédokat, amíg a minden szoba elérhető nem lesz minden szobából
+            for (Room room : rooms) {
+                for (Room otherRoom : rooms) {
+                    if (room != otherRoom && !room.getNeighbours().contains(otherRoom)) { // saját magát és már felvett szomszédokat nem rakunk be
+                        if (ProtoUtil.random.nextInt(2, 0) == 0) {
+                            room.addNeighbour(otherRoom);
+                            otherRoom.addNeighbour(room);
+                        }
+                    }
+                }
+            }
+        }
 		
 		// tárgyak legenerálása (0, 1, ..., 6 db minden szobába)
 		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(10, 0));
 		roomWithSlideRule.addItem(new SlideRule()); // logarléc betétele egy random szobába
 		
 		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN TÁRGYAT BE LEHET RAKNI*/
-		r1.items.add(new WetCloth());
-		r1.items.add(new BatSkin());
-		r1.items.add(new Beer());
-		r5.items.add(new Beer());
-		r1.envFactors.add(new Gas(r1));
-		r3.addItem(new AirFreshener());
-		r3.addItem(new CabbageCamembert());
-		//r1.envFactors.add(new Sticky(r1));
-		
+		//r1.items.add(new WetCloth());
+		//r1.items.add(new BatSkin());
+		//r1.items.add(new Beer());
+		//r5.items.add(new Beer());
 		
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba
 			int numberOfSpawnedItems = ProtoUtil.random.nextInt(7 - r.currentNumOfItems(), 4);
@@ -300,8 +367,8 @@ public class Labyrinth implements iTask{
 		List<Room> roomsWithStudents = new ArrayList<Room>();
 		
 		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(10, 2));
-		roomOfFirstStudent.addCharacter(reds); // első diák betétele egy random szobába
-		reds.setRoom(roomOfFirstStudent);
+		roomOfFirstStudent.addCharacter(red); // első diák betétele egy random szobába
+		red.setRoom(roomOfFirstStudent);
 		roomsWithStudents.add(roomOfFirstStudent);
 		
 		Room roomOfSecondStudent = null;
@@ -311,8 +378,8 @@ public class Labyrinth implements iTask{
 				roomOfSecondStudent = rooms.get(roomidx);
 			}
 		}
-		roomOfSecondStudent.addCharacter(blues); // második diák betétele egy random szabad helyre
-		blues.setRoom(roomOfSecondStudent);
+		roomOfSecondStudent.addCharacter(blue); // második diák betétele egy random szabad helyre
+		blue.setRoom(roomOfSecondStudent);
 		roomsWithStudents.add(roomOfSecondStudent);
 		
 		List<Room> roomsWithoutStudents = new ArrayList<Room>(rooms);
@@ -336,7 +403,6 @@ public class Labyrinth implements iTask{
 	@Override
 	public void update() {
 		// a random események végrehajtása
-		Random rand=new Random();
 		if(ProtoUtil.random.nextInt(1000, -1)==0) {
 			//mergeRoom(rooms.get(rand.nextInt(rooms.size())), rooms.get(rand.nextInt(rooms.size()))); // merge
 		}
