@@ -20,5 +20,18 @@ public class FakeMask extends Mask{
 	}
 	
 	@Override
+	public void onPickUp() 
+	{
+		ProtoUtil.printLog("onPickUp"); // Logolás
+	}
+	
+	@Override
+	public void onDrop() 
+	{
+		ProtoUtil.printLog("onDrop"); // Logolás
+		owner=null;
+	}
+	
+	@Override
 	public void update() {}
 }

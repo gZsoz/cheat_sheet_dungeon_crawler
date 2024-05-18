@@ -16,6 +16,14 @@ public class FakeBatSkin extends BatSkin{
     }
 
     /**
+     * Végrehajtja azokat a tevékenységeket, amiknek a tárgy felvevésénél kell megtörténnie.
+     */
+	@Override
+	public void onPickUp() {
+		ProtoUtil.printLog("onPickUp");
+	}
+    
+    /**
      * A tárgy használatának metódusa.
      */
     @Override

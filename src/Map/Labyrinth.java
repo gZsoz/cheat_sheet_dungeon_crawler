@@ -206,7 +206,7 @@ public class Labyrinth implements iTask{
 	 * @return A véletlenszerűen kiválasztott tárgy.
 	 */
 	private Item itemPicker(){
-		switch(ProtoUtil.random.nextInt(10, 5)){
+		switch(ProtoUtil.random.nextInt(10, 7)){
 		case 0:
 			return new AirFreshener();
 		case 1:

@@ -15,6 +15,11 @@ public class FakeSlideRule extends SlideRule{
         RemainingUses=0; // Nincs maradék használat
     }
 
+    @Override
+	public void onPickUp() {
+    	ProtoUtil.printLog("onPickUp");
+    }
+    
     /**
      * A tárgy használatának metódusa.
      */
