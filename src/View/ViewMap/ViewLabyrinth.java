@@ -3,6 +3,8 @@ package View.ViewMap;
 import Map.CursedRoom;
 import Map.Labyrinth;
 import Map.Room;
+import ProtoUtil.MyRandom;
+import ProtoUtil.ProtoUtil;
 import View.Controller.Controller;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
@@ -13,6 +15,8 @@ import View.Utils.Subscriber;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * A labirintus grafikus osztálya.
@@ -40,14 +44,20 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	 * A képernyőn megjelenítendő x és y koordináták.
 	 */
 	private Coordinates coordinates;
-
+	
+	/**
+	 * A fixedRoomPositions tömbbel azonos indexü tagja 1, ha van ott szoba. 0, ha nincs.
+	 */
+	private int roomsInPosition [] = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	
 	/**
 	 * Az összes lehetséges szoba pozíciója
 	 */
-	private Coordinates[] fixedRoomPositions = {new Coordinates(71,50), new Coordinates(542,30), new Coordinates(964,30), new Coordinates(1410,50),
-														new Coordinates(209,300), new Coordinates(772,300), new Coordinates(1272,300),
-													new Coordinates(322,620), new Coordinates(722,556), new Coordinates(1132,620)
-	};
+	private ArrayList<Coordinates> fixedRoomPositions = new ArrayList<>(Arrays.asList(
+				new Coordinates(71,50), new Coordinates(542,30), new Coordinates(964,30), new Coordinates(1410,50),
+				new Coordinates(209,300), new Coordinates(772,300), new Coordinates(1272,300),
+				new Coordinates(322,620), new Coordinates(722,556), new Coordinates(1132,620)
+	));
 
 	public void paintRoutes(Graphics2D g2D) {
 
@@ -76,39 +86,55 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 				g2D.drawImage(pinImage,Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX(),Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY(),40,40,null);
 			}
 		}
-
-		this.routesBetweenRooms = routesBetweenRooms;
 	}
-
-	/**
-	 * A szomszédos szobák közti összeköttetés koordinátái.
-	 */
-	private ArrayList<ArrayList<Coordinates>> routesBetweenRooms;
 
 	public ViewLabyrinth(Labyrinth lab){
 		labyrinth = lab;
 		this.setBackground(null);
 		pinImage = ImageReader.loadImage("res/images/room/pin.png");
-		// lab.subscribe(this);
+		lab.subscribe(this);
 	}
 
 	@Override
 	public void propertyChanged(String property) {
-	    // TODO document why this method is empty
+		if(property.contains("merge")) {
+			int idx=Integer.parseInt(property.split(" ")[2]);
+			roomsInPosition[idx]=0;
+		}else if(property.contains("split")) {
+			int idx=Integer.parseInt(property.split(" ")[1])+1;
+			int posidx=-1;
+			for(int i=0;i<roomsInPosition.length;i++) {
+				if(roomsInPosition[i]==0) {
+					posidx=i;
+					break;
+				}
+			}
+			roomsInPosition[posidx]=1;
+			Room room = labyrinth.getRooms().get(idx);
+			if(room instanceof CursedRoom){
+				new ViewCursedRoom( (CursedRoom) room, fixedRoomPositions.get(posidx));
+			}
+			else if(room instanceof Room){
+				new ViewRoom( (Room) room, fixedRoomPositions.get(posidx));
+			}
+		}
 	}
 	
 	/**
 	 * Kezdő map generálás view szinten
 	 */
 	public void initLab() {
+		if(ProtoUtil.random.nextInt(1, -1)==0)
+			Collections.shuffle(fixedRoomPositions);
 		for(int i = 0; i < labyrinth.getRooms().size(); i++){
+			roomsInPosition[i]=1;
 			Room room = labyrinth.getRooms().get(i);
 			ViewRoom r=null;
 			if(room instanceof CursedRoom){
-				r=new ViewCursedRoom( (CursedRoom) room, fixedRoomPositions[i]);
+				r=new ViewCursedRoom( (CursedRoom) room, fixedRoomPositions.get(i));
 			}
 			else if(room instanceof Room){
-				r=new ViewRoom( (Room) room, fixedRoomPositions[i]);
+				r=new ViewRoom( (Room) room, fixedRoomPositions.get(i));
 			}
 			r.addview();
 		}

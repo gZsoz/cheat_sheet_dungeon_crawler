@@ -329,10 +329,17 @@ public class ProtoUtil {
                     //viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
 					mf.container.repaint();
 					labyrinth.update();
-					if(aa++%10000==15) {
-						labyrinth.getRooms().get(3).getCharacters().get(0).enterRoom(labyrinth.getRooms().get(0));
+					if(aa++%10000==16) {
+						//labyrinth.getRooms().get(3).getCharacters().get(0).enterRoom(labyrinth.getRooms().get(0));
+						labyrinth.splitRoom(labyrinth.getRooms().get(3));
+						//labyrinth.mergeRoom(labyrinth.getRooms().get(2), labyrinth.getRooms().get(0));
+						labyrinth.update();
+						
 						//labyrinth.getRooms().get(0).addEnvironmentalFactor(new Gas(labyrinth.getRooms().get(0)));
 					}
+					//if(aa++%10000==100) 
+						//labyrinth.splitRoom(labyrinth.getRooms().get(3));
+					
 					//if(!reds.getRoom().getItems().isEmpty())
 					//reds.pickupItem(reds.getRoom().getItems().get(0));
 					//if(!reds.getRoom().getItems().isEmpty())

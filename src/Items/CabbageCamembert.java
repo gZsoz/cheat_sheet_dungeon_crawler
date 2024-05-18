@@ -28,7 +28,7 @@ public class CabbageCamembert extends NumberOfUsesItem {
     public void use() {
     	ProtoUtil.printLog("use");
 		Gas g=new Gas(owner.getRoom());
-		owner.getRoom().addEnvironmentalFactor(g);
+		owner.getRoom().spawnEnvironmentalFactor(g);
 		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
     }
 

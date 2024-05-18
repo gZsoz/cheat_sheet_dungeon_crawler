@@ -204,7 +204,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 	    	setFixedCharacterPositions();
 	    	setCharacterPositions();
 	    }
-	    else if(property.contains("items")) {
+	    else if(property.contains("items")) { // kell a contains!!
 	    	setFixedItemPositions();
 	    	setItemPositions();
 	    }
@@ -216,6 +216,15 @@ public class ViewRoom extends JComponent implements Subscriber {
 	    }else if(property.contains("spawnfactor")) {
 	    	int idx = Integer.parseInt(property.split(" ")[1]);
 	    	createViewEnvFactor(room.getEnvironmentalFactors().get(idx));
+	    }else if(property.equals("roomremoved")) {
+	    	Controller.rooms.remove(room);
+			GameFrame.viewRooms.remove(this);
+			GameFrame.container.remove(this);
+			room.unsubscribe(this);
+	    }else if(property.equals("factors")) {
+	    	for(EnvironmentalFactors env : room.getEnvironmentalFactors()) {
+	    		Controller.envs.get(env).setCoordinates(coordinates);
+	    	}
 	    }
 	}
 	

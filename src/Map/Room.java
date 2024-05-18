@@ -1,6 +1,8 @@
 package Map;
 
+import Items.FakeSlideRule;
 import Items.Item;
+import Items.SlideRule;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
 import View.Utils.Subscriber;
@@ -69,7 +71,7 @@ public class Room implements iTask {
 	 */
 	public void notifySubsribers(String str) {
 		for(Subscriber sub : new ArrayList<>(subscribers))
-			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx", "spawnfactor <factor pos>"
+			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx", "spawnfactor <factor pos>", "roomremoved"
 	}
 	
 	/**
@@ -111,6 +113,13 @@ public class Room implements iTask {
 	    	items.add(i);
 	    	notifySubsribers("items");
 	    	return true;
+	    }else if(i instanceof SlideRule && !(i instanceof FakeSlideRule)){
+	    	items.add(i);
+	    	Item temp=items.get(5);
+	    	removeItem(temp);
+	    	temp.notifySubsribers("itemexpired");
+	    	notifySubsribers("items");
+	    	return true;
 	    }else {
 	    	i.notifySubsribers("itemexpired");
 	    	return false;
@@ -146,6 +155,7 @@ public class Room implements iTask {
 	 */
 	public void addNeighbour(Room r) {
 	    ProtoUtil.printLog("addNeighbour");
+	    neighbours.remove(r);
 	    neighbours.add(r);
 	}
 	
@@ -163,7 +173,7 @@ public class Room implements iTask {
 	 * Hozzáadja a paraméterként kapott környezeti tényezőt a szobához.
 	 * @param ef A hozzáadandó környezeti tényező
 	 */
-	public void addEnvironmentalFactor(EnvironmentalFactors ef) {
+	public void spawnEnvironmentalFactor(EnvironmentalFactors ef) {
 	    ProtoUtil.printLog("addEnvironmentalFactor");
 	    ef.setLocation(this);
 	    EnvironmentalFactors temp=null;
@@ -175,6 +185,24 @@ public class Room implements iTask {
 	    if(temp!=null) removeEnvironmentalFactor(temp);
 	    envFactors.add(ef);
     	notifySubsribers("spawnfactor "+(envFactors.size()-1));
+	    notifySubsribers("factors");
+	}
+	
+	/**
+	 * Hozzáadja a paraméterként kapott környezeti tényezőt a szobához.
+	 * @param ef A hozzáadandó környezeti tényező
+	 */
+	public void addEnvironmentalFactor(EnvironmentalFactors ef) {
+	    ProtoUtil.printLog("addEnvironmentalFactor");
+	    ef.setLocation(this);
+	    EnvironmentalFactors temp=null;
+	    for (EnvironmentalFactors e : envFactors ) {
+	        if (e.getClass().equals(ef.getClass())) {
+	        	temp=e;
+	        }
+	    }
+	    if(temp!=null) removeEnvironmentalFactor(temp);
+	    envFactors.add(ef);
 	    notifySubsribers("factors");
 	}
 	
@@ -220,21 +248,27 @@ public class Room implements iTask {
 	 */
 	public void merge(Room r) {
 	    ProtoUtil.printLog("merge");
-	    for (Room current : r.getNeighbours()) {
-	        if (!neighbours.contains(current)) {
+	    for (Room current : new ArrayList<>(r.getNeighbours())) {
+	        if (!neighbours.contains(current)&&!current.equals(this)) {
 	            addNeighbour(current);
 	            current.addNeighbour(this);
-	            current.removeNeighbour(r);
 	        }
+	        current.removeNeighbour(r);
 	    }
-	    for (Item i : r.getItems()) {
+	    for (Item i : new ArrayList<>(r.getItems())) {
 	        addItem(i);
 	    }
-	    for (Character c : r.getCharacters()) {
-	        addCharacter(c);
+	    for (Character c : new ArrayList<>(r.getCharacters())) {
+	        c.setStunned(0);
+	    	c.enterRoom(this);
 	    }
+	    for (EnvironmentalFactors env : new ArrayList<>(r.getEnvironmentalFactors())) {
+	    	addEnvironmentalFactor(env);
+	    }
+	    if(neighbours.contains(this))
+	    	System.out.println("nagy a baj");
 	}
-	
+
 	/**
 	 * Visszaadja, a szoba szomszédait.
 	 * @return A szoba szomszédai egy listában.

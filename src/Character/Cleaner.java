@@ -56,8 +56,7 @@ public class Cleaner extends Character {
 		}
 
 		// új ragacsosság betétele ha még nincs benne
-		Sticky st = new Sticky(currentRoom);
-		r.addEnvironmentalFactor(st);
+		r.spawnEnvironmentalFactor(new Sticky(r));
 	}
 	
 	/**

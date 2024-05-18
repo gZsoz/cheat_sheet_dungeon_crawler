@@ -29,6 +29,10 @@ public abstract class ViewEnvironmentalFactors extends JComponent implements Sub
 	 */
 	protected Coordinates coordinates;
 	
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates=coordinates;
+	}
+	
 	/**
 	 * A környezeti változó kirajzolása.
 	 */
