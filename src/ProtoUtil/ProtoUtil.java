@@ -329,7 +329,7 @@ public class ProtoUtil {
 					mf.container.repaint();
 					labyrinth.update();
 					if(aa++%10000==15) {
-						labyrinth.getRooms().get(3).getCharacters().get(0).enterRoom(labyrinth.getRooms().get(2));
+						//labyrinth.getRooms().get(4).getCharacters().get(0).enterRoom(labyrinth.getRooms().get(0));
 					}
 					//if(!reds.getRoom().getItems().isEmpty())
 					//reds.pickupItem(reds.getRoom().getItems().get(0));

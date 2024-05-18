@@ -81,15 +81,10 @@ getInventory
 getInventory
 getInventory
 getInventory
-getInventory
-use
-setInvincible
-setRemainingUses
 use
 setIsActive
 getRoom
 getCharacters
-getStunned
 setStunned
 reduceDuration
 reduceStunned
@@ -101,7 +96,7 @@ use
 setIsActive
 getRoom
 getCharacters
-getStunned
+setStunned
 reduceDuration
 reduceStunned
 checkCollision
@@ -112,7 +107,7 @@ use
 setIsActive
 getRoom
 getCharacters
-getStunned
+setStunned
 reduceDuration
 getInventory
 onDrop

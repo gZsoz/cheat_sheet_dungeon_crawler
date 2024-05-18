@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import Items.BatSkin;
 import Items.Beer;
+import Items.FakeBatSkin;
 import Items.Item;
 import Items.Transistor;
+import Items.WetCloth;
 import Map.Room;
 import ProtoUtil.ProtoUtil;
 
@@ -50,7 +52,8 @@ public class Teacher extends Character {
     		for(int i = 0; i < s.getInventory().size(); i++){
     			Item currentItem = s.getInventory().get(i);
     			if(currentItem instanceof Beer) return; // ha sört találtunk, az minden további nélkül megvéd
-    			if(currentItem instanceof BatSkin) b = (BatSkin) currentItem; // denevérbőrt találtunk
+    			if(currentItem instanceof WetCloth) return; // ha nedves törlőrongyot találtunk, az elkábítja a tanárt
+    			if(currentItem instanceof BatSkin && !(currentItem instanceof FakeBatSkin)) {b = (BatSkin) currentItem;} // denevérbőrt találtunk
     		}
     		if(b != null) { // nem volt sör, de volt denevérbőr
     			b.use();

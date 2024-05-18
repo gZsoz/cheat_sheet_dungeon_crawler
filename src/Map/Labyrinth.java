@@ -276,6 +276,7 @@ public class Labyrinth implements iTask{
 		
 		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN TÁRGYAT BE LEHET RAKNI*/
 		r1.items.add(new WetCloth());
+		r1.items.add(new FakeBatSkin());
 		
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba
 			int numberOfSpawnedItems = ProtoUtil.random.nextInt(r.getCapacity() + 2 - r.currentNumOfItems(), 4);
