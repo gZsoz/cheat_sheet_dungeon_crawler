@@ -24,12 +24,13 @@ public abstract class Character implements iTask {
 	public static int stunTime=4;
 	public static int restTime=10;
 	
-	/** A karakter változásaira feliratkozott osztályok*/
+	/*
+	 * A karakter változásaira feliratkozott osztályok.
+	 */
 	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	
 	/**
-	 * A karakter birtokában található tárgyak
-	 * listája. Maximum 5 Item lehet benne. Nem lehet benne logarléc.
+	 * A karakter birtokában található tárgyak listája. Maximum 5 Item lehet benne. Nem lehet benne logarléc.
 	 */
 	protected ArrayList<Item> inventory;
 	
@@ -49,8 +50,7 @@ public abstract class Character implements iTask {
 	protected boolean hasDefense;
 	
     /**
-     * meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
-     *  függvényüket a paraméterként kapott Stringgel
+     * Meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String) függvényüket a paraméterként kapott Stringgel.
      * @param str
      */
     public void notifySubsribers(String str) {
@@ -196,7 +196,7 @@ public abstract class Character implements iTask {
     		i.onPickUp();
     		return true;
     	}
-    	ProtoUtil.printLog("Could not pick up item");
+    	ProtoUtil.printLog("Could not pick up item, as it is a paired transistor.");
     	return false;
     }
 
@@ -208,8 +208,8 @@ public abstract class Character implements iTask {
     	ProtoUtil.printLog("putdownItem");
     	inventory.remove(i);
     	notifySubsribers("inventory");
-    	currentRoom.addItem(i);
-    	i.onDrop();
+    	if(currentRoom.addItem(i))
+    		i.onDrop();
     }
 
     /**

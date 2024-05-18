@@ -79,7 +79,7 @@ getRoom
 getItems
 pickupItem
 getSticky
-Could not pick up item
+Could not pick up item, as it is a paired transistor.
 getLocation
 getItems
 makeSticky

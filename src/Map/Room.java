@@ -101,13 +101,20 @@ public class Room implements iTask {
 	}
 	
 	/**
-	 * Hozzáadja a paraméterként kapott tárgyat a szobában található tárgyak listájához.
+	 * Hozzáadja a paraméterként kapott tárgyat a szobában található tárgyak listájához. Egy szobában maximum hat tárgy lehet
 	 * @param i A hozzáadandó tárgy
+	 * @return befért-e a tárgy
 	 */
-	public void addItem(Item i) {
+	public boolean addItem(Item i) {
 	    ProtoUtil.printLog("addItem");
-	    items.add(i);
-	    notifySubsribers("items");
+	    if(items.size()<6) {
+	    	items.add(i);
+	    	notifySubsribers("items");
+	    	return true;
+	    }else {
+	    	i.notifySubsribers("itemexpired");
+	    	return false;
+	    }
 	}
 	
 	/**

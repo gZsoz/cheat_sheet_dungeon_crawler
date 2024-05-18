@@ -58,7 +58,7 @@ getInventory
 getRoom
 getItems
 pickupItem
-Could not pick up item
+Could not pick up item, as it is a paired transistor.
 reduceStunned
 getLocation
 getCharacters
