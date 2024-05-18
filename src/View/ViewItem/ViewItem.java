@@ -36,7 +36,7 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	protected Image image;
 
 	public void setItemSize(Size size) {
-		if(size.getHeight()==78&&this.size.getHeight()!=78) {
+		if(size.getHeight()==78&&size.getHeight()!=78) {
 			selected=SelectionColor.Empty;
 		}
 		this.size = size;

@@ -19,11 +19,11 @@ public class ViewSticky extends ViewEnvironmentalFactors {
 	 */
 	private Sticky sticky;
 	
-	public ViewSticky(Sticky s, Coordinates c){
+	public ViewSticky(Sticky s, Coordinates c, int capacity){
 		sticky=s;
 		coordinates=c;
 		image = ImageReader.loadImage("res/images/envfactors/sticky.png");
-		size = new Size(/*capacity * */90+30,250);
+		size = new Size(capacity * 90+30,250);
 		GameFrame.container.add(this);
     	GameFrame.viewEnvs.add(this);
     	Controller.envs.put(sticky, this);
@@ -34,6 +34,7 @@ public class ViewSticky extends ViewEnvironmentalFactors {
 	 */
 	@Override
 	public void paint(Graphics g) {
-	    // TODO document why this method is empty
+		Graphics2D g2D = (Graphics2D)g;
+		g2D.drawImage(image,coordinates.getX()-15,coordinates.getY()-15,size.getWidth(),size.getHeight(),null);
 	}
 }

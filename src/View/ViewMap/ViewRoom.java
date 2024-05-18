@@ -55,7 +55,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 	public ViewRoom(Room r, Coordinates pos){
 		room = r;
 		coordinates = pos;
-		image = ImageReader.loadImage("res/images/test/testroom.png");
+		image = ImageReader.loadImage("res/images/room/room.png");
 		size = new Size(/*r.getCapacity() * 90*/ 360,220);
 		selected = SelectionColor.Empty;
 		this.setBackground(null);
@@ -170,10 +170,10 @@ public class ViewRoom extends JComponent implements Subscriber {
 		for(int i = 0; i < room.getEnvironmentalFactors().size(); i++){
 			EnvironmentalFactors factor = room.getEnvironmentalFactors().get(i);
 			if(factor instanceof Gas){
-				new ViewGas((Gas) factor, coordinates);
+				new ViewGas((Gas) factor, coordinates, room.getCapacity());
 			}
 			else if(factor instanceof Sticky){
-				new ViewSticky((Sticky) factor, coordinates);
+				new ViewSticky((Sticky) factor, coordinates, room.getCapacity());
 			}
 		}
 	}
