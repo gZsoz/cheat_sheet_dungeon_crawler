@@ -56,7 +56,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 		room = r;
 		coordinates = pos;
 		image = ImageReader.loadImage("res/images/test/testroom.png");
-		size = new Size(r.getCapacity() * 90,220);
+		size = new Size(/*r.getCapacity() * 90*/ 360,220);
 		selected = SelectionColor.Empty;
 		this.setBackground(null);
 		GameFrame.container.add(this);

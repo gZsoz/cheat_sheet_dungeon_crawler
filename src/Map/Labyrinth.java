@@ -270,7 +270,7 @@ public class Labyrinth implements iTask{
 		r3.addNeighbour(r4);
 		r4.addNeighbour(r3);
 		
-		// tárgyak legenerálása (0, 1, ..., karakterkapacitás+1 db minden szobába)
+		// tárgyak legenerálása (0, 1, ..., 6 db minden szobába)
 		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(10, 0));
 		roomWithSlideRule.addItem(new SlideRule()); // logarléc betétele egy random szobába
 		
@@ -283,7 +283,7 @@ public class Labyrinth implements iTask{
 		r1.envFactors.add(new Gas(r1));
 		
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba
-			int numberOfSpawnedItems = ProtoUtil.random.nextInt(r.getCapacity() + 2 - r.currentNumOfItems(), 4);
+			int numberOfSpawnedItems = ProtoUtil.random.nextInt(7 - r.currentNumOfItems(), 4);
 			for(int i = 0; i < numberOfSpawnedItems; i++) {
 				r.spawnItem(itemPicker());
 			}
