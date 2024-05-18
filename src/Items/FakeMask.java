@@ -6,9 +6,6 @@ import ProtoUtil.ProtoUtil;
  * Az osztály egy hamis maszkot reprezentál, amely a Maskból származik.
  */
 public class FakeMask extends Mask{
-	/*
-	 * Nem csinál semmit
-	 */
 
 	/**
      * A FakeMask osztály használatának metódusa.

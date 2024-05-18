@@ -239,8 +239,10 @@ public class Room implements iTask {
      */
     public void spawnItem(Item a) {
         ProtoUtil.printLog("spawnItem");
-        items.add(a);
-        notifySubsribers("spawnitem "+(items.size()-1));
+        if(items.size()<6) {
+        	items.add(a);
+        	notifySubsribers("spawnitem "+(items.size()-1));
+        }
     }
 	
 	/**
