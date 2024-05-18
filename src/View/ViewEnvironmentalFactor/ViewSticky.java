@@ -4,6 +4,8 @@ import EnvironmentalFactor.Sticky;
 import View.Controller.Controller;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
+import View.Utils.ImageReader;
+import View.Utils.Size;
 
 import java.awt.*;
 
@@ -20,6 +22,8 @@ public class ViewSticky extends ViewEnvironmentalFactors {
 	public ViewSticky(Sticky s, Coordinates c){
 		sticky=s;
 		coordinates=c;
+		image = ImageReader.loadImage("res/images/envfactors/sticky.png");
+		size = new Size(/*capacity * */90+30,250);
 		GameFrame.container.add(this);
     	GameFrame.viewEnvs.add(this);
     	Controller.envs.put(sticky, this);
