@@ -19,11 +19,11 @@ public class ViewGas extends ViewEnvironmentalFactors {
 	 */
 	private Gas gas;
 	
-	public ViewGas(Gas g, Coordinates c){
+	public ViewGas(Gas g, Coordinates c, int capacity){
 		gas=g;
 		coordinates=c;
 		image = ImageReader.loadImage("res/images/envfactors/gas.png");
-		size = new Size(/*capacity * */90+30,	250);
+		size = new Size(/*capacity * 90*/ 360+30,	250);
 		GameFrame.container.add(this);
     	GameFrame.viewEnvs.add(this);
     	Controller.envs.put(gas, this);

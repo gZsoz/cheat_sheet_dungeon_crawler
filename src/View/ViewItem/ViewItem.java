@@ -36,7 +36,7 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	protected Image image;
 
 	public void setItemSize(Size size) {
-		if(size.getHeight()==78&&this.size.getHeight()!=78) {
+		if(size.getHeight()==78&&size.getHeight()!=78) {
 			selected=SelectionColor.Empty;
 		}
 		this.size = size;
@@ -84,7 +84,7 @@ public abstract class ViewItem extends JComponent implements Subscriber {
         // TODO Auto-generated method stub
     	Graphics2D g2D = (Graphics2D) g;
 		if(selected == SelectionColor.Red){
-			g2D.setColor(Color.RED.darker());
+			g2D.setColor(Color.RED);
 			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
 		}
 		else if(selected == SelectionColor.Blue){
