@@ -362,6 +362,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 	public void propertyChanged(String property) {
 		if(property.equals("kicked")) {
 			isStudentAlive=false;
+			clearColor();
 			GameFrame.viewCharacters.remove(Controller.characters.get(player));
 			GameFrame.container.remove(Controller.characters.get(player));
 			Controller.characters.remove(player);
