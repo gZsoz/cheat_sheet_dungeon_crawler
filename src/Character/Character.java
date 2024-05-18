@@ -21,8 +21,8 @@ import View.Utils.Subscriber;
  * a játék környezetében. A Character leszármazottai a Teacher és a Student.
  */
 public abstract class Character implements iTask {
-	public static int stunTime=4;
-	public static int restTime=10;
+	public static int stunTime=50;
+	public static int restTime=100;
 	
 	/*
 	 * A karakter változásaira feliratkozott osztályok.

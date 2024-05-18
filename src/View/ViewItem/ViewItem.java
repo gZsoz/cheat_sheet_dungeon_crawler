@@ -36,7 +36,7 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	protected Image image;
 
 	public void setItemSize(Size size) {
-		if(size.getHeight()==78&&size.getHeight()!=78) {
+		if(size.getHeight()==78&&this.size.getHeight()!=78) {
 			selected=SelectionColor.Empty;
 		}
 		this.size = size;
@@ -85,15 +85,17 @@ public abstract class ViewItem extends JComponent implements Subscriber {
     	Graphics2D g2D = (Graphics2D) g;
 		if(selected == SelectionColor.Red){
 			g2D.setColor(Color.RED);
-			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+			g2D.fillRect(coordinates.getX()-5,coordinates.getY()-5,size.getWidth()+10,size.getHeight()+10);
 		}
 		else if(selected == SelectionColor.Blue){
 			g2D.setColor(Color.BLUE.brighter());
-			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+			g2D.fillRect(coordinates.getX()-5,coordinates.getY()-5,size.getWidth()+10,size.getHeight()+10);
 		}
 		else if(selected == SelectionColor.Both){
-    		g2D.setColor(Color.GRAY);
-			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+			g2D.setColor(Color.BLUE.brighter());
+			g2D.fillRect(coordinates.getX()-5,coordinates.getY()-5,size.getWidth()+10,size.getHeight()+10);
+			g2D.setColor(Color.RED);
+			g2D.fillRect(coordinates.getX()-5,coordinates.getY()-5,(size.getWidth()+10)/2,size.getHeight()+10);
     	}
     	g2D.drawImage(image,coordinates.getX(),coordinates.getY(), size.getWidth(),size.getHeight(),this);
     	

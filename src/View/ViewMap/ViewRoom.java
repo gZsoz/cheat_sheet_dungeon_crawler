@@ -241,8 +241,11 @@ public class ViewRoom extends JComponent implements Subscriber {
 			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
 		}
 		else if(selected == SelectionColor.Both){
-			g2D.setColor(Color.GRAY);
+			g2D.setColor(Color.BLUE.brighter());
 			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+			g2D.setColor(Color.RED);
+			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,(size.getWidth()+20)/2,size.getHeight()+20);
+
 		}
 
 		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);

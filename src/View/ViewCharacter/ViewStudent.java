@@ -1,6 +1,7 @@
 package View.ViewCharacter;
 
 import Character.Student;
+import Character.Character;
 import View.Controller.Controller;
 import View.Controller.PlayerController;
 import View.Utils.*;
@@ -12,7 +13,7 @@ import java.awt.*;
  * A diák kirajzolásáért felelős osztály.
  */
 public class ViewStudent extends ViewCharacter {
-	
+
 	/**
 	 * A modellbeli diák, amit reprezentál.
 	 */
@@ -65,13 +66,33 @@ public class ViewStudent extends ViewCharacter {
 		if(property.equals("kicked")) {
 			character.unsubscribe(this);
 		}
+
+		if(property.equals("stun")){
+			if(character.getStunned()>0 && character.getStunned()< Character.stunTime){
+				if(color == SelectionColor.Red){
+					image = ImageReader.loadImage("res/images/Characters/student_red_stunned.png");
+				}
+				else if(color == SelectionColor.Blue){
+					image = ImageReader.loadImage("res/images/Characters/student_blue_stunned.png");
+				}
+			}
+			else {
+				if(color == SelectionColor.Blue){
+					image = ImageReader.loadImage("res/images/Characters/student_blue.png");
+				}
+				else if(color == SelectionColor.Red){
+					image = ImageReader.loadImage("res/images/Characters/student_red.png");
+				}
+			}
+		}
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2D = (Graphics2D) g;
-		// példa
+
 		g2D.drawImage(image, coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
+
 	}
 }

@@ -50,12 +50,13 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 
     private SelectionColor color;
 
-    public static Coordinates[] leftInventoryPositions = {new Coordinates(50,575),new Coordinates(150,575),
+    public final static Coordinates RED_FACE_POSITION = new Coordinates(50,575);
+    public static Coordinates[] leftInventoryPositions = {new Coordinates(150,575),
                                                     new Coordinates(50,670),new Coordinates(150,670),
                                                     new Coordinates(50,765),new Coordinates(150,765)
     };
-
-    public static Coordinates[] rightInventoryPositions = {new Coordinates(1578,575),new Coordinates(1678,575),
+    public final static Coordinates BLUE_FACE_POSITION = new Coordinates(1578,575);
+    public static Coordinates[] rightInventoryPositions = {new Coordinates(1678,575),
                                                      new Coordinates(1578,670),new Coordinates(1678,670),
                                                      new Coordinates(1578,765),new Coordinates(1678,765)
     };
@@ -98,60 +99,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
      */
     public void action() {}
 
-    /**
-     * Kirajzolja a játékos által irányított karakter információs ablakát.
-     */
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2D = (Graphics2D) g;
 
-        // RED Inventory
-        if(color == SelectionColor.Red){
-            // Box
-            g2D.setColor(Color.RED.brighter());
-            g2D.fillRect(0,540,280,400);
-            g2D.drawImage(inventoryBackgroundImage,20,560,238,360,null);
-
-            // Slots
-            g2D.setColor(Color.DARK_GRAY.darker());
-            g2D.fillRect(leftInventoryPositions[0].getX(),leftInventoryPositions[0].getY(),78,78);
-            g2D.setColor(Color.GRAY.darker());
-            for(int i = 1; i<leftInventoryPositions.length; i++){
-                g2D.fillRect(leftInventoryPositions[i].getX(),leftInventoryPositions[i].getY(),78,78);
-            }
-            // Mode textbox
-            g2D.setColor(Color.white.darker());
-            g2D.fillRect(leftInventoryPositions[leftInventoryPositions.length-2].getX(),
-                    leftInventoryPositions[leftInventoryPositions.length-2].getY() + 94,
-                    78+100,50);
-
-        }
-        // BLUE Inventory
-        else if(color == SelectionColor.Blue){
-            // Box
-            g2D.setColor(Color.BLUE.brighter());
-            g2D.fillRect(1526,540,280,400);
-            g2D.drawImage(inventoryBackgroundImage,1548,560,238,360,null);
-
-            // Slots
-            g2D.setColor(Color.GRAY.darker());
-            for(int i = 0; i<rightInventoryPositions.length; i++){
-                if(i!=1){
-                    g2D.fillRect(rightInventoryPositions[i].getX(),rightInventoryPositions[i].getY(),78,78);
-                }
-
-            }
-            g2D.setColor(Color.DARK_GRAY.darker());
-            g2D.fillRect(rightInventoryPositions[1].getX(),rightInventoryPositions[1].getY(),78,78);
-
-            // Mode textbox
-            g2D.setColor(Color.white.darker());
-            g2D.fillRect(rightInventoryPositions[rightInventoryPositions.length-2].getX(),
-                    rightInventoryPositions[rightInventoryPositions.length-2].getY() + 94,
-                    78+100,50);
-        }
-
-    }
 
 	public ViewStudent getViewStudent() {
 		// TODO Auto-generated method stub
@@ -401,4 +349,60 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 			}
 		}	
 	}
+    /**
+     * Kirajzolja a játékos által irányított karakter információs ablakát.
+     */
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2D = (Graphics2D) g;
+
+        // RED Inventory
+        if(color == SelectionColor.Red){
+            // Box
+            g2D.setColor(Color.RED.brighter());
+            g2D.fillRect(0,540,280,400);
+            g2D.drawImage(inventoryBackgroundImage,20,560,238,360,null);
+
+            // Slots
+            g2D.setColor(Color.DARK_GRAY.darker());
+            g2D.fillRect(RED_FACE_POSITION.getX(),RED_FACE_POSITION.getY(),78,78);
+            characterImage = ImageReader.loadImage("res/images/characters/student_red_face.png");
+            g2D.drawImage(characterImage,RED_FACE_POSITION.getX(),RED_FACE_POSITION.getY(),78,78,null);
+            g2D.setColor(Color.GRAY.darker());
+            for(int i = 0; i<leftInventoryPositions.length; i++){
+                g2D.fillRect(leftInventoryPositions[i].getX(),leftInventoryPositions[i].getY(),78,78);
+            }
+            // Mode textbox
+            g2D.setColor(Color.white.darker());
+            g2D.fillRect(leftInventoryPositions[leftInventoryPositions.length-2].getX(),
+                    leftInventoryPositions[leftInventoryPositions.length-2].getY() + 94,
+                    78+100,50);
+
+        }
+        // BLUE Inventory
+        else if(color == SelectionColor.Blue){
+            // Box
+            g2D.setColor(Color.BLUE.brighter());
+            g2D.fillRect(1526,540,280,400);
+            g2D.drawImage(inventoryBackgroundImage,1548,560,238,360,null);
+
+            // Slots
+            g2D.setColor(Color.GRAY.darker());
+            for(int i = 0; i<rightInventoryPositions.length; i++){
+                    g2D.fillRect(rightInventoryPositions[i].getX(),rightInventoryPositions[i].getY(),78,78);
+
+            }
+            g2D.setColor(Color.DARK_GRAY.darker());
+            g2D.fillRect(BLUE_FACE_POSITION.getX(),BLUE_FACE_POSITION.getY(),78,78);
+            characterImage = ImageReader.loadImage("res/images/characters/student_blue_face.png");
+            g2D.drawImage(characterImage,BLUE_FACE_POSITION.getX(),BLUE_FACE_POSITION.getY(),78,78,null);
+
+            // Mode textbox
+            g2D.setColor(Color.white.darker());
+            g2D.fillRect(rightInventoryPositions[rightInventoryPositions.length-2].getX(),
+                    rightInventoryPositions[rightInventoryPositions.length-2].getY() + 94,
+                    78+100,50);
+        }
+
+    }
 }
