@@ -15,7 +15,7 @@ import View.Utils.Coordinates;
  */
 public abstract class ViewNumberOfUsesItem extends ViewItem {
 	
-	protected Coordinates[] fixedDotPositions;
+	protected Coordinates[] fixedDotPositions=new Coordinates[3];
 
 	public ViewNumberOfUsesItem(Item item, Coordinates coor) {
 		super(item, coor);
@@ -25,7 +25,6 @@ public abstract class ViewNumberOfUsesItem extends ViewItem {
 	private void setFixedDotPositions() {
 		int remaininguses = ((NumberOfUsesItem) item).getRemainingUses();
 		if(remaininguses != 0){
-			fixedDotPositions = new Coordinates[remaininguses];
 			int dotwidth = size.getWidth() / 4;
 			int distance = size.getWidth() / 8;
 			int middlepart = dotwidth * remaininguses + (remaininguses - 1) * distance;
