@@ -36,7 +36,7 @@ public class ViewStudent extends ViewCharacter {
 			image = ImageReader.loadImage("res/images/Characters/student_red.png");
 		}
 	}
-
+	
 	private void setItemPositions() {
 
 			if(color == SelectionColor.Red){

@@ -5,6 +5,7 @@ import javax.swing.*;
 import Character.Student;
 import Map.Labyrinth;
 import Map.Room;
+import ProtoUtil.ProtoUtil;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -81,8 +82,23 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
         selectedSlot = 0;
         playerView=new ViewStudent(player, new Coordinates(0,0));
         playerView.setImage(color);
+        setCharacterImage();
     }
 
+    private void setCharacterImage() {
+    	if(isStudentAlive) {
+	    	if(color==SelectionColor.Red)
+	    		characterImage = ImageReader.loadImage(ImageReader.path+"characters/student_red_face.png");
+	    	else
+	    		characterImage = ImageReader.loadImage(ImageReader.path+"characters/student_blue_face.png");
+    	}else {
+    		if(color==SelectionColor.Red)
+	    		characterImage = ImageReader.loadImage(ImageReader.path+"characters/student_red_face_kicked.png");
+	    	else
+	    		characterImage = ImageReader.loadImage(ImageReader.path+"characters/student_blue_face_kicked.png");
+    	}
+    } 
+    
     public void setPlayerView(ViewStudent pv){
         playerView = pv;
         playerView.setImage(color);
@@ -316,6 +332,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 			Controller.characters.remove(player);
 			room.unsubscribe(this);
 			player.unsubscribe(this);
+			setCharacterImage();
 		}else if(property.equals("characters")) {
 			if(!room.getCharacters().contains(player)) {
 				if(state==ActionState.ItemPicker) {
@@ -366,7 +383,6 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
             // Slots
             g2D.setColor(Color.DARK_GRAY.darker());
             g2D.fillRect(RED_FACE_POSITION.getX(),RED_FACE_POSITION.getY(),78,78);
-            characterImage = ImageReader.loadImage("res/images/characters/student_red_face.png");
             g2D.drawImage(characterImage,RED_FACE_POSITION.getX(),RED_FACE_POSITION.getY(),78,78,null);
             g2D.setColor(Color.GRAY.darker());
             for(int i = 0; i<leftInventoryPositions.length; i++){
@@ -394,7 +410,6 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
             }
             g2D.setColor(Color.DARK_GRAY.darker());
             g2D.fillRect(BLUE_FACE_POSITION.getX(),BLUE_FACE_POSITION.getY(),78,78);
-            characterImage = ImageReader.loadImage("res/images/characters/student_blue_face.png");
             g2D.drawImage(characterImage,BLUE_FACE_POSITION.getX(),BLUE_FACE_POSITION.getY(),78,78,null);
 
             // Mode textbox
