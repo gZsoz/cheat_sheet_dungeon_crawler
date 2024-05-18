@@ -23,7 +23,7 @@ public class ViewSticky extends ViewEnvironmentalFactors {
 		sticky=s;
 		coordinates=c;
 		image = ImageReader.loadImage("res/images/envfactors/sticky.png");
-		size = new Size(capacity * 90+30,250);
+		size = new Size(/*capacity * 90*/ 360+30,250);
 		GameFrame.container.add(this);
     	GameFrame.viewEnvs.add(this);
     	Controller.envs.put(sticky, this);
