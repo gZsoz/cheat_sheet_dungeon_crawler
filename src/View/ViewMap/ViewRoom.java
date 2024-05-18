@@ -45,6 +45,12 @@ public class ViewRoom extends JComponent implements Subscriber {
 
 	protected Coordinates[] fixedItemPositions;
 
+	public Coordinates[] getFixedRoutePins() {
+		return fixedRoutePins;
+	}
+
+	protected Coordinates[] fixedRoutePins;
+
 	protected Coordinates[] fixedCharacterPositions;
 	
 	/**
@@ -55,8 +61,10 @@ public class ViewRoom extends JComponent implements Subscriber {
 	public ViewRoom(Room r, Coordinates pos){
 		room = r;
 		coordinates = pos;
-		image = ImageReader.loadImage("res/images/room/room.png");
 		size = new Size(/*r.getCapacity() * 90*/ 360,220);
+		setFixedRoutePins();
+		image = ImageReader.loadImage("res/images/room/room.png");
+
 		selected = SelectionColor.Empty;
 		this.setBackground(null);
 		GameFrame.container.add(this);
@@ -83,11 +91,19 @@ public class ViewRoom extends JComponent implements Subscriber {
 			int startingXPos = coordinates.getX() + (size.getWidth() - (room.getCharacters().size() * 84)) / 2;
 			for(int i = 0; i<room.getCharacters().size(); i++){
 				startingXPos += 10;
-				fixedCharacterPositions[i] = new Coordinates(startingXPos + i * 80, coordinates.getY()+10);
+				fixedCharacterPositions[i] = new Coordinates(startingXPos + i * 80, coordinates.getY()+18);
 
 			}
 		}
 	}
+
+	private void setFixedRoutePins(){
+		fixedRoutePins = new Coordinates[]{new Coordinates(coordinates.getX() - 20 -1, coordinates.getY() + size.getHeight() / 2 - 20),
+				   							new Coordinates(coordinates.getX() + size.getWidth()/2 - 20, coordinates.getY() - 20 - 2),
+											new Coordinates(coordinates.getX() + size.getWidth() - 20 + 3, coordinates.getY() + size.getHeight() / 2 - 20),
+											new Coordinates(coordinates.getX() + size.getWidth()/2 - 20, coordinates.getY() + size.getHeight() - 20 + 4),
+											};
+    }
 
 	private void createViewItem(Item item, int i) {
 		if(item instanceof AirFreshener){

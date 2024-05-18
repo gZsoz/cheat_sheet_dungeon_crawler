@@ -263,12 +263,16 @@ public class Labyrinth implements iTask{
 		rooms.add(r10);
 		
 		// szomszédos szobák beállítása
-		r3.addNeighbour(r1);
-		r1.addNeighbour(r3);
-		r1.addNeighbour(r5);
-		r5.addNeighbour(r1);
-		r3.addNeighbour(r4);
-		r4.addNeighbour(r3);
+		for(Room room1 : rooms){
+			for(Room room2 : rooms){
+				if(!room1.equals(room2)){
+					if(ProtoUtil.random.nextInt(10,1) == 1){
+						room1.addNeighbour(room2);
+					}
+
+				}
+			}
+		}
 		
 		// tárgyak legenerálása (0, 1, ..., 6 db minden szobába)
 		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(10, 0));
