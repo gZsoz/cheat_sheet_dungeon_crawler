@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import EnvironmentalFactor.EnvironmentalFactors;
 import EnvironmentalFactor.Gas;
 import EnvironmentalFactor.Sticky;
 import Items.Item;
@@ -45,7 +46,11 @@ public class Cleaner extends Character {
 
 		boolean roomHasGas = r.getEnvironmentalFactors().stream().anyMatch(n -> n.getClass().equals(Gas.class));
 		if(roomHasGas){
-			r.getEnvironmentalFactors().removeIf(n -> n.getClass().equals(Gas.class)); // gáz megszűntetése
+			EnvironmentalFactors expired=null;
+			for(EnvironmentalFactors env: r.getEnvironmentalFactors())
+				if(env instanceof Gas)
+					expired=env;
+			r.removeEnvironmentalFactor(expired); // gáz megszűntetése
 			r.notifySubsribers("factors");
 			ProtoUtil.printLog("removeEnvironmentalFactor");
 		}

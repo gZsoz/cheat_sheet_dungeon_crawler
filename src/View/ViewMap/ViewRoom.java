@@ -182,15 +182,19 @@ public class ViewRoom extends JComponent implements Subscriber {
 		}
 	}
 
+	private void createViewEnvFactor(EnvironmentalFactors factor) {
+		if(factor instanceof Gas){
+			new ViewGas((Gas) factor, coordinates, room.getCapacity());
+		}
+		else if(factor instanceof Sticky){
+			new ViewSticky((Sticky) factor, coordinates, room.getCapacity());
+		}
+	}
+	
 	private void createViewEnvFactors() {
 		for(int i = 0; i < room.getEnvironmentalFactors().size(); i++){
 			EnvironmentalFactors factor = room.getEnvironmentalFactors().get(i);
-			if(factor instanceof Gas){
-				new ViewGas((Gas) factor, coordinates, room.getCapacity());
-			}
-			else if(factor instanceof Sticky){
-				new ViewSticky((Sticky) factor, coordinates, room.getCapacity());
-			}
+			createViewEnvFactor(factor);
 		}
 	}
 
@@ -209,6 +213,9 @@ public class ViewRoom extends JComponent implements Subscriber {
 	    	setFixedItemPositions();
 	    	createViewItem(room.getItems().get(idx), idx);
 	    	setItemPositions();
+	    }else if(property.contains("spawnfactor")) {
+	    	int idx = Integer.parseInt(property.split(" ")[1]);
+	    	createViewEnvFactor(room.getEnvironmentalFactors().get(idx));
 	    }
 	}
 	

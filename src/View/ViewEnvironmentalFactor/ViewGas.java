@@ -21,6 +21,7 @@ public class ViewGas extends ViewEnvironmentalFactors {
 	
 	public ViewGas(Gas g, Coordinates c, int capacity){
 		gas=g;
+		gas.subscribe(this);
 		coordinates=c;
 		image = ImageReader.loadImage("res/images/envfactors/gas.png");
 		size = new Size(/*capacity * 90*/ 360+30,	250);
@@ -29,6 +30,16 @@ public class ViewGas extends ViewEnvironmentalFactors {
     	Controller.envs.put(gas, this);
 	}
 
+	@Override
+	public void propertyChanged(String property) {
+		if(property.equals("factorremoved")) {
+			Controller.envs.remove(gas);
+			GameFrame.viewEnvs.remove(this);
+			GameFrame.container.remove(this);
+			gas.unsubscribe(this);
+		}
+	}
+	
 	/**
 	 * Gáz kirajzolása.
 	 */

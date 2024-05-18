@@ -69,7 +69,7 @@ public class Room implements iTask {
 	 */
 	public void notifySubsribers(String str) {
 		for(Subscriber sub : new ArrayList<>(subscribers))
-			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx"
+			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx", "spawnfactor <factor pos>"
 	}
 	
 	/**
@@ -172,9 +172,20 @@ public class Room implements iTask {
 	        	temp=e;
 	        }
 	    }
-	    if(temp!=null) envFactors.remove(temp);
+	    if(temp!=null) removeEnvironmentalFactor(temp);
 	    envFactors.add(ef);
+    	notifySubsribers("spawnfactor "+(envFactors.size()-1));
 	    notifySubsribers("factors");
+	}
+	
+	/**
+	 * Eltávolítja a paraméterként kapott környezeti tényezőt a szobához.
+	 * @param ef Az eltávolítandó környezeti tényező
+	 */
+	public void removeEnvironmentalFactor(EnvironmentalFactors ef) {
+	    ef.notifySubsribers("factorremoved");
+	    envFactors.remove(ef);
+		notifySubsribers("factors");
 	}
 	
 	/**

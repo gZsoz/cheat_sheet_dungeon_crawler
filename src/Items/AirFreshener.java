@@ -1,5 +1,6 @@
 package Items;
 
+import EnvironmentalFactor.EnvironmentalFactors;
 import EnvironmentalFactor.Gas;
 import Map.Room;
 import ProtoUtil.ProtoUtil;
@@ -28,9 +29,14 @@ public class AirFreshener extends NumberOfUsesItem {
         ProtoUtil.printLog("use");
         if(RemainingUses>0) setRemainingUses(RemainingUses-1); // Csökkenti a maradék használatok számát
         Room r = owner.getRoom();
+        
         boolean roomHasGas = r.getEnvironmentalFactors().stream().anyMatch(n -> n.getClass().equals(Gas.class));
 		if(roomHasGas){
-			r.getEnvironmentalFactors().removeIf(n -> n.getClass().equals(Gas.class)); // gáz megszűntetése
+			EnvironmentalFactors expired=null;
+			for(EnvironmentalFactors env: r.getEnvironmentalFactors())
+				if(env instanceof Gas)
+					expired=env;
+			r.removeEnvironmentalFactor(expired); // gáz megszűntetése
 			r.notifySubsribers("factors");
 			ProtoUtil.printLog("airfreshener removed gas");
 		}

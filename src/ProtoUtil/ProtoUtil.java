@@ -20,6 +20,7 @@ import View.Utils.SelectionColor;
 import View.ViewMap.ViewLabyrinth;
 import Character.Character;
 import Character.Student;
+import EnvironmentalFactor.Gas;
 import EnvironmentalFactor.Sticky;
 import Items.AirFreshener;
 import Items.BatSkin;
@@ -302,7 +303,7 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom(false);
+    		random = new MyRandom(true);
     		Student reds=new Student();
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);
@@ -329,7 +330,8 @@ public class ProtoUtil {
 					mf.container.repaint();
 					labyrinth.update();
 					if(aa++%10000==15) {
-						//labyrinth.getRooms().get(4).getCharacters().get(0).enterRoom(labyrinth.getRooms().get(0));
+						labyrinth.getRooms().get(3).getCharacters().get(0).enterRoom(labyrinth.getRooms().get(0));
+						//labyrinth.getRooms().get(0).addEnvironmentalFactor(new Gas(labyrinth.getRooms().get(0)));
 					}
 					//if(!reds.getRoom().getItems().isEmpty())
 					//reds.pickupItem(reds.getRoom().getItems().get(0));
