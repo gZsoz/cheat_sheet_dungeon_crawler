@@ -194,7 +194,7 @@ public class Labyrinth implements iTask{
 		// Környezeti tényezők hozzáadása
 		for(int i=0; i<old.getEnvironmentalFactors().size(); i++){
 			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.spawnEnvironmentalFactor(new Gas(n));
-			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.spawnEnvironmentalFactor(new Sticky(n));
+			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.spawnEnvironmentalFactor(new Sticky(n)); 
 		}
 		rooms.add(rooms.indexOf(old)+1, n);
 		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
