@@ -18,12 +18,11 @@ public class ViewFakeMask extends ViewMask {
 	}
 	
 	@Override
-	public void setItemSize(Size size) {
-		if(size.getHeight()==78&&this.size.getHeight()!=78) {
+	public void setItemImage() {
+		if(this.size.getHeight()==78) {
 			image = ImageReader.loadImage(ImageReader.path+itemsPath+"mask_fake.png");
-		} else if(size.getHeight()!=78&&this.size.getHeight()==78) {
+		} else if(this.size.getHeight()!=78) {
 			image=ImageReader.loadImage(ImageReader.path+itemsPath+"mask.png");
 		}
-		super.setItemSize(size);
 	}
 }

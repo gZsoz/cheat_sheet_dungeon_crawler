@@ -60,6 +60,8 @@ public abstract class ViewItem extends JComponent implements Subscriber {
     	GameFrame.viewItems.add(this);
 		Controller.items.put(this.item, this);
 	}
+	
+	public void setItemImage() {}
 
 	@Override
 	public void propertyChanged(String property) {

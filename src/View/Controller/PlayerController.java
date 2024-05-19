@@ -441,17 +441,17 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
             g2D.setFont(new Font("Monospaced", Font.BOLD, 18));
             g2D.setColor(Color.RED);
             switch (state){
-                case ActionState.InInventory:
+                case InInventory:
                     if(color == SelectionColor.Red){
                         g2D.drawString("Inventory mód", leftInventoryPositions[3].getX() + 16, leftInventoryPositions[4].getY() + 78 + 44);
                     }
                     break;
-                case ActionState.RoomPicker:
+                case RoomPicker:
                     if(color == SelectionColor.Red){
                         g2D.drawString("Szobaváltó mód", leftInventoryPositions[3].getX() + 12, leftInventoryPositions[4].getY() + 78 + 44);
                     }
                     break;
-                case ActionState.ItemPicker:
+                case ItemPicker:
                     if(color == SelectionColor.Red){
                         g2D.drawString("Szobatárgy mód", leftInventoryPositions[3].getX() + 12, leftInventoryPositions[4].getY() + 78 + 44);
                     }
@@ -484,17 +484,17 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
             g2D.setFont(new Font("Monospaced", Font.BOLD, 18));
             g2D.setColor(Color.BLUE);
             switch (state){
-                case ActionState.InInventory:
+                case InInventory:
                     if(color == SelectionColor.Blue){
                         g2D.drawString("Inventory mód",rightInventoryPositions[3].getX() + 16, rightInventoryPositions[4].getY() + 78 + 44);
                     }
                     break;
-                case ActionState.RoomPicker:
+                case RoomPicker:
                     if(color == SelectionColor.Blue){
                         g2D.drawString("Szobaváltó mód",rightInventoryPositions[3].getX() + 12, rightInventoryPositions[4].getY() + 78 + 44);
                     }
                     break;
-                case ActionState.ItemPicker:
+                case ItemPicker:
                     if(color == SelectionColor.Blue){
                         g2D.drawString("Szobatárgy mód",rightInventoryPositions[3].getX() + 12, rightInventoryPositions[4].getY() + 78 + 44);
                     }

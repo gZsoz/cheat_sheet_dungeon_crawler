@@ -20,14 +20,12 @@ public class ViewFakeBatSkin extends ViewBatSkin {
 	}
 	
 	@Override
-	public void setItemSize(Size size) {
-		if(size.getHeight()==78&&this.size.getHeight()!=78) {
+	public void setItemImage() {
+		if(this.size.getHeight()==78) {
 			image = ImageReader.loadImage(ImageReader.path+itemsPath+"batskin_fake.png");
-			System.out.println("okokokokokokok");
-		} else if(size.getHeight()!=78&&this.size.getHeight()==78) {
+		} else if(this.size.getHeight()!=78) {
 			image=ImageReader.loadImage(ImageReader.path+itemsPath+"batskin.png");
 		}
-		super.setItemSize(size);
 	}
 }
 

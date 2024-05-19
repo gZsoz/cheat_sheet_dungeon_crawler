@@ -164,6 +164,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 			ViewItem item=Controller.items.get(room.getItems().get(i));
 			item.setCoordinates(fixedItemPositions[i]);
 			item.setItemSize(new Size(40, 40));
+			item.setItemImage();
 		}
 	}
 	

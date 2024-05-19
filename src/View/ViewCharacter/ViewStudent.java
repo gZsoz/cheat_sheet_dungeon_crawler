@@ -37,6 +37,7 @@ public class ViewStudent extends ViewCharacter {
 				ViewItem item = Controller.items.get(character.getInventory().get(i));
 				item.setCoordinates(PlayerController.leftInventoryPositions[i]);
 				item.setItemSize(new Size(78,78));
+				item.setItemImage();
 			}
 		}
 		else if(color == SelectionColor.Blue){
@@ -44,6 +45,7 @@ public class ViewStudent extends ViewCharacter {
 				ViewItem item = Controller.items.get(character.getInventory().get(i));
 				item.setCoordinates(PlayerController.rightInventoryPositions[i]);
 				item.setItemSize(new Size(78,78));
+				item.setItemImage();
 			}
 		}
 	}
