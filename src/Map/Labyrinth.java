@@ -309,7 +309,7 @@ public class Labyrinth implements iTask{
 		Room r4 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r5 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r6 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r7 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r7 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r8 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r9 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r10 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
@@ -371,11 +371,13 @@ public class Labyrinth implements iTask{
 		//r1.items.add(new BatSkin());
 		//r1.items.add(new Beer());
 		
-		r5.items.add(new Beer());
-		r1.envFactors.add(new Gas(r1));
-		r3.addItem(new AirFreshener());
-		r3.addItem(new CabbageCamembert());
+		//r5.items.add(new Beer());
+		//r1.envFactors.add(new Gas(r1));
+		//r1.addItem(new AirFreshener());
+		//r1.addItem(new CabbageCamembert());
 		//r1.envFactors.add(new Sticky(r1));
+		r1.addItem(new WetCloth());
+		r1.addItem(new BatSkin());
 		
 		
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba

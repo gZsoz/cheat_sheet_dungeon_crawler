@@ -37,7 +37,7 @@ public class Cleaner extends Character {
 		// nem kábult karakterek kitessékelése
 		Random rand = new Random();
 		for(Character temp : new ArrayList<Character>(currentRoom.getCharacters())) {
-			if(!temp.getClass().equals(Cleaner.class) && (temp.getStunned()==0 || temp.getStunned()>stunTime)) {
+			if(!temp.getClass().equals(Cleaner.class) && (temp.getStunned()==0 || temp.getStunned()>stunTime) && !r.getNeighbours().isEmpty()) {
 				List<Room> roomsToMove = r.getNeighbours();
 				int idx = rand.nextInt(roomsToMove.size()); // milyen indexű szobába tegyük a karaktert
 				temp.enterRoom(roomsToMove.get(idx));

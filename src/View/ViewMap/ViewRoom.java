@@ -19,10 +19,6 @@ import java.util.ArrayList;
  */
 public class ViewRoom extends JComponent implements Subscriber {
 
-	public Room getRoom() {
-		return room;
-	}
-
 	/**
 	 * A modellbeli szoba, amit reprezentál.
 	 */
@@ -57,6 +53,14 @@ public class ViewRoom extends JComponent implements Subscriber {
 	 * Kijelölt-e az adott szoba (szoba váltásnál) és ha igen milyen színnel.
 	 */
 	protected SelectionColor selected;
+	
+	public SelectionColor getSelected() {
+		return selected;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
 
 	public ViewRoom(Room r, Coordinates pos){
 		room = r;
@@ -109,6 +113,9 @@ public class ViewRoom extends JComponent implements Subscriber {
 		if(item instanceof AirFreshener){
 			new ViewAirFreshener((AirFreshener) item, fixedItemPositions[i]);
 		}
+		else if(item instanceof FakeBatSkin){
+			new ViewFakeBatSkin((FakeBatSkin) item, fixedItemPositions[i]);
+		}
 		else if(item instanceof BatSkin){
 			new ViewBatSkin((BatSkin) item, fixedItemPositions[i]);
 		}
@@ -118,20 +125,17 @@ public class ViewRoom extends JComponent implements Subscriber {
 		else if(item instanceof CabbageCamembert){
 			new ViewCabbageCamembert((CabbageCamembert) item, fixedItemPositions[i]);
 		}
-		else if(item instanceof FakeBatSkin){
-			new ViewFakeBatSkin((FakeBatSkin) item, fixedItemPositions[i]);
+		else if(item instanceof FakeSlideRule){
+			new ViewFakeSlideRule((FakeSlideRule) item, fixedItemPositions[i]);
+		}
+		else if(item instanceof SlideRule){
+			new ViewSlideRule((SlideRule) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof FakeMask){
 			new ViewFakeMask((FakeMask) item, fixedItemPositions[i]);
 		}
-		else if(item instanceof FakeSlideRule){
-			new ViewFakeSlideRule((FakeSlideRule) item, fixedItemPositions[i]);
-		}
 		else if(item instanceof Mask){
 			new ViewMask((Mask) item, fixedItemPositions[i]);
-		}
-		else if(item instanceof SlideRule){
-			new ViewSlideRule((SlideRule) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof Transistor){
 			new ViewTransistor((Transistor) item, fixedItemPositions[i]);
@@ -184,10 +188,10 @@ public class ViewRoom extends JComponent implements Subscriber {
 
 	private void createViewEnvFactor(EnvironmentalFactors factor) {
 		if(factor instanceof Gas){
-			new ViewGas((Gas) factor, coordinates, room.getCapacity());
+			new ViewGas((Gas) factor, coordinates);
 		}
 		else if(factor instanceof Sticky){
-			new ViewSticky((Sticky) factor, coordinates, room.getCapacity());
+			new ViewSticky((Sticky) factor, coordinates);
 		}
 	}
 	

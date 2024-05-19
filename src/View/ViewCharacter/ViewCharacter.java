@@ -1,10 +1,13 @@
 package View.ViewCharacter;
 
+import View.Controller.Controller;
 import View.Utils.Coordinates;
+import View.Utils.GameFrame;
 import View.Utils.ImageReader;
 import View.Utils.Size;
 import View.Utils.Subscriber;
 import View.ViewItem.ViewItem;
+import Character.Character;
 
 import javax.swing.*;
 
@@ -15,11 +18,16 @@ import java.util.ArrayList;
  * A különböző karakterek grafikus osztályának az ősosztálya.
  */
 public abstract class ViewCharacter extends JComponent implements Subscriber {
+	protected Character character;
 	
-	public ViewCharacter(String src_img, Coordinates pos){
-		image = ImageReader.loadImage(ImageReader.path+"/Characters/"+src_img);
+	protected final String charactersPath = "Characters/";
+	
+	public ViewCharacter(Character character, Coordinates coords){
+		this.character = character;
+		this.character.subscribe(this);
 		size = new Size(60,150);
-		coordinates = new Coordinates(pos.getX(), pos.getY());
+		coordinates = coords;
+		Controller.characters.put(this.character, this);
 	}
 	
 	/**
@@ -45,4 +53,12 @@ public abstract class ViewCharacter extends JComponent implements Subscriber {
 	 * Az inventory-ban megjelenítendő tárgyak.
 	 */
 	protected ArrayList<ViewItem> itemsInInventory;
+	
+	public abstract void setItemPositions();
+	
+	public void propertyChanged(String property) {
+		if(property.equals("inventory")) {
+			setItemPositions();
+		}
+	}
 }

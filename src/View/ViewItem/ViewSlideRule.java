@@ -21,7 +21,6 @@ public class ViewSlideRule extends ViewNumberOfUsesItem {
 	@Override
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
-		// TODO Auto-generated method stub
 	}
 
 }

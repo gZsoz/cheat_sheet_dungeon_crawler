@@ -83,7 +83,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
     private int selectedSlot;
 
     public PlayerController(SelectionColor color, Student stud){
-        inventoryBackgroundImage = ImageReader.loadImage("res/images/test/testroom.png");
+        inventoryBackgroundImage = ImageReader.loadImage(ImageReader.path+"test/testroom.png");
         this.color = color;
         player=stud;
         player.subscribe(this);
@@ -402,6 +402,11 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 			if(state==ActionState.RoomPicker) {
 					selectedSlot=0;
 					setNewColor();
+			}
+		} else if(property.equals("enteredcursedroom")) {
+			for(ViewRoom vr : GameFrame.viewRooms) {
+				if(vr.getSelected() == color || vr.getSelected() == SelectionColor.Both)
+					vr.removeColor(color);
 			}
 		}
 	}

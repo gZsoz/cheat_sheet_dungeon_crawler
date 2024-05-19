@@ -18,17 +18,6 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	protected Item item;
 	
 	protected final String itemsPath = "Items/"; 
-	
-	public ViewItem(Item item, Coordinates coor) {
-		this.item = item;
-		this.item.subscribe(this);
-		size= new Size(40, 40);
-		coordinates = coor;
-		selected= SelectionColor.Empty;
-		GameFrame.container.add(this);
-    	GameFrame.viewItems.add(this);
-		Controller.items.put(this.item, this);
-	}
 
 	/**
 	 * A tárgy képe, ami megjelenik.
@@ -36,11 +25,10 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	protected Image image;
 
 	public void setItemSize(Size size) {
-		if(size.getHeight()==78&&this.size.getHeight()!=78) {
+		if(size.getHeight()==78&&this.size.getHeight()!=78) { // 78 a mérete az inventory tárgyaknak
 			selected=SelectionColor.Empty;
 		}
 		this.size = size;
-
 	}
 
 	public Size getItemSize() {
@@ -61,6 +49,17 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	 * Kijelölt-e az adott tárgy (letevésnél, felvevésnél vagy használatnál) és ha igen, milyen színnel.
 	 */
 	protected SelectionColor selected;
+	
+	public ViewItem(Item item, Coordinates coor) {
+		this.item = item;
+		this.item.subscribe(this);
+		size= new Size(40, 40);
+		coordinates = coor;
+		selected= SelectionColor.Empty;
+		GameFrame.container.add(this);
+    	GameFrame.viewItems.add(this);
+		Controller.items.put(this.item, this);
+	}
 
 	@Override
 	public void propertyChanged(String property) {

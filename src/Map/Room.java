@@ -275,7 +275,13 @@ public class Room implements iTask {
 	 */
 	public List<Room> getNeighbours() {
 	    ProtoUtil.printLog("getNeighbours");
-	    return neighbours;
+	    ArrayList<Room> openNeighbours = new ArrayList<>();
+	    for(Room r : new ArrayList<Room>(neighbours)) {
+	    	if(!((r instanceof CursedRoom) && r.getNeighbours().isEmpty())) {
+	    		openNeighbours.add(r);
+	    	}
+	    }
+	    return openNeighbours;
 	}
 	
     /**

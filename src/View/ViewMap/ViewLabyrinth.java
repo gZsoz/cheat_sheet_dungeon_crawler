@@ -59,65 +59,11 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 				new Coordinates(322,620), new Coordinates(722,556), new Coordinates(1132,620)
 	));
 
-	public void paintRoutes(Graphics2D g2D) {
-
-		// legközelebbi pin kiszámolása
-		for(ViewRoom vroom : GameFrame.viewRooms){
-			for(Room neighbour : vroom.getRoom().getNeighbours()){
-				double shortestDistance = Double.MAX_VALUE;
-				int pinIdx1 = -1;
-				int pinIdx2 = -1;
-				for(int i = 0; i<4; i++){
-					for(int j = 0; j<4; j++){
-						double currDistance = Coordinates.distanceBetweenCoords(vroom.getFixedRoutePins()[i],Controller.rooms.get(neighbour).getFixedRoutePins()[j]);
-						if(currDistance < shortestDistance){
-							shortestDistance = currDistance;
-							pinIdx1 = i;
-							pinIdx2 = j;
-						}
-					}
-				}
-				g2D.setColor(Color.RED);
-				g2D.setStroke(new BasicStroke(8));
-				g2D.drawLine(vroom.getFixedRoutePins()[pinIdx1].getX() + 20, vroom.getFixedRoutePins()[pinIdx1].getY() + 25,
-						Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX() + 20,Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY() + 25
-						);
-				g2D.drawImage(pinImage,vroom.getFixedRoutePins()[pinIdx1].getX(),vroom.getFixedRoutePins()[pinIdx1].getY(),40,40,null);
-				g2D.drawImage(pinImage,Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX(),Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY(),40,40,null);
-			}
-		}
-	}
-
 	public ViewLabyrinth(Labyrinth lab){
 		labyrinth = lab;
 		this.setBackground(null);
 		pinImage = ImageReader.loadImage("res/images/room/pin.png");
 		lab.subscribe(this);
-	}
-
-	@Override
-	public void propertyChanged(String property) {
-		if(property.contains("merge")) {
-			int idx=Integer.parseInt(property.split(" ")[2]);
-			roomsInPosition[idx]=0;
-		}else if(property.contains("split")) {
-			int idx=Integer.parseInt(property.split(" ")[1])+1;
-			int posidx=-1;
-			for(int i=0;i<roomsInPosition.length;i++) {
-				if(roomsInPosition[i]==0) {
-					posidx=i;
-					break;
-				}
-			}
-			roomsInPosition[posidx]=1;
-			Room room = labyrinth.getRooms().get(idx);
-			if(room instanceof CursedRoom){
-				new ViewCursedRoom( (CursedRoom) room, fixedRoomPositions.get(posidx));
-			}
-			else if(room instanceof Room){
-				new ViewRoom( (Room) room, fixedRoomPositions.get(posidx));
-			}
-		}
 	}
 	
 	/**
@@ -151,7 +97,60 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 		//	vroom.paint(g);
 		//}
 	}*/
+	
+	@Override
+	public void propertyChanged(String property) {
+		if(property.contains("merge")) {
+			int idx=Integer.parseInt(property.split(" ")[2]);
+			roomsInPosition[idx]=0;
+		}else if(property.contains("split")) {
+			int idx=Integer.parseInt(property.split(" ")[1])+1;
+			int posidx=-1;
+			for(int i=0;i<roomsInPosition.length;i++) {
+				if(roomsInPosition[i]==0) {
+					posidx=i;
+					break;
+				}
+			}
+			roomsInPosition[posidx]=1;
+			Room room = labyrinth.getRooms().get(idx);
+			if(room instanceof CursedRoom){
+				new ViewCursedRoom( (CursedRoom) room, fixedRoomPositions.get(posidx));
+			}
+			else if(room instanceof Room){
+				new ViewRoom( (Room) room, fixedRoomPositions.get(posidx));
+			}
+		}
+	}
 
+	public void paintRoutes(Graphics2D g2D) {
+
+		// legközelebbi pin kiszámolása
+		for(ViewRoom vroom : GameFrame.viewRooms){
+			for(Room neighbour : vroom.getRoom().getNeighbours()){
+				double shortestDistance = Double.MAX_VALUE;
+				int pinIdx1 = -1;
+				int pinIdx2 = -1;
+				for(int i = 0; i<4; i++){
+					for(int j = 0; j<4; j++){
+						double currDistance = Coordinates.distanceBetweenCoords(vroom.getFixedRoutePins()[i],Controller.rooms.get(neighbour).getFixedRoutePins()[j]);
+						if(currDistance < shortestDistance){
+							shortestDistance = currDistance;
+							pinIdx1 = i;
+							pinIdx2 = j;
+						}
+					}
+				}
+				g2D.setColor(Color.RED);
+				g2D.setStroke(new BasicStroke(8));
+				g2D.drawLine(vroom.getFixedRoutePins()[pinIdx1].getX() + 20, vroom.getFixedRoutePins()[pinIdx1].getY() + 25,
+						Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX() + 20,Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY() + 25
+						);
+				g2D.drawImage(pinImage,vroom.getFixedRoutePins()[pinIdx1].getX(),vroom.getFixedRoutePins()[pinIdx1].getY(),40,40,null);
+				g2D.drawImage(pinImage,Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX(),Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY(),40,40,null);
+			}
+		}
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
