@@ -39,4 +39,12 @@ public class CabbageCamembert extends NumberOfUsesItem {
 	public void onPickUp() {
 		ProtoUtil.printLog("onPickUp");
 	}
+	
+	/**
+     * A tárgy használatakor lefutó metódus.
+     */
+    @Override
+    public void onActivate() {
+    	use();
+    }
 }

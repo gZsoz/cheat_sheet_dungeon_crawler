@@ -241,19 +241,19 @@ public class Labyrinth implements iTask{
 	private Item itemPicker(){
 		switch(ProtoUtil.random.nextInt(10, 8)){
 		case 0:
-			return new AirFreshener();
-		case 1:
-			return new BatSkin();
-		case 2:
-			return new Beer();
-		case 3:
-			return new CabbageCamembert();
-		case 4:
 			return new FakeBatSkin();
-		case 5:
+		case 1:
 			return new FakeMask();
-		case 6:
+		case 2:
 			return new FakeSlideRule();
+		case 3:
+			return new AirFreshener();
+		case 4:
+			return new BatSkin();
+		case 5:
+			return new Beer();
+		case 6:
+			return new CabbageCamembert();
 		case 7:
 			return new Mask();
 		case 8:

@@ -151,4 +151,12 @@ public class Transistor extends Item {
 			transistorsInInventory.get(j).connect(transistorsInInventory.get(j + 1));
 		}
 	}
+    
+    /**
+     * A tárgy használatakor lefutó metódus.
+     */
+    @Override
+    public void onActivate() {
+    	use();
+    }
 }

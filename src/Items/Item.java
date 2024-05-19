@@ -101,6 +101,11 @@ public abstract class Item {
 	}
 	
 	/**
+     * Egy tárgy használatakor hívódik meg.
+     */
+	public void onActivate() {}
+	
+	/**
      * Egy tárgy használata. A tárgyak a saját,egyedi módján kerül használatba, 
      * ezért ezt külön-külön valósítják meg a  leszármazottak.
      */
