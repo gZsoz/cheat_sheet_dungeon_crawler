@@ -372,6 +372,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 			room.unsubscribe(this);
 			player.unsubscribe(this);
 			setCharacterImage();
+			labyrinth.notifySubsribers("gamelost");
 		}else if(property.equals("characters")) {
 			if(!room.getCharacters().contains(player)) {
 				if(state==ActionState.ItemPicker) {

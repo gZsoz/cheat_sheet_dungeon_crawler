@@ -50,6 +50,8 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	 */
 	private int roomsInPosition [] = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	
+	private int kickedStudents = 0;
+	
 	/**
 	 * Az összes lehetséges szoba pozíciója
 	 */
@@ -58,6 +60,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 				new Coordinates(209,300), new Coordinates(772,300), new Coordinates(1272,300),
 				new Coordinates(322,620), new Coordinates(722,556), new Coordinates(1132,620)
 	));
+	
 	private boolean gameWon = false;
 	private boolean gameLost = false;
 
@@ -102,10 +105,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	
 	@Override
 	public void propertyChanged(String property) {
-		if(property.equals("gamewon")){
-			gameWon = true;
-		}
-		else if(property.contains("merge")) {
+		if(property.contains("merge")) {
 			int idx=Integer.parseInt(property.split(" ")[2]);
 			roomsInPosition[idx]=0;
 		}else if(property.contains("split")) {
@@ -125,6 +125,12 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 			else if(room instanceof Room){
 				new ViewRoom( (Room) room, fixedRoomPositions.get(posidx));
 			}
+		}else if(property.equals("gamewon")){
+			gameWon = true;
+		}else if(property.equals("gamelost")) {
+			kickedStudents += 1;
+			if(kickedStudents >= 2)
+				gameLost = true;
 		}
 	}
 
@@ -147,7 +153,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 					}
 				}
 				g2D.setColor(Color.RED);
-				g2D.setStroke(new BasicStroke(8));
+				g2D.setStroke(new BasicStroke(5));
 				g2D.drawLine(vroom.getFixedRoutePins()[pinIdx1].getX() + 20, vroom.getFixedRoutePins()[pinIdx1].getY() + 25,
 						Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX() + 20,Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY() + 25
 						);
@@ -160,17 +166,15 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-	    //for(ViewRoom vroom : roomsInLabyrinth){
-		//	vroom.paint(g);
-		//}
-
 		Graphics2D g2D = (Graphics2D)g;
+		
 		// Mode textbox
 		g2D.setColor(new Color(221,221,221));
 		g2D.drawImage(ImageReader.loadImage("res/images/test/testroom.png"),1820/2 - 240 + 40, 800, 400, 200,null);
 		g2D.fillRect(1820/2 - 220 + 40,
 				815-4,
 				400 - 40,120);
+		
 		// key bindings
 		g2D.setFont(new Font("Monospaced", Font.BOLD, 18));
 
@@ -202,9 +206,13 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 
 		if(gameWon || gameLost){
 			if(gameWon){
-				g2D.drawImage(ImageReader.loadImage("res/images/endscreen.png"),0,0,1820,980,null);
+				g2D.drawImage(ImageReader.loadImage(ImageReader.path+"wonscreen.png"),0,0,1820,980,null);
+			} else {
+				g2D.drawImage(ImageReader.loadImage(ImageReader.path+"lostscreen.png"),0,0,1820,980,null);
 			}
+			ProtoUtil.timer.stop();
 		}
+		
 	}
 
 

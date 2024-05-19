@@ -27,6 +27,7 @@ import Items.BatSkin;
 import Items.CabbageCamembert;
 import Items.DecayingItems;
 import Items.FakeBatSkin;
+import Items.Mask;
 import Items.Transistor;
 
 import java.awt.EventQueue;
@@ -42,11 +43,12 @@ public class ProtoUtil {
 	private static final String RESET = "\033[0m";  // Text Reset
     private static final String RED = "\033[0;31m";     // RED
     private static final String GREEN = "\033[0;32m";   // GREEN
-	public static int aa=0;
 	private static final String dirName = "test/";
     private static PrintStream logOutput = null;
     
     public static MyRandom random;
+    public static Timer timer;
+    public static int aa=0;
     
     /**
      * A beállított OutputStreambe írja az a tesztprogram logokat.
@@ -303,7 +305,7 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom(true);
+    		random = new MyRandom(false);
     		Student reds=new Student();
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);
@@ -315,16 +317,14 @@ public class ProtoUtil {
             red.setRoomSubscribed();
             blue.setRoomSubscribed();
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
-
 			GameFrame mf = new GameFrame(viewLabyrinth,red,blue);
-
             viewLabyrinth.initLab();
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
 		        	mf.setVisible(true);
                 }
         	});
-            Timer timer = new Timer(100, a ->{
+            timer = new Timer(100, a ->{
                     //System.out.printn("update()");
                     //viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=1;
                     //viewLabyrinth.roomsInLabyrinth.get(2).coordinates.x-=1;
@@ -336,7 +336,8 @@ public class ProtoUtil {
 						//labyrinth.splitRoom(labyrinth.getRooms().get(3));
 						//labyrinth.mergeRoom(labyrinth.getRooms().get(2), labyrinth.getRooms().get(0));
 						//labyrinth.update();
-						labyrinth.splitRoom(labyrinth.getRooms().get(0));
+						labyrinth.getRooms().get(3).spawnItem(new Mask());
+						//labyrinth.splitRoom(labyrinth.getRooms().get(0));
 						//labyrinth.getRooms().get(0).addEnvironmentalFactor(new Gas(labyrinth.getRooms().get(0)));
 					}
 					//if(aa++%10000==100) 
