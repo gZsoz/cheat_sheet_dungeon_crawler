@@ -113,6 +113,9 @@ public class ViewRoom extends JComponent implements Subscriber {
 		if(item instanceof AirFreshener){
 			new ViewAirFreshener((AirFreshener) item, fixedItemPositions[i]);
 		}
+		else if(item instanceof FakeBatSkin){
+			new ViewFakeBatSkin((FakeBatSkin) item, fixedItemPositions[i]);
+		}
 		else if(item instanceof BatSkin){
 			new ViewBatSkin((BatSkin) item, fixedItemPositions[i]);
 		}
@@ -122,20 +125,17 @@ public class ViewRoom extends JComponent implements Subscriber {
 		else if(item instanceof CabbageCamembert){
 			new ViewCabbageCamembert((CabbageCamembert) item, fixedItemPositions[i]);
 		}
-		else if(item instanceof FakeBatSkin){
-			new ViewFakeBatSkin((FakeBatSkin) item, fixedItemPositions[i]);
+		else if(item instanceof FakeSlideRule){
+			new ViewFakeSlideRule((FakeSlideRule) item, fixedItemPositions[i]);
+		}
+		else if(item instanceof SlideRule){
+			new ViewSlideRule((SlideRule) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof FakeMask){
 			new ViewFakeMask((FakeMask) item, fixedItemPositions[i]);
 		}
-		else if(item instanceof FakeSlideRule){
-			new ViewFakeSlideRule((FakeSlideRule) item, fixedItemPositions[i]);
-		}
 		else if(item instanceof Mask){
 			new ViewMask((Mask) item, fixedItemPositions[i]);
-		}
-		else if(item instanceof SlideRule){
-			new ViewSlideRule((SlideRule) item, fixedItemPositions[i]);
 		}
 		else if(item instanceof Transistor){
 			new ViewTransistor((Transistor) item, fixedItemPositions[i]);
