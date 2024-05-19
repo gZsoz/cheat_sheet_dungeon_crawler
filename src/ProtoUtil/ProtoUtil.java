@@ -303,7 +303,7 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom(true);
+    		random = new MyRandom(false);
     		Student reds=new Student();
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);

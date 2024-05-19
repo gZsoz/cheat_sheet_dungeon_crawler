@@ -239,8 +239,8 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
                     setNewColor();
                     break;
 
-                case KeyEvent.VK_ALT:
-                    System.out.println("Alt - Tárgy eldobása");
+                case KeyEvent.VK_SHIFT:
+                    System.out.println("Shift - Tárgy eldobása");
                     if (state == ActionState.InInventory && !player.getInventory().isEmpty()) {
                         clearColor();
                         player.putdownItem(player.getInventory().get(selectedSlot));

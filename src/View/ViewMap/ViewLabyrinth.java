@@ -188,10 +188,10 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 		g2D.setColor(Color.BLUE);
 		g2D.drawString("⮜/⮞",1820/2+136,828);
 		g2D.drawString("Enter",1820/2+120,846);
-		g2D.drawString("Alt",1820/2+141,866);
+		g2D.drawString("Shift",1820/2+120,866);
 		g2D.drawString("⮝",1820/2+158,886);
 		g2D.drawString("⮟",1820/2+158,906);
-		g2D.drawString("Ctrl",1820/2+132,924);
+		g2D.drawString("Ctrl",1820/2+132,926);
 
 		paintRoutes(g2D);
 	}
