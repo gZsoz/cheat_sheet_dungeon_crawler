@@ -1,6 +1,7 @@
 package EnvironmentalFactor;
 
 import Character.Character;
+import Character.Cleaner;
 import Items.*;
 import Map.Room;
 import ProtoUtil.ProtoUtil;
@@ -26,6 +27,8 @@ public class Gas extends EnvironmentalFactors {
 	 */
 	public void stun(Character character) {
 		ProtoUtil.printLog("stun");
+		if(character instanceof Cleaner)
+			return;
 		if(!character.getHasDefense()) {
 			if(character.getStunned()==0) {
 				character.setStunned(Character.stunTime);

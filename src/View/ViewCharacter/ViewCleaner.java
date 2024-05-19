@@ -4,6 +4,7 @@ import Character.Cleaner;
 import View.Controller.Controller;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
+import View.Utils.ImageReader;
 
 import java.awt.*;
 
@@ -11,20 +12,16 @@ import java.awt.*;
  * A takarító kirajzolásáért felelős osztály.
  */
 public class ViewCleaner extends ViewCharacter {
-	
-	/**
-	 * A modellbeli takarító, amit reprezentál.
-	 */
-	private Cleaner character;
 
-	public ViewCleaner(Cleaner clean, Coordinates pos){
-		super("cleaner.png", pos);
-		character = clean;
-		character.subscribe(this);
+	public ViewCleaner(Cleaner cleaner, Coordinates pos){
+		super(cleaner, pos);
+		image = ImageReader.loadImage(ImageReader.path+charactersPath+"cleaner.png");
 		GameFrame.container.add(this);
     	GameFrame.viewCharacters.add(this);
-		Controller.characters.put(character, this);
 	}
+	
+	@Override
+	public void setItemPositions() {}
 
 	@Override
 	public void propertyChanged(String property) {

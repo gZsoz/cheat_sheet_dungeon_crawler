@@ -14,60 +14,47 @@ import java.awt.*;
  */
 public class ViewStudent extends ViewCharacter {
 
-	/**
-	 * A modellbeli diák, amit reprezentál.
-	 */
-	private Student character;
 	private SelectionColor color;
 
-	public ViewStudent(Student stud, Coordinates pos){
-		super("student_blue.png", pos);
-		character = stud;
-		character.subscribe(this);
-		Controller.characters.put(character, this);
+	public ViewStudent(Student student, Coordinates pos){
+		super(student, pos);
 	}
 
 	public void setImage(SelectionColor color){
 		this.color = color;
 		if(color == SelectionColor.Blue){
-			image = ImageReader.loadImage("res/images/Characters/student_blue.png");
+			image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_blue.png");
 		}
 		else if(color == SelectionColor.Red){
-			image = ImageReader.loadImage("res/images/Characters/student_red.png");
+			image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_red.png");
 		}
 	}
 	
-	private void setItemPositions() {
-
-			if(color == SelectionColor.Red){
-				for(int i=0;i<character.getInventory().size();i++) {
-					ViewItem item = Controller.items.get(character.getInventory().get(i));
-					item.setCoordinates(PlayerController.leftInventoryPositions[i]);
-					item.setItemSize(new Size(78,78));
-				}
+	@Override
+	public void setItemPositions() {
+		if(color == SelectionColor.Red){
+			for(int i=0;i<character.getInventory().size();i++) {
+				ViewItem item = Controller.items.get(character.getInventory().get(i));
+				item.setCoordinates(PlayerController.leftInventoryPositions[i]);
+				item.setItemSize(new Size(78,78));
 			}
-			else if(color == SelectionColor.Blue){
-				for(int i=0;i<character.getInventory().size();i++) {
-					ViewItem item = Controller.items.get(character.getInventory().get(i));
-					item.setCoordinates(PlayerController.rightInventoryPositions[i]);
-					item.setItemSize(new Size(78,78));
-				}
+		}
+		else if(color == SelectionColor.Blue){
+			for(int i=0;i<character.getInventory().size();i++) {
+				ViewItem item = Controller.items.get(character.getInventory().get(i));
+				item.setCoordinates(PlayerController.rightInventoryPositions[i]);
+				item.setItemSize(new Size(78,78));
 			}
-
-
+		}
 	}
 	
 	@Override
 	public void propertyChanged(String property) {
-		if(property.equals("inventory")) {
-			setItemPositions();
-
-		}
+		
 		if(property.equals("kicked")) {
 			character.unsubscribe(this);
 		}
-
-		if(property.equals("stun")){
+		else if(property.equals("stun")){
 			if(character.getStunned()>0 && character.getStunned()< Character.stunTime){
 				if(color == SelectionColor.Red){
 					image = ImageReader.loadImage("res/images/Characters/student_red_stunned.png");
