@@ -32,9 +32,11 @@ public class Gas extends EnvironmentalFactors {
 				for(Item currentItem : new ArrayList<Item>(character.getInventory())){
 					if(currentItem instanceof Transistor) { // ha tranzisztor, annak az értékeit default-ra állítjuk
 						Transistor t = (Transistor) currentItem;
-						t.getPair().setLocation(null);
-						t.getPair().setActive(false);
-						t.getPair().setPair(null);
+						if (t.getPair() != null) {
+							t.getPair().setLocation(null);
+							t.getPair().setActive(false);
+							t.getPair().setPair(null);
+						}
 						t.setPair(null);
 						t.setActive(false);
 						t.setLocation(null);

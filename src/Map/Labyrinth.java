@@ -167,7 +167,7 @@ public class Labyrinth implements iTask{
 		int rand;
 		if(!old.getNeighbours().isEmpty()) {
 		rand=random.nextInt(old.getNeighbours().size());
-			for(int i=0; i<rand; i++){
+			for(int i=0; i<=rand; i++){
 				n.addNeighbour(old.getNeighbours().get(0));
 				old.getNeighbours().get(0).addNeighbour(n);
 				old.getNeighbours().get(0).removeNeighbour(old);
@@ -176,27 +176,39 @@ public class Labyrinth implements iTask{
 		}
 		old.addNeighbour(n);
 		n.addNeighbour(old);
+		
+		rooms.add(rooms.indexOf(old)+1, n);
+		notifySubsribers("split "+rooms.indexOf(old));
+		
 		// Tárgyak hozzáadása
 		if(!old.getItems().isEmpty()) {
 			rand=random.nextInt(old.getItems().size());
-			for(int i=0; i<rand; i++){
+			for(int i=0; i<=rand; i++){
 				n.addItem(old.getItems().get(0));
 				old.removeItem(old.getItems().get(0));
 			}
 		}
+		old.notifySubsribers("items");
+		n.notifySubsribers("items");
+		
 		// Karakterek hozzáadása
 		if(!old.getCharacters().isEmpty()) {
 			rand=random.nextInt(old.getCharacters().size());
-			for(int i=0; i<rand; i++){
-				old.getCharacters().get(i).enterRoom(n);
+			for(int i=0; i<=rand; i++){
+				old.getCharacters().get(0).enterRoom(n);
 			}
 		}
+		old.notifySubsribers("characters");
+		n.notifySubsribers("characters");
+		
 		// Környezeti tényezők hozzáadása
 		for(int i=0; i<old.getEnvironmentalFactors().size(); i++){
 			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.spawnEnvironmentalFactor(new Gas(n));
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.spawnEnvironmentalFactor(new Sticky(n)); 
 		}
-		rooms.add(rooms.indexOf(old)+1, n);
+		old.notifySubsribers("factors");
+		n.notifySubsribers("factors");
+		
 		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
 		ProtoUtil.printLog("Neighbours of new room: "+n.getNeighbours().size());
 		ProtoUtil.printLog("Items of old room: "+old.getItems().size());
@@ -205,7 +217,7 @@ public class Labyrinth implements iTask{
 		ProtoUtil.printLog("Characters of new room: "+n.getCharacters().size());
 		ProtoUtil.printLog("EnvironmentalFactors of old room: "+old.getEnvironmentalFactors().size());
 		ProtoUtil.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
-		notifySubsribers("split "+rooms.indexOf(old));
+		
     }
 
 	
