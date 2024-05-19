@@ -188,10 +188,10 @@ public class ViewRoom extends JComponent implements Subscriber {
 
 	private void createViewEnvFactor(EnvironmentalFactors factor) {
 		if(factor instanceof Gas){
-			new ViewGas((Gas) factor, coordinates, room.getCapacity());
+			new ViewGas((Gas) factor, coordinates);
 		}
 		else if(factor instanceof Sticky){
-			new ViewSticky((Sticky) factor, coordinates, room.getCapacity());
+			new ViewSticky((Sticky) factor, coordinates);
 		}
 	}
 	

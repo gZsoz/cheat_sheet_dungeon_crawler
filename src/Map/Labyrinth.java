@@ -373,8 +373,8 @@ public class Labyrinth implements iTask{
 		
 		//r5.items.add(new Beer());
 		//r1.envFactors.add(new Gas(r1));
-		//r3.addItem(new AirFreshener());
-		//r3.addItem(new CabbageCamembert());
+		r1.addItem(new AirFreshener());
+		r1.addItem(new CabbageCamembert());
 		//r1.envFactors.add(new Sticky(r1));
 		r1.addItem(new BatSkin());
 		r1.addItem(new Mask());

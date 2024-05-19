@@ -13,31 +13,15 @@ import java.awt.*;
  * A gáz grafikus osztálya.
  */
 public class ViewGas extends ViewEnvironmentalFactors {
-
-	/**
-	 * A modellbeli gáz, amit reprezentál.
-	 */
-	private Gas gas;
 	
-	public ViewGas(Gas g, Coordinates c, int capacity){
-		gas=g;
-		gas.subscribe(this);
-		coordinates=c;
-		image = ImageReader.loadImage("res/images/envfactors/gas.png");
-		size = new Size(/*capacity * 90*/ 360+30,	250);
-		GameFrame.container.add(this);
-    	GameFrame.viewEnvs.add(this);
-    	Controller.envs.put(gas, this);
+	public ViewGas(Gas gas, Coordinates c){
+		super(gas,c);
+		image = ImageReader.loadImage(ImageReader.path+envFactorsPath+"gas.png");
 	}
 
 	@Override
 	public void propertyChanged(String property) {
-		if(property.equals("factorremoved")) {
-			Controller.envs.remove(gas);
-			GameFrame.viewEnvs.remove(this);
-			GameFrame.container.remove(this);
-			gas.unsubscribe(this);
-		}
+		super.propertyChanged(property);
 	}
 	
 	/**
