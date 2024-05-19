@@ -423,10 +423,10 @@ public class Labyrinth implements iTask{
 		// a random események végrehajtása
 		Random rand=new Random();
 		if(ProtoUtil.random.nextInt(1000, -1)==0) {
-			//mergeRoom(rooms.get(rand.nextInt(rooms.size())), rooms.get(rand.nextInt(rooms.size()))); // merge
+			mergeRoom(rooms.get(rand.nextInt(rooms.size())), rooms.get(rand.nextInt(rooms.size()))); // merge
 		}
 		if(ProtoUtil.random.nextInt(1000, -1)==0) {
-			//splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
+			splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
 		}
 		for(Room r : rooms){
 			if(ProtoUtil.random.nextInt(1000, -1)==0) {
