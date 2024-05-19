@@ -55,7 +55,7 @@ public class ViewStudent extends ViewCharacter {
 			character.unsubscribe(this);
 		}
 		else if(property.equals("stun")){
-			if(character.getStunned()>0 && character.getStunned()< Character.stunTime){
+			if(character.getStunned()>0 && character.getStunned() <= Character.stunTime){
 				if(color == SelectionColor.Red){
 					image = ImageReader.loadImage("res/images/Characters/student_red_stunned.png");
 				}

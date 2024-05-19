@@ -376,9 +376,8 @@ public class Labyrinth implements iTask{
 		//r1.addItem(new AirFreshener());
 		//r1.addItem(new CabbageCamembert());
 		//r1.envFactors.add(new Sticky(r1));
-		r1.addItem(new FakeBatSkin());
-		r1.addItem(new FakeMask());
-		r1.addItem(new FakeSlideRule());
+		r1.addItem(new WetCloth());
+		r1.addItem(new BatSkin());
 		
 		
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba
