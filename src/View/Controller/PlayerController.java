@@ -3,6 +3,7 @@ package View.Controller;
 import javax.swing.*;
 
 import Character.Student;
+import Map.CursedRoom;
 import Map.Labyrinth;
 import Map.Room;
 import ProtoUtil.ProtoUtil;
@@ -12,7 +13,9 @@ import View.Utils.ImageReader;
 import View.Utils.SelectionColor;
 import View.Utils.Subscriber;
 import View.ViewCharacter.ViewStudent;
+import View.ViewMap.ViewCursedRoom;
 import View.ViewMap.ViewLabyrinth;
+import View.ViewMap.ViewRoom;
 import View.Utils.ActionState;
 
 import java.awt.*;
@@ -33,6 +36,11 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
      * A szoba melyben a hallgató van.
      */
     private Room room;
+    
+    /**
+     * A labirintus melyben a hallgató van.
+     */
+    private Labyrinth labyrinth;
     
     /**
      * Az egyik játékos által irányított hallgató megjelenítéséért felelő része.
@@ -83,6 +91,11 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
         playerView=new ViewStudent(player, new Coordinates(0,0));
         playerView.setImage(color);
         setCharacterImage();
+    }
+    
+    public void setLabyrinth(Labyrinth l) {
+    	labyrinth=l;
+    	labyrinth.subscribe(this);
     }
 
     private void setCharacterImage() {
@@ -364,7 +377,16 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 					setNewColor();
 				}
 			}
-		}	
+		}else if(property.equals("modifyneighbours")) {
+			if(state==ActionState.RoomPicker) {
+				clearColor();
+			}
+		}else if(property.equals("neighboursmodified")) {
+			if(state==ActionState.RoomPicker) {
+					selectedSlot=0;
+					setNewColor();
+			}
+		}
 	}
     /**
      * Kirajzolja a játékos által irányított karakter információs ablakát.

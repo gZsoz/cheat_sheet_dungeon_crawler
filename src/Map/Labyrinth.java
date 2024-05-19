@@ -35,7 +35,7 @@ public class Labyrinth implements iTask{
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : new ArrayList<>(subscribers))
-    		sub.propertyChanged(str); // lehetséges értékek: "merge <indexOf(result)> <indexOf(merging)>", "split <indexOf(old)>"
+    		sub.propertyChanged(str); // lehetséges értékek: "merge <indexOf(result)> <indexOf(merging)>", "split <indexOf(old)>", "modifyneighbours"
     }
     
     /**
@@ -92,10 +92,12 @@ public class Labyrinth implements iTask{
 			return;
 		}else{
 			notifySubsribers("merge "+rooms.indexOf(result)+" "+rooms.indexOf(merging));
+			notifySubsribers("modifyneighbours");
 			result.setCapacity(bigger);
 			result.merge(merging);
 			this.removeRoom(merging);
 			merging.notifySubsribers("roomremoved");
+			notifySubsribers("neighboursmodified");
 		}
     }
 	
@@ -154,6 +156,7 @@ public class Labyrinth implements iTask{
      */
 	public void splitRoom(Room old) {
 		ProtoUtil.printLog("splitRoom");
+		notifySubsribers("modifyneighbours");
 		Room n;
 		// Az új szoba típusa a régi szobától függ
 		if(old instanceof CursedRoom) {
@@ -166,7 +169,7 @@ public class Labyrinth implements iTask{
 		Random random=new Random();
 		int rand;
 		if(!old.getNeighbours().isEmpty()) {
-		rand=random.nextInt(old.getNeighbours().size());
+			rand=random.nextInt(old.getNeighbours().size());
 			for(int i=0; i<=rand; i++){
 				n.addNeighbour(old.getNeighbours().get(0));
 				old.getNeighbours().get(0).addNeighbour(n);
@@ -179,6 +182,7 @@ public class Labyrinth implements iTask{
 		
 		rooms.add(rooms.indexOf(old)+1, n);
 		notifySubsribers("split "+rooms.indexOf(old));
+		notifySubsribers("neighboursmodified");
 		
 		// Tárgyak hozzáadása
 		if(!old.getItems().isEmpty()) {
@@ -384,7 +388,7 @@ public class Labyrinth implements iTask{
 		// diákok legenerálása
 		List<Room> roomsWithStudents = new ArrayList<Room>();
 		
-		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 0));
+		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 1));
 		roomOfFirstStudent.addCharacter(reds); // első diák betétele egy random szobába
 		reds.setRoom(roomOfFirstStudent);
 		roomsWithStudents.add(roomOfFirstStudent);
