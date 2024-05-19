@@ -25,6 +25,7 @@ public class SlideRule extends NumberOfUsesItem {
 		ProtoUtil.printLog("use");
 		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
 		ProtoUtil.printLog("Game over");
+		owner.notifySubsribers("studentwon");
     }
 	
 	/**

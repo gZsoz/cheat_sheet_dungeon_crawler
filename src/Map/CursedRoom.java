@@ -15,7 +15,12 @@ public class CursedRoom extends Room{
 	public static int defaultCloseDuration=100;
 	
 	private int closeDuration=0; // A Szoba zárva tartásának ideje
-	private boolean isOpen=true; // A Szoba állapota: nyitva vagy zárva
+
+    public boolean getIsOpen() {
+        return isOpen;
+    }
+
+    private boolean isOpen=true; // A Szoba állapota: nyitva vagy zárva
 	
     /**
      * Konstruktor egy szoba létrehozásához.
@@ -97,10 +102,19 @@ public class CursedRoom extends Room{
     @Override
     public List<Room> getNeighbours() {
         ProtoUtil.printLog("getNeighbours");
-        if (isOpen)
-            return neighbours;
+        if (isOpen) {
+            ArrayList<Room> openNeighbours = new ArrayList<>();
+            for(Room r : new ArrayList<Room>(neighbours)) {
+                if(!((r instanceof CursedRoom) && !((CursedRoom) r).getIsOpen())) {
+                    openNeighbours.add(r);
+                }
+            }
+            return openNeighbours;
+        }
         return new ArrayList<Room>();
     }
+
+
     
     /**
      * Meghívja a tárolt Character-ek és EnvironmentalFactorok update() metódusát 

@@ -337,7 +337,13 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
             selectedSlot--;
         }
         else if(state == ActionState.RoomPicker){
-            selectedSlot=player.getRoom().getNeighbours().size()-1;
+            if(player.getRoom().getNeighbours().isEmpty()){
+                selectedSlot = 0;
+            }
+            else {
+                selectedSlot=player.getRoom().getNeighbours().size()-1;
+            }
+
         }
         else if(state == ActionState.ItemPicker){
             selectedSlot=player.getRoom().getItems().size()-1;
@@ -354,7 +360,10 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 
 	@Override
 	public void propertyChanged(String property) {
-		if(property.equals("kicked")) {
+        if(property.equals("studentwon")){
+            labyrinth.notifySubsribers("gamewon");
+        }
+		else if(property.equals("kicked")) {
 			isStudentAlive=false;
 			clearColor();
 			GameFrame.viewCharacters.remove(Controller.characters.get(player));
@@ -368,7 +377,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 				if(state==ActionState.ItemPicker) {
 					Controller.items.get(room.getItems().get(selectedSlot)).removeColor(color);
 					selectedSlot=0;
-				}else if(state==ActionState.RoomPicker) {
+				}else if(state==ActionState.RoomPicker && !room.getNeighbours().isEmpty()) {
 					Controller.rooms.get(room.getNeighbours().get(selectedSlot)).removeColor(color);
 					selectedSlot=0;
 				}

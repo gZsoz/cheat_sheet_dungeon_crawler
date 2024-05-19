@@ -303,7 +303,7 @@ public class ProtoUtil {
     		test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
     	}
     	else {
-    		random = new MyRandom(false);
+    		random = new MyRandom(true);
     		Student reds=new Student();
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);
@@ -336,7 +336,7 @@ public class ProtoUtil {
 						//labyrinth.splitRoom(labyrinth.getRooms().get(3));
 						//labyrinth.mergeRoom(labyrinth.getRooms().get(2), labyrinth.getRooms().get(0));
 						//labyrinth.update();
-						
+						labyrinth.splitRoom(labyrinth.getRooms().get(0));
 						//labyrinth.getRooms().get(0).addEnvironmentalFactor(new Gas(labyrinth.getRooms().get(0)));
 					}
 					//if(aa++%10000==100) 

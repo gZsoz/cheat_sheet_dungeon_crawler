@@ -58,6 +58,8 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 				new Coordinates(209,300), new Coordinates(772,300), new Coordinates(1272,300),
 				new Coordinates(322,620), new Coordinates(722,556), new Coordinates(1132,620)
 	));
+	private boolean gameWon = false;
+	private boolean gameLost = false;
 
 	public ViewLabyrinth(Labyrinth lab){
 		labyrinth = lab;
@@ -100,7 +102,10 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	
 	@Override
 	public void propertyChanged(String property) {
-		if(property.contains("merge")) {
+		if(property.equals("gamewon")){
+			gameWon = true;
+		}
+		else if(property.contains("merge")) {
 			int idx=Integer.parseInt(property.split(" ")[2]);
 			roomsInPosition[idx]=0;
 		}else if(property.contains("split")) {
@@ -194,5 +199,13 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 		g2D.drawString("Ctrl",1820/2+132,926);
 
 		paintRoutes(g2D);
+
+		if(gameWon || gameLost){
+			if(gameWon){
+				g2D.drawImage(ImageReader.loadImage("res/images/endscreen.png"),0,0,1820,980,null);
+			}
+		}
 	}
+
+
 }

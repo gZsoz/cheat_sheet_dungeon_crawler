@@ -35,7 +35,7 @@ public class Labyrinth implements iTask{
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : new ArrayList<>(subscribers))
-    		sub.propertyChanged(str); // lehetséges értékek: "merge <indexOf(result)> <indexOf(merging)>", "split <indexOf(old)>", "modifyneighbours"
+    		sub.propertyChanged(str); // lehetséges értékek: "merge <indexOf(result)> <indexOf(merging)>", "split <indexOf(old)>", "modifyneighbours", "gamewon"
     }
     
     /**
@@ -90,12 +90,17 @@ public class Labyrinth implements iTask{
 		else bigger=merging.getCapacity();
 		if(result.getCharacters().size()+merging.getCharacters().size()>bigger){
 			return;
-		}else{
+		}
+		else if(result.getNeighbours().isEmpty() || merging.getNeighbours().isEmpty()){
+			return;
+		}
+		else{
 			notifySubsribers("merge "+rooms.indexOf(result)+" "+rooms.indexOf(merging));
 			notifySubsribers("modifyneighbours");
 			result.setCapacity(bigger);
 			result.merge(merging);
 			this.removeRoom(merging);
+			merging.getNeighbours().clear();
 			merging.notifySubsribers("roomremoved");
 			notifySubsribers("neighboursmodified");
 		}
@@ -303,13 +308,13 @@ public class Labyrinth implements iTask{
 		ProtoUtil.printLog("generateRooms");
 		
 		// szobák legenerálása (2-4 fősek)
-		Room r1 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r1 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r2 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r3 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r4 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r5 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r6 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r7 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r7 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r8 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r9 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r10 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
@@ -341,7 +346,7 @@ public class Labyrinth implements iTask{
 		for (Room room : rooms) { // minden szobához végigiterálunk az összes szobán és vagy berakjuk a szomszédok közé vagy nem
             for (Room otherRoom : rooms) {
                 if (room != otherRoom) { // saját magát nem rakjuk be semmiképpen
-                    if (ProtoUtil.random.nextInt(2, 0) == 0) {
+                    if (ProtoUtil.random.nextInt(4, 0) == 0) {
                         room.addNeighbour(otherRoom);
                         otherRoom.addNeighbour(room);
                     }
@@ -390,7 +395,7 @@ public class Labyrinth implements iTask{
 		// diákok legenerálása
 		List<Room> roomsWithStudents = new ArrayList<Room>();
 		
-		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 1));
+		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 6));
 		roomOfFirstStudent.addCharacter(reds); // első diák betétele egy random szobába
 		reds.setRoom(roomOfFirstStudent);
 		roomsWithStudents.add(roomOfFirstStudent);
