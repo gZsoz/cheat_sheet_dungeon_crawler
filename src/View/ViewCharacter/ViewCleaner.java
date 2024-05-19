@@ -25,8 +25,7 @@ public class ViewCleaner extends ViewCharacter {
 
 	@Override
 	public void propertyChanged(String property) {
-
-
+		super.propertyChanged(property);
 	}
 
 	@Override

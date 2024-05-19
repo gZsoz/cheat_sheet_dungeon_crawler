@@ -386,6 +386,11 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 					selectedSlot=0;
 					setNewColor();
 			}
+		} else if(property.equals("enteredcursedroom")) {
+			for(ViewRoom vr : GameFrame.viewRooms) {
+				if(vr.getSelected() == color || vr.getSelected() == SelectionColor.Both)
+					vr.removeColor(color);
+			}
 		}
 	}
     /**

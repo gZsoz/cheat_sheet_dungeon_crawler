@@ -19,10 +19,6 @@ import java.util.ArrayList;
  */
 public class ViewRoom extends JComponent implements Subscriber {
 
-	public Room getRoom() {
-		return room;
-	}
-
 	/**
 	 * A modellbeli szoba, amit reprezentál.
 	 */
@@ -57,6 +53,14 @@ public class ViewRoom extends JComponent implements Subscriber {
 	 * Kijelölt-e az adott szoba (szoba váltásnál) és ha igen milyen színnel.
 	 */
 	protected SelectionColor selected;
+	
+	public SelectionColor getSelected() {
+		return selected;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
 
 	public ViewRoom(Room r, Coordinates pos){
 		room = r;

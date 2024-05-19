@@ -106,6 +106,7 @@ getCharacters
 getStunned
 getStunned
 getNeighbours
+getNeighbours
 enterRoom
 getCharacters
 getCapacity

@@ -56,7 +56,6 @@ public abstract class ViewCharacter extends JComponent implements Subscriber {
 	
 	public abstract void setItemPositions();
 	
-	@Override
 	public void propertyChanged(String property) {
 		if(property.equals("inventory")) {
 			setItemPositions();

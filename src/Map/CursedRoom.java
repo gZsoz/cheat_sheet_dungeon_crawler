@@ -12,7 +12,7 @@ import ProtoUtil.ProtoUtil;
  */
 public class CursedRoom extends Room{
 	
-	public static int defaultCloseDuration=5;
+	public static int defaultCloseDuration=100;
 	
 	private int closeDuration=0; // A Szoba zárva tartásának ideje
 	private boolean isOpen=true; // A Szoba állapota: nyitva vagy zárva
@@ -61,6 +61,7 @@ public class CursedRoom extends Room{
     public void removeAllDoors() {
         ProtoUtil.printLog("removeAllDoors");
         isOpen = false;
+        notifySubsribers("enteredcursedroom");
     }
 	
     /**

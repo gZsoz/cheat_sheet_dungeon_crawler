@@ -17,7 +17,7 @@ public class ViewCursedRoom extends ViewRoom implements Subscriber {
 
 	@Override
 	public void propertyChanged(String property) {
-	    // TODO document why this method is empty
+	    super.propertyChanged(property);
 	}
 	
 	/**
@@ -25,6 +25,6 @@ public class ViewCursedRoom extends ViewRoom implements Subscriber {
 	 */
 	@Override
 	public void paint(Graphics g) {
-	    // TODO document why this method is empty
+	    super.paint(g);
 	}
 }

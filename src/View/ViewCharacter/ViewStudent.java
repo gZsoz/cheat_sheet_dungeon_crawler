@@ -50,7 +50,7 @@ public class ViewStudent extends ViewCharacter {
 	
 	@Override
 	public void propertyChanged(String property) {
-		
+		super.propertyChanged(property);
 		if(property.equals("kicked")) {
 			character.unsubscribe(this);
 		}

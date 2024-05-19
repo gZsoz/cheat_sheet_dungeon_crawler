@@ -26,6 +26,7 @@ public class ViewTeacher extends ViewCharacter {
 
 	@Override
 	public void propertyChanged(String property) {
+		super.propertyChanged(property);
 		if(property.equals("stun")){
 			if(character.getStunned()>0 && character.getStunned()< Character.stunTime){
 				image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_stunned.png");

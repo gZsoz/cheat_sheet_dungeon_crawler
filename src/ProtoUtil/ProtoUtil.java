@@ -335,7 +335,7 @@ public class ProtoUtil {
 						//labyrinth.getRooms().get(3).getCharacters().get(0).enterRoom(labyrinth.getRooms().get(0));
 						//labyrinth.splitRoom(labyrinth.getRooms().get(3));
 						//labyrinth.mergeRoom(labyrinth.getRooms().get(2), labyrinth.getRooms().get(0));
-						labyrinth.update();
+						//labyrinth.update();
 						
 						//labyrinth.getRooms().get(0).addEnvironmentalFactor(new Gas(labyrinth.getRooms().get(0)));
 					}
