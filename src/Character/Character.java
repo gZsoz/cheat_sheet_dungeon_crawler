@@ -55,7 +55,7 @@ public abstract class Character implements iTask {
      */
     public void notifySubsribers(String str) {
     	for(Subscriber sub : new ArrayList<>(subscribers))
-    		sub.propertyChanged(str); // lehetséges értékek: "stun", "inventory", "invincible", "kicked", "studentwon"
+    		sub.propertyChanged(str); // lehetséges értékek: "stun", "inventory", "invincible", "kicked", "studentwon", "angry"
     }
 	
     /**
@@ -74,6 +74,14 @@ public abstract class Character implements iTask {
      */
     public void unsubscribe(Subscriber sub) {
     	subscribers.remove(sub);
+    }
+    
+    /**
+	 * Kábítás állapot lekérdezése.
+	 * @return A karakter kábultsági állapota.
+	 */
+    public boolean isStunned() {
+    	return stunned > 0 && stunned <= stunTime;	
     }
     
 	/**

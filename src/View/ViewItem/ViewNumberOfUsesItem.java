@@ -9,6 +9,7 @@ import Items.DecayingItems;
 import Items.Item;
 import Items.NumberOfUsesItem;
 import View.Utils.Coordinates;
+import View.Utils.Size;
 
 /**
  * A különböző valahányszor használható tárgyak grafikus osztályának az ősosztálya.
@@ -37,6 +38,12 @@ public abstract class ViewNumberOfUsesItem extends ViewItem {
 	}
 	
 	@Override
+	public void setItemSize(Size size) {
+		super.setItemSize(size);
+		setFixedDotPositions();
+	}
+	
+	@Override
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
 	}
@@ -51,7 +58,6 @@ public abstract class ViewNumberOfUsesItem extends ViewItem {
 		super.paint(g);
 		if (size.getWidth() == 78) {
 			Graphics2D g2D = (Graphics2D) g;
-			setFixedDotPositions();
 			g2D.setColor(Color.YELLOW);
 			for (int i = 0; i < ((NumberOfUsesItem) item).getRemainingUses(); i++) {
 				g2D.fillOval(fixedDotPositions[i].getX(), fixedDotPositions[i].getY(), size.getWidth() / 4, size.getHeight() / 4);

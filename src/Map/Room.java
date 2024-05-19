@@ -255,15 +255,15 @@ public class Room implements iTask {
 	        }
 	        current.removeNeighbour(r);
 	    }
-	    for (Item i : new ArrayList<>(r.getItems())) {
-	        addItem(i);
+	    for (EnvironmentalFactors env : new ArrayList<>(r.getEnvironmentalFactors())) {
+	    	addEnvironmentalFactor(env);
 	    }
 	    for (Character c : new ArrayList<>(r.getCharacters())) {
 	        c.setStunned(0);
 	    	c.enterRoom(this);
 	    }
-	    for (EnvironmentalFactors env : new ArrayList<>(r.getEnvironmentalFactors())) {
-	    	addEnvironmentalFactor(env);
+	    for (Item i : new ArrayList<>(r.getItems())) {
+	        addItem(i);
 	    }
 	    if(neighbours.contains(this))
 	    	System.out.println("nagy a baj");

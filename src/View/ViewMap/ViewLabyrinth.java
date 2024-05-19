@@ -52,6 +52,13 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	
 	private int kickedStudents = 0;
 	
+	public void printRoomsInPosition() {
+		for(int i : roomsInPosition)
+			System.out.print(i+" ");
+		System.out.println();
+		
+	}
+	
 	/**
 	 * Az összes lehetséges szoba pozíciója
 	 */
@@ -107,7 +114,13 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	public void propertyChanged(String property) {
 		if(property.contains("merge")) {
 			int idx=Integer.parseInt(property.split(" ")[2]);
-			roomsInPosition[idx]=0;
+			ViewRoom vr = Controller.rooms.get(labyrinth.getRooms().get(idx));
+			for(int i=0;i<fixedRoomPositions.size();i++) {
+				if(fixedRoomPositions.get(i).equals(vr.coordinates)) {
+					roomsInPosition[i]=0;
+					break;
+				}
+			}
 		}else if(property.contains("split")) {
 			int idx=Integer.parseInt(property.split(" ")[1])+1;
 			int posidx=-1;

@@ -53,6 +53,21 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
     private Image characterImage;
 
     /**
+     * Az adott karakter normál arcképe.
+     */
+    private Image normalCharacterImage;
+    
+    /**
+     * Az adott stunnolt karakter arcképe.
+     */
+    private Image stunnedCharacterImage;
+    
+    /**
+     * Az adott kirúgott karakter arcképe.
+     */
+    private Image kickedCharacterImage;
+    
+    /**
      * Az adott karkter inventory-jának háttere
      */
     private Image inventoryBackgroundImage;
@@ -90,6 +105,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
         selectedSlot = 0;
         playerView=new ViewStudent(player, new Coordinates(0,0));
         playerView.setImage(color);
+        initCharacterImage();
         setCharacterImage();
     }
     
@@ -98,18 +114,25 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
     	labyrinth.subscribe(this);
     }
 
-    private void setCharacterImage() {
-    	if(isStudentAlive) {
-	    	if(color==SelectionColor.Red)
-	    		characterImage = ImageReader.loadImage(ImageReader.path+"characters/student_red_face.png");
-	    	else
-	    		characterImage = ImageReader.loadImage(ImageReader.path+"characters/student_blue_face.png");
+    private void initCharacterImage() {
+    	if(color==SelectionColor.Red) {
+    		normalCharacterImage = ImageReader.loadImage(ImageReader.path+"Characters/student_red_face.png");
+    		stunnedCharacterImage = ImageReader.loadImage(ImageReader.path+"Characters/student_red_face_stunned.png");
     	}else {
-    		if(color==SelectionColor.Red)
-	    		characterImage = ImageReader.loadImage(ImageReader.path+"characters/student_red_face_kicked.png");
-	    	else
-	    		characterImage = ImageReader.loadImage(ImageReader.path+"characters/student_blue_face_kicked.png");
+    		normalCharacterImage = ImageReader.loadImage(ImageReader.path+"Characters/student_blue_face.png");
+    		stunnedCharacterImage = ImageReader.loadImage(ImageReader.path+"Characters/student_blue_face_stunned.png");	
     	}
+    	kickedCharacterImage = ImageReader.loadImage(ImageReader.path+"Characters/student_face_kicked.png");
+    	
+    }
+    
+    private void setCharacterImage() {
+    	if(!isStudentAlive)
+    		characterImage=kickedCharacterImage;
+    	else if(player.isStunned())
+    		characterImage=stunnedCharacterImage;
+    	else
+    		characterImage=normalCharacterImage;
     } 
     
     public void setPlayerView(ViewStudent pv){
@@ -362,6 +385,8 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 	public void propertyChanged(String property) {
         if(property.equals("studentwon")){
             labyrinth.notifySubsribers("gamewon");
+        }else if(property.equals("stun")) {
+        	setCharacterImage();
         }
 		else if(property.equals("kicked")) {
 			isStudentAlive=false;
@@ -372,6 +397,9 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 			room.unsubscribe(this);
 			player.unsubscribe(this);
 			setCharacterImage();
+			for(ViewRoom vr : GameFrame.viewRooms) {
+				vr.removeColor(color);
+			}
 			labyrinth.notifySubsribers("gamelost");
 		}else if(property.equals("characters")) {
 			if(!room.getCharacters().contains(player)) {
@@ -410,13 +438,12 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 			}
 		}else if(property.equals("neighboursmodified")) {
 			if(state==ActionState.RoomPicker) {
-					selectedSlot=0;
-					setNewColor();
+				selectedSlot=0;
+				setNewColor();
 			}
 		} else if(property.equals("enteredcursedroom")) {
 			for(ViewRoom vr : GameFrame.viewRooms) {
-				if(vr.getSelected() == color || vr.getSelected() == SelectionColor.Both)
-					vr.removeColor(color);
+				vr.removeColor(color);
 			}
 		}
 	}

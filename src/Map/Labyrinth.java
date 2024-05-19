@@ -85,6 +85,8 @@ public class Labyrinth implements iTask{
      */
 	public void mergeRoom(Room result, Room merging) {
 		ProtoUtil.printLog("mergeRoom");
+		if(result.equals(merging))
+			return;
 		int bigger;
 		if(result.getCapacity()>merging.getCapacity()) bigger=result.getCapacity();
 		else bigger=merging.getCapacity();
@@ -100,7 +102,7 @@ public class Labyrinth implements iTask{
 			result.setCapacity(bigger);
 			result.merge(merging);
 			this.removeRoom(merging);
-			merging.getNeighbours().clear();
+			//merging.getNeighbours().clear();
 			merging.notifySubsribers("roomremoved");
 			notifySubsribers("neighboursmodified");
 		}
@@ -161,6 +163,8 @@ public class Labyrinth implements iTask{
      */
 	public void splitRoom(Room old) {
 		ProtoUtil.printLog("splitRoom");
+		if(old.getNeighbours().isEmpty())
+			return;
 		notifySubsribers("modifyneighbours");
 		Room n;
 		// Az új szoba típusa a régi szobától függ
@@ -308,14 +312,14 @@ public class Labyrinth implements iTask{
 		ProtoUtil.printLog("generateRooms");
 		
 		// szobák legenerálása (2-4 fősek)
-		Room r1 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r1 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r2 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r3 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r4 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r5 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r5 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r6 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r7 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r8 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r8 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r9 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r10 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		rooms.add(r1);
@@ -330,9 +334,7 @@ public class Labyrinth implements iTask{
 		//rooms.add(r10);
 		
 		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN KÖRNYEZETI VÁLTOZÓT BE LEHET RAKNI*/
-		//r1.envFactors.add(new Gas(r1));
-		//r1.envFactors.add(new Sticky(r1));
-
+		
 		// környezeti változók legenerálása a szobákba
 		int numberOfEnvFactors = ProtoUtil.random.nextInt(3, 2);
 		for (int i = 0; i < numberOfEnvFactors; i++) {
@@ -395,7 +397,7 @@ public class Labyrinth implements iTask{
 		// diákok legenerálása
 		List<Room> roomsWithStudents = new ArrayList<Room>();
 		
-		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 6));
+		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 1));
 		roomOfFirstStudent.addCharacter(reds); // első diák betétele egy random szobába
 		reds.setRoom(roomOfFirstStudent);
 		roomsWithStudents.add(roomOfFirstStudent);
@@ -437,7 +439,8 @@ public class Labyrinth implements iTask{
 			mergeRoom(rooms.get(rand.nextInt(rooms.size())), rooms.get(rand.nextInt(rooms.size()))); // merge
 		}
 		if(ProtoUtil.random.nextInt(1000, -1)==0) {
-			splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
+			if(rooms.size()<10)
+				splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
 		}
 		for(Room r : rooms){
 			if(ProtoUtil.random.nextInt(1000, -1)==0) {

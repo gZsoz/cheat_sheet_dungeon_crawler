@@ -28,11 +28,20 @@ public class ViewTeacher extends ViewCharacter {
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
 		if(property.equals("stun")){
-			if(character.getStunned()>0 && character.getStunned() <= Character.stunTime){
+			if(character.isStunned()){
 				image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_stunned.png");
 			} else {
-				image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher.png");
+				if(((Teacher)character).isAngry())
+					image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_angry.png");
+				else
+					image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher.png");
 			}
+		}else if(property.equals("angry")) {
+			if(((Teacher)character).isAngry())
+				image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_angry.png");
+			else
+				image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher.png");
+				
 		}
 	}
 

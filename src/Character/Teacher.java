@@ -16,6 +16,10 @@ import ProtoUtil.ProtoUtil;
  */
 public class Teacher extends Character {
 	
+	public static int angryTime = 30; // mennyi ideig lesz angry
+	public static int moveTime = 100; // menny idő telik el átlagosan 2 enterroom között
+	private int timeToMove=moveTime; // menny idő múlva megy be egy szobába
+	
 	/**
 	 * Kostruktor.
 	 * @param currentRoom Melyik szobában van éppen a tanár.
@@ -25,6 +29,15 @@ public class Teacher extends Character {
 		this.inventory = new ArrayList<Item>();
 		this.stunned = 0;
 		this.hasDefense = false;
+	}
+	
+	public void setTimeToMove(int timetomove) {
+		timeToMove=timetomove;
+		notifySubsribers("angry");
+	}
+	
+	public boolean isAngry() {
+		return timeToMove<=angryTime;
 	}
 	
     /**
@@ -82,11 +95,22 @@ public class Teacher extends Character {
     	}
     }
 
+    @Override
+    public boolean enterRoom(Room r) {
+    	setTimeToMove(2*ProtoUtil.random.nextInt(moveTime, 20)+angryTime+1);
+    	return super.enterRoom(r);
+    }
+    
 	/**
 	 * Ugyanaz mint a Character-nek, plusz még meghívja a checkCollision() függvényt.
 	 */
     @Override
     public void update() {
+    	if(!isStunned() && --timeToMove==angryTime)
+    		notifySubsribers("angry");
+    	else if(timeToMove<=0&&!currentRoom.getNeighbours().isEmpty()) {
+    		enterRoom(currentRoom.getNeighbours().get(ProtoUtil.random.nextInt(currentRoom.getNeighbours().size(), 0)));
+    	}
     	super.update();
 		checkCollision();
     }
