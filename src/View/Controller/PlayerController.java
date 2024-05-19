@@ -64,8 +64,8 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
                                                     new Coordinates(50,670),new Coordinates(150,670),
                                                     new Coordinates(50,765),new Coordinates(150,765)
     };
-    public final static Coordinates BLUE_FACE_POSITION = new Coordinates(1578,575);
-    public static Coordinates[] rightInventoryPositions = {new Coordinates(1678,575),
+    public final static Coordinates BLUE_FACE_POSITION = new Coordinates(1678,575);
+    public static Coordinates[] rightInventoryPositions = {new Coordinates(1578,575),
                                                      new Coordinates(1578,670),new Coordinates(1678,670),
                                                      new Coordinates(1578,765),new Coordinates(1678,765)
     };
@@ -73,7 +73,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
     /**
      * Az irányító játékos éppen melyik akció melyik részén áll.
      */
-    private ActionState state=ActionState.Empty;
+    private ActionState state=ActionState.RoomPicker;
     
     private boolean isStudentAlive=true;
     
@@ -186,10 +186,18 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
                     selectedSlot = 0;
                     setNewColor();
                     break;
+                case KeyEvent.VK_Q:
+                    System.out.println("Q - Tárgy eldobása");
+                    if (state == ActionState.InInventory && !player.getInventory().isEmpty()) {
+                        clearColor();
+                        player.putdownItem(player.getInventory().get(selectedSlot));
+                        setNewColor();
+                    }
+                    break;
             }
         }
-        if(color == SelectionColor.Blue){
-            switch (e.getKeyCode()){
+        if(color == SelectionColor.Blue) {
+            switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
                     System.out.println("⬅ - Balra vált kijelölést");
                     clearColor();
@@ -229,6 +237,15 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
                     state = ActionState.ItemPicker;
                     selectedSlot = 0;
                     setNewColor();
+                    break;
+
+                case KeyEvent.VK_ALT:
+                    System.out.println("Alt - Tárgy eldobása");
+                    if (state == ActionState.InInventory && !player.getInventory().isEmpty()) {
+                        clearColor();
+                        player.putdownItem(player.getInventory().get(selectedSlot));
+                        setNewColor();
+                    }
                     break;
             }
         }
@@ -411,10 +428,30 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
                 g2D.fillRect(leftInventoryPositions[i].getX(),leftInventoryPositions[i].getY(),78,78);
             }
             // Mode textbox
-            g2D.setColor(Color.white.darker());
+            g2D.setColor(new Color(221,221,221));
             g2D.fillRect(leftInventoryPositions[leftInventoryPositions.length-2].getX(),
                     leftInventoryPositions[leftInventoryPositions.length-2].getY() + 94,
                     78+100,50);
+
+            g2D.setFont(new Font("Monospaced", Font.BOLD, 18));
+            g2D.setColor(Color.RED);
+            switch (state){
+                case ActionState.InInventory:
+                    if(color == SelectionColor.Red){
+                        g2D.drawString("Inventory mód", leftInventoryPositions[3].getX() + 16, leftInventoryPositions[4].getY() + 78 + 44);
+                    }
+                    break;
+                case ActionState.RoomPicker:
+                    if(color == SelectionColor.Red){
+                        g2D.drawString("Szobaváltó mód", leftInventoryPositions[3].getX() + 12, leftInventoryPositions[4].getY() + 78 + 44);
+                    }
+                    break;
+                case ActionState.ItemPicker:
+                    if(color == SelectionColor.Red){
+                        g2D.drawString("Szobatárgy mód", leftInventoryPositions[3].getX() + 12, leftInventoryPositions[4].getY() + 78 + 44);
+                    }
+                    break;
+            }
 
         }
         // BLUE Inventory
@@ -435,10 +472,30 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
             g2D.drawImage(characterImage,BLUE_FACE_POSITION.getX(),BLUE_FACE_POSITION.getY(),78,78,null);
 
             // Mode textbox
-            g2D.setColor(Color.white.darker());
+            g2D.setColor(new Color(221,221,221));
             g2D.fillRect(rightInventoryPositions[rightInventoryPositions.length-2].getX(),
                     rightInventoryPositions[rightInventoryPositions.length-2].getY() + 94,
                     78+100,50);
+            g2D.setFont(new Font("Monospaced", Font.BOLD, 18));
+            g2D.setColor(Color.BLUE);
+            switch (state){
+                case ActionState.InInventory:
+                    if(color == SelectionColor.Blue){
+                        g2D.drawString("Inventory mód",rightInventoryPositions[3].getX() + 16, rightInventoryPositions[4].getY() + 78 + 44);
+                    }
+                    break;
+                case ActionState.RoomPicker:
+                    if(color == SelectionColor.Blue){
+                        g2D.drawString("Szobaváltó mód",rightInventoryPositions[3].getX() + 12, rightInventoryPositions[4].getY() + 78 + 44);
+                    }
+                    break;
+                case ActionState.ItemPicker:
+                    if(color == SelectionColor.Blue){
+                        g2D.drawString("Szobatárgy mód",rightInventoryPositions[3].getX() + 12, rightInventoryPositions[4].getY() + 78 + 44);
+                    }
+                    break;
+            }
+
         }
 
     }

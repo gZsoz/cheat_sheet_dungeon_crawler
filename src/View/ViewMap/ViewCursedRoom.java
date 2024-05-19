@@ -2,6 +2,7 @@ package View.ViewMap;
 
 import Map.Room;
 import View.Utils.Coordinates;
+import View.Utils.ImageReader;
 import View.Utils.Subscriber;
 
 import java.awt.*;
@@ -13,6 +14,7 @@ public class ViewCursedRoom extends ViewRoom implements Subscriber {
 
 	public ViewCursedRoom(Room r, Coordinates pos) {
 		super(r, pos);
+		image = ImageReader.loadImage("res/images/room/cursedroom.png");
 	}
 
 	@Override
