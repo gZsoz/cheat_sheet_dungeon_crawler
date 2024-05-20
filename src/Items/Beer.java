@@ -9,18 +9,7 @@ import ProtoUtil.ProtoUtil;
 public class Beer extends DecayingItems {
 	
 	/**
-     * Sör használatakor (felvételekor) végrehajtott műveletek,
-     * amelyek immunitást adnak a használónak, és minden másodpercben csökkentik a hatás időtartamát.
-     */
-	@Override
-    public void use() {
-		ProtoUtil.printLog("use");
-		if(owner instanceof Student) ((Student)owner).setInvincible(true); // Immunitás adása
-		setIsActive(true); // Aktiválás jelzése
-    }
-	
-	/**
-	 * A tárgy felvételekor végrehajtott műveletek.
+	 * Lerakat egy tárgyat a karakterrel, amely felveszi a sört.
 	 */
 	@Override
 	public void onPickUp() {
@@ -33,7 +22,7 @@ public class Beer extends DecayingItems {
 	}
 	
 	/**
-	 * A tárgy eldobásakor végrehajtott műveletek.
+	 * A tárgy aktivitásának és a tárgyat letevő karakter immunitásának beállítása.
 	 */
 	@Override
 	public void onDrop() {
@@ -49,5 +38,16 @@ public class Beer extends DecayingItems {
 		if((!beer) && owner instanceof Student) ((Student)owner).setInvincible(false); // Immunitás kikapcsolása
 		
 		super.onDrop();
+	}
+	
+	/**
+	 * Sör használatakor (felvételekor) végrehajtott műveletek, amelyek immunitást adnak a használónak
+	 * és minden másodpercben csökkentik a hatás időtartamát.
+	 */
+	@Override
+	public void use() {
+		ProtoUtil.printLog("use");
+		if(owner instanceof Student) ((Student)owner).setInvincible(true); // Immunitás adása
+		setIsActive(true); // Aktiválás jelzése
 	}
 }

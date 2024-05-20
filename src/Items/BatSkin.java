@@ -11,31 +11,33 @@ import ProtoUtil.ProtoUtil;
  */
 public class BatSkin extends NumberOfUsesItem {
 	
+	/**
+	 * Ezzel a változóval állítható be a ProtoUtil-ban az alapértelmezett használatszám.
+	 */
 	public static int defaultRemainingUses = 3;
 	
 	/**
-     * Konstruktor egy tárgy létrehozásához. BatSkin-ra állítja a nevet.
-     */
+	 * Konstruktor egy BatSkin létrehozásához.
+	 */
 	public BatSkin() {
 		sticky=false;
 		RemainingUses=defaultRemainingUses;
 	}
 		
 	/**
-	 * Megvédi a hallgatót az oktatókkal szemben. Automatikusan használódik, 
-	 * amikor a hallgatót kirúgnák az egyetemről és védelmet nyújt nekik 
-	 * amíg az adott szobából ki nem mennek, hogy legyen esélyük elmenekülni az oktató elől.
+	 * Érinthetetlenné teszi a hallgatót az oktatókkal szemben. Automatikusan használódik, amikor a hallgatót kirúgnák
+	 * és védelmet nyújt nekik, amíg az adott szobából ki nem mennek, hogy legyen esélyük elmenekülni az oktató elől.
 	 */
 	@Override
 	public void use() {
-        ProtoUtil.printLog("use");
-        if(owner instanceof Student) ((Student)owner).setInvincible(true);
-        if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
-    }
-
+	    ProtoUtil.printLog("use");
+	    if(owner instanceof Student) ((Student)owner).setInvincible(true);
+	    if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
+	}
+	
 	/**
-     * Végrehajtja azokat a tevékenységeket, amiknek a tárgy felvevésénél kell megtörténnie.
-     */
+	 * Végrehajtja azokat a tevékenységeket, amelyeknek a tárgy felvételénél kell megtörténniük.
+	 */
 	@Override
 	public void onPickUp() {
 		ProtoUtil.printLog("onPickUp");

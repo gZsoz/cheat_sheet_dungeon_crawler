@@ -12,56 +12,33 @@ import View.Utils.Subscriber;
  */
 public abstract class Item {
 	
-	/** Az item változásaira feliratkozott osztályok*/
+	/**
+	 * A tárgy változásaira feliratkozott osztályok.
+	 */
 	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	
+	/**
+	 * A tárgy tulajdonosa.
+	 */
 	protected Character owner;
 	
 	/**
-	 * A tárgy ragacsosságát jelzi
+	 * Ragacsos-e a tárgy.
 	 */
 	protected boolean sticky;
-
-	/**
-     * meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
-     *  függvényüket a paraméterként kapott Stringgel
-     * @param str
-     */
-    public void notifySubsribers(String str) {
-    	for(Subscriber sub : new ArrayList<>(subscribers))
-    		sub.propertyChanged(str); // lehetséges értékek: "sticky", "remaininguses", "isactive", "duration", "pair", "itemexpired"
-    }
 	
-    /**
-     * hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához
-     * ezzentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik
-     * @param sub
-     */
-    public void subscribe(Subscriber sub) {
-    	subscribers.add(sub);
-    }
-    
-    /**
-     * eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából
-     * ezzentúl nem kap értesítést, ha az osztály belső állapota megváltozik
-     * @param sub
-     */
-    public void unsubscribe(Subscriber sub) {
-    	subscribers.remove(sub);
-    }
-    
 	/**
-	 * Tárgy ragacsosságának lekérdezése
+	 * Tárgy ragacsosságának lekérdezése.
 	 * @return ragacsos-e a tárgy
 	 */
 	public boolean getSticky(){
 		ProtoUtil.printLog("getSticky");
 		return sticky;
 	}
-
+	
 	/**
-	 * Tárgy ragacsosságának beállítása
-	 * @param s A beállítandó állapot
+	 * Tárgy ragacsosságának beállítása.
+	 * @param s a beállítandó állapot
 	 */
 	public void setSticky(boolean s){
 		sticky=s;
@@ -69,8 +46,17 @@ public abstract class Item {
 	}
 	
 	/**
-	 * Beállítja a tárgy tulajdonosát
-	 * @param o - tárgy tulajdonosa
+	 * Lekérdezi a tárgy tulajdonosát.
+	 * @return a tárgy tulajdonosa
+	 */
+	public Character getOwner() {
+		ProtoUtil.printLog("getOwner");
+		return owner;
+	}
+	
+	/**
+	 * Beállítja a tárgy tulajdonosát.
+	 * @param o a tárgy tulajdonosa
 	 */
 	public void setOwner(Character o) {
 		ProtoUtil.printLog("setOwner");
@@ -78,36 +64,55 @@ public abstract class Item {
 	}
 	
 	/**
-	 * Lekérdezi a tárgy tulajdonosát
-	 * tárgy tulajdonosa
+	 * Meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
+	 * függvényüket a paraméterként kapott Stringgel.
+	 * @param str üzenet arról, hogy mi változott meg, lehetséges értékek: "sticky", "remaininguses", "isactive", "duration", "pair", "itemexpired"
 	 */
-	public Character getOwner() {
-		ProtoUtil.printLog("getOwner");
-		return owner;
+	public void notifySubsribers(String str) {
+		for(Subscriber sub : new ArrayList<>(subscribers))
+			sub.propertyChanged(str);
 	}
-
+	
 	/**
-     * Egy tárgy felvételekor hívódik meg. A tárgyak a saját, egyedi módján kerül használatba,
-     * ezért ezt külön-külön valósítják meg a leszármazottak.
-     */
+	 * Hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához,
+	 * ezentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik.
+	 * @param sub a feliratkozó View objektum
+	 */
+	public void subscribe(Subscriber sub) {
+		subscribers.add(sub);
+	}
+	
+	/**
+	 * Eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából,
+	 * ezentúl nem kap értesítést, ha az osztály belső állapota megváltozik.
+	 * @param sub a leiratkozó View objektum
+	 */
+	public void unsubscribe(Subscriber sub) {
+		subscribers.remove(sub);
+	}
+	
+	/**
+	 * Egy tárgy felvételekor hívódik meg. A tárgyak a saját, egyedi módján kerül használatba,
+	 * ezért ezt külön-külön valósítják meg a leszármazottak.
+	 */
 	public abstract void onPickUp();
 	
 	/**
-     * Egy tárgy letételekor hívódik meg, ekkor a tárgynak nem lesz tulajdonosa.
-     */
+	 * Egy tárgy letételekor hívódik meg, ekkor a tárgynak nem lesz tulajdonosa.
+	 */
 	public void onDrop() {
 		ProtoUtil.printLog("Dropped");
 		owner=null;
 	}
 	
 	/**
-     * Egy tárgy használatakor hívódik meg.
-     */
+	 * Egy tárgy aktiválásakor hívódik meg, amelyet a játékosok végezhetnek.
+	 */
 	public void onActivate() {}
 	
 	/**
-     * Egy tárgy használata. A tárgyak a saját,egyedi módján kerül használatba, 
-     * ezért ezt külön-külön valósítják meg a  leszármazottak.
-     */
-    public abstract void use();
+	 * Egy tárgy használata. A tárgyak a saját,egyedi módján kerül használatba, 
+	 * ezért ezt külön-külön valósítják meg a  leszármazottak.
+	 */
+	public abstract void use();
 }

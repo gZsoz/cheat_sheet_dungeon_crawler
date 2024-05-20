@@ -3,35 +3,40 @@ package Items;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
 
-import java.awt.*;
-
 /**
  * Absztrakt osztály, amely összefoglalja az időérzékeny tárgyak közös tulajdonságait és metódusait.
  */
 public abstract class DecayingItems extends Item implements iTask {
-    
-	public static int defaultDuration = 14 * ProtoUtil.fps;
-
-	public int getDuration() {
-		return duration;
-	}
-
+	
 	/**
-	 * Milyen hoszzú ideig jó a tárgy.
+	 * Ezzel a változóval állítható be a ProtoUtil-ban az alapértelmezett lejárati idő.
+	 */
+	public static int defaultDuration = 14 * ProtoUtil.fps;
+	
+	/**
+	 * Lejárati idő.
 	 */
 	protected int duration = defaultDuration;
 	
 	/**
-	 * Aktív-e a tárgy.
+	 * Aktív-e éppen a tárgy.
 	 */
 	protected boolean isActive = false;
-
+	
 	/**
-     * A duration attribútum értékét csökkenti a Time osztály időmérése alapján, 
-     * amennyiben a usable értéke true, illetve átbillenti azt hamis értékre, 
-     * ha a duration eléri a 0-t.
-     */
-    public void reduceDuration() {
+	 * Lejárati idő lekérdezése.
+	 * @return a lejárati idő
+	 */
+	public int getDuration() {
+		return duration;
+	}
+	
+	/**
+	 * A duration attribútum értékét csökkenti a Time osztály időmérése alapján, 
+	 * amennyiben a usable értéke true, illetve átbillenti azt hamis értékre, 
+	 * ha a duration eléri a 0-t.
+	 */
+	public void reduceDuration() {
 		ProtoUtil.printLog("reduceDuration");
 		duration--;
 		notifySubsribers("duration");
@@ -46,10 +51,10 @@ public abstract class DecayingItems extends Item implements iTask {
 			ProtoUtil.printLog("Decaying item expired and removed.");
 		}
 	}
-
+	
 	/**
 	 * A tárgy aktív állapotának lekérdezése.
-	 * @return A tárgy aktív állapota.
+	 * @return a tárgy aktív állapota
 	 */
 	public boolean getIsActive() {
 		ProtoUtil.printLog("getIsActive");
@@ -58,25 +63,25 @@ public abstract class DecayingItems extends Item implements iTask {
 	
 	/**
 	 * A tárgy aktív állapotának beállítása.
-	 * @param isactive A tárgy aktív állapota.
+	 * @param isactive a tárgy aktív állapota
 	 */
 	public void setIsActive(boolean isactive) {
 		ProtoUtil.printLog("setIsActive");
 		notifySubsribers("isactive");
-		this.isActive = isactive;
+			this.isActive = isactive;
+		}
+	   
+	    /**
+	 * A gyermekosztályok által leírt tárgyak használatát és hatását elindító függvény, 
+	 * a gyermekosztályok implementálják. Item ősosztályból örökölt metódus.
+	 */
+	public abstract void use();
+	
+	/**
+	 * Az időérzékeny tárgyak frissítése.
+	 */
+	@Override
+	public void update() {
+		if(duration>0 && isActive) reduceDuration();
 	}
-   
-    /**
-     * A gyermekosztályok által leírt tárgyak használatát és hatását elindító függvény, 
-     * gyermekosztályok implementálják. Item ősosztályból örökölt metódus.
-     */
-    public abstract void use();
-    
-    /**
-     * Az időérzékeny tárgyak frissítése.
-     */
-    @Override
-    public void update() {
-    	if(duration>0 && isActive) reduceDuration();
-    };
 }

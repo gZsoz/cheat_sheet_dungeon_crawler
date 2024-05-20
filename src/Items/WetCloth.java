@@ -5,24 +5,9 @@ import Character.Teacher;
 import ProtoUtil.ProtoUtil;
 
 /**
- * Class representing WetCLoth item.
+ * Az osztály egy nedves törlőrongyot reprezentál a játékban.
  */
-public class WetCloth extends DecayingItems{
-	/**
-     * A WetCLoth tárgy használatakor elvégezendő műveleteket végzi
-     * Elkábítja abban a szobában tartozkodó tanárokat, ahol a tárgy használva volt
-     * Minden másodpercben csökkenti a hatás időtartamát
-     */
-	@Override
-	public void use() {
-    	ProtoUtil.printLog("use");
-    	setIsActive(true);
-		for(Character character: owner.getRoom().getCharacters() ) {
-			if(character instanceof Teacher) {
-				character.setStunned(Character.stunTime);
-			}
-		}
-    }
+public class WetCloth extends DecayingItems {
 	
 	/**
 	 * A tárgy felvételekor elvégezendő feladatok
@@ -41,7 +26,25 @@ public class WetCloth extends DecayingItems{
 		setIsActive(false);
 		super.onDrop();
 	}
-
+	
+	/**
+	 * A WetCLoth tárgy használatakor elvégezendő műveleteket végzi.
+	 * Elkábítja abban a szobában tartozkodó tanárokat, ahol a tárgy használva volt.
+	 */
+	@Override
+	public void use() {
+		ProtoUtil.printLog("use");
+		setIsActive(true);
+		for(Character character: owner.getRoom().getCharacters() ) {
+			if(character instanceof Teacher) {
+				character.setStunned(Character.stunTime);
+			}
+		}
+	}
+	
+	/**
+	 * A nedves törlőrongy frissítése.
+	 */
 	@Override
 	public void update() {
 		use();

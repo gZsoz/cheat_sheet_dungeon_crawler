@@ -8,17 +8,6 @@ import ProtoUtil.ProtoUtil;
 public class Mask extends DecayingItems {
 	
 	/**
-     * A maszk használatának metódusa.
-     * Aktiválja a tárgyat, lehetővé téve a védelmet és az időtartam csökkenését.
-     */
-	@Override
-    public void use() {
-    	ProtoUtil.printLog("use"); // Logolás
-    	isActive=true; // Aktiválás jelzése
-    	reduceDuration(); // Időtartam csökkentése
-    }
-	
-	/**
 	 * A tárgy felvételekor végrehajtott műveletek.
 	 */
 	@Override
@@ -46,7 +35,21 @@ public class Mask extends DecayingItems {
 		super.onDrop();
 	}
 	
+	/**
+	 * A maszk használatának metódusa.
+	 * Aktiválja a tárgyat, lehetővé téve a védelmet és az időtartam csökkenését.
+	 */
+	@Override
+	public void use() {
+		ProtoUtil.printLog("use"); // Logolás
+		isActive=true; // Aktiválás jelzése
+		reduceDuration(); // Időtartam csökkentése
+	}
+	
+	/**
+	 * A maszk frissítése.
+	 */
 	@Override
 	public void update(){}
-	
+
 }

@@ -10,17 +10,13 @@ import ProtoUtil.ProtoUtil;
  * A CursedRoom osztály egy speciális típusú szobát reprezentál a játékban, amely az alap Room osztálytól származik.
  * Felelőssége megegyezik a szoba osztállyal, emellett felelőssége még az ajtók eltüntetése és megjelenítése.
  */
-public class CursedRoom extends Room{
+public class CursedRoom extends Room {
 	
 	public static int defaultCloseDuration=7 * ProtoUtil.fps;
 	
 	private int closeDuration=0; // A Szoba zárva tartásának ideje
 
-    public boolean getIsOpen() {
-        return isOpen;
-    }
-
-    private boolean isOpen=true; // A Szoba állapota: nyitva vagy zárva
+    private boolean isOpen = true; // A Szoba állapota: nyitva vagy zárva
 	
     /**
      * Konstruktor egy szoba létrehozásához.
@@ -31,6 +27,14 @@ public class CursedRoom extends Room{
     
     /**
      * Konstruktor egy szoba létrehozásához.
+     * @param capacity kapacitás
+     */
+    public CursedRoom(int capacity) {
+		super(capacity);
+	}
+    
+    /**
+     * Konstruktor egy szoba létrehozásához.
      * @param neighbours a szoba szomszédai
      * @param capacity kapacitás
      */
@@ -38,13 +42,9 @@ public class CursedRoom extends Room{
     	super(neighbours, capacity);
     }
     
-    /**
-     * Konstruktor egy szoba létrehozásához.
-     * @param capacity kapacitás
-     */
-    public CursedRoom(int capacity) {
-		super(capacity);
-	}
+    public boolean getIsOpen() {
+        return isOpen;
+    }
 
 	/**
      * Beállítja az ajtók állapotát zártnak és inicializálja a closeDuration-t a definiált kezdőértékre.
