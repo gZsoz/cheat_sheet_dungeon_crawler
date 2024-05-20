@@ -166,7 +166,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 					}
 				}
 				g2D.setColor(Color.RED);
-				g2D.setStroke(new BasicStroke(5));
+				g2D.setStroke(new BasicStroke(6));
 				g2D.drawLine(vroom.getFixedRoutePins()[pinIdx1].getX() + 20, vroom.getFixedRoutePins()[pinIdx1].getY() + 25,
 						Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX() + 20,Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY() + 25
 						);
@@ -180,40 +180,6 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D)g;
-		
-		// Mode textbox
-		g2D.setColor(new Color(221,221,221));
-		g2D.drawImage(ImageReader.loadImage("res/images/test/testroom.png"),1820/2 - 240 + 40, 800, 400, 200,null);
-		g2D.fillRect(1820/2 - 220 + 40,
-				815-4,
-				400 - 40,120);
-		
-		// key bindings
-		g2D.setFont(new Font("Monospaced", Font.BOLD, 18));
-
-		g2D.setColor(Color.black);
-		g2D.drawString("Kijelölő mozgatása",1820/2-95,826);
-		g2D.drawString("Kiválasztás",1820/2-56,846);
-		g2D.drawString("Tárgy eldobása",1820/2-74,866);
-		g2D.drawString("Szoba váltó mód",1820/2-80,886);
-		g2D.drawString("Inventory mód",1820/2-70,906);
-		g2D.drawString("Szobatárgy jelölő mód",1820/2-118,926);
-
-		g2D.setColor(Color.RED);
-		g2D.drawString("A/D",1820/2-174,826);
-		g2D.drawString("Space",1820/2-174,846);
-		g2D.drawString("Q",1820/2-174,866);
-		g2D.drawString("W",1820/2-174,886);
-		g2D.drawString("S",1820/2-174,906);
-		g2D.drawString("E",1820/2-174,926);
-
-		g2D.setColor(Color.BLUE);
-		g2D.drawString("⮜/⮞",1820/2+136,828);
-		g2D.drawString("Enter",1820/2+120,846);
-		g2D.drawString("Shift",1820/2+120,866);
-		g2D.drawString("⮝",1820/2+158,886);
-		g2D.drawString("⮟",1820/2+158,906);
-		g2D.drawString("Ctrl",1820/2+132,926);
 
 		paintRoutes(g2D);
 
