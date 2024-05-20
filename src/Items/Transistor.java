@@ -43,8 +43,8 @@ public class Transistor extends Item {
 	 */
 	public void setPair(Transistor t){
 		ProtoUtil.printLog("setPair");
-		notifySubsribers("pair");
 		pair=t;
+		notifySubsribers("pair");
 	}
 
 	/**
@@ -81,8 +81,8 @@ public class Transistor extends Item {
 	 */
 	public void setActive(boolean state){
 		ProtoUtil.printLog("setActive");
-		notifySubsribers("isactive");
 		active = state;
+		notifySubsribers("isactive");
 	}
 
 	/**
