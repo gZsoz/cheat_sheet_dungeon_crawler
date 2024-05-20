@@ -94,6 +94,9 @@ public class Transistor extends Item {
 	public void use() {
 		ProtoUtil.printLog("use");
 		setActive(!active);
+		if(getPair() != null) {
+			getPair().setActive(active);
+		}
 	}
 
     /**
@@ -144,7 +147,8 @@ public class Transistor extends Item {
 		for(Item i: owner.getInventory()) {
 			if(i instanceof Transistor) {
 				Transistor transistorAtDisposal = (Transistor) i;
-				transistorsInInventory.add(transistorAtDisposal);
+				if(transistorAtDisposal.getPair() == null)
+					transistorsInInventory.add(transistorAtDisposal);
 			}
 		}
 		for(int j = 0; j + 1 < transistorsInInventory.size(); j += 2) {

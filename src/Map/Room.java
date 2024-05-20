@@ -3,6 +3,7 @@ package Map;
 import Items.FakeSlideRule;
 import Items.Item;
 import Items.SlideRule;
+import Items.Transistor;
 import ProtoUtil.ProtoUtil;
 import Time.iTask;
 import View.Utils.Subscriber;
@@ -123,6 +124,17 @@ public class Room implements iTask {
 	    	notifySubsribers("items");
 	    	return true;
 	    }else {
+	    	if(i instanceof Transistor) {
+	    		Transistor t = (Transistor) i;
+				if (t.getPair() != null) {
+					t.getPair().setLocation(null);
+					t.getPair().setActive(false);
+					t.getPair().setPair(null);
+				}
+				t.setPair(null);
+				t.setActive(false);
+				t.setLocation(null);
+	    	}
 	    	i.notifySubsribers("itemexpired");
 	    	return false;
 	    }
