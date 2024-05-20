@@ -9,66 +9,68 @@ import Time.iTask;
 import View.Utils.Subscriber;
 
 /**
- * Absztrakt osztály a környezeti változók reprezentálására
+ * Absztrakt osztály a környezeti változók reprezentálására.
  */
 public abstract class EnvironmentalFactors implements iTask {
+	
 	/**
-	 * Melyik szobában van
+	 * Melyik szobában van a környezeti változó.
 	 */
 	protected Room location;
-
-	/** A környezeti változó változásaira feliratkozott osztályok*/
-	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	
 	/**
-     * meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
-     *  függvényüket a paraméterként kapott Stringgel
-     * @param str
-     */
-    public void notifySubsribers(String str) {
-    	for(Subscriber sub : new ArrayList<>(subscribers))
-    		sub.propertyChanged(str); // lehetséges értékek: "factorremoved"
-    }
-	
-    /**
-     * hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához
-     * ezzentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik
-     * @param sub
-     */
-    public void subscribe(Subscriber sub) {
-    	subscribers.add(sub);
-    }
-    
-    /**
-     * eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából
-     * ezzentúl nem kap értesítést, ha az osztály belső állapota megváltozik
-     * @param sub
-     */
-    public void unsubscribe(Subscriber sub) {
-    	subscribers.remove(sub);
-    }
-    
+	 * A környezeti változó változásaira feliratkozott osztályok.
+	 */
+	private List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	
 	/**
-	 * Beállítja a környezeti változó helyét egy adott szobába
+	 * Lekérdezi a környezeti változó helyét, melyik szobában van.
+	 * @return a szoba, ahol a környezeti változó van
+	 */
+	public Room getLocation() {
+		ProtoUtil.printLog("getLocation");
+		return location;
+	}
+	
+	/**
+	 * Beállítja a környezeti változó helyét egy adott szobába.
 	 * @param room a szoba ahová a környezeti változó elhelyezendő
 	 */
 	public void setLocation(Room room) {
 		ProtoUtil.printLog("setLocation");
 		location = room;
 	}
-
+	
 	/**
-	 * Lekérdezi a környezeti változó helyét, melyik szobában van
-	 * @return A szoba, ha van
+	 * Meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
+	 * függvényüket a paraméterként kapott Stringgel.
+	 * @param str üzenet arról, hogy mi változott meg, lehetséges értékek: "factorremoved"
 	 */
-	public Room getLocation() {
-		ProtoUtil.printLog("getLocation");
-		return location;
+	public void notifySubsribers(String str) {
+		for(Subscriber sub : new ArrayList<>(subscribers))
+			sub.propertyChanged(str);
 	}
-
+	
 	/**
-	 * Az időérzékeny műveleteket végrehajtja
+	 * Hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához,
+	 * ezentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik.
+	 * @param sub a feliratkozó View objektum
+	 */
+	public void subscribe(Subscriber sub) {
+		subscribers.add(sub);
+	}
+	
+	/**
+	 * Eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából,
+	 * ezentúl nem kap értesítést, ha az osztály belső állapota megváltozik.
+	 * @param sub a leiratkozó View objektum
+	 */
+	public void unsubscribe(Subscriber sub) {
+		subscribers.remove(sub);
+	}
+	
+	/**
+	 * Az időérzékeny műveleteket végrehajtja.
 	 */
 	public abstract void update();
 

@@ -95,5 +95,6 @@ activate
 use
 setRemainingUses
 getInventory
+getInventory
 getRoom
 airfreshener removed gas

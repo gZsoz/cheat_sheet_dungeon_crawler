@@ -5,44 +5,50 @@ import Map.Room;
 import ProtoUtil.ProtoUtil;
 
 /**
- * Class representing gas environmental factor in the game.
+ * Osztály a ragacs környezeti változó reprezentálására.
  */
 public class Sticky extends EnvironmentalFactors {
-	public static int defaultRemainingEntries=2;
+	
 	/**
-	 * Kontruktor létrehozza, a sticky objektumot
-	 * @param r Adott szoba
+	 * Ezzel a változóval állítható be a ProtoUtil-ban, hogy a takarító takarítása után mennyi karakter belépése után válik ragacsossá egy szoba.
+	 */
+	public static int defaultRemainingEntries=2;
+	
+	/**
+	 * A takarító takarítása után ennyi karakter belépése után válik ragacsossá egy szoba.
+	 */
+	private int remainingEntries=defaultRemainingEntries;
+	
+	/**
+	 * Kontruktor ragacs létrehozásához.
+	 * @param r a szoba, ahol a környezeti változó van
 	 */
 	public Sticky(Room r){
 		location = r;
 	}
+	
 	/**
-	 * A hátralévő emberek száma, amelyek után ragacsossá teszi a szobát
-	 */
-	private int remainingEntries=defaultRemainingEntries;
-
-	/**
-	 * Lekérdezi a hátralévő emberek számát, amelyek után ragacsossá teszi a szobát
-	 * @return Hátralévő emberek száma
+	 * Lekérdezi a hátralévő karakterek számát, amely után ragacsossá teszi a szobát.
+	 * @return a hátralévő emberek száma
 	 */
 	public int getRemainingEntries(){
 		ProtoUtil.printLog("getRemainingEntries");
 		return remainingEntries;
 	}
-
+	
 	/**
-	 * Beállítja a hátralévő emberek számát, amelyek után ragacsossá teszi a szobát
-	 * @param re A beállítandó emberek száma
+	 * Beállítja a hátralévő karakterek számát, amely után ragacsossá teszi a szobát.
+	 * @param re a beállítandó emberek száma.
 	 */
 	public void reduceRemainingEntries(){
 		ProtoUtil.printLog("setRemainingEntries");
 		location.notifySubsribers("factors");
 		remainingEntries--;
 	}
-
+	
 	/**
-	 * Ragacsossá teszi a paraméterként kapott tárgyat
-	 * @param i Ragacsossá teendő tárgy
+	 * Ragacsossá teszi a paraméterként kapott tárgyat.
+	 * @param i ragacsossá teendő tárgy.
 	 */
 	private void makeSticky(Item i){
 		ProtoUtil.printLog("makeSticky");
@@ -50,8 +56,8 @@ public class Sticky extends EnvironmentalFactors {
 	}
 	
 	/**
-     * Minden adott időben, ha elértük, hogy elég ember megforduljon a szobában,
-	 * akkor ragacsossá teszi az összes itemet a szobában
+	 * Minden adott időben, ha elértük, hogy elég karakter megforduljon a szobában,
+	 * akkor ragacsossá teszi az összes itemet a szobában.
 	 */
 	@Override
 	public void update() {

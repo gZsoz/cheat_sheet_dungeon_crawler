@@ -9,21 +9,21 @@ import ProtoUtil.ProtoUtil;
 import java.util.ArrayList;
 
 /**
- * Class representing gas environmental factor in the game.
+ * Osztály a gáz környezeti változó reprezentálására.
  */
 public class Gas extends EnvironmentalFactors {
-
+	
 	/**
-	 * Kontruktor létrehozza, a gáz objektumot
-	 * @param r Adott szoba
+	 * Kontruktor gáz létrehozásához.
+	 * @param r a szoba, ahol a környezeti változó van
 	 */
 	public Gas(Room r){
 		location = r;
 	}
-
+	
 	/**
-	 * Egy karakter elkábítása, ha nincs védelmi eszköze
-	 * @param character - Kábítandó karakter
+	 * Egy karakter elkábítása, ha nincs védelmi eszköze.
+	 * @param character az elkábítandó karakter
 	 */
 	public void stun(Character character) {
 		ProtoUtil.printLog("stun");
@@ -56,10 +56,10 @@ public class Gas extends EnvironmentalFactors {
 			}
 		}
 	}
-
-
+	
+	
 	/**
-	 * Minden adott időben megpróbálja elkábítani, a vele egy szobában lévőket
+	 * Minden adott időben megpróbálja elkábítani a szobájában lévő karaktereket.
 	 */
 	@Override
 	public void update() {

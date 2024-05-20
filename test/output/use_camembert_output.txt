@@ -19,6 +19,7 @@ addEnvironmentalFactor
 setLocation
 setRemainingUses
 getInventory
+getInventory
 getLocation
 getCharacters
 stun

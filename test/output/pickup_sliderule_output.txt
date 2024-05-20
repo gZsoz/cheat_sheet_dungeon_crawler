@@ -13,4 +13,5 @@ onPickUp
 use
 setRemainingUses
 getInventory
+getInventory
 Game over

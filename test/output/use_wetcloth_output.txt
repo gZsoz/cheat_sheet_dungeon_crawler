@@ -110,6 +110,7 @@ getCharacters
 setStunned
 reduceDuration
 getInventory
+getInventory
 onDrop
 setIsActive
 Dropped

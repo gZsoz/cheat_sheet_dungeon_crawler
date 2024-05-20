@@ -51,6 +51,7 @@ getInventory
 use
 reduceDuration
 getInventory
+getInventory
 onDrop
 getInventory
 Dropped

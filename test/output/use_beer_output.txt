@@ -83,6 +83,7 @@ kick
 getInvincible
 reduceDuration
 getInventory
+getInventory
 onDrop
 getInventory
 setInvincible

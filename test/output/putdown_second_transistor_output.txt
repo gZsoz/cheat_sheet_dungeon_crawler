@@ -15,6 +15,7 @@ setOwner
 Successfully picked up item
 onPickUp
 getInventory
+getPair
 getRoom
 getItems
 pickupItem
@@ -25,6 +26,8 @@ setOwner
 Successfully picked up item
 onPickUp
 getInventory
+getPair
+getPair
 connect
 setPair
 setPair
@@ -44,6 +47,9 @@ setInvincible
 getInventory
 activate
 use
+setActive
+getPair
+getPair
 setActive
 getInventory
 putdownItem

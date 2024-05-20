@@ -7,9 +7,9 @@ enterRoom
 getCharacters
 getCapacity
 removeCharacter
-addCharacter
 hideDoors
 removeAllDoors
+addCharacter
 setStunned
 setInvincible
 reduceDurationCursed
