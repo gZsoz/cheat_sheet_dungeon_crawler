@@ -50,7 +50,7 @@ public class Gas extends EnvironmentalFactors {
 			}
 		}
 		for (Item item: character.getInventory()) {
-			if(item instanceof Mask) {
+			if(item instanceof Mask && !(item instanceof FakeMask)) {
 				item.use();
 				break;
 			}
