@@ -99,7 +99,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
     private int selectedSlot;
 
     public PlayerController(SelectionColor color, Student stud){
-        inventoryBackgroundImage = ImageReader.loadImage(ImageReader.path+"test/testroom.png");
+        inventoryBackgroundImage = ImageReader.loadImage(ImageReader.path+"Backgrounds/inventory_background.png");
         this.color = color;
         player=stud;
         player.subscribe(this);
@@ -278,15 +278,15 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
     private void setNewColor() {
         if(state==ActionState.RoomPicker && !player.getRoom().getNeighbours().isEmpty()){
             // set color
-            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).setColor(color);
+            Containers.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).setColor(color);
         }
         else if(state==ActionState.ItemPicker && !player.getRoom().getItems().isEmpty()){
             //set color
-            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).setColor(color);
+            Containers.items.get(player.getRoom().getItems().get(selectedSlot)).setColor(color);
         }
         else if(state == ActionState.InInventory && !player.getInventory().isEmpty()){
             //set color
-            Controller.items.get(player.getInventory().get(selectedSlot)).setColor(color);
+            Containers.items.get(player.getInventory().get(selectedSlot)).setColor(color);
         }
     }
 
@@ -296,35 +296,35 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
             if(player.getRoom().getNeighbours().isEmpty()){
                 return;
             }
-            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).removeColor(color);
+            Containers.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).removeColor(color);
         }
         else if(state == ActionState.ItemPicker){
             //set prev empty color
             if(player.getRoom().getItems().isEmpty()){
                 return;
             }
-            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).removeColor(color);
+            Containers.items.get(player.getRoom().getItems().get(selectedSlot)).removeColor(color);
         }
         else if(state == ActionState.InInventory){
             //set prev empty color
             if(player.getInventory().isEmpty()){
                 return;
             }
-            Controller.items.get(player.getInventory().get(selectedSlot)).removeColor(color);
+            Containers.items.get(player.getInventory().get(selectedSlot)).removeColor(color);
         }
     }
 
     private void useSelected() {
         if(state == ActionState.RoomPicker && !player.getRoom().getNeighbours().isEmpty()){
-            Controller.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).removeColor(color);
+            Containers.rooms.get(player.getRoom().getNeighbours().get(selectedSlot)).removeColor(color);
             player.enterRoom(player.getRoom().getNeighbours().get(selectedSlot));
         }
         else if(state == ActionState.ItemPicker && !player.getRoom().getItems().isEmpty()){
-            Controller.items.get(player.getRoom().getItems().get(selectedSlot)).removeColor(color);
+            Containers.items.get(player.getRoom().getItems().get(selectedSlot)).removeColor(color);
             player.pickupItem(player.getRoom().getItems().get(selectedSlot));
         }
         else if(state == ActionState.InInventory && !player.getInventory().isEmpty()){
-            Controller.items.get(player.getInventory().get(selectedSlot)).removeColor(color);
+            Containers.items.get(player.getInventory().get(selectedSlot)).removeColor(color);
             player.activate(player.getInventory().get(selectedSlot));
         }
     }
@@ -392,9 +392,9 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 		else if(property.equals("kicked")) {
 			isStudentAlive=false;
 			clearColor();
-			GameFrame.viewCharacters.remove(Controller.characters.get(player));
-			GameFrame.container.remove(Controller.characters.get(player));
-			Controller.characters.remove(player);
+			GameFrame.viewCharacters.remove(Containers.characters.get(player));
+			GameFrame.mainPanel.remove(Containers.characters.get(player));
+			Containers.characters.remove(player);
 			room.unsubscribe(this);
 			player.unsubscribe(this);
 			labyrinth.unsubscribe(this);
@@ -406,19 +406,27 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 		}else if(property.equals("characters")) {
 			if(!room.getCharacters().contains(player)) {
 				if(state==ActionState.ItemPicker && !room.getItems().isEmpty()) {
-					Controller.items.get(room.getItems().get(selectedSlot)).removeColor(color);
+					Containers.items.get(room.getItems().get(selectedSlot)).removeColor(color);
 				}else if(state==ActionState.RoomPicker && !room.getNeighbours().isEmpty()) {
-					Controller.rooms.get(room.getNeighbours().get(selectedSlot)).removeColor(color);
+					Containers.rooms.get(room.getNeighbours().get(selectedSlot)).removeColor(color);
 				}
 				selectedSlot=0;
 				room.unsubscribe(this);
 				setRoomSubscribed();
 				setNewColor();
 			}
-		}else if(property.equals("inventory")) { // ha elhasználódik egy decaying akkor a selectedSlot reagáljon rá
+		}else if(property.contains("inventory removed")) { // ha elhasználódik egy decaying akkor a selectedSlot reagáljon rá
 			if(state==ActionState.InInventory) {
-				selectedSlot=0;
-				setNewColor();
+				int idx= Integer.parseInt(property.split(" ")[2]);
+				if(idx>selectedSlot)
+					return;
+				else if(idx==selectedSlot){
+					selectedSlot=0;
+					setNewColor();
+				}else {
+					selectedSlot--;
+					setNewColor();
+				}
 			}	
 		}else if(property.contains("items removed")) {
 			if(state==ActionState.ItemPicker) {
@@ -455,7 +463,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 				neighboursbeforecursedremoved.removeIf(szoba -> ((room.neighbours.contains(szoba) && !room.getNeighbours().contains(szoba)) && szoba != justremoved));
 				justremovedselectionpos=neighboursbeforecursedremoved.indexOf(justremoved);
 				if(selectedSlot==justremovedselectionpos) {
-					Controller.rooms.get(justremoved).removeColor(color);
+					Containers.rooms.get(justremoved).removeColor(color);
 					selectedSlot=0;
 					setNewColor();
 				}else if(selectedSlot>justremovedselectionpos) {

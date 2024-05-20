@@ -2,7 +2,7 @@ package View.ViewCharacter;
 
 import Character.Character;
 import Character.Teacher;
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -17,7 +17,7 @@ public class ViewTeacher extends ViewCharacter {
 	public ViewTeacher(Teacher teacher, Coordinates pos){
 		super(teacher, pos);
 		image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher.png");
-		GameFrame.container.add(this);
+		GameFrame.mainPanel.add(this);
     	GameFrame.viewCharacters.add(this);
 	}
 	

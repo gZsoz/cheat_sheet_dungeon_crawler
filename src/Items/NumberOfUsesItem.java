@@ -29,9 +29,12 @@ public abstract class NumberOfUsesItem extends Item {
         RemainingUses=x;
         notifySubsribers("remaininguses");
         if(RemainingUses == 0) {
-        	notifySubsribers("itemexpired");
-        	owner.getInventory().remove(this); // Ha elfogytak a használatok, távolítsa el a tárgyat az inventáriumból
-        	owner.notifySubsribers("inventory");
+			notifySubsribers("itemexpired");
+			int idx = owner.getInventory().indexOf(this);
+			if(!owner.getInventory().remove(this)) {
+				System.out.println("Olyan NumberOfUsesItem lett eltávolítva az inventoryból, ami nincs benne az inventoryban!");
+			}
+			owner.notifySubsribers("inventory removed "+idx);
         }
     }
     

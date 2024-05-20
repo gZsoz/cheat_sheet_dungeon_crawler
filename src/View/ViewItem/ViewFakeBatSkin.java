@@ -1,7 +1,7 @@
 package View.ViewItem;
 
 import Items.FakeBatSkin;
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -21,9 +21,9 @@ public class ViewFakeBatSkin extends ViewBatSkin {
 	
 	@Override
 	public void setItemImage() {
-		if(this.size.getHeight()==78) {
+		if(this.size.equals(ViewItem.inventorySize)) {
 			image = ImageReader.loadImage(ImageReader.path+itemsPath+"batskin_fake.png");
-		} else if(this.size.getHeight()!=78) {
+		}else if(this.size.equals(ViewItem.roomSize)) {
 			image=ImageReader.loadImage(ImageReader.path+itemsPath+"batskin.png");
 		}
 	}

@@ -19,7 +19,9 @@ import View.Utils.GameFrame;
 import View.Utils.SelectionColor;
 import View.ViewMap.ViewLabyrinth;
 import Character.Character;
+import Character.Cleaner;
 import Character.Student;
+import Character.Teacher;
 import EnvironmentalFactor.Gas;
 import EnvironmentalFactor.Sticky;
 import Items.AirFreshener;
@@ -45,10 +47,10 @@ public class ProtoUtil {
     private static final String GREEN = "\033[0;32m";   // GREEN
 	private static final String dirName = "test/";
     private static PrintStream logOutput = null;
-    
+
     public static MyRandom random;
     public static Timer timer;
-    public static int aa=0;
+    public static int fps = 24;
     
     /**
      * A beállított OutputStreambe írja az a tesztprogram logokat.
@@ -294,6 +296,19 @@ public class ProtoUtil {
         } while(!quit);
 	}
     
+	private static void multiplyTimingsWithFps() {
+		Character.restTime *= fps;
+    	Character.stunTime *= fps;
+    	Cleaner.moveTime *= fps;
+    	Teacher.angryTime *= fps;
+    	Teacher.moveTime *= fps;
+    	DecayingItems.defaultDuration *= fps;
+    	CursedRoom.defaultCloseDuration *= fps;
+    	Labyrinth.itemSpawnFrequency *= fps;
+    	Labyrinth.mergeFrequency *= fps;
+    	Labyrinth.splitFrequency *= fps;
+	}
+	
     /**
      * A program belépési pontja.
      * @param args A program argumentumai
@@ -306,6 +321,28 @@ public class ProtoUtil {
     	}
     	else {
     		random = new MyRandom(false);
+    		
+    		fps = 24; // frames per second
+    		
+    		// A játékbeli események időzítései másodpercben
+        	Character.restTime = 10;
+        	Character.stunTime = 5;
+        	Cleaner.moveTime = 10;
+        	Teacher.angryTime = 3;
+        	Teacher.moveTime = 7;
+        	DecayingItems.defaultDuration = 14;
+        	CursedRoom.defaultCloseDuration = 7;
+        	Labyrinth.itemSpawnFrequency = 90;	// szobánkénti átlagos időtartam
+        	Labyrinth.mergeFrequency = 90;
+        	Labyrinth.splitFrequency = 100;
+        	multiplyTimingsWithFps(); // pontosan egyszer kell meghívni, beállítja az időzítéseket fps-sel arányosan
+        	
+        	Sticky.defaultRemainingEntries=2;
+        	AirFreshener.defaultRemainingUses=1;
+        	BatSkin.defaultRemainingUses=3;
+        	CabbageCamembert.defaultRemainingUses=1;
+        	
+        	
     		Student reds=new Student();
     		Student blues=new Student();
     		PlayerController red = new PlayerController(SelectionColor.Red, reds);
@@ -325,33 +362,13 @@ public class ProtoUtil {
                 }
         	});
             
-            timer = new Timer(100, a ->{
-                    //System.out.printn("update()");
-                    //viewLabyrinth.roomsInLabyrinth.get(0).coordinates.x+=1;
-                    //viewLabyrinth.roomsInLabyrinth.get(2).coordinates.x-=1;
-                    //viewLabyrinth.roomsInLabyrinth.get(0).itemsInRoom.get(0).coordinates.x+=2;
-					mf.container.repaint();
+            timer = new Timer(1000/fps, a -> {
+					GameFrame.mainPanel.repaint();
 					labyrinth.update();
-					if(aa++%10000==6) {
-					}
-					if(aa++%10000==15) {
-					}
-					//labyrinth.splitRoom(labyrinth.getRooms().get(3));
-					//if(!reds.getRoom().getItems().isEmpty())
-					//reds.pickupItem(reds.getRoom().getItems().get(0));
-					//if(!reds.getRoom().getItems().isEmpty())
-					//reds.pickupItem(reds.getRoom().getItems().get(0));
-					//labyrinth.update();
-					//blues.enterRoom(labyrinth.getRooms().get(aa++%10));
-					//labyrinth.getRooms().get(0).spawnItem(new Transistor());
-					//reds.enterRoom(labyrinth.getRooms().get(aa++%10));
-					//reds.enterRoom(labyrinth.getRooms().get(4));
-					//labyrinth.update();
-					//if(!reds.getInventory().isEmpty())
-					//reds.putdownItem(reds.getInventory().get(0));
-					//labyrinth.update();
             });
             timer.start();
     	}
     }
+
+
 }

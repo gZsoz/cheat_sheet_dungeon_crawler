@@ -15,7 +15,7 @@ public class ViewCursedRoom extends ViewRoom implements Subscriber {
 
 	public ViewCursedRoom(Room r, Coordinates pos) {
 		super(r, pos);
-		image = ImageReader.loadImage("res/images/room/cursedroom.png");
+		image = ImageReader.loadImage(ImageReader.path + roomPath + "cursedroom.png");
 	}
 
 	@Override

@@ -1,28 +1,14 @@
 package View.Utils;
 
-import View.Controller.Controller;
 import View.Controller.PlayerController;
 import View.ViewCharacter.ViewCharacter;
-import View.ViewCharacter.ViewStudent;
 import View.ViewEnvironmentalFactor.ViewEnvironmentalFactors;
 import View.ViewItem.ViewItem;
 import View.ViewMap.ViewLabyrinth;
 import View.ViewMap.ViewRoom;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import Character.Character;
-import Items.Item;
-
 import java.awt.*;
-import java.io.File;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.Buffer;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * Felelősség: Létrehoz egy fix méretű JPanelt és erre fog majd rajzolni a többi osztály a graphics segítségével.
@@ -31,8 +17,8 @@ import java.util.Objects;
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
 
-	public static JPanel container;
-    
+	public static JPanel mainPanel;
+    private static Image instructionsBackground = ImageReader.loadImage(ImageReader.path+"Backgrounds/inventory_background.png");
     public static ArrayList<ViewItem> viewItems = new ArrayList<>();
     public static ArrayList<ViewEnvironmentalFactors> viewEnvs = new ArrayList<>();
     public static ArrayList<ViewCharacter> viewCharacters = new ArrayList<>();
@@ -48,7 +34,7 @@ public class GameFrame extends JFrame {
     		
     		// Mode textbox
     		g2D.setColor(new Color(221,221,221));
-    		g2D.drawImage(ImageReader.loadImage("res/images/test/testroom.png"),1820/2 - 240 + 40, 800, 400, 200,null);
+    		g2D.drawImage(instructionsBackground, 1820/2 - 240 + 40, 800, 400, 200,null);
     		g2D.fillRect(1820/2 - 220 + 40,
     				815-4,
     				400 - 40,120);
@@ -85,16 +71,16 @@ public class GameFrame extends JFrame {
     
 	public GameFrame(ViewLabyrinth vl, PlayerController red, PlayerController blue){
 		super("cheat_sheet");
-		this.vl=vl;
-		this.red=red;
-		this.blue=blue;
+		GameFrame.vl=vl;
+		GameFrame.red=red;
+		GameFrame.blue=blue;
 		this.addKeyListener(red);
 		this.addKeyListener(blue);
 		this.setResizable(false);
 		this.setPreferredSize(new Dimension(1820,980));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		container =  new JPanel() {
+		mainPanel =  new JPanel() {
 			@Override
 			public void paint(Graphics g) {
 				super.paint(g);
@@ -112,17 +98,16 @@ public class GameFrame extends JFrame {
 				vl.paint(g);
 			};
 		};
-		container.setBackground(Color.black);
-		LayoutManager overlay = new OverlayLayout(container);
-		container.setLayout(overlay);
-		container.add(red);
-		container.add(blue);
-		container.add(vl);
-		container.add(red.getViewStudent());
-		container.add(blue.getViewStudent());
+		mainPanel.setBackground(Color.black);
+		LayoutManager overlay = new OverlayLayout(mainPanel);
+		mainPanel.setLayout(overlay);
+		mainPanel.add(red);
+		mainPanel.add(blue);
+		mainPanel.add(vl);
+		mainPanel.add(red.getViewStudent());
+		mainPanel.add(blue.getViewStudent());
 
-
-		this.add(container, BorderLayout.CENTER);
+		this.add(mainPanel, BorderLayout.CENTER);
 
 		this.pack();
 		this.setLocationRelativeTo(null);

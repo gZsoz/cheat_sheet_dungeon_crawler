@@ -21,8 +21,8 @@ import View.Utils.Subscriber;
  * a játék környezetében. A Character leszármazottai a Teacher és a Student.
  */
 public abstract class Character implements iTask {
-	public static int stunTime=50;
-	public static int restTime=100;
+	public static int stunTime=5 * ProtoUtil.fps;
+	public static int restTime=10 * ProtoUtil.fps;
 	
 	/*
 	 * A karakter változásaira feliratkozott osztályok.
@@ -216,8 +216,11 @@ public abstract class Character implements iTask {
      */
     public void putdownItem(Item i) {
     	ProtoUtil.printLog("putdownItem");
-    	inventory.remove(i);
-    	notifySubsribers("inventory");
+    	int idx = inventory.indexOf(i);
+    	if(!inventory.remove(i)) {
+    		System.out.println("Olyan Item-re lett meghívva a putdownItem, ami nincs benne az inventoryban!");
+    	}
+    	notifySubsribers("inventory removed "+idx);
     	if(currentRoom.addItem(i))
     		i.onDrop();
     }

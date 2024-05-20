@@ -1,6 +1,6 @@
 package View.ViewEnvironmentalFactor;
 
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -46,9 +46,9 @@ public abstract class ViewEnvironmentalFactors extends JComponent implements Sub
 		this.environmentalFactor.subscribe(this);
 		size = new Size(360+30,	250);
 		coordinates=c;
-		GameFrame.container.add(this);
+		GameFrame.mainPanel.add(this);
     	GameFrame.viewEnvs.add(this);
-    	Controller.envs.put(this.environmentalFactor, this);
+    	Containers.envs.put(this.environmentalFactor, this);
 	}
 	
 	public void setCoordinates(Coordinates coordinates) {
@@ -57,9 +57,9 @@ public abstract class ViewEnvironmentalFactors extends JComponent implements Sub
 	
 	public void propertyChanged(String property) {
 		if(property.equals("factorremoved")) {
-			Controller.envs.remove(environmentalFactor);
+			Containers.envs.remove(environmentalFactor);
 			GameFrame.viewEnvs.remove(this);
-			GameFrame.container.remove(this);
+			GameFrame.mainPanel.remove(this);
 			environmentalFactor.unsubscribe(this);
 		}
 	}

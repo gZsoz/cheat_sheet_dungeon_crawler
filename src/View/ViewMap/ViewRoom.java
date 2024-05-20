@@ -2,7 +2,7 @@ package View.ViewMap;
 
 import Items.*;
 import Map.Room;
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.*;
 import View.ViewCharacter.*;
 import View.ViewEnvironmentalFactor.*;
@@ -28,6 +28,8 @@ public class ViewRoom extends JComponent implements Subscriber {
 	 * A szoba képe, ami megjelenik.
 	 */
 	protected Image image;
+	
+	protected String roomPath = "Room/";
 	
 	/**
 	 * A szoba képének mérete.
@@ -65,15 +67,15 @@ public class ViewRoom extends JComponent implements Subscriber {
 	public ViewRoom(Room r, Coordinates pos){
 		room = r;
 		coordinates = pos;
-		size = new Size(/*r.getCapacity() * 90*/ 360,220);
+		size = new Size(360,220);
 		setFixedRoutePins();
-		image = ImageReader.loadImage("res/images/room/room.png");
+		image = ImageReader.loadImage(ImageReader.path + roomPath + "room.png");
 
 		selected = SelectionColor.Empty;
 		this.setBackground(null);
-		GameFrame.container.add(this);
+		GameFrame.mainPanel.add(this);
     	GameFrame.viewRooms.add(this);
-		Controller.rooms.put(r, this);
+		Containers.rooms.put(r, this);
 		room.subscribe(this);
 	}
 	
@@ -155,15 +157,15 @@ public class ViewRoom extends JComponent implements Subscriber {
 
 	private void setCharacterPositions() {
 		for(int i=0;i<room.getCharacters().size();i++) {
-			Controller.characters.get(room.getCharacters().get(i)).setCoordinates(fixedCharacterPositions[i]);
+			Containers.characters.get(room.getCharacters().get(i)).setCoordinates(fixedCharacterPositions[i]);
 		}
 	}
 	
 	private void setItemPositions() {
 		for(int i=0;i<room.getItems().size();i++) {
-			ViewItem item=Controller.items.get(room.getItems().get(i));
+			ViewItem item=Containers.items.get(room.getItems().get(i));
 			item.setCoordinates(fixedItemPositions[i]);
-			item.setItemSize(new Size(40, 40));
+			item.setItemSize(ViewItem.roomSize);
 			item.setItemImage();
 		}
 	}
@@ -174,7 +176,7 @@ public class ViewRoom extends JComponent implements Subscriber {
 			Character character = room.getCharacters().get(i);
 			if(character instanceof Student){
 				//charactersInRoom.add(new ViewStudent((Student) character, fixedCharacterPositions[i]));
-				ViewCharacter c=Controller.characters.get(character);
+				ViewCharacter c=Containers.characters.get(character);
 				c.setCoordinates(fixedCharacterPositions[i]);
 				GameFrame.viewCharacters.add(c);
 			}
@@ -222,13 +224,13 @@ public class ViewRoom extends JComponent implements Subscriber {
 	    	int idx = Integer.parseInt(property.split(" ")[1]);
 	    	createViewEnvFactor(room.getEnvironmentalFactors().get(idx));
 	    }else if(property.equals("roomremoved")) {
-	    	Controller.rooms.remove(room);
+	    	Containers.rooms.remove(room);
 			GameFrame.viewRooms.remove(this);
-			GameFrame.container.remove(this);
+			GameFrame.mainPanel.remove(this);
 			room.unsubscribe(this);
 	    }else if(property.equals("factors")) {
 	    	for(EnvironmentalFactors env : room.getEnvironmentalFactors()) {
-	    		Controller.envs.get(env).setCoordinates(coordinates);
+	    		Containers.envs.get(env).setCoordinates(coordinates);
 	    	}
 	    }
 	}
@@ -267,15 +269,6 @@ public class ViewRoom extends JComponent implements Subscriber {
 		g2D.setFont(new Font("Monospaced", Font.BOLD, 45));
         g2D.setColor(new Color(115, 80, 44));
         g2D.drawString(Integer.toString(room.getCapacity()), coordinates.getX()+2, coordinates.getY()+32);
-		//for(ViewEnvironmentalFactors venvfact : environmentalFactorsInRoom){
-		//	venvfact.paint(g);
-		//}
-		//for(ViewItem vitem : itemsInRoom){
-		//	vitem.paint(g);
-		//}
-		//for(ViewCharacter vcharacter : charactersInRoom){
-		//	vcharacter.paint(g);
-		//}
 	}
 
 	public void setColor(SelectionColor selectionColor) {

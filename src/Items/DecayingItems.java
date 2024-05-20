@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public abstract class DecayingItems extends Item implements iTask {
     
-	public static int defaultDuration = 120;
+	public static int defaultDuration = 14 * ProtoUtil.fps;
 
 	public int getDuration() {
 		return duration;
@@ -37,8 +37,11 @@ public abstract class DecayingItems extends Item implements iTask {
 		notifySubsribers("duration");
 		if(duration==0) {
 			notifySubsribers("itemexpired");
-			owner.getInventory().remove(this);
-			owner.notifySubsribers("inventory");
+			int idx = owner.getInventory().indexOf(this);
+			if(!owner.getInventory().remove(this)) {
+				System.out.println("Olyan DecayingItem lett eltávolítva az inventoryból, ami nincs benne az inventoryban!");
+			}
+			owner.notifySubsribers("inventory removed "+idx);
 			onDrop();
 			ProtoUtil.printLog("Decaying item expired and removed.");
 		}

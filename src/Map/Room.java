@@ -23,6 +23,8 @@ import Character.Character;
  */
 public class Room implements iTask {
 	
+	public static int maxItemCapacity=6;
+	
 	/** A szoba változásaira feliratkozott osztályok*/
 	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	
@@ -41,7 +43,6 @@ public class Room implements iTask {
 	/** A szoba környezeti tényezőinek listája */
 	protected List<EnvironmentalFactors> envFactors = new ArrayList<EnvironmentalFactors>();
 	
-	public static int maxItemCapacity=6;
 	
 	/**
 	 * Konstruktor egy szoba létrehozásához.

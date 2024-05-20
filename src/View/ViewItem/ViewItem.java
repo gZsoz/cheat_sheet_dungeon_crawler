@@ -1,6 +1,6 @@
 package View.ViewItem;
 
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.*;
 
 import javax.swing.*;
@@ -15,6 +15,9 @@ import java.awt.*;
  */
 public abstract class ViewItem extends JComponent implements Subscriber {
 	
+	public static Size inventorySize = new Size(78,78);
+	public static Size roomSize = new Size(40,40);
+	
 	protected Item item;
 	
 	protected final String itemsPath = "Items/"; 
@@ -25,7 +28,7 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	protected Image image;
 
 	public void setItemSize(Size size) {
-		if(size.getHeight()==78&&this.size.getHeight()!=78) { // 78 a mérete az inventory tárgyaknak
+		if(size.equals(inventorySize)&&!this.size.equals(inventorySize)) { // 78 a mérete az inventory tárgyaknak
 			selected=SelectionColor.Empty;
 		}
 		this.size = size;
@@ -53,12 +56,12 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	public ViewItem(Item item, Coordinates coor) {
 		this.item = item;
 		this.item.subscribe(this);
-		size= new Size(40, 40);
+		size = roomSize;
 		coordinates = coor;
 		selected= SelectionColor.Empty;
-		GameFrame.container.add(this);
+		GameFrame.mainPanel.add(this);
     	GameFrame.viewItems.add(this);
-		Controller.items.put(this.item, this);
+		Containers.items.put(this.item, this);
 	}
 	
 	public void setItemImage() {}
@@ -66,9 +69,9 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	@Override
 	public void propertyChanged(String property) {
 		if(property.equals("itemexpired")) {
-			Controller.items.remove(item);
+			Containers.items.remove(item);
 			GameFrame.viewItems.remove(this);
-			GameFrame.container.remove(this);
+			GameFrame.mainPanel.remove(this);
 			item.unsubscribe(this);
 		}
 	}

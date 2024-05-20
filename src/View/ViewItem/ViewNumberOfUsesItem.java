@@ -3,9 +3,6 @@ package View.ViewItem;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
-
-import Items.DecayingItems;
 import Items.Item;
 import Items.NumberOfUsesItem;
 import View.Utils.Coordinates;
@@ -58,7 +55,7 @@ public abstract class ViewNumberOfUsesItem extends ViewItem {
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
-		if (size.getWidth() == 78) {
+		if (size.equals(ViewItem.inventorySize)) {
 			Graphics2D g2D = (Graphics2D) g;
 			g2D.setColor(Color.YELLOW);
 			for (int i = 0; i < ((NumberOfUsesItem) item).getRemainingUses(); i++) {

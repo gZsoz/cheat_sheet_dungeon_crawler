@@ -1,7 +1,7 @@
 package View.ViewItem;
 
 import Items.Transistor;
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;

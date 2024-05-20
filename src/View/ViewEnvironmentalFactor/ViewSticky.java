@@ -1,7 +1,7 @@
 package View.ViewEnvironmentalFactor;
 
 import EnvironmentalFactor.Sticky;
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;

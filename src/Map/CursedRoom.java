@@ -12,7 +12,7 @@ import ProtoUtil.ProtoUtil;
  */
 public class CursedRoom extends Room{
 	
-	public static int defaultCloseDuration=70;
+	public static int defaultCloseDuration=7 * ProtoUtil.fps;
 	
 	private int closeDuration=0; // A Szoba zárva tartásának ideje
 

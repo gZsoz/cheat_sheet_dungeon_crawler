@@ -16,7 +16,7 @@ import ProtoUtil.ProtoUtil;
  */
 public class Cleaner extends Character {
 	
-	public static int moveTime = 100; // menny idő telik el átlagosan 2 enterroom között
+	public static int moveTime = 10 * ProtoUtil.fps; // menny idő telik el átlagosan 2 enterroom között
 	private int timeToMove=moveTime; // menny idő múlva megy be egy szobába
 	private int neighbourWithGas=0;
 	
@@ -70,7 +70,7 @@ public class Cleaner extends Character {
 	 */
 	@Override
 	public boolean enterRoom(Room r) {
-		setTimeToMove(2*ProtoUtil.random.nextInt(moveTime, 20)+10);
+		setTimeToMove(2*ProtoUtil.random.nextInt(moveTime, 20) + ProtoUtil.fps);
 		ProtoUtil.printLog("enterRoom");
 		if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= stunTime)) {
 			Room temp=currentRoom;

@@ -5,7 +5,7 @@ import Map.Labyrinth;
 import Map.Room;
 import ProtoUtil.MyRandom;
 import ProtoUtil.ProtoUtil;
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -118,7 +118,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	public void propertyChanged(String property) {
 		if(property.contains("merge")) {
 			int idx=Integer.parseInt(property.split(" ")[2]);
-			ViewRoom vr = Controller.rooms.get(labyrinth.getRooms().get(idx));
+			ViewRoom vr = Containers.rooms.get(labyrinth.getRooms().get(idx));
 			for(int i=0;i<fixedRoomPositions.size();i++) {
 				if(fixedRoomPositions.get(i).equals(vr.coordinates)) {
 					roomsInPosition[i]=0;
@@ -161,7 +161,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 				int pinIdx2 = -1;
 				for(int i = 0; i<4; i++){
 					for(int j = 0; j<4; j++){
-						double currDistance = Coordinates.distanceBetweenCoords(vroom.getFixedRoutePins()[i],Controller.rooms.get(neighbour).getFixedRoutePins()[j]);
+						double currDistance = Coordinates.distanceBetweenCoords(vroom.getFixedRoutePins()[i],Containers.rooms.get(neighbour).getFixedRoutePins()[j]);
 						if(currDistance < shortestDistance){
 							shortestDistance = currDistance;
 							pinIdx1 = i;
@@ -172,10 +172,10 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 				g2D.setColor(Color.RED);
 				g2D.setStroke(new BasicStroke(6));
 				g2D.drawLine(vroom.getFixedRoutePins()[pinIdx1].getX() + 20, vroom.getFixedRoutePins()[pinIdx1].getY() + 25,
-						Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX() + 20,Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY() + 25
+						Containers.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX() + 20,Containers.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY() + 25
 						);
 				g2D.drawImage(pinImage,vroom.getFixedRoutePins()[pinIdx1].getX(),vroom.getFixedRoutePins()[pinIdx1].getY(),40,40,null);
-				g2D.drawImage(pinImage,Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX(),Controller.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY(),40,40,null);
+				g2D.drawImage(pinImage,Containers.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getX(),Containers.rooms.get(neighbour).getFixedRoutePins()[pinIdx2].getY(),40,40,null);
 			}
 		}
 	}

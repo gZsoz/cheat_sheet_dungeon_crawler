@@ -1,7 +1,7 @@
 package View.ViewCharacter;
 
 import Character.Cleaner;
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -16,7 +16,7 @@ public class ViewCleaner extends ViewCharacter {
 	public ViewCleaner(Cleaner cleaner, Coordinates pos){
 		super(cleaner, pos);
 		image = ImageReader.loadImage(ImageReader.path+charactersPath+"cleaner.png");
-		GameFrame.container.add(this);
+		GameFrame.mainPanel.add(this);
     	GameFrame.viewCharacters.add(this);
 	}
 	

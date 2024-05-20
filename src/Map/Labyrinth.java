@@ -19,6 +19,10 @@ import Character.*;
  */
 public class Labyrinth implements iTask{
 
+	public static int itemSpawnFrequency = 100 * ProtoUtil.fps; // szobánkénti átlagos időtartam
+	public static int mergeFrequency = 100 * ProtoUtil.fps;
+	public static int splitFrequency = 100 * ProtoUtil.fps;
+	
 	/** A labirintus változásaira feliratkozott osztályok*/
 	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	private List<Room> rooms;
@@ -238,32 +242,30 @@ public class Labyrinth implements iTask{
 	 * @return A véletlenszerűen kiválasztott tárgy.
 	 */
 	private Item itemPicker(){
-		switch(ProtoUtil.random.nextInt(11, 8)){
+		switch(ProtoUtil.random.nextInt(10, 8)){
 		case 0:
-			return new BatSkin();
+			return new FakeBatSkin();
 		case 1:
 			return new FakeMask();
 		case 2:
-			return new FakeSlideRule();
-		case 3:
-			return new FakeSlideRule();
-		case 4:
 			return new AirFreshener();
-		case 5:
-			if(ProtoUtil.random.nextInt(1, 0)==0)
+		case 3:
+			if(ProtoUtil.random.nextInt(2, 0)==0)
 				return new BatSkin();
 			else
 				return new FakeBatSkin();
-		case 6:
+		case 4:
 			return new Beer();
-		case 7:
+		case 5:
 			return new CabbageCamembert();
-		case 8:
+		case 6:
 			return new Mask();
-		case 9:
+		case 7:
 			return new Transistor();
-		case 10:
+		case 8:
 			return new WetCloth();
+		case 9:
+			return new FakeSlideRule();
 		default:
 			return null;
 		}
@@ -352,7 +354,7 @@ public class Labyrinth implements iTask{
 		for (Room room : rooms) { // minden szobához végigiterálunk az összes szobán és vagy berakjuk a szomszédok közé vagy nem
             for (Room otherRoom : rooms) {
                 if (room != otherRoom) { // saját magát nem rakjuk be semmiképpen
-                    if (ProtoUtil.random.nextInt(4, 0) == 0) {
+                    if (ProtoUtil.random.nextInt(5, 0) == 0) {
                         room.addNeighbour(otherRoom);
                         otherRoom.addNeighbour(room);
                     }
@@ -363,7 +365,7 @@ public class Labyrinth implements iTask{
             for (Room room : rooms) {
                 for (Room otherRoom : rooms) {
                     if (room != otherRoom && !room.getNeighbours().contains(otherRoom)) { // saját magát és már felvett szomszédokat nem rakunk be
-                        if (ProtoUtil.random.nextInt(2, 0) == 0) {
+                        if (ProtoUtil.random.nextInt(3, 0) == 0) {
                             room.addNeighbour(otherRoom);
                             otherRoom.addNeighbour(room);
                         }
@@ -378,18 +380,7 @@ public class Labyrinth implements iTask{
 		roomWithSlideRule.addItem(new SlideRule()); // logarléc betétele egy random szobába
 		
 		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN TÁRGYAT BE LEHET RAKNI*/
-		//r1.items.add(new WetCloth());
-		//r1.items.add(new BatSkin());
-		//r1.items.add(new Beer());
-		
-		//r5.items.add(new Beer());
-		//r1.envFactors.add(new Gas(r1));
-		//r1.addItem(new AirFreshener());
-		//r1.addItem(new CabbageCamembert());
-		//r1.envFactors.add(new Sticky(r1));
-		//r1.addItem(new WetCloth());
-		//r1.addItem(new BatSkin());
-		
+		r1.items.add(new FakeSlideRule());	// balance changes
 		
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba
 			int numberOfSpawnedItems = ProtoUtil.random.nextInt((Room.maxItemCapacity+1) - 2 - r.currentNumOfItems(), 4) + 2; // hogy mindig legalább kettőt spawnoljon
@@ -439,18 +430,18 @@ public class Labyrinth implements iTask{
 	public void update() {
 		// a random események végrehajtása
 		Random rand=new Random();
-		if(ProtoUtil.random.nextInt(1000, -1)==0) {
+		if(ProtoUtil.random.nextInt(mergeFrequency, -1)==0) {
 			if (rooms.size() > 2) {
 				mergeRoom(rooms.get(rand.nextInt(rooms.size())), rooms.get(rand.nextInt(rooms.size()))); // merge
 			}
 		}
-		if(ProtoUtil.random.nextInt(1000, -1)==0) {
+		if(ProtoUtil.random.nextInt(splitFrequency, -1)==0) {
 			if(rooms.size()<10) {
 				splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
 			}
 		}
 		for(Room r : rooms){
-			if(ProtoUtil.random.nextInt(1000, -1)==0) {
+			if(ProtoUtil.random.nextInt(itemSpawnFrequency, -1)==0) {
 				r.spawnItem(itemPicker()); // item legenerálása
 			}
 			r.update();

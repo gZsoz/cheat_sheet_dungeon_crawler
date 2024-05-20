@@ -2,12 +2,14 @@ package View.ViewCharacter;
 
 import Character.Student;
 import Character.Character;
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Controller.PlayerController;
 import View.Utils.*;
 import View.ViewItem.ViewItem;
 
 import java.awt.*;
+
+import javax.swing.text.View;
 
 /**
  * A diák kirajzolásáért felelős osztály.
@@ -34,17 +36,17 @@ public class ViewStudent extends ViewCharacter {
 	public void setItemPositions() {
 		if(color == SelectionColor.Red){
 			for(int i=0;i<character.getInventory().size();i++) {
-				ViewItem item = Controller.items.get(character.getInventory().get(i));
+				ViewItem item = Containers.items.get(character.getInventory().get(i));
 				item.setCoordinates(PlayerController.leftInventoryPositions[i]);
-				item.setItemSize(new Size(78,78));
+				item.setItemSize(ViewItem.inventorySize);
 				item.setItemImage();
 			}
 		}
 		else if(color == SelectionColor.Blue){
 			for(int i=0;i<character.getInventory().size();i++) {
-				ViewItem item = Controller.items.get(character.getInventory().get(i));
+				ViewItem item = Containers.items.get(character.getInventory().get(i));
 				item.setCoordinates(PlayerController.rightInventoryPositions[i]);
-				item.setItemSize(new Size(78,78));
+				item.setItemSize(ViewItem.inventorySize);
 				item.setItemImage();
 			}
 		}

@@ -1,6 +1,6 @@
 package View.ViewCharacter;
 
-import View.Controller.Controller;
+import View.Controller.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -27,7 +27,7 @@ public abstract class ViewCharacter extends JComponent implements Subscriber {
 		this.character.subscribe(this);
 		size = new Size(60,150);
 		coordinates = coords;
-		Controller.characters.put(this.character, this);
+		Containers.characters.put(this.character, this);
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public abstract class ViewCharacter extends JComponent implements Subscriber {
 	public abstract void setItemPositions();
 	
 	public void propertyChanged(String property) {
-		if(property.equals("inventory")) {
+		if(property.contains("inventory")) {
 			setItemPositions();
 		}
 	}
