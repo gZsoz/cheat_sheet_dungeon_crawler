@@ -68,9 +68,10 @@ public class Cleaner extends Character {
 	public boolean enterRoom(Room r) {
 		ProtoUtil.printLog("enterRoom");
 		if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= stunTime)) {
-    		currentRoom.removeCharacter(this);
-    		r.addCharacter(this);
-    		currentRoom = r;
+			Room temp=currentRoom;
+			currentRoom = r;
+			temp.removeCharacter(this);
+			r.addCharacter(this);
     		setStunned(0);
     		clean(r);
     		return true;

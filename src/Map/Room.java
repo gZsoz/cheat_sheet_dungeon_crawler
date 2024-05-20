@@ -248,13 +248,15 @@ public class Room implements iTask {
 	 */
 	public void merge(Room r) {
 	    ProtoUtil.printLog("merge");
-	    for (Room current : new ArrayList<>(r.getNeighbours())) {
+	    for (Room current : new ArrayList<>(r.neighbours)) {
 	        if (!neighbours.contains(current)&&!current.equals(this)) {
 	            addNeighbour(current);
 	            current.addNeighbour(this);
 	        }
 	        current.removeNeighbour(r);
 	    }
+	    //this.removeNeighbour(r);
+	    //r.removeNeighbour(this);
 	    for (EnvironmentalFactors env : new ArrayList<>(r.getEnvironmentalFactors())) {
 	    	addEnvironmentalFactor(env);
 	    }
@@ -265,8 +267,14 @@ public class Room implements iTask {
 	    for (Item i : new ArrayList<>(r.getItems())) {
 	        addItem(i);
 	    }
+	    
 	    if(neighbours.contains(this))
 	    	System.out.println("nagy a baj");
+	    for(Room rr : r.neighbours) {
+	    	if(rr.neighbours.contains(r)) {
+	    		System.out.println("Egy már eltávolított szoba bentmaradt a CursedRoom szomszédai között!!!");
+	    	}
+	    }
 	}
 
 	/**
@@ -277,7 +285,7 @@ public class Room implements iTask {
 	    ProtoUtil.printLog("getNeighbours");
 	    ArrayList<Room> openNeighbours = new ArrayList<>();
 	    for(Room r : new ArrayList<Room>(neighbours)) {
-	    	if(!((r instanceof CursedRoom) && r.getNeighbours().isEmpty())) {
+	    	if(!((r instanceof CursedRoom) && r.getNeighbours().isEmpty()) && !r.neighbours.isEmpty()) {
 	    		openNeighbours.add(r);
 	    	}
 	    }

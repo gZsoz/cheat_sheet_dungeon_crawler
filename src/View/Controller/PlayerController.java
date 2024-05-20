@@ -396,6 +396,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 			Controller.characters.remove(player);
 			room.unsubscribe(this);
 			player.unsubscribe(this);
+			labyrinth.unsubscribe(this);
 			setCharacterImage();
 			for(ViewRoom vr : GameFrame.viewRooms) {
 				vr.removeColor(color);

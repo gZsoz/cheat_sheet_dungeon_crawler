@@ -314,7 +314,7 @@ public class Labyrinth implements iTask{
 		// szobák legenerálása (2-4 fősek)
 		Room r1 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r2 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r3 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r3 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r4 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r5 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r6 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
@@ -436,11 +436,14 @@ public class Labyrinth implements iTask{
 		// a random események végrehajtása
 		Random rand=new Random();
 		if(ProtoUtil.random.nextInt(1000, -1)==0) {
-			mergeRoom(rooms.get(rand.nextInt(rooms.size())), rooms.get(rand.nextInt(rooms.size()))); // merge
+			if (rooms.size() > 2) {
+				mergeRoom(rooms.get(rand.nextInt(rooms.size())), rooms.get(rand.nextInt(rooms.size()))); // merge
+			}
 		}
 		if(ProtoUtil.random.nextInt(1000, -1)==0) {
-			if(rooms.size()<10)
+			if(rooms.size()<10) {
 				splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
+			}
 		}
 		for(Room r : rooms){
 			if(ProtoUtil.random.nextInt(1000, -1)==0) {
