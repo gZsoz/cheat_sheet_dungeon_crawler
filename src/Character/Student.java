@@ -7,7 +7,8 @@ import Map.Room;
 import ProtoUtil.ProtoUtil;
 
 /**
- * A Student osztály felelős a hallgatók inventory-jában lévő aktiválható tárgyak aktiválásáért.
+ * A Student osztály felelős a hallgatók inventory-jában lévő aktiválható tárgyak aktiválásáért,
+ * valamint a hallgató érinthetetlenségének számontartásáért.
  */
 public class Student extends Character {
 	
@@ -16,14 +17,19 @@ public class Student extends Character {
 	 */
 	 private boolean invincible;
 	 
-	 
-	 public Student() {this.inventory = new ArrayList<Item>();
+	 /**
+	 * Konstruktor egy hallgató létrehozásához.
+	 */
+	public Student() {
+		this.inventory = new ArrayList<Item>();
 		this.stunned = 0;
 		this.hasDefense = false;
-		this.invincible = false;}
+		this.invincible = false;
+	}
+	
 	/**
-	 * Kostruktor.
-	 * @param currentRoom Melyik szobában van éppen a hallgató.
+	 * Kostruktor egy hallgató létrehozásához.
+	 * @param currentRoom melyik szobában van éppen a hallgató
 	 */
 	public Student(Room currentRoom) {
 		this.currentRoom = currentRoom;
@@ -35,7 +41,7 @@ public class Student extends Character {
 	
 	/**
 	 * Érinthetetlenség lekérdezése.
-	 * @return A hallgató érinthetetlenségi állapota.
+	 * @return a hallgató érinthetetlenségi állapota
 	 */
 	public boolean getInvincible() {
 		ProtoUtil.printLog("getInvincible");
@@ -44,7 +50,7 @@ public class Student extends Character {
 	
 	/**
 	 * Érinthetetlenség beállítása.
-	 * @param state Ha érinthetetlen a karakter, akkor igaz, egyébként hamis.
+	 * @param state ha érinthetetlen a karakter, akkor igaz, egyébként hamis
 	 */
 	public void setInvincible(boolean state) {
 		ProtoUtil.printLog("setInvincible");
@@ -54,20 +60,12 @@ public class Student extends Character {
 	 
 	/**
 	 * A paraméterül kapott tárgy hatásának megkezdése.
-	 * @param i A tárgy.
+	 * @param i az aktiválandó tárgy
 	 */
 	public void activate(Item i) {
 		ProtoUtil.printLog("activate");
 		if (!(stunned > 0 && stunned <= stunTime)) {
 			i.onActivate();
 		}
-	}
-	 
-	/**
-	 * Ugyanaz mint a Character-nek.
-	 */
-	@Override
-	public void update() {
-		super.update();
 	}
 }

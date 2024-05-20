@@ -299,9 +299,9 @@ public class ProtoUtil {
 	private static void multiplyTimingsWithFps() {
 		Character.restTime *= fps;
     	Character.stunTime *= fps;
-    	Cleaner.moveTime *= fps;
+    	Cleaner.timeBetweenMoves *= fps;
     	Teacher.angryTime *= fps;
-    	Teacher.moveTime *= fps;
+    	Teacher.timeBetweenMoves *= fps;
     	DecayingItems.defaultDuration *= fps;
     	CursedRoom.defaultCloseDuration *= fps;
     	Labyrinth.itemSpawnFrequency *= fps;
@@ -327,9 +327,9 @@ public class ProtoUtil {
     		// A játékbeli események időzítései másodpercben
         	Character.restTime = 10;
         	Character.stunTime = 5;
-        	Cleaner.moveTime = 10;
+        	Cleaner.timeBetweenMoves = 10;
         	Teacher.angryTime = 3;
-        	Teacher.moveTime = 7;
+        	Teacher.timeBetweenMoves = 7;
         	DecayingItems.defaultDuration = 14;
         	CursedRoom.defaultCloseDuration = 7;
         	Labyrinth.itemSpawnFrequency = 90;	// szobánkénti átlagos időtartam
