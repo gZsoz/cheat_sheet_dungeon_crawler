@@ -21,6 +21,7 @@ import View.Utils.ActionState;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 /**
  * Felelősség: A felhasználók bemeneteinek értelmezése és a model ezek szerinti formázása.
@@ -406,11 +407,10 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 			if(!room.getCharacters().contains(player)) {
 				if(state==ActionState.ItemPicker && !room.getItems().isEmpty()) {
 					Controller.items.get(room.getItems().get(selectedSlot)).removeColor(color);
-					selectedSlot=0;
 				}else if(state==ActionState.RoomPicker && !room.getNeighbours().isEmpty()) {
 					Controller.rooms.get(room.getNeighbours().get(selectedSlot)).removeColor(color);
-					selectedSlot=0;
 				}
+				selectedSlot=0;
 				room.unsubscribe(this);
 				setRoomSubscribed();
 				setNewColor();
@@ -442,9 +442,30 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 				selectedSlot=0;
 				setNewColor();
 			}
-		} else if(property.equals("enteredcursedroom")) {
+		}else if(property.contains("enteredcursedroom")) {
 			for(ViewRoom vr : GameFrame.viewRooms) {
 				vr.removeColor(color);
+			}
+		}else if(property.contains("cursedremovedfromneighbours")) {
+			if(state==ActionState.RoomPicker) {
+				int idx=Integer.parseInt(property.split(" ")[1]);	// labyrinthon belüli index
+				Room justremoved=labyrinth.getRooms().get(idx);
+				ArrayList<Room> neighboursbeforecursedremoved=new ArrayList<Room>(room.neighbours);
+				int justremovedselectionpos=room.neighbours.indexOf(justremoved);
+				neighboursbeforecursedremoved.removeIf(szoba -> ((room.neighbours.contains(szoba) && !room.getNeighbours().contains(szoba)) && szoba != justremoved));
+				justremovedselectionpos=neighboursbeforecursedremoved.indexOf(justremoved);
+				if(selectedSlot==justremovedselectionpos) {
+					Controller.rooms.get(justremoved).removeColor(color);
+					selectedSlot=0;
+					setNewColor();
+				}else if(selectedSlot>justremovedselectionpos) {
+					selectedSlot--;
+					setNewColor();
+				}else if(selectedSlot<justremovedselectionpos){
+					// a selectedSlot után tűnik el a szoba szóval nem változik semmi
+					return;
+				}
+				
 			}
 		}
 	}

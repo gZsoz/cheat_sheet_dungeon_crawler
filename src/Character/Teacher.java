@@ -17,7 +17,7 @@ import ProtoUtil.ProtoUtil;
 public class Teacher extends Character {
 	
 	public static int angryTime = 30; // mennyi ideig lesz angry
-	public static int moveTime = 100; // menny idő telik el átlagosan 2 enterroom között
+	public static int moveTime = 75; // menny idő telik el átlagosan 2 enterroom között
 	private int timeToMove=moveTime; // menny idő múlva megy be egy szobába
 	private int neighbourWithStudent=0;
 	

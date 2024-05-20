@@ -29,7 +29,7 @@ public class Room implements iTask {
 	protected int capacity=1;
 	
 	/** A szomszéd szobák listája */
-	protected List<Room> neighbours = new ArrayList<Room>();
+	public List<Room> neighbours = new ArrayList<Room>();
 	
 	/** A szobában található tárgyak listája */
 	protected List<Item> items = new ArrayList<Item>();
@@ -39,6 +39,8 @@ public class Room implements iTask {
 	
 	/** A szoba környezeti tényezőinek listája */
 	protected List<EnvironmentalFactors> envFactors = new ArrayList<EnvironmentalFactors>();
+	
+	public static int maxItemCapacity=6;
 	
 	/**
 	 * Konstruktor egy szoba létrehozásához.
@@ -71,7 +73,7 @@ public class Room implements iTask {
 	 */
 	public void notifySubsribers(String str) {
 		for(Subscriber sub : new ArrayList<>(subscribers))
-			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx", "spawnfactor <factor pos>", "roomremoved"
+			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx", "spawnfactor <factor pos>", "roomremoved", "enteredcursedroom"
 	}
 	
 	/**
@@ -109,13 +111,13 @@ public class Room implements iTask {
 	 */
 	public boolean addItem(Item i) {
 	    ProtoUtil.printLog("addItem");
-	    if(items.size()<6) {
+	    if(items.size()<maxItemCapacity) {
 	    	items.add(i);
 	    	notifySubsribers("items");
 	    	return true;
 	    }else if(i instanceof SlideRule && !(i instanceof FakeSlideRule)){
 	    	items.add(i);
-	    	Item temp=items.get(5);
+	    	Item temp=items.get(maxItemCapacity-1); // utolsó item eltávolítása
 	    	removeItem(temp);
 	    	temp.notifySubsribers("itemexpired");
 	    	notifySubsribers("items");
@@ -298,7 +300,7 @@ public class Room implements iTask {
      */
     public void spawnItem(Item a) {
         ProtoUtil.printLog("spawnItem");
-        if(items.size()<6) {
+        if(items.size()<maxItemCapacity) {
         	items.add(a);
         	notifySubsribers("spawnitem "+(items.size()-1));
         }

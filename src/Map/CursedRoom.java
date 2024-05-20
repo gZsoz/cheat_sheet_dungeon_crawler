@@ -77,8 +77,9 @@ public class CursedRoom extends Room{
      */
     @Override
     public void addCharacter(Character character) {
-        super.addCharacter(character);
         hideDoors();
+        super.addCharacter(character);
+        notifySubsribers("removedfromneighbours");
     }
     
     /**

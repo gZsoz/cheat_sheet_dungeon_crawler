@@ -37,8 +37,8 @@ public class GameFrame extends JFrame {
     public static ArrayList<ViewEnvironmentalFactors> viewEnvs = new ArrayList<>();
     public static ArrayList<ViewCharacter> viewCharacters = new ArrayList<>();
     public static ArrayList<ViewRoom> viewRooms = new ArrayList<>();
-    /*public static ViewLabyrinth vl;
-    public static PlayerController red, blue;*/
+    public static ViewLabyrinth vl;
+    public static PlayerController red, blue;
     
     public static JComponent instructions = new JComponent() {
     	@Override
@@ -85,9 +85,9 @@ public class GameFrame extends JFrame {
     
 	public GameFrame(ViewLabyrinth vl, PlayerController red, PlayerController blue){
 		super("cheat_sheet");
-		/*this.vl=vl;
+		this.vl=vl;
 		this.red=red;
-		this.blue=blue;*/
+		this.blue=blue;
 		this.addKeyListener(red);
 		this.addKeyListener(blue);
 		this.setResizable(false);

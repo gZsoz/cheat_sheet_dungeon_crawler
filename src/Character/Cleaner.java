@@ -97,6 +97,7 @@ public class Cleaner extends Character {
 				}
 			}
 		}
+		neighbourWithGas=Integer.MAX_VALUE;
 	}
 	
 	/**

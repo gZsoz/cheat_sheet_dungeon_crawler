@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public abstract class DecayingItems extends Item implements iTask {
     
-	public static int defaultDuration = 100000000;
+	public static int defaultDuration = 120;
 
 	public int getDuration() {
 		return duration;

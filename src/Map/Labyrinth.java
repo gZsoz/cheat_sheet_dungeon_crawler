@@ -21,7 +21,6 @@ public class Labyrinth implements iTask{
 
 	/** A labirintus változásaira feliratkozott osztályok*/
 	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
-	
 	private List<Room> rooms;
 
 	public Labyrinth(){
@@ -59,7 +58,7 @@ public class Labyrinth implements iTask{
 	public List<Room> getRooms(){
 		return rooms;
 	}
-
+	
     /**
      * Szobát add a labirintushoz.
      * @param r A hozzáadandó szoba.
@@ -239,26 +238,31 @@ public class Labyrinth implements iTask{
 	 * @return A véletlenszerűen kiválasztott tárgy.
 	 */
 	private Item itemPicker(){
-		switch(ProtoUtil.random.nextInt(10, 8)){
+		switch(ProtoUtil.random.nextInt(11, 8)){
 		case 0:
-			return new FakeBatSkin();
+			return new BatSkin();
 		case 1:
-			return new Mask();
+			return new FakeMask();
 		case 2:
 			return new FakeSlideRule();
 		case 3:
-			return new AirFreshener();
+			return new FakeSlideRule();
 		case 4:
-			return new BatSkin();
+			return new AirFreshener();
 		case 5:
-			return new Beer();
+			if(ProtoUtil.random.nextInt(1, 0)==0)
+				return new BatSkin();
+			else
+				return new FakeBatSkin();
 		case 6:
-			return new CabbageCamembert();
+			return new Beer();
 		case 7:
-			return new Mask();
+			return new CabbageCamembert();
 		case 8:
-			return new Transistor();
+			return new Mask();
 		case 9:
+			return new Transistor();
+		case 10:
 			return new WetCloth();
 		default:
 			return null;
@@ -315,9 +319,9 @@ public class Labyrinth implements iTask{
 		Room r1 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r2 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r3 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r4 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r4 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r5 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r6 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r6 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r7 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r8 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r9 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
@@ -330,8 +334,8 @@ public class Labyrinth implements iTask{
 		rooms.add(r6);
 		rooms.add(r7);
 		rooms.add(r8);
-		rooms.add(r9);
-		rooms.add(r10);
+		//rooms.add(r9);
+		//rooms.add(r10);
 		
 		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN KÖRNYEZETI VÁLTOZÓT BE LEHET RAKNI*/
 		
@@ -383,14 +387,14 @@ public class Labyrinth implements iTask{
 		//r1.addItem(new AirFreshener());
 		//r1.addItem(new CabbageCamembert());
 		//r1.envFactors.add(new Sticky(r1));
-		r1.addItem(new WetCloth());
-		r1.addItem(new BatSkin());
+		//r1.addItem(new WetCloth());
+		//r1.addItem(new BatSkin());
 		
 		
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba
-			int numberOfSpawnedItems = ProtoUtil.random.nextInt(7 - r.currentNumOfItems(), 4);
+			int numberOfSpawnedItems = ProtoUtil.random.nextInt((Room.maxItemCapacity+1) - 2 - r.currentNumOfItems(), 4) + 2; // hogy mindig legalább kettőt spawnoljon
 			for(int i = 0; i < numberOfSpawnedItems; i++) {
-				r.spawnItem(itemPicker());
+				r.addItem(itemPicker());
 			}
 		}
 		

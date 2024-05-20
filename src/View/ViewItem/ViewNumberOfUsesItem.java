@@ -46,6 +46,8 @@ public abstract class ViewNumberOfUsesItem extends ViewItem {
 	@Override
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
+		if(property.equals("remaininguses"))
+			setFixedDotPositions();
 	}
 	
 	@Override

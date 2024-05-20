@@ -2,6 +2,7 @@ package View.ViewMap;
 
 import Map.Room;
 import View.Utils.Coordinates;
+import View.Utils.GameFrame;
 import View.Utils.ImageReader;
 import View.Utils.Subscriber;
 
@@ -20,6 +21,10 @@ public class ViewCursedRoom extends ViewRoom implements Subscriber {
 	@Override
 	public void propertyChanged(String property) {
 	    super.propertyChanged(property);
+	    if(property.startsWith("removedfromneighbours")) {
+	    	for(Room r : room.neighbours)
+	    		r.notifySubsribers("cursedremovedfromneighbours "+GameFrame.vl.getLabyrinth().getRooms().indexOf(room));
+	    }
 	}
 	
 	/**

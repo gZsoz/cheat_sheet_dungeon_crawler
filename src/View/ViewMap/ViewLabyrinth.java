@@ -78,6 +78,10 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 		lab.subscribe(this);
 	}
 	
+	public Labyrinth getLabyrinth() {
+		return labyrinth;
+	}
+	
 	/**
 	 * Kezdő map generálás view szinten
 	 */
