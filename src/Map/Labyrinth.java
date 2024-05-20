@@ -243,7 +243,7 @@ public class Labyrinth implements iTask{
 		case 0:
 			return new FakeBatSkin();
 		case 1:
-			return new FakeMask();
+			return new Mask();
 		case 2:
 			return new FakeSlideRule();
 		case 3:
@@ -314,12 +314,12 @@ public class Labyrinth implements iTask{
 		// szobák legenerálása (2-4 fősek)
 		Room r1 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r2 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r3 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r3 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r4 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r5 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r5 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r6 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r7 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
-		Room r8 = new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2);
+		Room r8 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r9 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		Room r10 = new Room(ProtoUtil.random.nextInt(3, 2) + 2);
 		rooms.add(r1);
@@ -329,9 +329,9 @@ public class Labyrinth implements iTask{
 		rooms.add(r5);
 		rooms.add(r6);
 		rooms.add(r7);
-		//rooms.add(r8);
-		//rooms.add(r9);
-		//rooms.add(r10);
+		rooms.add(r8);
+		rooms.add(r9);
+		rooms.add(r10);
 		
 		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN KÖRNYEZETI VÁLTOZÓT BE LEHET RAKNI*/
 		

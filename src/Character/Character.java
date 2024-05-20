@@ -81,7 +81,9 @@ public abstract class Character implements iTask {
 	 * @return A karakter kábultsági állapota.
 	 */
     public boolean isStunned() {
-    	return stunned > 0 && stunned <= stunTime;	
+    	boolean a=stunned > 0 && stunned <= stunTime;
+    	if(getHasDefense()&&a) System.out.println("egyszerre stunolt és nem");
+    	return a;
     }
     
 	/**
@@ -122,14 +124,14 @@ public abstract class Character implements iTask {
 	 */
 	public void setStunned(int s) {
 		ProtoUtil.printLog("setStunned");
-		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 		stunned = s;
+		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 	}
 	
 	public void reduceStunned() {
 		ProtoUtil.printLog("reduceStunned");
-		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 		stunned--;
+		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 	}
 	
 	/**

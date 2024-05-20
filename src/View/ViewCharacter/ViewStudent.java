@@ -57,20 +57,20 @@ public class ViewStudent extends ViewCharacter {
 			character.unsubscribe(this);
 		}
 		else if(property.equals("stun")){
-			if(character.getStunned()>0 && character.getStunned() <= Character.stunTime){
+			if(character.isStunned()){
 				if(color == SelectionColor.Red){
-					image = ImageReader.loadImage("res/images/Characters/student_red_stunned.png");
+					image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_red_stunned.png");
 				}
 				else if(color == SelectionColor.Blue){
-					image = ImageReader.loadImage("res/images/Characters/student_blue_stunned.png");
+					image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_blue_stunned.png");
 				}
 			}
 			else {
 				if(color == SelectionColor.Blue){
-					image = ImageReader.loadImage("res/images/Characters/student_blue.png");
+					image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_blue.png");
 				}
 				else if(color == SelectionColor.Red){
-					image = ImageReader.loadImage("res/images/Characters/student_red.png");
+					image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_red.png");
 				}
 			}
 		}

@@ -264,7 +264,9 @@ public class ViewRoom extends JComponent implements Subscriber {
 
 		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
 
-		
+		g2D.setFont(new Font("Monospaced", Font.BOLD, 45));
+        g2D.setColor(new Color(115, 80, 44));
+        g2D.drawString(Integer.toString(room.getCapacity()), coordinates.getX()+2, coordinates.getY()+32);
 		//for(ViewEnvironmentalFactors venvfact : environmentalFactorsInRoom){
 		//	venvfact.paint(g);
 		//}

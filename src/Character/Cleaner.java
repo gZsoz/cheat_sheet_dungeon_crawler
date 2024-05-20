@@ -16,6 +16,10 @@ import ProtoUtil.ProtoUtil;
  */
 public class Cleaner extends Character {
 	
+	public static int moveTime = 100; // menny idő telik el átlagosan 2 enterroom között
+	private int timeToMove=moveTime; // menny idő múlva megy be egy szobába
+	private int neighbourWithGas=0;
+	
 	/**
 	 * Kostruktor.
 	 * @param currentRoom Melyik szobában van éppen a takarító.
@@ -66,6 +70,7 @@ public class Cleaner extends Character {
 	 */
 	@Override
 	public boolean enterRoom(Room r) {
+		setTimeToMove(2*ProtoUtil.random.nextInt(moveTime, 20)+10);
 		ProtoUtil.printLog("enterRoom");
 		if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= stunTime)) {
 			Room temp=currentRoom;
@@ -79,11 +84,36 @@ public class Cleaner extends Character {
     	return false;
 	}
 	
+	private void setTimeToMove(int i) {
+		timeToMove=i;
+	}
+
+	private void searchForGas() {
+		for(int i=0;i<currentRoom.getNeighbours().size();i++) {
+			for(EnvironmentalFactors factor : currentRoom.getNeighbours().get(i).getEnvironmentalFactors()) {
+				if(factor instanceof Gas){
+					neighbourWithGas=i;
+					return;
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Ugyanaz mint a karakternek.
 	 */
 	@Override
 	public void update() {
+    	if(--timeToMove<=0&&!currentRoom.getNeighbours().isEmpty()) {
+    		if(neighbourWithGas < currentRoom.getNeighbours().size()) {
+    			enterRoom(currentRoom.getNeighbours().get(neighbourWithGas));
+    		}else {
+    			enterRoom(currentRoom.getNeighbours().get(ProtoUtil.random.nextInt(currentRoom.getNeighbours().size(), 0)));
+    		}
+			searchForGas();
+    	}
 		super.update();
 	}
+
+	
 }

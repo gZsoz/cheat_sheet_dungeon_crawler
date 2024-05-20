@@ -36,7 +36,7 @@ public class Mask extends DecayingItems {
 		isActive=false; // Aktiválás kikapcsolása
 		boolean mask=false;
 		for(Item i : owner.getInventory()) {
-			if(i instanceof Mask) {
+			if(i instanceof Mask && !(i instanceof FakeMask)) {
 				mask=true;
 				break;
 			}
