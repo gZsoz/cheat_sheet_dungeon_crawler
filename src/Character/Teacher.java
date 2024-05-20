@@ -19,6 +19,7 @@ public class Teacher extends Character {
 	public static int angryTime = 30; // mennyi ideig lesz angry
 	public static int moveTime = 100; // menny idő telik el átlagosan 2 enterroom között
 	private int timeToMove=moveTime; // menny idő múlva megy be egy szobába
+	private int neighbourWithStudent=0;
 	
 	/**
 	 * Kostruktor.
@@ -38,6 +39,17 @@ public class Teacher extends Character {
 	
 	public boolean isAngry() {
 		return timeToMove<=angryTime;
+	}
+	
+	private void searchForStudents() {
+		for(int i=0;i<currentRoom.getNeighbours().size();i++) {
+			for(Character c : currentRoom.getNeighbours().get(i).getCharacters()) {
+				if(c instanceof Student){
+					neighbourWithStudent=i;
+					return;
+				}
+			}
+		}
 	}
 	
     /**
@@ -106,10 +118,15 @@ public class Teacher extends Character {
 	 */
     @Override
     public void update() {
-    	if(!isStunned() && --timeToMove==angryTime)
+    	if(!isStunned() && --timeToMove==angryTime) {
     		notifySubsribers("angry");
-    	else if(timeToMove<=0&&!currentRoom.getNeighbours().isEmpty()) {
-    		enterRoom(currentRoom.getNeighbours().get(ProtoUtil.random.nextInt(currentRoom.getNeighbours().size(), 0)));
+    		searchForStudents();
+    	}else if(timeToMove<=0&&!currentRoom.getNeighbours().isEmpty()) {
+    		if(neighbourWithStudent < currentRoom.getNeighbours().size())
+    			enterRoom(currentRoom.getNeighbours().get(neighbourWithStudent));
+    		else
+    			enterRoom(currentRoom.getNeighbours().get(ProtoUtil.random.nextInt(currentRoom.getNeighbours().size(), 0)));
+    		neighbourWithStudent=0;
     	}
     	super.update();
 		checkCollision();

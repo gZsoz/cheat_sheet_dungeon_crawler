@@ -27,21 +27,18 @@ public class ViewTeacher extends ViewCharacter {
 	@Override
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
-		if(property.equals("stun")){
+		if(property.equals("stun") || property.equals("angry")){
 			if(character.isStunned()){
-				image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_stunned.png");
+				if(((Teacher)character).isAngry())
+					image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_stunned_and_angry.png");
+				else
+					image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_stunned.png");
 			} else {
 				if(((Teacher)character).isAngry())
 					image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_angry.png");
 				else
 					image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher.png");
 			}
-		}else if(property.equals("angry")) {
-			if(((Teacher)character).isAngry())
-				image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_angry.png");
-			else
-				image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher.png");
-				
 		}
 	}
 

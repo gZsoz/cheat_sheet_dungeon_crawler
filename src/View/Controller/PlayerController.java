@@ -404,7 +404,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 			labyrinth.notifySubsribers("gamelost");
 		}else if(property.equals("characters")) {
 			if(!room.getCharacters().contains(player)) {
-				if(state==ActionState.ItemPicker) {
+				if(state==ActionState.ItemPicker && !room.getItems().isEmpty()) {
 					Controller.items.get(room.getItems().get(selectedSlot)).removeColor(color);
 					selectedSlot=0;
 				}else if(state==ActionState.RoomPicker && !room.getNeighbours().isEmpty()) {
