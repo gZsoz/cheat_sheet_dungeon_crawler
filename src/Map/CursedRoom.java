@@ -12,119 +12,133 @@ import ProtoUtil.ProtoUtil;
  */
 public class CursedRoom extends Room {
 	
+	/**
+	 * Ezzel a változóval állítható be a ProtoUtil-ban az alapértelmezett zárva tartási idő hossza.
+	 */
 	public static int defaultCloseDuration=7 * ProtoUtil.fps;
 	
-	private int closeDuration=0; // A Szoba zárva tartásának ideje
-
-    private boolean isOpen = true; // A Szoba állapota: nyitva vagy zárva
+	/**
+	 * A szoba zárva tartásának ideje.
+	 */
+	private int closeDuration=0;
 	
-    /**
-     * Konstruktor egy szoba létrehozásához.
-     */
-    public CursedRoom() {
-    	super();
-    }
-    
-    /**
-     * Konstruktor egy szoba létrehozásához.
-     * @param capacity kapacitás
-     */
-    public CursedRoom(int capacity) {
+	/**
+	 * A szoba állapota: nyitva vagy zárva.
+	 */
+	private boolean isOpen = true;
+	
+	/**
+	 * Konstruktor egy szoba létrehozásához.
+	 */
+	public CursedRoom() {
+		super();
+	}
+	
+	/**
+	 * Konstruktor egy szoba létrehozásához.
+	 * @param capacity kapacitás
+	 */
+	public CursedRoom(int capacity) {
 		super(capacity);
 	}
-    
-    /**
-     * Konstruktor egy szoba létrehozásához.
-     * @param neighbours a szoba szomszédai
-     * @param capacity kapacitás
-     */
-    public CursedRoom(List<Room> neighbours, int capacity) {
-    	super(neighbours, capacity);
-    }
-    
-    public boolean getIsOpen() {
-        return isOpen;
-    }
-
-	/**
-     * Beállítja az ajtók állapotát zártnak és inicializálja a closeDuration-t a definiált kezdőértékre.
-     */
-    public void hideDoors() {
-        ProtoUtil.printLog("hideDoors");
-        removeAllDoors();
-        setCloseDuration(defaultCloseDuration);
-    }
-    
-    private void setCloseDuration(int duration){
-    	closeDuration=duration;
-    	notifySubsribers("closeDuration");
-    }
-    
-    /**
-     * A szoba összes ajtaját eltávolítja.
-     */
-    public void removeAllDoors() {
-        ProtoUtil.printLog("removeAllDoors");
-        isOpen = false;
-        notifySubsribers("enteredcursedroom");
-    }
 	
-    /**
-     * Hozzáadja a paraméterként kapott karaktert a listához, majd három másodpercre eltünteti a szoba összes ajtaját (szomszédait),
-     * ha a szoba kapacitása ezt nem engedné meg, akkor Exceptiont dob.
-     * @param character A hozzáadandó karakter
-     * @throws Exception Ha a szoba kapacitása nem engedi meg a karakter hozzáadását
-     */
-    @Override
-    public void addCharacter(Character character) {
-        hideDoors();
-        super.addCharacter(character);
-        notifySubsribers("removedfromneighbours");
-    }
-    
-    /**
-     * Csökkenti a szoba zárva maradásának idejét.
-     */
-    public void reduceDuration() {
-        if (closeDuration > 0) {
-        	ProtoUtil.printLog("reduceDurationCursed");
-            setCloseDuration(closeDuration-1);
-            if (closeDuration == 0) {
-                isOpen = true;
-                ProtoUtil.printLog("bringbackDoors");
-            }
-        }
-    }
-    
-    /**
-     * Visszaadja a szoba szomszédos szobáit. Ha a szoba zárva van, üres listát ad vissza.
-     * @return A szomszédos szobák listája
-     */
-    @Override
-    public List<Room> getNeighbours() {
-        ProtoUtil.printLog("getNeighbours");
-        if (isOpen) {
-            ArrayList<Room> openNeighbours = new ArrayList<>();
-            for(Room r : new ArrayList<Room>(neighbours)) {
-                if(!((r instanceof CursedRoom) && !((CursedRoom) r).getIsOpen())) {
-                    openNeighbours.add(r);
-                }
-            }
-            return openNeighbours;
-        }
-        return new ArrayList<Room>();
-    }
-
-
-    
-    /**
-     * Meghívja a tárolt Character-ek és EnvironmentalFactorok update() metódusát 
-     * és csökkenti a szoba zárva maradásának idejét.
-     */
-    @Override
-    public void update() {
-        super.update();
-        if(!isOpen)
-        	reduceDuration();
-    }
+	/**
+	 * Konstruktor egy szoba létrehozásához.
+	 * @param neighbours a szoba szomszédai
+	 * @param capacity kapacitás
+	 */
+	public CursedRoom(List<Room> neighbours, int capacity) {
+		super(neighbours, capacity);
+	}
+	
+	/**
+	 * Visszaadja, hogy nyitva van-e a szoba.
+	 * @return nyitva van-e a szoba
+	 */
+	public boolean getIsOpen() {
+	    return isOpen;
+	}
+	
+	/**
+	 * Beállítja az ajtók állapotát zártnak és inicializálja a closeDuration-t a definiált kezdőértékre.
+	 */
+	public void hideDoors() {
+	    ProtoUtil.printLog("hideDoors");
+	    removeAllDoors();
+	    setCloseDuration(defaultCloseDuration);
+	}
+	
+	/**
+	 * Beállítja a szoba zárva tartási ideje.
+	 * @param duration a szoba zárva tartási ideje
+	 */
+	private void setCloseDuration(int duration){
+		closeDuration=duration;
+		notifySubsribers("closeDuration");
+	}
+	
+	/**
+	 * A szoba összes ajtaját eltávolítja.
+	 */
+	public void removeAllDoors() {
+	    ProtoUtil.printLog("removeAllDoors");
+	    isOpen = false;
+	    notifySubsribers("enteredcursedroom");
+	}
+	
+	/**
+	 * Hozzáadja a paraméterként kapott karaktert a listához, majd három másodpercre eltünteti a szoba összes ajtaját (szomszédait),
+	 * ha a szoba kapacitása ezt nem engedné meg, akkor Exceptiont dob.
+	 * @param character a hozzáadandó karakter
+	 * @throws Exception ha a szoba kapacitása nem engedi meg a karakter hozzáadását
+	 */
+	@Override
+	public void addCharacter(Character character) {
+	    hideDoors();
+	    super.addCharacter(character);
+	    notifySubsribers("removedfromneighbours");
+	}
+	
+	/**
+	 * Csökkenti a szoba zárva maradásának idejét.
+	 */
+	public void reduceDuration() {
+	    if (closeDuration > 0) {
+	    	ProtoUtil.printLog("reduceDurationCursed");
+	        setCloseDuration(closeDuration-1);
+	        if (closeDuration == 0) {
+	            isOpen = true;
+	            ProtoUtil.printLog("bringbackDoors");
+	        }
+	    }
+	}
+	
+	/**
+	 * Visszaadja a szoba szomszédos szobáit. Ha a szoba zárva van, üres listát ad vissza.
+	 * @return a szomszédos szobák listája
+	 */
+	@Override
+	public List<Room> getNeighbours() {
+	    ProtoUtil.printLog("getNeighbours");
+	    if (isOpen) {
+	        ArrayList<Room> openNeighbours = new ArrayList<>();
+	        for(Room r : new ArrayList<Room>(neighbours)) {
+	            if(!((r instanceof CursedRoom) && !((CursedRoom) r).getIsOpen())) {
+	                openNeighbours.add(r);
+	            }
+	        }
+	        return openNeighbours;
+	    }
+	    return new ArrayList<Room>();
+	}
+	
+	/**
+	 * Meghívja a tárolt Character-ek és EnvironmentalFactorok update() metódusát és csökkenti a szoba zárva maradásának idejét.
+	 */
+	@Override
+	public void update() {
+	    super.update();
+	    if(!isOpen)
+	    	reduceDuration();
+	}
 }

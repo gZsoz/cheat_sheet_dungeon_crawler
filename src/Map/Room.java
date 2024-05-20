@@ -23,31 +23,52 @@ import Character.Character;
  */
 public class Room implements iTask {
 	
+	/**
+	 * Ezzel a változóval állítható be a ProtoUtil-ban a szoba maximális kapacitása.
+	 */
 	public static int maxItemCapacity=6;
 	
-	/** A szoba változásaira feliratkozott osztályok*/
+	/**
+	 * A szoba változásaira feliratkozott osztályok.
+	 */
 	public List<Subscriber> subscribers = new ArrayList<Subscriber>();
 	
-	/** A szoba kapacitása */
+	/**
+	 * A szoba kapacitása.
+	 */
 	protected int capacity=1;
 	
-	/** A szomszéd szobák listája */
+	/**
+	 * A szomszéd szobák listája.
+	 */
 	public List<Room> neighbours = new ArrayList<Room>();
 	
-	/** A szobában található tárgyak listája */
+	/**
+	 * A szobában található tárgyak listája.
+	 */
 	protected List<Item> items = new ArrayList<Item>();
 	
-	/** A szobában található karakterek listája */
+	/**
+	 * A szobában található karakterek listája.
+	 */
 	protected List<Character> characters = new ArrayList<Character>();
 	
-	/** A szoba környezeti tényezőinek listája */
+	/**
+	 * A szoba környezeti tényezőinek listája.
+	 */
 	protected List<EnvironmentalFactors> envFactors = new ArrayList<EnvironmentalFactors>();
-	
 	
 	/**
 	 * Konstruktor egy szoba létrehozásához.
 	 */
-	public Room() {
+	public Room() {}
+	
+	/**
+	 * Konstruktor egy szoba létrehozásához.
+	 * @param capacity kapacitás
+	 */
+	public Room(int capacity) {
+		this.capacity = capacity;
 	}
 	
 	/**
@@ -61,17 +82,88 @@ public class Room implements iTask {
 	}
 	
 	/**
-	 * Konstruktor egy szoba létrehozásához.
-	 * @param capacity kapacitás
+	 * Visszaadja a szoba kapcitását.
+	 * @return A szoba kapacitása.
 	 */
-	public Room(int capacity) {
-		this.capacity = capacity;
+	public int getCapacity() {
+	    ProtoUtil.printLog("getCapacity");
+	    return capacity;
 	}
 	
 	/**
-	 * meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
-	 *  függvényüket a paraméterként kapott Stringgel
-	 * @param str
+	 * Beállítja a szoba kapcitását.
+	 * @param capacity a kapacitás
+	 */
+	public void setCapacity(int capacity) {
+	    ProtoUtil.printLog("setCapacity");
+	    this.capacity=capacity;
+	    notifySubsribers("capacity");
+	}
+	
+	/**
+	 * Visszaadja a szoba környezeti tényezőit.
+	 * @return a szoba környezeti tényezőinek listája
+	 */
+	public List<EnvironmentalFactors> getEnvironmentalFactors() {
+	    return envFactors;
+	}
+	
+	/**
+	 * Visszaadja, hogy éppen hányan vannak a szobában.
+	 * @return a szobában tartózkodó karakterek száma
+	 */
+	public int currentNumOfPlayers() {
+	    ProtoUtil.printLog("currentNumOfPlayers");
+	    return characters.size();
+	}
+	
+	/**
+	 * Visszaadja, hogy éppen hány tárgy van a szobában.
+	 * @return a szobában lévő tárgyak száma
+	 */
+	public int currentNumOfItems() {
+	    ProtoUtil.printLog("currentNumOfItems");
+	    return items.size();
+	}
+	
+	/**
+	 * Visszaadja a szobában található karaktereket.
+	 * @return a szobában található karakterek egy listában
+	 */
+	public List<Character> getCharacters() {
+	    ProtoUtil.printLog("getCharacters");
+	    return characters;
+	}
+	
+	/**
+	 * Visszaadja a szobában található tárgyakat.
+	 * @return a szobában található tárgyak egy listában
+	 */
+	public List<Item> getItems() {
+	    ProtoUtil.printLog("getItems");
+	    return items;
+	}
+	
+	/**
+	 * Visszaadja, a szoba szomszédait.
+	 * @return a szoba szomszédai egy listában
+	 */
+	public List<Room> getNeighbours() {
+	    ProtoUtil.printLog("getNeighbours");
+	    ArrayList<Room> openNeighbours = new ArrayList<>();
+	    for(Room r : new ArrayList<Room>(neighbours)) {
+	    	if(!((r instanceof CursedRoom) && r.getNeighbours().isEmpty()) && !r.neighbours.isEmpty()) {
+	    		openNeighbours.add(r);
+	    	}
+	    }
+	    return openNeighbours;
+	}
+	
+	/**
+	 * Meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
+	 * függvényüket a paraméterként kapott Stringgel.
+	 * @param str üzenet arról, hogy mi változott meg, lehetséges értékek:
+	 * "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx", "spawnfactor <factor pos>", "roomremoved", "enteredcursedroom"
 	 */
 	public void notifySubsribers(String str) {
 		for(Subscriber sub : new ArrayList<>(subscribers))
@@ -79,18 +171,18 @@ public class Room implements iTask {
 	}
 	
 	/**
-	 * hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához
-	 * ezzentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik
-	 * @param sub
+	 * Hozzáadja a paraméterként kapott Subscriber objektumot a feliratkózók listájához,
+	 * ezentúl a propertyChanged függvénye meghívásával jelzi, ha belső állapota megváltozik.
+	 * @param sub a feliratkozó View objektum
 	 */
 	public void subscribe(Subscriber sub) {
 		subscribers.add(sub);
 	}
 	
 	/**
-	 * eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából
-	 * ezzentúl nem kap értesítést, ha az osztály belső állapota megváltozik
-	 * @param sub
+	 * Eltávolítja a paraméterként kapott Subscriber objektumot a feliratkózók listájából,
+	 * ezentúl nem kap értesítést, ha az osztály belső állapota megváltozik.
+	 * @param sub a leiratkozó View objektum
 	 */
 	public void unsubscribe(Subscriber sub) {
 		subscribers.remove(sub);
@@ -142,19 +234,8 @@ public class Room implements iTask {
 	}
 	
 	/**
-	 * Eltávolítja a paraméterként kapott karaktert a szobából.
-	 * @param character Az eltávolítandó karakter
-	 */
-	public void removeCharacter(Character character) {
-	    ProtoUtil.printLog("removeCharacter");
-	    if (!characters.remove(character))
-	        System.out.println("Olyan karakterre lett meghívva a removeCharacter, ami nincs a listában!!!");
-	    notifySubsribers("characters");
-	}
-	
-	/**
 	 * Eltávolítja a paraméterként kapott tárgyat a szobából.
-	 * @param i Az eltávolítandó tárgy
+	 * @param i az eltávolítandó tárgy
 	 */
 	public void removeItem(Item i) {
 	    ProtoUtil.printLog("removeItem");
@@ -165,8 +246,19 @@ public class Room implements iTask {
 	}
 	
 	/**
+	 * Eltávolítja a paraméterként kapott karaktert a szobából.
+	 * @param character az eltávolítandó karakter
+	 */
+	public void removeCharacter(Character character) {
+	    ProtoUtil.printLog("removeCharacter");
+	    if (!characters.remove(character))
+	        System.out.println("Olyan karakterre lett meghívva a removeCharacter, ami nincs a listában!!!");
+	    notifySubsribers("characters");
+	}
+	
+	/**
 	 * Hozzáadja a paraméterként kapott szomszédos szobát a szoba szomszédok listájához.
-	 * @param r A hozzáadandó szomszédos szoba
+	 * @param r a hozzáadandó szomszédos szoba
 	 */
 	public void addNeighbour(Room r) {
 	    ProtoUtil.printLog("addNeighbour");
@@ -176,7 +268,7 @@ public class Room implements iTask {
 	
 	/**
 	 * Eltávolítja a paraméterként kapott szomszédos szobát a szoba szomszédok listájából.
-	 * @param r Az eltávolítandó szomszédos szoba
+	 * @param r az eltávolítandó szomszédos szoba
 	 */
 	public void removeNeighbour(Room r) {
 	    ProtoUtil.printLog("removeNeighbour");
@@ -186,7 +278,7 @@ public class Room implements iTask {
 	
 	/**
 	 * Hozzáadja a paraméterként kapott környezeti tényezőt a szobához.
-	 * @param ef A hozzáadandó környezeti tényező
+	 * @param ef a leteendő környezeti tényező
 	 */
 	public void spawnEnvironmentalFactor(EnvironmentalFactors ef) {
 	    ProtoUtil.printLog("addEnvironmentalFactor");
@@ -199,13 +291,13 @@ public class Room implements iTask {
 	    }
 	    if(temp!=null) removeEnvironmentalFactor(temp);
 	    envFactors.add(ef);
-    	notifySubsribers("spawnfactor "+(envFactors.size()-1));
+		notifySubsribers("spawnfactor "+(envFactors.size()-1));
 	    notifySubsribers("factors");
 	}
 	
 	/**
 	 * Hozzáadja a paraméterként kapott környezeti tényezőt a szobához.
-	 * @param ef A hozzáadandó környezeti tényező
+	 * @param ef a hozzáadandó környezeti tényező
 	 */
 	public void addEnvironmentalFactor(EnvironmentalFactors ef) {
 	    ProtoUtil.printLog("addEnvironmentalFactor");
@@ -223,7 +315,7 @@ public class Room implements iTask {
 	
 	/**
 	 * Eltávolítja a paraméterként kapott környezeti tényezőt a szobához.
-	 * @param ef Az eltávolítandó környezeti tényező
+	 * @param ef az eltávolítandó környezeti tényező
 	 */
 	public void removeEnvironmentalFactor(EnvironmentalFactors ef) {
 	    ef.notifySubsribers("factorremoved");
@@ -232,34 +324,8 @@ public class Room implements iTask {
 	}
 	
 	/**
-	 * Visszaadja a szoba környezeti tényezőit.
-	 * @return A szoba környezeti tényezőinek listája
-	 */
-	public List<EnvironmentalFactors> getEnvironmentalFactors() {
-	    return envFactors;
-	}
-	
-	/**
-	 * Visszaadja, hogy éppen hányan vannak a szobában.
-	 * @return A szobában tartózkodó karakterek száma.
-	 */
-	public int currentNumOfPlayers() {
-	    ProtoUtil.printLog("currentNumOfPlayers");
-	    return characters.size();
-	}
-	
-	/**
-	 * Visszaadja, hogy éppen hány tárgy van a szobában.
-	 * @return A szobában lévő tárgyak száma.
-	 */
-	public int currentNumOfItems() {
-	    ProtoUtil.printLog("currentNumOfItems");
-	    return items.size();
-	}
-	
-	/**
 	 * Összeolvasztja a paraméterként kapott szobát a jelenlegivel.
-	 * @param r Az összeolvasztandó szoba.
+	 * @param r az összeolvasztandó szoba
 	 */
 	public void merge(Room r) {
 	    ProtoUtil.printLog("merge");
@@ -270,8 +336,6 @@ public class Room implements iTask {
 	        }
 	        current.removeNeighbour(r);
 	    }
-	    //this.removeNeighbour(r);
-	    //r.removeNeighbour(this);
 	    for (EnvironmentalFactors env : new ArrayList<>(r.getEnvironmentalFactors())) {
 	    	addEnvironmentalFactor(env);
 	    }
@@ -291,76 +355,28 @@ public class Room implements iTask {
 	    	}
 	    }
 	}
-
+	
 	/**
-	 * Visszaadja, a szoba szomszédait.
-	 * @return A szoba szomszédai egy listában.
+	 * Lerakja a paraméterként kapott tárgyat a szobába.
+	 * @param i a lerakandó tárgy
 	 */
-	public List<Room> getNeighbours() {
-	    ProtoUtil.printLog("getNeighbours");
-	    ArrayList<Room> openNeighbours = new ArrayList<>();
-	    for(Room r : new ArrayList<Room>(neighbours)) {
-	    	if(!((r instanceof CursedRoom) && r.getNeighbours().isEmpty()) && !r.neighbours.isEmpty()) {
-	    		openNeighbours.add(r);
-	    	}
+	public void spawnItem(Item i) {
+	    ProtoUtil.printLog("spawnItem");
+	    if(items.size()<maxItemCapacity) {
+	    	items.add(i);
+	    	notifySubsribers("spawnitem "+(items.size()-1));
 	    }
-	    return openNeighbours;
-	}
-	
-    /**
-     * Lerakja a paraméterként kapott tárgyat a szobába.
-     * @param a A lerakandó tárgy.
-     */
-    public void spawnItem(Item a) {
-        ProtoUtil.printLog("spawnItem");
-        if(items.size()<maxItemCapacity) {
-        	items.add(a);
-        	notifySubsribers("spawnitem "+(items.size()-1));
-        }
-    }
-	
-	/**
-	 * Visszaadja, a szoba kapcitását.
-	 * @return A szoba kapacitása.
-	 */
-	public int getCapacity() {
-	    ProtoUtil.printLog("getCapacity");
-	    return capacity;
-	}
-	
-	public void setCapacity(int capacity) {
-	    ProtoUtil.printLog("setCapacity");
-	    this.capacity=capacity;
-	    notifySubsribers("capacity");
-	}
-	
-	/**
-	 * Visszaadja, a szobában található karaktereket.
-	 * @return A szobában található karakterek egy listában.
-	 */
-	public List<Character> getCharacters() {
-	    ProtoUtil.printLog("getCharacters");
-	    return characters;
-	}
-	
-	/**
-	 * Visszaadja, a szobában található tárgyakat.
-	 * @return A szobában található tárgyak egy listában.
-	 */
-	public List<Item> getItems() {
-	    ProtoUtil.printLog("getItems");
-	    return items;
 	}
 	
 	/**
 	 * Meghívja a tárolt Character-ek és EnvironmentalFactorok update() metódusát.
 	 */
-	    @Override
-	    public void update() {
-	        for(Character character: new ArrayList<Character>(characters)){
-	            character.update();
-	        }
-	        for (EnvironmentalFactors env : envFactors)
-	            env.update();
+	@Override
+	public void update() {
+	    for(Character character: new ArrayList<Character>(characters)){
+	        character.update();
 	    }
+	    for (EnvironmentalFactors env : envFactors)
+	        env.update();
 	}
+}

@@ -369,6 +369,4 @@ public class ProtoUtil {
             timer.start();
     	}
     }
-
-
 }
