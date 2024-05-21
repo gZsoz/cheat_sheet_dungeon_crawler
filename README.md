@@ -20,9 +20,9 @@ cd cheat_sheet_dungeon_crawler\src
 ## Fordítás és futtatás
 A program osztályait le kell fordítani, majd ez után futtatható lesz:
 ```bash
-javac Character\*.java EnvironmentalFactor\*.java Items\*.java Map\*.java SkeletonUtil\SkeletonUtil.java
+javac Character\*.java EnvironmentalFactor\*.java Items\*.java Map\*.java Time\*.java View\Controller\*.java View\Utils\*.java View\ViewCharacter\*.java View\ViewEnvironmentalFactor\*.java View\ViewItem\*.java View\ViewMap\*.java Main\Main.java
 
-java SkeletonUtil.SkeletonUtil
+java Main.Main
 ```
 
 ## Közreműködők
