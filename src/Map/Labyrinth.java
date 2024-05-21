@@ -352,8 +352,8 @@ public class Labyrinth implements iTask {
 	public void generateRooms(Student blue, Student red) {
 		ProtoUtil.printLog("generateRooms");
 		
-		// szobák legenerálása (6-8 darab, köztük 1-2 elátkozott, mindegyik 2-4 fős)
-		int numOfRooms = ProtoUtil.random.nextInt(3, 1) + 6;
+		// szobák legenerálása (7-8 darab, köztük 1-2 elátkozott, mindegyik 2-4 fős)
+		int numOfRooms = ProtoUtil.random.nextInt(2, 1) + 7;
 		int numOfCursedRooms = ProtoUtil.random.nextInt(2, 0) + 1;
 		ArrayList<Room> allRooms = new ArrayList<>();
 		for(int i = 0; i < numOfCursedRooms; i++) {

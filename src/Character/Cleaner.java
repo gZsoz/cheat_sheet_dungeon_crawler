@@ -118,6 +118,14 @@ public class Cleaner extends Character {
 				}
 			}
 		}
+		for(int i=0;i<currentRoom.getNeighbours().size();i++) {
+			for(EnvironmentalFactors factor : currentRoom.getNeighbours().get(i).getEnvironmentalFactors()) {
+				if(factor instanceof Sticky && ((Sticky)factor).getRemainingEntries() <= 0){
+					neighbourWithGas=i;
+					return;
+				}
+			}
+		}
 		neighbourWithGas=Integer.MAX_VALUE;
 	}
 	
