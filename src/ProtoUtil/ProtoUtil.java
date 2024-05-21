@@ -1,5 +1,10 @@
 package ProtoUtil;
 
+import java.awt.EventQueue;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,49 +17,69 @@ import java.util.Scanner;
 
 import javax.swing.Timer;
 
+import Character.Character;
+import Character.Cleaner;
+import Character.Student;
+import Character.Teacher;
+import EnvironmentalFactor.Sticky;
+import Items.AirFreshener;
+import Items.BatSkin;
+import Items.CabbageCamembert;
+import Items.DecayingItems;
 import Map.CursedRoom;
 import Map.Labyrinth;
 import View.Controller.PlayerController;
 import View.Utils.GameFrame;
 import View.Utils.SelectionColor;
 import View.ViewMap.ViewLabyrinth;
-import Character.Character;
-import Character.Cleaner;
-import Character.Student;
-import Character.Teacher;
-import EnvironmentalFactor.Gas;
-import EnvironmentalFactor.Sticky;
-import Items.AirFreshener;
-import Items.BatSkin;
-import Items.CabbageCamembert;
-import Items.DecayingItems;
-import Items.FakeBatSkin;
-import Items.Mask;
-import Items.Transistor;
-
-import java.awt.EventQueue;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
 /**
  * A ProtoUtil osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
  */
 public class ProtoUtil {
+	/**
+	 * A konzol szövegszínének default-ra állítása.
+	 */
 	private static final String RESET = "\033[0m";  // Text Reset
+	
+    /**
+     * A konzol szövegszínének pirosra állítása.
+     */
     private static final String RED = "\033[0;31m";     // RED
+    
+    /**
+     * A konzol szövegszínének zöldre állítása.
+     */
     private static final String GREEN = "\033[0;32m";   // GREEN
+    
+	/**
+	 * A tesztmappa neve.
+	 */
 	private static final String dirName = "test/";
+	
+    /**
+     * A stream, ahova logolunk.
+     */
     private static PrintStream logOutput = null;
 
+    /**
+     * Saját random objektum, amin int számokat generálunk.
+     */
     public static MyRandom random;
+    
+    /**
+     * A Swing időzítője, ami lépteti a programot.
+     */
     public static Timer timer;
+    
+    /**
+     * Frames per second, a másodpercenként kapott képszám a játék során.
+     */
     public static int fps = 24;
     
     /**
      * A beállított OutputStreambe írja az a tesztprogram logokat.
-     * @param question A kérdés
+     * @param question a kérdés
      */
     public static void printLog(String str) {
     	if(logOutput!=null)
@@ -63,8 +88,8 @@ public class ProtoUtil {
     
     /**
      * Bináris kérdést tesz fel a felhasználónak.
-     * @param question A kérdés
-     * @return A felhasználó válasza
+     * @param question a kérdés
+     * @return a felhasználó válasza
      */
     public static boolean binaryQuestion(String question) {
         int choice;
@@ -87,9 +112,9 @@ public class ProtoUtil {
 
     /**
      * Általános kérdést tesz fel a felhasználónak.
-     * @param question A kérdés
-     * @param opt A válaszlehetőségek tömbje
-     * @return A felhasználó válasza
+     * @param question a kérdés
+     * @param opt a válaszlehetőségek tömbje
+     * @return a felhasználó válasza
      */    
     public static int question(String question, String[] opt) {
         int choice;
@@ -114,8 +139,8 @@ public class ProtoUtil {
 
     /**
      * Teszt futtatása bemenetről és kimenetre.
-     * @param input A bemeneti adatfolyam
-     * @param output A kimeneti adatfolyam
+     * @param input a bemeneti adatfolyam
+     * @param output a kimeneti adatfolyam
      */
     public static void runTest(InputStream input, OutputStream output) {
     	Scanner sc = new Scanner(input);
@@ -141,9 +166,9 @@ public class ProtoUtil {
     
     /**
      * Teszt kiértékelése az elvárt kimenettel.
-     * @param output A teszt kimenete
-     * @param expected Az elvárt kimenet
-     * @return Igaz, ha a teszt sikeresen kiértékelhető, különben hamis
+     * @param output a teszt kimenete
+     * @param expected az elvárt kimenet
+     * @return igaz, ha a teszt sikeresen kiértékelhető, különben hamis
      */
 	private static boolean evaluateTest(InputStream output, InputStream expected) {
 		Scanner scanner = new Scanner( output );
@@ -159,7 +184,7 @@ public class ProtoUtil {
 	
     /**
      * Tesztfájlok neveinek lekérdezése.
-     * @return A tesztfájlok neveinek listája
+     * @return a tesztfájlok neveinek listája
      */
 	private static ArrayList<String> getTestNames() {
 		File folder = new File(dirName+"input");
@@ -178,7 +203,7 @@ public class ProtoUtil {
 	
     /**
      * Teszt futtatása név alapján.
-     * @param name A teszt neve
+     * @param name a teszt neve
      */
 	private static void runTestFromName(String name) {
 		try {
@@ -199,8 +224,8 @@ public class ProtoUtil {
 	
     /**
      * Teszt kiértékelése név alapján.
-     * @param name A teszt neve
-     * @return Igaz, ha a teszt sikeresen kiértékelhető, különben hamis
+     * @param name a teszt neve
+     * @return igaz, ha a teszt sikeresen kiértékelhető, különben hamis
      */
 	private static boolean evaluateTestFromName(String name) {
 		boolean result=false;
@@ -217,6 +242,10 @@ public class ProtoUtil {
 		return result;
 	}
 	
+	/**
+	 * Teszt módban induló függvény.
+	 * @param args ha "all", akkor az összes teszteset lefut
+	 */
 	private static void test(String[] args) {
     	Character.restTime=10;
     	Character.stunTime=4;
@@ -244,9 +273,9 @@ public class ProtoUtil {
     			System.out.println(RED+"\nEgy vagy több teszt hibás eredményt adott!"+RESET);
         	return;
     	}
-        boolean quit=false; // Kilépési feltétel
+        boolean quit = false; // Kilépési feltétel
         do {
-            String[] opt={
+            String[] opt = {
                     "Saját teszt futtatása konzolról",
                     "Teszt futtatása fájlból",
                     "Összes teszt futtatása",
@@ -296,6 +325,9 @@ public class ProtoUtil {
         } while(!quit);
 	}
     
+	/**
+	 * A játék időzítőjeinek beállítása az fps-nek megfelelően.
+	 */
 	private static void multiplyTimingsWithFps() {
 		Character.restTime *= fps;
     	Character.stunTime *= fps;
@@ -311,8 +343,8 @@ public class ProtoUtil {
 	
     /**
      * A program belépési pontja.
-     * @param args A program argumentumai
-     * @throws FileNotFoundException Ha a naplófájl nem található
+     * @param args a program argumentumai
+     * @throws FileNotFoundException ha a naplófájl nem található
      */
     public static void main(String[] args) throws FileNotFoundException {
     	if(args.length>0 && args[0].equals("test")) {

@@ -149,7 +149,7 @@ public class Labyrinth implements iTask {
 	}
 	
 	/**
-	 * Egy szoba kettéosztása a labirintusban a tesztprogramhoz determisztikus
+	 * Egy szoba kettéosztása a labirintusban a tesztprogramhoz determisztikus.
 	 * @param r a szétosztandó szoba
 	 */
 	public void splitRoomTest(Room old, int neighbourcnt, int itemcnt, int charactercnt) {

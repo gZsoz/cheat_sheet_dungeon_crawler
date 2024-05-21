@@ -31,7 +31,7 @@ import Character.Cleaner;
 public class TestCommand {
 	String command;
 	String[] parameters;
-
+	
 	/**
 	 * Konstruktor a tesztparancsok inicializálásához.
 	 */
@@ -40,14 +40,17 @@ public class TestCommand {
 	/**
 	 * Konstruktor a tesztparancsok inicializálásához.
 	 * 
-	 * @param command A parancs neve.
-	 * @param parameters A parancs paraméterei.
+	 * @param command a parancs neve
+	 * @param parameters a parancs paraméterei
 	 */
 	public TestCommand(String command, String[] parameters) {
 		this.command = command;
 		this.parameters = parameters;
 	}
 	
+	/**
+	 * Az összes lehetséges parancsot és funkcióját kiírja a konzolra.
+	 */
 	private void help() {
 		System.out.println("Create_Room <capacity> <type> [<neighbors>]\n"
 				+ "    Új szobát vagy elátkozott szobát hoz létre, opcionálisan megadva a szomszédos szobákat.\n"
@@ -86,25 +89,25 @@ public class TestCommand {
 				+ "    A parancs, melynek segítségével kiléphetsz konzolról teszteléskor."
 				);
 	}
-
+	
 	/**
 	 * Beolvassa a tesztparancsot a megadott sorból.
 	 * 
-	 * @param line A beolvasandó sor.
+	 * @param line a beolvasandó sor
 	 */
 	public void readTestCommand(String line) {
 		String[] temp = (line.split(" "));
 		parameters = Arrays.copyOfRange(temp, 1, temp.length);
 		command = temp[0];
 	}
-	// visszatér false értékkel, ha quit
+	
 	/**
 	 * Végrehajtja a megadott tesztparancsot a labirintuson, karaktereken és tárgyakon.
 	 * 
-	 * @param l A labirintus, amelyen a műveletek végrehajtódnak.
-	 * @param characters A karakterek listája, amelyen a műveletek végrehajtódnak.
-	 * @param actorArr A cselekvő karakter tömbje.
-	 * @return Visszatérési érték igaz, ha a művelet sikeresen lefutott, különben hamis.
+	 * @param l a labirintus, amelyen a műveletek végrehajtódnak
+	 * @param characters a karakterek listája, amelyen a műveletek végrehajtódnak
+	 * @param actorArr a cselekvő karakter tömbje
+	 * @return visszatérési érték igaz, ha a művelet sikeresen lefutott, különben hamis
 	 */
 	public boolean runCommand(Labyrinth l, ArrayList<Character> characters, ArrayList<Character> actorArr) {
 		Character actor=actorArr.get(0);
