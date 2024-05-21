@@ -3,6 +3,7 @@ package View.ViewItem;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 import Items.Item;
 import Items.NumberOfUsesItem;
 import View.Utils.Coordinates;
@@ -11,15 +12,27 @@ import View.Utils.Size;
 /**
  * A különböző valahányszor használható tárgyak grafikus osztályának az ősosztálya.
  */
+@SuppressWarnings("serial")
 public abstract class ViewNumberOfUsesItem extends ViewItem {
 	
-	protected Coordinates[] fixedDotPositions=new Coordinates[3];
-
+	/**
+	 * A hátralévő használati lehetőségek számát jelző pöttyök koordinátái.
+	 */
+	protected Coordinates[] fixedDotPositions = new Coordinates[3];
+	
+	/**
+	 * Konstruktor egy valahányszor használható tárgy nézet létrehozásához.
+	 * @param item a modellbeli valahányszor használható tárgy
+	 * @param coor a koordináták
+	 */
 	public ViewNumberOfUsesItem(Item item, Coordinates coor) {
 		super(item, coor);
 		setFixedDotPositions();
 	}
 	
+	/**
+	 * A hátralévő használati lehetőségek számát jelző pöttyök pozícióinak kiszámítása.
+	 */
 	private void setFixedDotPositions() {
 		int remaininguses = ((NumberOfUsesItem) item).getRemainingUses();
 		if(remaininguses != 0){
@@ -34,24 +47,28 @@ public abstract class ViewNumberOfUsesItem extends ViewItem {
 		}
 	}
 	
+	/**
+	 * Beállítja a hátralévő használati lehetőségek számát jelző pöttyök helyét.
+	 */
 	@Override
 	public void setItemSize(Size size) {
 		super.setItemSize(size);
 		setFixedDotPositions();
 	}
 	
+	/**
+	 * A következőkről kap értesítést: a hátralévő használati lehetőségek száma változott.
+	 */
 	@Override
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
-		if(property.equals("remaininguses"))
+		if(property.equals("remaininguses")) // küldő: NumberOfUsesItem
 			setFixedDotPositions();
 	}
 	
-	@Override
-	public void setCoordinates(Coordinates coordinates) {
-		super.setCoordinates(coordinates);
-	}
-	
+	/**
+	 * A különböző valahányszor használható tárgyak kirajzolása.
+	 */
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);

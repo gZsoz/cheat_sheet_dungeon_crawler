@@ -5,7 +5,7 @@ import ProtoUtil.ProtoUtil;
 /**
  * Az osztály egy maszk tárgyat reprezentál a játékban.
  */
-public class Mask extends DecayingItems {
+public class Mask extends DecayingItem {
 	
 	/**
 	 * A tárgy felvételekor végrehajtott műveletek.

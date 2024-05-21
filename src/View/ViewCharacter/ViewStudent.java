@@ -2,7 +2,6 @@ package View.ViewCharacter;
 
 import Character.Student;
 import Character.Character;
-import View.Controller.Containers;
 import View.Controller.PlayerController;
 import View.Utils.*;
 import View.ViewItem.ViewItem;
@@ -55,10 +54,10 @@ public class ViewStudent extends ViewCharacter {
 	@Override
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
-		if(property.equals("kicked")) {
+		if(property.equals("kicked")) { // küldő: Teacher
 			character.unsubscribe(this);
 		}
-		else if(property.equals("stun")){
+		else if(property.equals("stun")){ // küldő:
 			if(character.isStunned()){
 				if(color == SelectionColor.Red){
 					image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_red_stunned.png");
@@ -80,10 +79,8 @@ public class ViewStudent extends ViewCharacter {
 
 	@Override
 	public void paint(Graphics g) {
-		super.paint(g);
 		Graphics2D g2D = (Graphics2D) g;
-
-		g2D.drawImage(image, coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
-
+		super.paint(g);
+		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
 	}
 }

@@ -6,7 +6,7 @@ import ProtoUtil.ProtoUtil;
 /**
  * Az osztály a Beer tárgy reprezentálására szolgál.
  */
-public class Beer extends DecayingItems {
+public class Beer extends DecayingItem {
 	
 	/**
 	 * Lerakat egy tárgyat a karakterrel, amely felveszi a sört.

@@ -142,7 +142,6 @@ public class Labyrinth implements iTask {
 			result.setCapacity(bigger);
 			result.merge(merging);
 			this.removeRoom(merging);
-			//merging.getNeighbours().clear();
 			merging.notifySubsribers("roomremoved");
 			notifySubsribers("neighboursmodified");
 		}
@@ -402,7 +401,7 @@ public class Labyrinth implements iTask {
 	    }
 	
 		
-		// tárgyak legenerálása (0, 1, ..., 6 db minden szobába)
+		// tárgyak legenerálása (0, 1, ..., maxItemCapacity db minden szobába)
 		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 0));
 		roomWithSlideRule.addItem(new SlideRule()); // logarléc betétele egy random szobába
 		

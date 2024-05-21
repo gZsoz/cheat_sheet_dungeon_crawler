@@ -1,22 +1,21 @@
 package View.ViewEnvironmentalFactor;
 
-import View.Controller.Containers;
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.JComponent;
+
+import EnvironmentalFactor.EnvironmentalFactors;
+import View.Utils.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
-import View.Utils.ImageReader;
 import View.Utils.Size;
 import View.Utils.Subscriber;
 
-import javax.swing.*;
-
-import EnvironmentalFactor.EnvironmentalFactors;
-import EnvironmentalFactor.Gas;
-
-import java.awt.*;
-
 /**
- * A környezeti változók grafikus osztályának ősosztálya.
+ * A környezeti változók grafikus osztályainak ősosztálya.
  */
+@SuppressWarnings("serial")
 public abstract class ViewEnvironmentalFactors extends JComponent implements Subscriber {
 	
 	/**
@@ -24,6 +23,9 @@ public abstract class ViewEnvironmentalFactors extends JComponent implements Sub
 	 */
 	protected EnvironmentalFactors environmentalFactor;
 	
+	/**
+	 * A környezeti változók képeinek elérési útja.
+	 */
 	protected final String envFactorsPath = "Envfactors/"; 
 	
 	/**
@@ -41,22 +43,34 @@ public abstract class ViewEnvironmentalFactors extends JComponent implements Sub
 	 */
 	protected Coordinates coordinates;
 	
+	/**
+	 * Konstruktor egy környezeti változó nézet létrehozásához.
+	 * @param environmentalFactor a modellbeli környezeti változó
+	 * @param c a koordináták
+	 */
 	public ViewEnvironmentalFactors(EnvironmentalFactors environmentalFactor, Coordinates c) {
 		this.environmentalFactor = environmentalFactor;
 		this.environmentalFactor.subscribe(this);
 		size = new Size(360+30,	250);
 		coordinates=c;
 		GameFrame.mainPanel.add(this);
-    	GameFrame.viewEnvs.add(this);
-    	Containers.envs.put(this.environmentalFactor, this);
+		GameFrame.viewEnvs.add(this);
+		Containers.envs.put(this.environmentalFactor, this);
 	}
 	
+	/**
+	 * A koordináták beállítása.
+	 * @param coordinates a koordináták
+	 */
 	public void setCoordinates(Coordinates coordinates) {
 		this.coordinates=coordinates;
 	}
 	
+	/**
+	 * A következőkről kap értesítést: a környezeti változót eltávolították a modellből.
+	 */
 	public void propertyChanged(String property) {
-		if(property.equals("factorremoved")) {
+		if(property.equals("factorremoved")) { // küldő: Room
 			Containers.envs.remove(environmentalFactor);
 			GameFrame.viewEnvs.remove(this);
 			GameFrame.mainPanel.remove(this);

@@ -1,7 +1,7 @@
 package View.ViewCharacter;
 
 import Character.Cleaner;
-import View.Controller.Containers;
+import View.Utils.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;

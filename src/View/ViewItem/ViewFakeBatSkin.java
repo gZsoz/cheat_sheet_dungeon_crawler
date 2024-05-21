@@ -1,24 +1,28 @@
 package View.ViewItem;
 
 import Items.FakeBatSkin;
-import View.Controller.Containers;
 import View.Utils.Coordinates;
-import View.Utils.GameFrame;
 import View.Utils.ImageReader;
-import View.Utils.Size;
-
-import java.awt.*;
 
 /**
  * A hamis denevérbőr kirajzolásáért felelős.
  */
+@SuppressWarnings("serial")
 public class ViewFakeBatSkin extends ViewBatSkin {
 	
+	/**
+	 * Konstruktor egy hamis denevérbőr nézet létrehozásához.
+	 * @param fbs a modellbeli hamis denevérbőr
+	 * @param coor a koordináták
+	 */
 	public ViewFakeBatSkin(FakeBatSkin fbs, Coordinates coor) {
 		super(fbs, coor);
 		image=ImageReader.loadImage(ImageReader.path+itemsPath+"batskin.png");
 	}
 	
+	/**
+	 * A denevérbőr képének beállítása attól függően, hogy hamis-e.
+	 */
 	@Override
 	public void setItemImage() {
 		if(this.size.equals(ViewItem.inventorySize)) {

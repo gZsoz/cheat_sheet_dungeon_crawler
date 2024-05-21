@@ -1,26 +1,30 @@
 package View.ViewMap;
 
-import Map.CursedRoom;
-import Map.Labyrinth;
-import Map.Room;
-import ProtoUtil.MyRandom;
-import ProtoUtil.ProtoUtil;
-import View.Controller.Containers;
-import View.Utils.Coordinates;
-import View.Utils.GameFrame;
-import View.Utils.ImageReader;
-import View.Utils.Size;
-import View.Utils.Subscriber;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import javax.swing.JComponent;
+
+import Map.CursedRoom;
+import Map.Labyrinth;
+import Map.Room;
+import ProtoUtil.ProtoUtil;
+import View.Utils.Containers;
+import View.Utils.Coordinates;
+import View.Utils.GameFrame;
+import View.Utils.ImageReader;
+import View.Utils.Subscriber;
+
 /**
  * A labirintus grafikus osztálya.
  */
+@SuppressWarnings("serial")
 public class ViewLabyrinth extends JComponent implements Subscriber {
 	
 	/**
@@ -32,32 +36,16 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	 * A labirintus hátterének megjelenítendő képe.
 	 */
 	private Image background;
-
+	
+	/**
+	 * A labirintus szobáihoz tartozó pin-ek képe.
+	 */
 	private Image pinImage;
-	
-	/**
-	 * A labirintus háttérképének mérete.
-	 */
-	private Size size;
-	
-	/**
-	 * A képernyőn megjelenítendő x és y koordináták.
-	 */
-	private Coordinates coordinates;
 	
 	/**
 	 * A fixedRoomPositions tömbbel azonos indexü tagja 1, ha van ott szoba. 0, ha nincs.
 	 */
 	private int roomsInPosition [] = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	
-	private int kickedStudents = 0;
-	
-	public void printRoomsInPosition() {
-		for(int i : roomsInPosition)
-			System.out.print(i+" ");
-		System.out.println();
-		
-	}
 	
 	/**
 	 * Az összes lehetséges szoba pozíciója
@@ -68,18 +56,30 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 				new Coordinates(322,620), new Coordinates(722,556), new Coordinates(1132,620)
 	));
 	
+	/**
+	 * Ennyi diákot rúgott ki a tanár.
+	 */
+	private int kickedStudents = 0;
+	
+	/**
+	 * Nyertek a diákok.
+	 */
 	private boolean gameWon = false;
+	
+	/**
+	 * Vesztettek a diákok.
+	 */
 	private boolean gameLost = false;
-
+	
+	/**
+	 * Konstruktor egy labirintus nézrt létrehozásához.
+	 * @param lab a modellbeli labirintus
+	 */
 	public ViewLabyrinth(Labyrinth lab){
 		labyrinth = lab;
 		this.setBackground(null);
-		pinImage = ImageReader.loadImage("res/images/room/pin.png");
+		pinImage = ImageReader.loadImage("res/images/Rooms/pin.png");
 		lab.subscribe(this);
-	}
-	
-	public Labyrinth getLabyrinth() {
-		return labyrinth;
 	}
 	
 	/**
@@ -103,20 +103,23 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	}
 	
 	/**
-	 * A labirintus háttere és a szobák közti utak kirajzolása.
+	 * A modellbeli labirintus lekérdezése.
+	 * @return a modellbeli labirintus
 	 */
-	/*
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-	    //for(ViewRoom vroom : roomsInLabyrinth){
-		//	vroom.paint(g);
-		//}
-	}*/
+	public Labyrinth getLabyrinth() {
+		return labyrinth;
+	}
 	
+	/**
+	 * A következőkről kap értesítést:
+	 * szobaösszeolvasztás történt,
+	 * szobaszétválasztás történt,
+	 * a diákok megnyerték a játékot,
+	 * a diákok elvesztették a játékot
+	 */
 	@Override
 	public void propertyChanged(String property) {
-		if(property.contains("merge")) {
+		if(property.contains("merge")) { // küldő: Labyrinth
 			int idx=Integer.parseInt(property.split(" ")[2]);
 			ViewRoom vr = Containers.rooms.get(labyrinth.getRooms().get(idx));
 			for(int i=0;i<fixedRoomPositions.size();i++) {
@@ -125,7 +128,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 					break;
 				}
 			}
-		}else if(property.contains("split")) {
+		}else if(property.contains("split")) { // küldő: Labyrinth
 			int idx=Integer.parseInt(property.split(" ")[1])+1;
 			int posidx=-1;
 			for(int i=0;i<roomsInPosition.length;i++) {
@@ -142,17 +145,20 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 			else if(room instanceof Room){
 				new ViewRoom( (Room) room, fixedRoomPositions.get(posidx));
 			}
-		}else if(property.equals("gamewon")){
+		}else if(property.equals("gamewon")){ // küldő: PlayerController
 			gameWon = true;
-		}else if(property.equals("gamelost")) {
+		}else if(property.equals("gamelost")) { // küldő: PlayerController
 			kickedStudents += 1;
 			if(kickedStudents >= 2)
 				gameLost = true;
 		}
 	}
-
+	
+	/**
+	 * A szobák szomszédosságát jelző vonalak kirajzolása.
+	 * @param g2D a Graphics2D, amire rajzolunk
+	 */
 	public void paintRoutes(Graphics2D g2D) {
-
 		// legközelebbi pin kiszámolása
 		for(ViewRoom vroom : GameFrame.viewRooms){
 			for(Room neighbour : vroom.getRoom().getNeighbours()){
@@ -179,14 +185,16 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 			}
 		}
 	}
-
+	
+	/**
+	 * A labirintus útjainak kirajzolása, játék vége esetén a végső kép kirajzolása és a timer megállítása.
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D)g;
-
 		paintRoutes(g2D);
-
+	
 		if(gameWon || gameLost){
 			if(gameWon){
 				g2D.drawImage(ImageReader.loadImage(ImageReader.path+"wonscreen.png"),0,0,1820,980,null);
@@ -195,8 +203,5 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 			}
 			ProtoUtil.timer.stop();
 		}
-		
 	}
-
-
 }

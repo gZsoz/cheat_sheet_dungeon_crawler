@@ -1,7 +1,7 @@
 package View.ViewEnvironmentalFactor;
 
 import EnvironmentalFactor.Gas;
-import View.Controller.Containers;
+import View.Utils.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -12,20 +12,26 @@ import java.awt.*;
 /**
  * A gáz grafikus osztálya.
  */
+@SuppressWarnings("serial")
 public class ViewGas extends ViewEnvironmentalFactors {
 	
+	/**
+	 * Konstruktor egy gáz nézet létrehozásához.
+	 * @param gas a modellbeli gáz
+	 * @param c a koordináták
+	 */
 	public ViewGas(Gas gas, Coordinates c){
 		super(gas,c);
 		image = ImageReader.loadImage(ImageReader.path+envFactorsPath+"gas.png");
 	}
-
+	
 	@Override
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
 	}
 	
 	/**
-	 * Gáz kirajzolása.
+	 * A gáz kirajzolása.
 	 */
 	@Override
 	public void paint(Graphics g) {

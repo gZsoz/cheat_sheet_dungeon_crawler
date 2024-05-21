@@ -1,18 +1,20 @@
 package View.ViewItem;
 
 import Items.Beer;
-import View.Controller.Containers;
 import View.Utils.Coordinates;
-import View.Utils.GameFrame;
 import View.Utils.ImageReader;
-
-import java.awt.*;
 
 /**
  * A sör kirajzolásáért felelős.
  */
+@SuppressWarnings("serial")
 public class ViewBeer extends ViewDecayingItem {
 	
+	/**
+	 * Konstruktor egy sör nézet létrehozásához.
+	 * @param beer a modellbeli sör
+	 * @param coor a koordináták
+	 */
 	public ViewBeer(Beer beer, Coordinates coor) {
 		super(beer, coor);
 		image=ImageReader.loadImage(ImageReader.path+itemsPath+"beer.png");

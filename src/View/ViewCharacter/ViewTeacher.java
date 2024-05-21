@@ -2,7 +2,7 @@ package View.ViewCharacter;
 
 import Character.Character;
 import Character.Teacher;
-import View.Controller.Containers;
+import View.Utils.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
@@ -27,7 +27,7 @@ public class ViewTeacher extends ViewCharacter {
 	@Override
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
-		if(property.equals("stun") || property.equals("angry")){
+		if(property.equals("stun") || property.equals("angry")){ // küldő: Teacher
 			if(character.isStunned()){
 				if(((Teacher)character).isAngry())
 					image = ImageReader.loadImage(ImageReader.path+charactersPath+"teacher_stunned_and_angry.png");

@@ -1,24 +1,64 @@
 package View.ViewMap;
 
-import Items.*;
-import Map.Room;
-import View.Controller.Containers;
-import View.Utils.*;
-import View.ViewCharacter.*;
-import View.ViewEnvironmentalFactor.*;
-import View.ViewItem.*;
-import Character.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+
+import javax.swing.JComponent;
+
 import Character.Character;
-import EnvironmentalFactor.*;
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
+import Character.Cleaner;
+import Character.Student;
+import Character.Teacher;
+import EnvironmentalFactor.EnvironmentalFactors;
+import EnvironmentalFactor.Gas;
+import EnvironmentalFactor.Sticky;
+import Items.AirFreshener;
+import Items.BatSkin;
+import Items.Beer;
+import Items.CabbageCamembert;
+import Items.FakeBatSkin;
+import Items.FakeMask;
+import Items.FakeSlideRule;
+import Items.Item;
+import Items.Mask;
+import Items.SlideRule;
+import Items.Transistor;
+import Items.WetCloth;
+import Map.Room;
+import View.Utils.Containers;
+import View.Utils.Coordinates;
+import View.Utils.GameFrame;
+import View.Utils.ImageReader;
+import View.Utils.SelectionColor;
+import View.Utils.Size;
+import View.Utils.Subscriber;
+import View.ViewCharacter.ViewCharacter;
+import View.ViewCharacter.ViewCleaner;
+import View.ViewCharacter.ViewTeacher;
+import View.ViewEnvironmentalFactor.ViewGas;
+import View.ViewEnvironmentalFactor.ViewSticky;
+import View.ViewItem.ViewAirFreshener;
+import View.ViewItem.ViewBatSkin;
+import View.ViewItem.ViewBeer;
+import View.ViewItem.ViewCabbageCamembert;
+import View.ViewItem.ViewFakeBatSkin;
+import View.ViewItem.ViewFakeMask;
+import View.ViewItem.ViewFakeSlideRule;
+import View.ViewItem.ViewItem;
+import View.ViewItem.ViewMask;
+import View.ViewItem.ViewSlideRule;
+import View.ViewItem.ViewTransistor;
+import View.ViewItem.ViewWetCloth;
 
 /**
  * A szoba grafikus osztálya.
  */
+@SuppressWarnings("serial")
 public class ViewRoom extends JComponent implements Subscriber {
-
+	
 	/**
 	 * A modellbeli szoba, amit reprezentál.
 	 */
@@ -29,7 +69,10 @@ public class ViewRoom extends JComponent implements Subscriber {
 	 */
 	protected Image image;
 	
-	protected String roomPath = "Room/";
+	/**
+	 * A szobák képeinek elérési útja.
+	 */
+	protected String roomPath = "Rooms/";
 	
 	/**
 	 * A szoba képének mérete.
@@ -40,15 +83,20 @@ public class ViewRoom extends JComponent implements Subscriber {
 	 * A képernyőn megjelenítendő x és y koordináták.
 	 */
 	public Coordinates coordinates;
-
+	
+	/**
+	 * A tárgyak pozíciói a szobán belül.
+	 */
 	protected Coordinates[] fixedItemPositions;
-
-	public Coordinates[] getFixedRoutePins() {
-		return fixedRoutePins;
-	}
-
+	
+	/**
+	 * A pin-ek pozíciói a szoba szélén.
+	 */
 	protected Coordinates[] fixedRoutePins;
-
+	
+	/**
+	 * A karakterek pozíciói a szobán belül.
+	 */
 	protected Coordinates[] fixedCharacterPositions;
 	
 	/**
@@ -56,29 +104,52 @@ public class ViewRoom extends JComponent implements Subscriber {
 	 */
 	protected SelectionColor selected;
 	
-	public SelectionColor getSelected() {
-		return selected;
-	}
-
-	public Room getRoom() {
-		return room;
-	}
-
-	public ViewRoom(Room r, Coordinates pos){
+	/**
+	 * Konstruktor egy szoba nézet létrehozásához.
+	 * @param r a modellbeli szoba
+	 * @param coor a koordináták
+	 */
+	public ViewRoom(Room r, Coordinates coor){
 		room = r;
-		coordinates = pos;
+		coordinates = coor;
 		size = new Size(360,220);
 		setFixedRoutePins();
 		image = ImageReader.loadImage(ImageReader.path + roomPath + "room.png");
-
 		selected = SelectionColor.Empty;
 		this.setBackground(null);
 		GameFrame.mainPanel.add(this);
-    	GameFrame.viewRooms.add(this);
+		GameFrame.viewRooms.add(this);
 		Containers.rooms.put(r, this);
 		room.subscribe(this);
 	}
 	
+	/**
+	 * Kijelölőszín lekérdezése.
+	 * @return a kijelölőszín
+	 */
+	public SelectionColor getSelected() {
+		return selected;
+	}
+	
+	/**
+	 * A modellbeli szoba lekérdezése.
+	 * @return a modellbeli szoba
+	 */
+	public Room getRoom() {
+		return room;
+	}
+	
+	/**
+	 * A pin-ek pozícióinak lekérdezése.
+	 * @return a pin-ek pozíciói
+	 */
+	public Coordinates[] getFixedRoutePins() {
+		return fixedRoutePins;
+	}
+	
+	/**
+	 * A szobán belüli tárgyak pozícióinak kiszámítása.
+	 */
 	private void setFixedItemPositions() {
 		if(!room.getItems().isEmpty()){
 			fixedItemPositions = new Coordinates[room.getItems().size()];
@@ -90,7 +161,10 @@ public class ViewRoom extends JComponent implements Subscriber {
 			}
 		}
 	}
-
+	
+	/**
+	 * A szobán belüli karakterek pozícióinak kiszámítása.
+	 */
 	private void setFixedCharacterPositions() {
 		if(!room.getCharacters().isEmpty()){
 			fixedCharacterPositions = new Coordinates[room.getCharacters().size()];
@@ -98,19 +172,38 @@ public class ViewRoom extends JComponent implements Subscriber {
 			for(int i = 0; i<room.getCharacters().size(); i++){
 				startingXPos += 10;
 				fixedCharacterPositions[i] = new Coordinates(startingXPos + i * 80, coordinates.getY()+18);
-
 			}
 		}
 	}
-
+	
+	/**
+	 * A pin-ek pozícióinak beállítása.
+	 */
 	private void setFixedRoutePins(){
-		fixedRoutePins = new Coordinates[]{new Coordinates(coordinates.getX() - 20 -1, coordinates.getY() + size.getHeight() / 2 - 20),
-				   							new Coordinates(coordinates.getX() + size.getWidth()/2 - 20, coordinates.getY() - 20 - 2),
-											new Coordinates(coordinates.getX() + size.getWidth() - 20 + 3, coordinates.getY() + size.getHeight() / 2 - 20),
-											new Coordinates(coordinates.getX() + size.getWidth()/2 - 20, coordinates.getY() + size.getHeight() - 20 + 4),
-											};
-    }
-
+		fixedRoutePins = new Coordinates[]{
+			new Coordinates(coordinates.getX() - 20 -1, coordinates.getY() + size.getHeight() / 2 - 20),
+			new Coordinates(coordinates.getX() + size.getWidth()/2 - 20, coordinates.getY() - 20 - 2),
+			new Coordinates(coordinates.getX() + size.getWidth() - 20 + 3, coordinates.getY() + size.getHeight() / 2 - 20),
+			new Coordinates(coordinates.getX() + size.getWidth()/2 - 20, coordinates.getY() + size.getHeight() - 20 + 4)
+		};
+	}
+	
+	/**
+	 * A szobán belüli tárgypozíciók beállítása, majd azokra tárgyak létrehozása.
+	 */
+	private void createViewItems() {
+		setFixedItemPositions();
+		for(int i = 0; i < room.getItems().size(); i++){
+			Item item = room.getItems().get(i);
+			createViewItem(item, i);
+		}
+	}
+	
+	/**
+	 * Egy tárgy nézet létrehozása egy modellbeli tárgyból és elhelyezése a megfelelő pozícióra.
+	 * @param item a modellbeli tárgy
+	 * @param i a megfelelő pozíció indexe
+	 */
 	private void createViewItem(Item item, int i) {
 		if(item instanceof AirFreshener){
 			new ViewAirFreshener((AirFreshener) item, fixedItemPositions[i]);
@@ -147,36 +240,15 @@ public class ViewRoom extends JComponent implements Subscriber {
 		}
 	}
 	
-	private void createViewItems() {
-		setFixedItemPositions();
-		for(int i = 0; i < room.getItems().size(); i++){
-			Item item = room.getItems().get(i);
-			createViewItem(item, i);
-		}
-	}
-
-	private void setCharacterPositions() {
-		for(int i=0;i<room.getCharacters().size();i++) {
-			Containers.characters.get(room.getCharacters().get(i)).setCoordinates(fixedCharacterPositions[i]);
-		}
-	}
-	
-	private void setItemPositions() {
-		for(int i=0;i<room.getItems().size();i++) {
-			ViewItem item=Containers.items.get(room.getItems().get(i));
-			item.setCoordinates(fixedItemPositions[i]);
-			item.setItemSize(ViewItem.roomSize);
-			item.setItemImage();
-		}
-	}
-	
+	/**
+	 * A szobán belüli karakterpozíciók beállítása, majd azokra karakterek létrehozása.
+	 */
 	private void createViewCharacters() {
 		setFixedCharacterPositions();
 		for(int i = 0; i < room.getCharacters().size(); i++){
 			Character character = room.getCharacters().get(i);
 			if(character instanceof Student){
-				//charactersInRoom.add(new ViewStudent((Student) character, fixedCharacterPositions[i]));
-				ViewCharacter c=Containers.characters.get(character);
+				ViewCharacter c = Containers.characters.get(character);
 				c.setCoordinates(fixedCharacterPositions[i]);
 				GameFrame.viewCharacters.add(c);
 			}
@@ -188,7 +260,21 @@ public class ViewRoom extends JComponent implements Subscriber {
 			}
 		}
 	}
-
+	
+	/**
+	 * A szobán belüli környezeti változók pozíciójának beállítása, majd azokra környezeti változók létrehozása.
+	 */
+	private void createViewEnvFactors() {
+		for(int i = 0; i < room.getEnvironmentalFactors().size(); i++){
+			EnvironmentalFactors factor = room.getEnvironmentalFactors().get(i);
+			createViewEnvFactor(factor);
+		}
+	}
+	
+	/**
+	 * Egy környezeti változó nézet létrehozása egy modellbeli környezeti változóból és elhelyezése a megfelelő pozícióra.
+	 * @param factor a modellbeli környezeti változó
+	 */
 	private void createViewEnvFactor(EnvironmentalFactors factor) {
 		if(factor instanceof Gas){
 			new ViewGas((Gas) factor, coordinates);
@@ -198,43 +284,69 @@ public class ViewRoom extends JComponent implements Subscriber {
 		}
 	}
 	
-	private void createViewEnvFactors() {
-		for(int i = 0; i < room.getEnvironmentalFactors().size(); i++){
-			EnvironmentalFactors factor = room.getEnvironmentalFactors().get(i);
-			createViewEnvFactor(factor);
+	/**
+	 * A karakterek koordinátáinak beállítása a megfelelő szobán belüli karakterpozícióra.
+	 */
+	private void setCharacterPositions() {
+		for(int i=0;i<room.getCharacters().size();i++) {
+			Containers.characters.get(room.getCharacters().get(i)).setCoordinates(fixedCharacterPositions[i]);
 		}
 	}
-
+	
+	/**
+	 * A tárgyak koordinátáinak beállítása a megfelelő szobán belüli tárgypozícióra.
+	 */
+	private void setItemPositions() {
+		for(int i=0;i<room.getItems().size();i++) {
+			ViewItem item=Containers.items.get(room.getItems().get(i));
+			item.setCoordinates(fixedItemPositions[i]);
+			item.setItemSize(ViewItem.roomSize);
+			item.setItemImage();
+		}
+	}
+	
+	/**
+	 * A következőkről kap értesítést:
+	 * a szobában tartózkodó karakterek listája megváltozott,
+	 * a szobában lévő tárgyak listája megváltozott,
+	 * a szobába spawn-olt egy tárgy,
+	 * a szobába spawn-olt egy környezeti változó,
+	 * a szoba el lett távolítva a modellből,
+	 * a szobában tartózkodó környezeti változók listája megváltozott
+	 */
 	@Override
 	public void propertyChanged(String property) {
-	    if(property.equals("characters")) {
+	    if(property.equals("characters")) { // küldő: Room
 	    	setFixedCharacterPositions();
 	    	setCharacterPositions();
 	    }
-	    else if(property.contains("items")) { // kell a contains!!
+	    else if(property.contains("items")) { // kell a contains!! // küldő: Room
 	    	setFixedItemPositions();
 	    	setItemPositions();
 	    }
-	    else if(property.contains("spawnitem")) {
+	    else if(property.contains("spawnitem")) { // kell a contains!! // küldő: Room
 	    	int idx = Integer.parseInt(property.split(" ")[1]);
 	    	setFixedItemPositions();
 	    	createViewItem(room.getItems().get(idx), idx);
 	    	setItemPositions();
-	    }else if(property.contains("spawnfactor")) {
+	    }else if(property.contains("spawnfactor")) { // kell a contains!! // küldő: Room
 	    	int idx = Integer.parseInt(property.split(" ")[1]);
 	    	createViewEnvFactor(room.getEnvironmentalFactors().get(idx));
-	    }else if(property.equals("roomremoved")) {
+	    }else if(property.equals("roomremoved")) { // küldő: Labyrinth
 	    	Containers.rooms.remove(room);
 			GameFrame.viewRooms.remove(this);
 			GameFrame.mainPanel.remove(this);
 			room.unsubscribe(this);
-	    }else if(property.equals("factors")) {
+	    }else if(property.equals("factors")) { // küldő: Room, Cleaner, Sticky, AirFreshener
 	    	for(EnvironmentalFactors env : room.getEnvironmentalFactors()) {
 	    		Containers.envs.get(env).setCoordinates(coordinates);
 	    	}
 	    }
 	}
 	
+	/**
+	 * A szobán belüli nézetek létrehozása.
+	 */
 	public void addview() {
 		createViewCharacters();
 		createViewItems();
@@ -242,7 +354,33 @@ public class ViewRoom extends JComponent implements Subscriber {
 	}
 	
 	/**
-	 * A szoba és benne lévő tárgyak, környezeti változók és karakterek kirajzolása.
+	 * Beállítja, hogy melyik játékos jelöli ki éppen a szobát.
+	 * @param selectionColor a kijelölő játékos színe
+	 */
+	public void setColor(SelectionColor selectionColor) {
+		if(selected==SelectionColor.Empty)
+			selected = selectionColor;
+		else if(selected!=selectionColor)
+			selected = SelectionColor.Both;
+	}
+	
+	/**
+	 * Eltávolítja egy játékos kijelölését a szobáról. 
+	 * @param selectionColor a játékos színe
+	 */
+	public void removeColor(SelectionColor selectionColor) {
+		if(selected==selectionColor)
+			selected = SelectionColor.Empty;
+		else if(selected==SelectionColor.Both) {
+			if(selectionColor==SelectionColor.Blue)
+				selected=SelectionColor.Red;
+			else if(selectionColor==SelectionColor.Red)
+				selected=SelectionColor.Blue;	
+		}	
+	}
+	
+	/**
+	 * A szoba kirajzolása.
 	 */
 	@Override
 	public void paint(Graphics g) {
@@ -261,31 +399,15 @@ public class ViewRoom extends JComponent implements Subscriber {
 			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
 			g2D.setColor(Color.RED);
 			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,(size.getWidth()+20)/2,size.getHeight()+20);
-
-		}
-
-		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
-
-		g2D.setFont(new Font("Monospaced", Font.BOLD, 45));
-        g2D.setColor(new Color(115, 80, 44));
-        g2D.drawString(Integer.toString(room.getCapacity()), coordinates.getX()+2, coordinates.getY()+32);
-	}
-
-	public void setColor(SelectionColor selectionColor) {
-		if(selected==SelectionColor.Empty)
-			selected = selectionColor;
-		else if(selected!=selectionColor)
-			selected = SelectionColor.Both;
-	}
 	
-	public void removeColor(SelectionColor selectionColor) {
-		if(selected==selectionColor)
-			selected = SelectionColor.Empty;
-		else if(selected==SelectionColor.Both) {
-			if(selectionColor==SelectionColor.Blue)
-				selected=SelectionColor.Red;
-			else if(selectionColor==SelectionColor.Red)
-				selected=SelectionColor.Blue;	
-		}	
+		}
+	
+		// szoba kirajzolása
+		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
+	
+		// szobaméret kiírása a szoba bal felső sarkába
+		g2D.setFont(new Font("Monospaced", Font.BOLD, 45));
+	    g2D.setColor(new Color(115, 80, 44));
+	    g2D.drawString(Integer.toString(room.getCapacity()), coordinates.getX()+2, coordinates.getY()+32);
 	}
 }

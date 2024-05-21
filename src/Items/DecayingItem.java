@@ -6,7 +6,7 @@ import Time.iTask;
 /**
  * Absztrakt osztály, amely összefoglalja az időérzékeny tárgyak közös tulajdonságait és metódusait.
  */
-public abstract class DecayingItems extends Item implements iTask {
+public abstract class DecayingItem extends Item implements iTask {
 	
 	/**
 	 * Ezzel a változóval állítható be a ProtoUtil-ban az alapértelmezett lejárati idő.
@@ -39,7 +39,6 @@ public abstract class DecayingItems extends Item implements iTask {
 	public void reduceDuration() {
 		ProtoUtil.printLog("reduceDuration");
 		duration--;
-		notifySubsribers("duration");
 		if(duration==0) {
 			notifySubsribers("itemexpired");
 			int idx = owner.getInventory().indexOf(this);

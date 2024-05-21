@@ -7,7 +7,7 @@ import ProtoUtil.ProtoUtil;
 /**
  * Az osztály egy nedves törlőrongyot reprezentál a játékban.
  */
-public class WetCloth extends DecayingItems {
+public class WetCloth extends DecayingItem {
 	
 	/**
 	 * A tárgy felvételekor elvégezendő feladatok

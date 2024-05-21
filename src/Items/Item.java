@@ -66,7 +66,7 @@ public abstract class Item {
 	/**
 	 * Meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String)
 	 * függvényüket a paraméterként kapott Stringgel.
-	 * @param str üzenet arról, hogy mi változott meg, lehetséges értékek: "sticky", "remaininguses", "isactive", "duration", "pair", "itemexpired"
+	 * @param str üzenet arról, hogy mi változott meg, lehetséges értékek: "sticky", "remaininguses", "isactive", "pair", "itemexpired"
 	 */
 	public void notifySubsribers(String str) {
 		for(Subscriber sub : new ArrayList<>(subscribers))

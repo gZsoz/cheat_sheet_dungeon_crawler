@@ -1,20 +1,22 @@
 package View.ViewItem;
 
 import Items.WetCloth;
-import View.Controller.Containers;
 import View.Utils.Coordinates;
-import View.Utils.GameFrame;
 import View.Utils.ImageReader;
-
-import java.awt.*;
 
 /**
  * A nedves törlőrongy kirajzolásáért felelős.
  */
+@SuppressWarnings("serial")
 public class ViewWetCloth extends ViewDecayingItem {
-    
-    public ViewWetCloth(WetCloth wc, Coordinates coor) {
+	
+	/**
+	 * Konstruktor egy nedves törlőrongy nézet létrehozásához.
+	 * @param wc a modellbeli nedves törlőrongy
+	 * @param coor a koordináták
+	 */
+	public ViewWetCloth(WetCloth wc, Coordinates coor) {
 		super(wc, coor);
 		image=ImageReader.loadImage(ImageReader.path+itemsPath+"wetcloth.png");
-	} 
+	}
 }

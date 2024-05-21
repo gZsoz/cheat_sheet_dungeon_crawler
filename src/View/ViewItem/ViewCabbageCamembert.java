@@ -1,18 +1,20 @@
 package View.ViewItem;
 
 import Items.CabbageCamembert;
-import View.Controller.Containers;
 import View.Utils.Coordinates;
-import View.Utils.GameFrame;
 import View.Utils.ImageReader;
-
-import java.awt.*;
 
 /**
  * A káposztás camembert kirajzolásáért felelős.
  */
+@SuppressWarnings("serial")
 public class ViewCabbageCamembert extends ViewNumberOfUsesItem {
 	
+	/**
+	 * Konstruktor egy káposztás camembert nézet létrehozásához.
+	 * @param cc a modellbeli káposztás camembert
+	 * @param coor a koordináták
+	 */
 	public ViewCabbageCamembert(CabbageCamembert cc, Coordinates coor) {
 		super(cc, coor);
 		image=ImageReader.loadImage(ImageReader.path+itemsPath+"camambert.png");

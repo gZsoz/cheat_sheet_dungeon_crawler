@@ -25,7 +25,7 @@ import EnvironmentalFactor.Sticky;
 import Items.AirFreshener;
 import Items.BatSkin;
 import Items.CabbageCamembert;
-import Items.DecayingItems;
+import Items.DecayingItem;
 import Map.CursedRoom;
 import Map.Labyrinth;
 import View.Controller.PlayerController;
@@ -252,7 +252,7 @@ public class ProtoUtil {
     	Sticky.defaultRemainingEntries=2;
     	AirFreshener.defaultRemainingUses=1;
     	BatSkin.defaultRemainingUses=3;
-    	DecayingItems.defaultDuration=6;
+    	DecayingItem.defaultDuration=6;
     	CabbageCamembert.defaultRemainingUses=1;
     	CursedRoom.defaultCloseDuration=5;
     	if(args.length==2 && args[1].equals("all")) {
@@ -334,7 +334,7 @@ public class ProtoUtil {
     	Cleaner.timeBetweenMoves *= fps;
     	Teacher.angryTime *= fps;
     	Teacher.timeBetweenMoves *= fps;
-    	DecayingItems.defaultDuration *= fps;
+    	DecayingItem.defaultDuration *= fps;
     	CursedRoom.defaultCloseDuration *= fps;
     	Labyrinth.itemSpawnFrequency *= fps;
     	Labyrinth.mergeFrequency *= fps;
@@ -362,7 +362,7 @@ public class ProtoUtil {
         	Cleaner.timeBetweenMoves = 10;
         	Teacher.angryTime = 3;
         	Teacher.timeBetweenMoves = 7;
-        	DecayingItems.defaultDuration = 14;
+        	DecayingItem.defaultDuration = 14;
         	CursedRoom.defaultCloseDuration = 7;
         	Labyrinth.itemSpawnFrequency = 90;	// szobánkénti átlagos időtartam
         	Labyrinth.mergeFrequency = 90;
@@ -375,18 +375,18 @@ public class ProtoUtil {
         	CabbageCamembert.defaultRemainingUses=1;
         	
         	
-    		Student reds=new Student();
-    		Student blues=new Student();
-    		PlayerController red = new PlayerController(SelectionColor.Red, reds);
-			PlayerController blue = new PlayerController(SelectionColor.Blue, blues);
+    		Student redStudent=new Student();
+    		Student blueStudent=new Student();
+    		PlayerController redController = new PlayerController(SelectionColor.Red, redStudent);
+			PlayerController blueController = new PlayerController(SelectionColor.Blue, blueStudent);
 			Labyrinth labyrinth = new Labyrinth();
-            labyrinth.generateRooms(reds, blues);
-            red.setLabyrinth(labyrinth);
-            blue.setLabyrinth(labyrinth);
-            red.setRoomSubscribed();
-            blue.setRoomSubscribed();
+            labyrinth.generateRooms(redStudent, blueStudent);
+            redController.setLabyrinth(labyrinth);
+            blueController.setLabyrinth(labyrinth);
+            redController.setRoomSubscribed();
+            blueController.setRoomSubscribed();
             ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
-			GameFrame mf = new GameFrame(viewLabyrinth,red,blue);
+			GameFrame mf = new GameFrame(viewLabyrinth,redController,blueController);
             viewLabyrinth.initLab();
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
