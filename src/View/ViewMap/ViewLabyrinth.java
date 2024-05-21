@@ -33,11 +33,6 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	private Labyrinth labyrinth;
 	
 	/**
-	 * A labirintus hátterének megjelenítendő képe.
-	 */
-	private Image background;
-	
-	/**
 	 * A labirintus szobáihoz tartozó pin-ek képe.
 	 */
 	private Image pinImage;
