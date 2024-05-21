@@ -2,8 +2,8 @@ package Items;
 
 import java.util.ArrayList;
 
+import Main.Main;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 
 /**
  * Felelős egy másik ugyanilyen tárggyal való összekapcsolódásért, amennyiben a két tárgy ugyanannak a hallgatónak az inventory-jába kerül. 
@@ -32,7 +32,7 @@ public class Transistor extends Item {
 	 * @return a tranzisztor párja
 	 */
 	public Transistor getPair(){
-		ProtoUtil.printLog("getPair");
+		Main.printLog("getPair");
 		return pair;
 	}
 	
@@ -41,7 +41,7 @@ public class Transistor extends Item {
 	 * @param t a tranzisztor amellyel párosul
 	 */
 	public void setPair(Transistor t){
-		ProtoUtil.printLog("setPair");
+		Main.printLog("setPair");
 		pair=t;
 		notifySubsribers("pair");
 	}
@@ -51,7 +51,7 @@ public class Transistor extends Item {
 	 * @return a szoba ahova letették
 	 */
 	public Room getLocation() {
-		ProtoUtil.printLog("getLocation");
+		Main.printLog("getLocation");
 		return location;
 	}
 	
@@ -60,7 +60,7 @@ public class Transistor extends Item {
 	 * @param r a szoba ahova letették
 	 */
 	public void setLocation(Room r) {
-		ProtoUtil.printLog("setLocation");
+		Main.printLog("setLocation");
 		location = r;
 	}
 	
@@ -69,7 +69,7 @@ public class Transistor extends Item {
 	 * @return ha aktív a tranzisztor, akkor igaz, egyébként hamis
 	 */
 	public boolean getActive(){
-		ProtoUtil.printLog("getActive");
+		Main.printLog("getActive");
 		return active;
 	}
 	
@@ -78,7 +78,7 @@ public class Transistor extends Item {
 	 * @param state ha aktív, akkor igaz, egyébként hamis
 	 */
 	public void setActive(boolean state){
-		ProtoUtil.printLog("setActive");
+		Main.printLog("setActive");
 		active = state;
 		notifySubsribers("isactive");
 	}
@@ -90,7 +90,7 @@ public class Transistor extends Item {
 	 */
 	@Override
 	public void use() {
-		ProtoUtil.printLog("use");
+		Main.printLog("use");
 		setActive(!active);
 		if(getPair() != null) {
 			getPair().setActive(active);
@@ -103,7 +103,7 @@ public class Transistor extends Item {
 	 */
 	@Override
 	public void onDrop() {
-		ProtoUtil.printLog("onDrop");
+		Main.printLog("onDrop");
 		if (pair != null) { // van párja
 			if(pair.location == null) { // nincs letéve a párja, ez az első közülük, amit letesz
 				setLocation(owner.getRoom());
@@ -129,7 +129,7 @@ public class Transistor extends Item {
 	 * @param t a tranzisztor akivel párosul
 	 */
 	public void connect(Transistor t) {
-		ProtoUtil.printLog("connect");
+		Main.printLog("connect");
 		setPair(t);
 		t.setPair(this);
 	}
@@ -139,7 +139,7 @@ public class Transistor extends Item {
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp");
+		Main.printLog("onPickUp");
 		ArrayList<Transistor> transistorsInInventory = new ArrayList<>();
 		for(Item i: owner.getInventory()) {
 			if(i instanceof Transistor) {

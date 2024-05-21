@@ -1,8 +1,8 @@
 package EnvironmentalFactor;
 
 import Items.Item;
+import Main.Main;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 
 /**
  * Osztály a ragacs környezeti változó reprezentálására.
@@ -10,7 +10,7 @@ import ProtoUtil.ProtoUtil;
 public class Sticky extends EnvironmentalFactors {
 	
 	/**
-	 * Ezzel a változóval állítható be a ProtoUtil-ban, hogy a takarító takarítása után mennyi karakter belépése után válik ragacsossá egy szoba.
+	 * Ezzel a változóval állítható be a Main-ban, hogy a takarító takarítása után mennyi karakter belépése után válik ragacsossá egy szoba.
 	 */
 	public static int defaultRemainingEntries=2;
 	
@@ -32,7 +32,7 @@ public class Sticky extends EnvironmentalFactors {
 	 * @return a hátralévő emberek száma
 	 */
 	public int getRemainingEntries(){
-		ProtoUtil.printLog("getRemainingEntries");
+		Main.printLog("getRemainingEntries");
 		return remainingEntries;
 	}
 	
@@ -41,7 +41,7 @@ public class Sticky extends EnvironmentalFactors {
 	 * @param re a beállítandó emberek száma.
 	 */
 	public void reduceRemainingEntries(){
-		ProtoUtil.printLog("setRemainingEntries");
+		Main.printLog("setRemainingEntries");
 		location.notifySubsribers("factors");
 		remainingEntries--;
 	}
@@ -51,7 +51,7 @@ public class Sticky extends EnvironmentalFactors {
 	 * @param i ragacsossá teendő tárgy.
 	 */
 	private void makeSticky(Item i){
-		ProtoUtil.printLog("makeSticky");
+		Main.printLog("makeSticky");
 		i.setSticky(true);
 	}
 	

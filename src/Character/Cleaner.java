@@ -8,8 +8,8 @@ import EnvironmentalFactor.EnvironmentalFactors;
 import EnvironmentalFactor.Gas;
 import EnvironmentalFactor.Sticky;
 import Items.Item;
+import Main.Main;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 
 /**
  * A szobák takarítását ez osztály végzi. NPC karakter, bizonyos időközönként elhatározza, hogy átmegy egy másik szobába.
@@ -19,7 +19,7 @@ public class Cleaner extends Character {
 	/**
 	 * Két elhatározás között átlagosan eltelt idő.
 	 */
-	public static int timeBetweenMoves = 10 * ProtoUtil.fps;
+	public static int timeBetweenMoves = 10 * Main.fps;
 	
 	/**
 	 * Mozgási idő. Ennyi idő múlva megy be egy szobába, ha már megszületett az elhatározása.
@@ -57,7 +57,7 @@ public class Cleaner extends Character {
 	 * @param r a kitakarítandó szoba
 	 */
 	public void clean(Room r) {
-		ProtoUtil.printLog("clean");
+		Main.printLog("clean");
 		
 		// nem kábult karakterek kitessékelése
 		Random rand = new Random();
@@ -77,7 +77,7 @@ public class Cleaner extends Character {
 					expired=env;
 			r.removeEnvironmentalFactor(expired); // gáz megszűntetése
 			r.notifySubsribers("factors");
-			ProtoUtil.printLog("removeEnvironmentalFactor");
+			Main.printLog("removeEnvironmentalFactor");
 		}
 	
 		// új ragacsosság betétele ha még nincs benne
@@ -91,8 +91,8 @@ public class Cleaner extends Character {
 	 */
 	@Override
 	public boolean enterRoom(Room r) {
-		setMoveTime(2*ProtoUtil.random.nextInt(timeBetweenMoves, 20) + ProtoUtil.fps);
-		ProtoUtil.printLog("enterRoom");
+		setMoveTime(2*Main.random.nextInt(timeBetweenMoves, 20) + Main.fps);
+		Main.printLog("enterRoom");
 		if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= stunTime)) {
 			Room temp=currentRoom;
 			currentRoom = r;
@@ -139,7 +139,7 @@ public class Cleaner extends Character {
 			if(neighbourWithGas < currentRoom.getNeighbours().size()) {
 				enterRoom(currentRoom.getNeighbours().get(neighbourWithGas));
 			}else {
-				enterRoom(currentRoom.getNeighbours().get(ProtoUtil.random.nextInt(currentRoom.getNeighbours().size(), 0)));
+				enterRoom(currentRoom.getNeighbours().get(Main.random.nextInt(currentRoom.getNeighbours().size(), 0)));
 			}
 			searchForGas();
 		}

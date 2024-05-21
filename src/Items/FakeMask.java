@@ -1,6 +1,6 @@
 package Items;
 
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * Az osztály egy hamis maszkot reprezentál, amely a Maskból származik.
@@ -13,7 +13,7 @@ public class FakeMask extends Mask {
 	@Override
 	public void onPickUp() 
 	{
-		ProtoUtil.printLog("onPickUp"); // Logolás
+		Main.printLog("onPickUp"); // Logolás
 	}
 	
 	/**
@@ -22,7 +22,7 @@ public class FakeMask extends Mask {
 	@Override
 	public void onDrop() 
 	{
-		ProtoUtil.printLog("onDrop"); // Logolás
+		Main.printLog("onDrop"); // Logolás
 		owner=null;
 	}
 	
@@ -32,7 +32,7 @@ public class FakeMask extends Mask {
 	@Override
 	public void use() 
 	{
-		ProtoUtil.printLog("use"); // Logolás
+		Main.printLog("use"); // Logolás
 	}
 	
 	/**

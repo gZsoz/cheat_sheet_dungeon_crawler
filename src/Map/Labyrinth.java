@@ -22,7 +22,7 @@ import Items.Mask;
 import Items.SlideRule;
 import Items.Transistor;
 import Items.WetCloth;
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 import Time.iTask;
 import View.Utils.Subscriber;
 
@@ -32,19 +32,19 @@ import View.Utils.Subscriber;
 public class Labyrinth implements iTask {
 	
 	/**
-	 * Ezzel a változóval állítható be a ProtoUtil-ban a tárgyak spawn-olásának gyakoriságának átlagos időtartama.
+	 * Ezzel a változóval állítható be a Main-ban a tárgyak spawn-olásának gyakoriságának átlagos időtartama.
 	 */
-	public static int itemSpawnFrequency = 100 * ProtoUtil.fps;
+	public static int itemSpawnFrequency = 100 * Main.fps;
 	
 	/**
-	 * Ezzel a változóval állítható be a ProtoUtil-ban a szobák összeolvadásának gyakoriságának átlagos időtartama.
+	 * Ezzel a változóval állítható be a Main-ban a szobák összeolvadásának gyakoriságának átlagos időtartama.
 	 */
-	public static int mergeFrequency = 100 * ProtoUtil.fps;
+	public static int mergeFrequency = 100 * Main.fps;
 	
 	/**
-	 * Ezzel a változóval állítható be a ProtoUtil-ban a szobák szétválásának gyakoriságának átlagos időtartama.
+	 * Ezzel a változóval állítható be a Main-ban a szobák szétválásának gyakoriságának átlagos időtartama.
 	 */
-	public static int splitFrequency = 100 * ProtoUtil.fps;
+	public static int splitFrequency = 100 * Main.fps;
 	
 	/**
 	 * A labirintus változásaira feliratkozott osztályok.
@@ -105,7 +105,7 @@ public class Labyrinth implements iTask {
 	 * @param r a hozzáadandó szoba
 	 */
 	public void addRoom(Room r) {
-		ProtoUtil.printLog("addRoom");
+		Main.printLog("addRoom");
 		rooms.add(r);
 	}
 	
@@ -114,7 +114,7 @@ public class Labyrinth implements iTask {
 	 * @param a törlendő szoba
 	 */
 	public void removeRoom(Room r) {
-		ProtoUtil.printLog("removeRoom");
+		Main.printLog("removeRoom");
 		rooms.remove(r);
 	}
 	
@@ -124,7 +124,7 @@ public class Labyrinth implements iTask {
 	 * @param merging a beolvasztandó szoba
 	 */
 	public void mergeRoom(Room result, Room merging) {
-		ProtoUtil.printLog("mergeRoom");
+		Main.printLog("mergeRoom");
 		if(result.equals(merging))
 			return;
 		int bigger;
@@ -152,7 +152,7 @@ public class Labyrinth implements iTask {
 	 * @param r a szétosztandó szoba
 	 */
 	public void splitRoomTest(Room old, int neighbourcnt, int itemcnt, int charactercnt) {
-		ProtoUtil.printLog("splitRoom");
+		Main.printLog("splitRoom");
 		Room n;
 		// Az új szoba típusa a régi szobától függ
 		if(old instanceof CursedRoom) {
@@ -185,14 +185,14 @@ public class Labyrinth implements iTask {
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.addEnvironmentalFactor(new Sticky(n));
 		}
 		rooms.add(rooms.indexOf(old)+1, n);
-		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
-		ProtoUtil.printLog("Neighbours of new room: "+n.getNeighbours().size());
-		ProtoUtil.printLog("Items of old room: "+old.getItems().size());
-		ProtoUtil.printLog("Items of new room: "+n.getItems().size());
-		ProtoUtil.printLog("Characters of old room: "+old.getCharacters().size());
-		ProtoUtil.printLog("Characters of new room: "+n.getCharacters().size());
-		ProtoUtil.printLog("EnvironmentalFactors of old room: "+old.getEnvironmentalFactors().size());
-		ProtoUtil.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
+		Main.printLog("Neighbours of old room: "+old.getNeighbours().size());
+		Main.printLog("Neighbours of new room: "+n.getNeighbours().size());
+		Main.printLog("Items of old room: "+old.getItems().size());
+		Main.printLog("Items of new room: "+n.getItems().size());
+		Main.printLog("Characters of old room: "+old.getCharacters().size());
+		Main.printLog("Characters of new room: "+n.getCharacters().size());
+		Main.printLog("EnvironmentalFactors of old room: "+old.getEnvironmentalFactors().size());
+		Main.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
 		
 	}
 	
@@ -201,7 +201,7 @@ public class Labyrinth implements iTask {
 	 * @param r a szétosztandó szoba
 	 */
 	public void splitRoom(Room old) {
-		ProtoUtil.printLog("splitRoom");
+		Main.printLog("splitRoom");
 		if(old.getNeighbours().isEmpty())
 			return;
 		notifySubsribers("modifyneighbours");
@@ -261,14 +261,14 @@ public class Labyrinth implements iTask {
 		old.notifySubsribers("factors");
 		n.notifySubsribers("factors");
 		
-		ProtoUtil.printLog("Neighbours of old room: "+old.getNeighbours().size());
-		ProtoUtil.printLog("Neighbours of new room: "+n.getNeighbours().size());
-		ProtoUtil.printLog("Items of old room: "+old.getItems().size());
-		ProtoUtil.printLog("Items of new room: "+n.getItems().size());
-		ProtoUtil.printLog("Characters of old room: "+old.getCharacters().size());
-		ProtoUtil.printLog("Characters of new room: "+n.getCharacters().size());
-		ProtoUtil.printLog("EnvironmentalFactors of old room: "+old.getEnvironmentalFactors().size());
-		ProtoUtil.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
+		Main.printLog("Neighbours of old room: "+old.getNeighbours().size());
+		Main.printLog("Neighbours of new room: "+n.getNeighbours().size());
+		Main.printLog("Items of old room: "+old.getItems().size());
+		Main.printLog("Items of new room: "+n.getItems().size());
+		Main.printLog("Characters of old room: "+old.getCharacters().size());
+		Main.printLog("Characters of new room: "+n.getCharacters().size());
+		Main.printLog("EnvironmentalFactors of old room: "+old.getEnvironmentalFactors().size());
+		Main.printLog("EnvironmentalFactors of new room: "+n.getEnvironmentalFactors().size());
 	}
 	
 	
@@ -277,7 +277,7 @@ public class Labyrinth implements iTask {
 	 * @return a véletlenszerűen kiválasztott tárgy
 	 */
 	private Item itemPicker(){
-		switch(ProtoUtil.random.nextInt(10, 8)){
+		switch(Main.random.nextInt(10, 8)){
 		case 0:
 			return new FakeBatSkin();
 		case 1:
@@ -285,7 +285,7 @@ public class Labyrinth implements iTask {
 		case 2:
 			return new AirFreshener();
 		case 3:
-			if(ProtoUtil.random.nextInt(2, 0)==0)
+			if(Main.random.nextInt(2, 0)==0)
 				return new BatSkin();
 			else
 				return new FakeBatSkin();
@@ -350,17 +350,17 @@ public class Labyrinth implements iTask {
 	 * @param red a piros játékoshoz tartozó diák
 	 */
 	public void generateRooms(Student blue, Student red) {
-		ProtoUtil.printLog("generateRooms");
+		Main.printLog("generateRooms");
 		
 		// szobák legenerálása (7-8 darab, köztük 1-2 elátkozott, mindegyik 2-4 fős)
-		int numOfRooms = ProtoUtil.random.nextInt(2, 1) + 7;
-		int numOfCursedRooms = ProtoUtil.random.nextInt(2, 0) + 1;
+		int numOfRooms = Main.random.nextInt(2, 1) + 7;
+		int numOfCursedRooms = Main.random.nextInt(2, 0) + 1;
 		ArrayList<Room> allRooms = new ArrayList<>();
 		for(int i = 0; i < numOfCursedRooms; i++) {
-			allRooms.add(new CursedRoom(ProtoUtil.random.nextInt(3, 2) + 2));
+			allRooms.add(new CursedRoom(Main.random.nextInt(3, 2) + 2));
 		}
 		for(int i = 0; i < numOfRooms - numOfCursedRooms; i++) {
-			allRooms.add(new Room(ProtoUtil.random.nextInt(3, 2) + 2));
+			allRooms.add(new Room(Main.random.nextInt(3, 2) + 2));
 		}
 		Collections.shuffle(allRooms);
 		rooms = new ArrayList<Room>(allRooms);
@@ -368,9 +368,9 @@ public class Labyrinth implements iTask {
 		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN KÖRNYEZETI VÁLTOZÓT BE LEHET RAKNI*/
 		
 		// környezeti változók legenerálása a szobákba
-		int numberOfEnvFactors = ProtoUtil.random.nextInt(2, 0) + 1;
+		int numberOfEnvFactors = Main.random.nextInt(2, 0) + 1;
 		for (int i = 0; i < numberOfEnvFactors; i++) {
-			Room gassyRoom = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 2));
+			Room gassyRoom = rooms.get(Main.random.nextInt(rooms.size(), 2));
 			if (gassyRoom.getEnvironmentalFactors().size() == 0) {
 				gassyRoom.addEnvironmentalFactor(new Gas(gassyRoom));
 			}
@@ -380,7 +380,7 @@ public class Labyrinth implements iTask {
 		for (Room room : rooms) { // minden szobához végigiterálunk az összes szobán és vagy berakjuk a szomszédok közé vagy nem
 	        for (Room otherRoom : rooms) {
 	            if (room != otherRoom) { // saját magát nem rakjuk be semmiképpen
-	                if (ProtoUtil.random.nextInt(5, 0) == 0) {
+	                if (Main.random.nextInt(5, 0) == 0) {
 	                    room.addNeighbour(otherRoom);
 	                    otherRoom.addNeighbour(room);
 	                }
@@ -391,7 +391,7 @@ public class Labyrinth implements iTask {
 	        for (Room room : rooms) {
 	            for (Room otherRoom : rooms) {
 	                if (room != otherRoom && !room.getNeighbours().contains(otherRoom)) { // saját magát és már felvett szomszédokat nem rakunk be
-	                    if (ProtoUtil.random.nextInt(3, 0) == 0) {
+	                    if (Main.random.nextInt(3, 0) == 0) {
 	                        room.addNeighbour(otherRoom);
 	                        otherRoom.addNeighbour(room);
 	                    }
@@ -402,14 +402,14 @@ public class Labyrinth implements iTask {
 	
 		
 		// tárgyak legenerálása (0, 1, ..., maxItemCapacity db minden szobába)
-		Room roomWithSlideRule = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 0));
+		Room roomWithSlideRule = rooms.get(Main.random.nextInt(rooms.size(), 0));
 		roomWithSlideRule.addItem(new SlideRule()); // logarléc betétele egy random szobába
 		
 		/*EZEN A PONTON BÁRMELYIK SZOBÁBA BÁRMILYEN TÁRGYAT BE LEHET RAKNI*/
 		rooms.get(0).items.add(new FakeSlideRule());	// balance changes
 		
 		for(Room r : rooms){ // random mennyiségű tárgy legenerálása a szobákba
-			int numberOfSpawnedItems = ProtoUtil.random.nextInt((Room.maxItemCapacity+1) - 2 - r.currentNumOfItems(), 4) + 2; // hogy mindig legalább kettőt spawnoljon
+			int numberOfSpawnedItems = Main.random.nextInt((Room.maxItemCapacity+1) - 2 - r.currentNumOfItems(), 4) + 2; // hogy mindig legalább kettőt spawnoljon
 			for(int i = 0; i < numberOfSpawnedItems; i++) {
 				r.addItem(itemPicker());
 			}
@@ -418,14 +418,14 @@ public class Labyrinth implements iTask {
 		// diákok legenerálása
 		List<Room> roomsWithStudents = new ArrayList<Room>();
 		
-		Room roomOfFirstStudent = rooms.get(ProtoUtil.random.nextInt(rooms.size(), 1));
+		Room roomOfFirstStudent = rooms.get(Main.random.nextInt(rooms.size(), 1));
 		roomOfFirstStudent.addCharacter(red); // első diák betétele egy random szobába
 		red.setRoom(roomOfFirstStudent);
 		roomsWithStudents.add(roomOfFirstStudent);
 		
 		Room roomOfSecondStudent = null;
 		while(roomOfSecondStudent == null) {
-			int roomidx = ProtoUtil.random.nextInt(rooms.size(), 0);
+			int roomidx = Main.random.nextInt(rooms.size(), 0);
 			if(!(rooms.get(roomidx).equals(roomOfFirstStudent) && roomOfFirstStudent.getCapacity() == 1)) {
 				roomOfSecondStudent = rooms.get(roomidx);
 			}
@@ -438,13 +438,13 @@ public class Labyrinth implements iTask {
 		roomsWithoutStudents.removeAll(roomsWithStudents);
 		
 		// tanár legenerálása
-		Room roomOfTeacher = roomsWithoutStudents.get(ProtoUtil.random.nextInt(roomsWithoutStudents.size(), 2));
+		Room roomOfTeacher = roomsWithoutStudents.get(Main.random.nextInt(roomsWithoutStudents.size(), 2));
 		roomOfTeacher.addCharacter(new Teacher(roomOfTeacher)); // tanár betétele egy diákmentes szobába egy random szabad helyre
 		
 		// takarító legenerálása
 		Room roomOfCleaner = null;
 		while(roomOfCleaner == null) {
-			int roomidx = ProtoUtil.random.nextInt(rooms.size(), 3);
+			int roomidx = Main.random.nextInt(rooms.size(), 3);
 			if(rooms.get(roomidx).getCapacity() != rooms.get(roomidx).currentNumOfPlayers()) {
 				roomOfCleaner = rooms.get(roomidx);
 			}
@@ -458,18 +458,18 @@ public class Labyrinth implements iTask {
 	@Override
 	public void update() {
 		Random rand=new Random();
-		if(ProtoUtil.random.nextInt(mergeFrequency, -1)==0) {
+		if(Main.random.nextInt(mergeFrequency, -1)==0) {
 			if (rooms.size() > 2) {
 				mergeRoom(rooms.get(rand.nextInt(rooms.size())), rooms.get(rand.nextInt(rooms.size()))); // merge
 			}
 		}
-		if(ProtoUtil.random.nextInt(splitFrequency, -1)==0) {
+		if(Main.random.nextInt(splitFrequency, -1)==0) {
 			if(rooms.size()<10) {
 				splitRoom(rooms.get(rand.nextInt(rooms.size()))); // split
 			}
 		}
 		for(Room r : rooms){
-			if(ProtoUtil.random.nextInt(itemSpawnFrequency, -1)==0) {
+			if(Main.random.nextInt(itemSpawnFrequency, -1)==0) {
 				r.spawnItem(itemPicker()); // item legenerálása
 			}
 			r.update();

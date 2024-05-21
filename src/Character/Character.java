@@ -8,8 +8,8 @@ import EnvironmentalFactor.Sticky;
 import Items.Beer;
 import Items.Item;
 import Items.Transistor;
+import Main.Main;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 import Time.iTask;
 import View.Utils.Subscriber;
 
@@ -25,13 +25,13 @@ public abstract class Character implements iTask {
 	/**
 	 * A karakterek kábultsági állapotának hossza másodpercben.
 	 */
-	public static int stunTime=5 * ProtoUtil.fps;
+	public static int stunTime=5 * Main.fps;
 	
 	/**
 	 * A karakterek kábultsági állapotai között eltelt idő hossza másodpercben.
 	 * Arra használjuk, hogy ha a karakter folyamatosan kábulva lenne, legyen ideje kiszabadulni.
 	 */
-	public static int restTime=10 * ProtoUtil.fps;
+	public static int restTime=10 * Main.fps;
 	
 	/*
 	 * A karakter változásaira feliratkozott osztályok.
@@ -73,7 +73,7 @@ public abstract class Character implements iTask {
 	 * @return a karakter birtokában lévő tárgyak listája
 	 */
 	public ArrayList<Item> getInventory(){
-		ProtoUtil.printLog("getInventory");
+		Main.printLog("getInventory");
 		return inventory;
 	}
 	
@@ -82,7 +82,7 @@ public abstract class Character implements iTask {
 	 * @return a karakter tartózkodási helye
 	 */
 	public Room getRoom() {
-		ProtoUtil.printLog("getRoom");
+		Main.printLog("getRoom");
 		return currentRoom;
 	}
 	
@@ -99,7 +99,7 @@ public abstract class Character implements iTask {
 	 * @return a karakter kábultsági állapota
 	 */
 	public int getStunned() {
-		ProtoUtil.printLog("getStunned");
+		Main.printLog("getStunned");
 		return stunned;
 	}
 	
@@ -108,7 +108,7 @@ public abstract class Character implements iTask {
 	 * @param s ha kábult a karakter, akkor igaz, egyébként hamis
 	 */
 	public void setStunned(int s) {
-		ProtoUtil.printLog("setStunned");
+		Main.printLog("setStunned");
 		stunned = s;
 		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 	}
@@ -117,7 +117,7 @@ public abstract class Character implements iTask {
 	 * Kábultsági állapot csökkentése.
 	 */
 	public void reduceStunned() {
-		ProtoUtil.printLog("reduceStunned");
+		Main.printLog("reduceStunned");
 		stunned--;
 		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 	}
@@ -171,7 +171,7 @@ public abstract class Character implements iTask {
 	 * @return ha a karakter befér az új szobába, akkor a művelet sikeres és igaz értékkel tér vissza a függvény, egyébként hamissal
 	 */
 	public boolean enterRoom(Room r) {
-		ProtoUtil.printLog("enterRoom");
+		Main.printLog("enterRoom");
 		if(r.getCharacters().size() < r.getCapacity() && !(stunned > 0 && stunned <= stunTime)) {
 			Room temp=currentRoom;
 			currentRoom = r;
@@ -204,12 +204,12 @@ public abstract class Character implements iTask {
 	 * @return ha az inventory-ban van hely, akkor a művelet sikeres és igaz értékkel tér vissza a függvény, ha egy párral rendelkező tranzisztort venne fel, illetve egyéb esetben hamissal
 	 */
 	public boolean pickupItem(Item i) {
-		ProtoUtil.printLog("pickupItem");
+		Main.printLog("pickupItem");
 		if(inventory.size() < 5 && !(stunned > 0 && stunned <= stunTime) && !i.getSticky()) {
 			if(i instanceof Transistor) {
 				Transistor transistorInRoom = (Transistor) i;
 				if(transistorInRoom.getPair() != null) {
-					ProtoUtil.printLog("Could not pick up item");
+					Main.printLog("Could not pick up item");
 					return false; // párosított tranzisztort nem vehetünk fel
 				}
 			}
@@ -217,11 +217,11 @@ public abstract class Character implements iTask {
 			inventory.add(i);
 			notifySubsribers("inventory");
 			i.setOwner(this);
-			ProtoUtil.printLog("Successfully picked up item");
+			Main.printLog("Successfully picked up item");
 			i.onPickUp();
 			return true;
 		}
-		ProtoUtil.printLog("Could not pick up item, as it is a paired transistor.");
+		Main.printLog("Could not pick up item, as it is a paired transistor.");
 		return false;
 	}
 	
@@ -230,7 +230,7 @@ public abstract class Character implements iTask {
 	 * @param i a tárgy, amit le akar tenni
 	 */
 	public void putdownItem(Item i) {
-		ProtoUtil.printLog("putdownItem");
+		Main.printLog("putdownItem");
 		int idx = inventory.indexOf(i);
 		if(!inventory.remove(i)) {
 			System.out.println("Olyan Item-re lett meghívva a putdownItem, ami nincs benne az inventoryban!");

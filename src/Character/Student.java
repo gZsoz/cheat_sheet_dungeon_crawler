@@ -3,8 +3,8 @@ package Character;
 import java.util.ArrayList;
 
 import Items.Item;
+import Main.Main;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 
 /**
  * A Student osztály felelős a hallgatók inventory-jában lévő aktiválható tárgyak aktiválásáért,
@@ -44,7 +44,7 @@ public class Student extends Character {
 	 * @return a hallgató érinthetetlenségi állapota
 	 */
 	public boolean getInvincible() {
-		ProtoUtil.printLog("getInvincible");
+		Main.printLog("getInvincible");
 		return invincible;
 	}
 	
@@ -53,7 +53,7 @@ public class Student extends Character {
 	 * @param state ha érinthetetlen a karakter, akkor igaz, egyébként hamis
 	 */
 	public void setInvincible(boolean state) {
-		ProtoUtil.printLog("setInvincible");
+		Main.printLog("setInvincible");
 		notifySubsribers("invincible");
 		invincible = state;
 	}
@@ -63,7 +63,7 @@ public class Student extends Character {
 	 * @param i az aktiválandó tárgy
 	 */
 	public void activate(Item i) {
-		ProtoUtil.printLog("activate");
+		Main.printLog("activate");
 		if (!(stunned > 0 && stunned <= stunTime)) {
 			i.onActivate();
 		}

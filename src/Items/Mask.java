@@ -1,6 +1,6 @@
 package Items;
 
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * Az osztály egy maszk tárgyat reprezentál a játékban.
@@ -12,7 +12,7 @@ public class Mask extends DecayingItem {
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp"); // Logolás
+		Main.printLog("onPickUp"); // Logolás
 		owner.setHasDefense(true); // Védelem beállítása
 	}
 	
@@ -21,7 +21,7 @@ public class Mask extends DecayingItem {
 	 */
 	@Override
 	public void onDrop() {
-		ProtoUtil.printLog("onDrop"); // Logolás
+		Main.printLog("onDrop"); // Logolás
 		isActive=false; // Aktiválás kikapcsolása
 		boolean mask=false;
 		for(Item i : owner.getInventory()) {
@@ -41,7 +41,7 @@ public class Mask extends DecayingItem {
 	 */
 	@Override
 	public void use() {
-		ProtoUtil.printLog("use"); // Logolás
+		Main.printLog("use"); // Logolás
 		isActive=true; // Aktiválás jelzése
 		reduceDuration(); // Időtartam csökkentése
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Character.Character;
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 import View.Utils.Subscriber;
 
 /**
@@ -32,7 +32,7 @@ public abstract class Item {
 	 * @return ragacsos-e a tárgy
 	 */
 	public boolean getSticky(){
-		ProtoUtil.printLog("getSticky");
+		Main.printLog("getSticky");
 		return sticky;
 	}
 	
@@ -50,7 +50,7 @@ public abstract class Item {
 	 * @return a tárgy tulajdonosa
 	 */
 	public Character getOwner() {
-		ProtoUtil.printLog("getOwner");
+		Main.printLog("getOwner");
 		return owner;
 	}
 	
@@ -59,7 +59,7 @@ public abstract class Item {
 	 * @param o a tárgy tulajdonosa
 	 */
 	public void setOwner(Character o) {
-		ProtoUtil.printLog("setOwner");
+		Main.printLog("setOwner");
 		owner=o;
 	}
 	
@@ -101,7 +101,7 @@ public abstract class Item {
 	 * Egy tárgy letételekor hívódik meg, ekkor a tárgynak nem lesz tulajdonosa.
 	 */
 	public void onDrop() {
-		ProtoUtil.printLog("Dropped");
+		Main.printLog("Dropped");
 		owner=null;
 	}
 	

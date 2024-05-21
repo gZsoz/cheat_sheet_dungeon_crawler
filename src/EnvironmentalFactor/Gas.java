@@ -3,8 +3,8 @@ package EnvironmentalFactor;
 import Character.Character;
 import Character.Cleaner;
 import Items.*;
+import Main.Main;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class Gas extends EnvironmentalFactors {
 	 * @param character az elkábítandó karakter
 	 */
 	public void stun(Character character) {
-		ProtoUtil.printLog("stun");
+		Main.printLog("stun");
 		if(character instanceof Cleaner)
 			return;
 		if(!character.getHasDefense()) {

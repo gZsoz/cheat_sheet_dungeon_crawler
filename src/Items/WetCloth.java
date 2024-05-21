@@ -2,7 +2,7 @@ package Items;
 
 import Character.Character;
 import Character.Teacher;
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * Az osztály egy nedves törlőrongyot reprezentál a játékban.
@@ -14,7 +14,7 @@ public class WetCloth extends DecayingItem {
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp");
+		Main.printLog("onPickUp");
 		use();
 	}
 	/**
@@ -22,7 +22,7 @@ public class WetCloth extends DecayingItem {
 	 */
 	@Override
 	public void onDrop() {
-		ProtoUtil.printLog("onDrop");
+		Main.printLog("onDrop");
 		setIsActive(false);
 		super.onDrop();
 	}
@@ -33,7 +33,7 @@ public class WetCloth extends DecayingItem {
 	 */
 	@Override
 	public void use() {
-		ProtoUtil.printLog("use");
+		Main.printLog("use");
 		setIsActive(true);
 		for(Character character: owner.getRoom().getCharacters() ) {
 			if(character instanceof Teacher) {

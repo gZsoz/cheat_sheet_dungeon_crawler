@@ -3,8 +3,8 @@ package EnvironmentalFactor;
 import java.util.ArrayList;
 import java.util.List;
 
+import Main.Main;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 import Time.iTask;
 import View.Utils.Subscriber;
 
@@ -28,7 +28,7 @@ public abstract class EnvironmentalFactors implements iTask {
 	 * @return a szoba, ahol a környezeti változó van
 	 */
 	public Room getLocation() {
-		ProtoUtil.printLog("getLocation");
+		Main.printLog("getLocation");
 		return location;
 	}
 	
@@ -37,7 +37,7 @@ public abstract class EnvironmentalFactors implements iTask {
 	 * @param room a szoba ahová a környezeti változó elhelyezendő
 	 */
 	public void setLocation(Room room) {
-		ProtoUtil.printLog("setLocation");
+		Main.printLog("setLocation");
 		location = room;
 	}
 	

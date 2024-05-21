@@ -1,4 +1,4 @@
-package ProtoUtil;
+package Main;
 
 import java.util.Random;
 

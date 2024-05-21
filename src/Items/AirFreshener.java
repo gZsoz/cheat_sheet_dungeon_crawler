@@ -2,8 +2,8 @@ package Items;
 
 import EnvironmentalFactor.EnvironmentalFactors;
 import EnvironmentalFactor.Gas;
+import Main.Main;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 
 /**
  * Az AirFreshener osztály egy használati tárgyat reprezentál, amely egy légfrissítőt jelképez.
@@ -29,7 +29,7 @@ public class AirFreshener extends NumberOfUsesItem {
 	 */
 	@Override
 	public void use() {
-	    ProtoUtil.printLog("use");
+	    Main.printLog("use");
 	    if(RemainingUses>0) setRemainingUses(RemainingUses-1); // Csökkenti a maradék használatok számát
 	    Room r = owner.getRoom();
 	    
@@ -41,7 +41,7 @@ public class AirFreshener extends NumberOfUsesItem {
 					expired=env;
 			r.removeEnvironmentalFactor(expired); // gáz megszűntetése
 			r.notifySubsribers("factors");
-			ProtoUtil.printLog("airfreshener removed gas");
+			Main.printLog("airfreshener removed gas");
 		}
 	}
 	
@@ -50,7 +50,7 @@ public class AirFreshener extends NumberOfUsesItem {
 	 */
 	@Override
 	public void onPickUp() {
-	    ProtoUtil.printLog("onPickUp");
+	    Main.printLog("onPickUp");
 	}
 	
 	/**

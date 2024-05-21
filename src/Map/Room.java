@@ -4,7 +4,7 @@ import Items.FakeSlideRule;
 import Items.Item;
 import Items.SlideRule;
 import Items.Transistor;
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 import Time.iTask;
 import View.Utils.Subscriber;
 import EnvironmentalFactor.EnvironmentalFactors;
@@ -24,7 +24,7 @@ import Character.Character;
 public class Room implements iTask {
 	
 	/**
-	 * Ezzel a változóval állítható be a ProtoUtil-ban a szoba maximális kapacitása.
+	 * Ezzel a változóval állítható be a Main-ban a szoba maximális kapacitása.
 	 */
 	public static int maxItemCapacity=6;
 	
@@ -86,7 +86,7 @@ public class Room implements iTask {
 	 * @return A szoba kapacitása.
 	 */
 	public int getCapacity() {
-	    ProtoUtil.printLog("getCapacity");
+	    Main.printLog("getCapacity");
 	    return capacity;
 	}
 	
@@ -95,7 +95,7 @@ public class Room implements iTask {
 	 * @param capacity a kapacitás
 	 */
 	public void setCapacity(int capacity) {
-	    ProtoUtil.printLog("setCapacity");
+	    Main.printLog("setCapacity");
 	    this.capacity=capacity;
 	    notifySubsribers("capacity");
 	}
@@ -113,7 +113,7 @@ public class Room implements iTask {
 	 * @return a szobában tartózkodó karakterek száma
 	 */
 	public int currentNumOfPlayers() {
-	    ProtoUtil.printLog("currentNumOfPlayers");
+	    Main.printLog("currentNumOfPlayers");
 	    return characters.size();
 	}
 	
@@ -122,7 +122,7 @@ public class Room implements iTask {
 	 * @return a szobában lévő tárgyak száma
 	 */
 	public int currentNumOfItems() {
-	    ProtoUtil.printLog("currentNumOfItems");
+	    Main.printLog("currentNumOfItems");
 	    return items.size();
 	}
 	
@@ -131,7 +131,7 @@ public class Room implements iTask {
 	 * @return a szobában található karakterek egy listában
 	 */
 	public List<Character> getCharacters() {
-	    ProtoUtil.printLog("getCharacters");
+	    Main.printLog("getCharacters");
 	    return characters;
 	}
 	
@@ -140,7 +140,7 @@ public class Room implements iTask {
 	 * @return a szobában található tárgyak egy listában
 	 */
 	public List<Item> getItems() {
-	    ProtoUtil.printLog("getItems");
+	    Main.printLog("getItems");
 	    return items;
 	}
 	
@@ -149,7 +149,7 @@ public class Room implements iTask {
 	 * @return a szoba szomszédai egy listában
 	 */
 	public List<Room> getNeighbours() {
-	    ProtoUtil.printLog("getNeighbours");
+	    Main.printLog("getNeighbours");
 	    ArrayList<Room> openNeighbours = new ArrayList<>();
 	    for(Room r : new ArrayList<Room>(neighbours)) {
 	    	if(!((r instanceof CursedRoom) && r.getNeighbours().isEmpty()) && !r.neighbours.isEmpty()) {
@@ -193,7 +193,7 @@ public class Room implements iTask {
 	 * @param c A hozzáadandó karakter
 	 */
 	public void addCharacter(Character character) {
-	    ProtoUtil.printLog("addCharacter");
+	    Main.printLog("addCharacter");
 	    characters.add(character);
 	    notifySubsribers("characters");
 	}
@@ -203,7 +203,7 @@ public class Room implements iTask {
 	 * @param character az eltávolítandó karakter
 	 */
 	public void removeCharacter(Character character) {
-	    ProtoUtil.printLog("removeCharacter");
+	    Main.printLog("removeCharacter");
 	    if (!characters.remove(character))
 	        System.out.println("Olyan karakterre lett meghívva a removeCharacter, ami nincs a listában!!!");
 	    notifySubsribers("characters");
@@ -215,7 +215,7 @@ public class Room implements iTask {
 	 * @return befért-e a tárgy
 	 */
 	public boolean addItem(Item i) {
-	    ProtoUtil.printLog("addItem");
+	    Main.printLog("addItem");
 	    if(items.size()<maxItemCapacity) {
 	    	items.add(i);
 	    	notifySubsribers("items");
@@ -249,7 +249,7 @@ public class Room implements iTask {
 	 * @param i az eltávolítandó tárgy
 	 */
 	public void removeItem(Item i) {
-	    ProtoUtil.printLog("removeItem");
+	    Main.printLog("removeItem");
 	    int idx=items.indexOf(i);
 	    if (!items.remove(i))
 	        System.out.println("Olyan Itemre lett meghívva a removeItem, ami nincs a listában!!!");
@@ -261,7 +261,7 @@ public class Room implements iTask {
 	 * @param r a hozzáadandó szomszédos szoba
 	 */
 	public void addNeighbour(Room r) {
-	    ProtoUtil.printLog("addNeighbour");
+	    Main.printLog("addNeighbour");
 	    neighbours.remove(r);
 	    neighbours.add(r);
 	}
@@ -271,7 +271,7 @@ public class Room implements iTask {
 	 * @param r az eltávolítandó szomszédos szoba
 	 */
 	public void removeNeighbour(Room r) {
-	    ProtoUtil.printLog("removeNeighbour");
+	    Main.printLog("removeNeighbour");
 	    if (!neighbours.remove(r))
 	        System.out.println("Olyan Roomra lett meghívva a removeNeighbour ami nincs a listában!!!");
 	}
@@ -281,7 +281,7 @@ public class Room implements iTask {
 	 * @param ef a leteendő környezeti tényező
 	 */
 	public void spawnEnvironmentalFactor(EnvironmentalFactors ef) {
-	    ProtoUtil.printLog("addEnvironmentalFactor");
+	    Main.printLog("addEnvironmentalFactor");
 	    ef.setLocation(this);
 	    EnvironmentalFactors temp=null;
 	    for (EnvironmentalFactors e : envFactors ) {
@@ -300,7 +300,7 @@ public class Room implements iTask {
 	 * @param ef a hozzáadandó környezeti tényező
 	 */
 	public void addEnvironmentalFactor(EnvironmentalFactors ef) {
-	    ProtoUtil.printLog("addEnvironmentalFactor");
+	    Main.printLog("addEnvironmentalFactor");
 	    ef.setLocation(this);
 	    EnvironmentalFactors temp=null;
 	    for (EnvironmentalFactors e : envFactors ) {
@@ -328,7 +328,7 @@ public class Room implements iTask {
 	 * @param r az összeolvasztandó szoba
 	 */
 	public void merge(Room r) {
-	    ProtoUtil.printLog("merge");
+	    Main.printLog("merge");
 	    for (Room current : new ArrayList<>(r.neighbours)) {
 	        if (!neighbours.contains(current)&&!current.equals(this)) {
 	            addNeighbour(current);
@@ -361,7 +361,7 @@ public class Room implements iTask {
 	 * @param i a lerakandó tárgy
 	 */
 	public void spawnItem(Item i) {
-	    ProtoUtil.printLog("spawnItem");
+	    Main.printLog("spawnItem");
 	    if(items.size()<maxItemCapacity) {
 	    	items.add(i);
 	    	notifySubsribers("spawnitem "+(items.size()-1));

@@ -1,6 +1,6 @@
 package Items;
 
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * Az osztály egy hamis csúszkálószabályzót reprezentál, amely a SlideRuleból származik.
@@ -20,7 +20,7 @@ public class FakeSlideRule extends SlideRule {
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp");
+		Main.printLog("onPickUp");
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public class FakeSlideRule extends SlideRule {
 	 */
 	@Override
 	public void use() {
-	    ProtoUtil.printLog("use"); // Logolás
+	    Main.printLog("use"); // Logolás
 	}
 
 }

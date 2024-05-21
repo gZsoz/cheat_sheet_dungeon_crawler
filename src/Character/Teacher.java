@@ -8,20 +8,20 @@ import Items.FakeBatSkin;
 import Items.Item;
 import Items.Transistor;
 import Items.WetCloth;
+import Main.Main;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 
 /**
  * Kirúgás esetén a Student eltávolítását ez az osztály végzi. NPC karakter, bizonyos időközönként elhatározza, hogy átmegy egy másik szobába.
  */
 public class Teacher extends Character {
 	
-	public static int angryTime = 3 * ProtoUtil.fps; // mennyi ideig lesz angry
+	public static int angryTime = 3 * Main.fps; // mennyi ideig lesz angry
 	
 	/**
 	 * Két elhatározás között átlagosan eltelt idő.
 	 */
-	public static int timeBetweenMoves = 7 * ProtoUtil.fps;
+	public static int timeBetweenMoves = 7 * Main.fps;
 	
 	/**
 	 * Mozgási idő. Ennyi idő múlva megy be egy szobába, ha már megszületett az elhatározása.
@@ -77,7 +77,7 @@ public class Teacher extends Character {
 	 * Megvizsgálja, hogy van-e hallgató a tnaár szobájában.
 	 */
 	public void checkCollision() {
-		ProtoUtil.printLog("checkCollision");
+		Main.printLog("checkCollision");
 		for(Character temp : new ArrayList<Character>(currentRoom.getCharacters())) {
 			if((Object)temp instanceof Student){
 				kick((Student) temp); // ha találunk, kirúgjuk a hallgatót
@@ -92,7 +92,7 @@ public class Teacher extends Character {
 	 * @param s a hallgató, amelyet ki szándékozik rúgni
 	 */
 	public void kick(Student s) {
-		ProtoUtil.printLog("kick");
+		Main.printLog("kick");
 		if(!s.getInvincible() && !(stunned > 0 && stunned <= stunTime)) {
 			BatSkin b = null;
 			for(int i = 0; i < s.getInventory().size(); i++){
@@ -123,7 +123,7 @@ public class Teacher extends Character {
 				
 				currentRoom.removeCharacter(s); // diák eltávolítása
 				s.notifySubsribers("kicked");
-				ProtoUtil.printLog("student removed from game");
+				Main.printLog("student removed from game");
 			}
 		}
 	}
@@ -133,7 +133,7 @@ public class Teacher extends Character {
 	 */
 	@Override
 	public boolean enterRoom(Room r) {
-		setTimeToMove(2*ProtoUtil.random.nextInt(timeBetweenMoves, 20)+angryTime+1);
+		setTimeToMove(2*Main.random.nextInt(timeBetweenMoves, 20)+angryTime+1);
 		return super.enterRoom(r);
 	}
 	
@@ -150,7 +150,7 @@ public class Teacher extends Character {
 			if(neighbourWithStudent < currentRoom.getNeighbours().size())
 				enterRoom(currentRoom.getNeighbours().get(neighbourWithStudent));
 			else
-				enterRoom(currentRoom.getNeighbours().get(ProtoUtil.random.nextInt(currentRoom.getNeighbours().size(), 0)));
+				enterRoom(currentRoom.getNeighbours().get(Main.random.nextInt(currentRoom.getNeighbours().size(), 0)));
 			neighbourWithStudent=0;
 		}
 		super.update();

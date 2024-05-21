@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Character.Character;
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * A CursedRoom osztály egy speciális típusú szobát reprezentál a játékban, amely az alap Room osztálytól származik.
@@ -13,9 +13,9 @@ import ProtoUtil.ProtoUtil;
 public class CursedRoom extends Room {
 	
 	/**
-	 * Ezzel a változóval állítható be a ProtoUtil-ban az alapértelmezett zárva tartási idő hossza.
+	 * Ezzel a változóval állítható be a Main-ban az alapértelmezett zárva tartási idő hossza.
 	 */
-	public static int defaultCloseDuration=7 * ProtoUtil.fps;
+	public static int defaultCloseDuration=7 * Main.fps;
 	
 	/**
 	 * A szoba zárva tartásának ideje.
@@ -65,7 +65,7 @@ public class CursedRoom extends Room {
 	 */
 	@Override
 	public List<Room> getNeighbours() {
-	    ProtoUtil.printLog("getNeighbours");
+	    Main.printLog("getNeighbours");
 	    if (isOpen) {
 	        ArrayList<Room> openNeighbours = new ArrayList<>();
 	        for(Room r : new ArrayList<Room>(neighbours)) {
@@ -95,7 +95,7 @@ public class CursedRoom extends Room {
 	 * Beállítja az ajtók állapotát zártnak és inicializálja a closeDuration-t a definiált kezdőértékre.
 	 */
 	public void hideDoors() {
-	    ProtoUtil.printLog("hideDoors");
+	    Main.printLog("hideDoors");
 	    removeAllDoors();
 	    setCloseDuration(defaultCloseDuration);
 	}
@@ -104,7 +104,7 @@ public class CursedRoom extends Room {
 	 * A szoba összes ajtaját eltávolítja.
 	 */
 	public void removeAllDoors() {
-	    ProtoUtil.printLog("removeAllDoors");
+	    Main.printLog("removeAllDoors");
 	    isOpen = false;
 	    notifySubsribers("enteredcursedroom");
 	}
@@ -123,11 +123,11 @@ public class CursedRoom extends Room {
 	 */
 	public void reduceDuration() {
 	    if (closeDuration > 0) {
-	    	ProtoUtil.printLog("reduceDurationCursed");
+	    	Main.printLog("reduceDurationCursed");
 	        setCloseDuration(closeDuration-1);
 	        if (closeDuration == 0) {
 	            isOpen = true;
-	            ProtoUtil.printLog("bringbackDoors");
+	            Main.printLog("bringbackDoors");
 	        }
 	    }
 	}

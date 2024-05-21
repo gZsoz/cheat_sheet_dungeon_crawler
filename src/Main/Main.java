@@ -1,4 +1,4 @@
-package ProtoUtil;
+package Main;
 
 import java.awt.EventQueue;
 import java.io.File;
@@ -34,9 +34,9 @@ import View.Utils.SelectionColor;
 import View.ViewMap.ViewLabyrinth;
 
 /**
- * A ProtoUtil osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
+ * A Main osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
  */
-public class ProtoUtil {
+public class Main {
 	/**
 	 * A konzol szövegszínének default-ra állítása.
 	 */

@@ -1,6 +1,6 @@
 package Items;
 
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * Ebből az osztályból származnak le azok a tárgyak, amiket csak bizonyos számú alkalommal lehet használni. 
@@ -18,7 +18,7 @@ public abstract class NumberOfUsesItem extends Item {
 	 * @return a maradék használatok száma
 	 */
 	public int getRemainingUses(){
-	    ProtoUtil.printLog("getRemainingUses"); // Logolás
+	    Main.printLog("getRemainingUses"); // Logolás
 	    return RemainingUses;
 	}
 	
@@ -27,7 +27,7 @@ public abstract class NumberOfUsesItem extends Item {
 	 * @param x az új maradék használatok száma
 	 */
 	public void setRemainingUses(int x){
-	    ProtoUtil.printLog("setRemainingUses"); // Logolás
+	    Main.printLog("setRemainingUses"); // Logolás
 	    RemainingUses=x;
 	    notifySubsribers("remaininguses");
 	    if(RemainingUses == 0) {

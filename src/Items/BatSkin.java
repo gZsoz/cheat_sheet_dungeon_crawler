@@ -1,7 +1,7 @@
 package Items;
 
 import Character.Student;
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * A tárgyhoz tartozó objektum feladata, hogy veszély esetén megvédje a karaktereket 
@@ -12,7 +12,7 @@ import ProtoUtil.ProtoUtil;
 public class BatSkin extends NumberOfUsesItem {
 	
 	/**
-	 * Ezzel a változóval állítható be a ProtoUtil-ban az alapértelmezett használatszám.
+	 * Ezzel a változóval állítható be a Main-ban az alapértelmezett használatszám.
 	 */
 	public static int defaultRemainingUses = 3;
 	
@@ -30,7 +30,7 @@ public class BatSkin extends NumberOfUsesItem {
 	 */
 	@Override
 	public void use() {
-	    ProtoUtil.printLog("use");
+	    Main.printLog("use");
 	    if(owner instanceof Student) ((Student)owner).setInvincible(true);
 	    if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
 	}
@@ -40,6 +40,6 @@ public class BatSkin extends NumberOfUsesItem {
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp");
+		Main.printLog("onPickUp");
 	}
 }

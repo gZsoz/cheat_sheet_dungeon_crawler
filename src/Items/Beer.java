@@ -1,7 +1,7 @@
 package Items;
 
 import Character.Student;
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * Az osztály a Beer tárgy reprezentálására szolgál.
@@ -13,10 +13,10 @@ public class Beer extends DecayingItem {
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp");
+		Main.printLog("onPickUp");
 		use(); // Használat elindítása
 		if(!owner.getInventory().isEmpty()) {
-			int rand=ProtoUtil.random.nextInt(owner.getInventory().size(),0);
+			int rand=Main.random.nextInt(owner.getInventory().size(),0);
 			owner.putdownItem(owner.getInventory().get(rand)); // Véletlenszerű tárgy eldobása
 		}
 	}
@@ -26,7 +26,7 @@ public class Beer extends DecayingItem {
 	 */
 	@Override
 	public void onDrop() {
-		ProtoUtil.printLog("onDrop");
+		Main.printLog("onDrop");
 		isActive=false; // Aktiválás kikapcsolása
 		boolean beer=false;
 		for(Item i : owner.getInventory()) {
@@ -46,7 +46,7 @@ public class Beer extends DecayingItem {
 	 */
 	@Override
 	public void use() {
-		ProtoUtil.printLog("use");
+		Main.printLog("use");
 		if(owner instanceof Student) ((Student)owner).setInvincible(true); // Immunitás adása
 		setIsActive(true); // Aktiválás jelzése
 	}

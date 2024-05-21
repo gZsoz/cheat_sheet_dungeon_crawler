@@ -1,6 +1,6 @@
 package Items;
 
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * A logarléc osztályból az összes többi tárggyal ellentétben csupán egy lehet a pályán, 
@@ -22,7 +22,7 @@ public class SlideRule extends NumberOfUsesItem {
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp");
+		Main.printLog("onPickUp");
 		use();
 	}
 	
@@ -31,9 +31,9 @@ public class SlideRule extends NumberOfUsesItem {
 	 */
 	@Override
 	public void use() {
-		ProtoUtil.printLog("use");
+		Main.printLog("use");
 		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
-		ProtoUtil.printLog("Game over");
+		Main.printLog("Game over");
 		owner.notifySubsribers("studentwon");
 	}
 }

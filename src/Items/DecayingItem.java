@@ -1,6 +1,6 @@
 package Items;
 
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 import Time.iTask;
 
 /**
@@ -9,9 +9,9 @@ import Time.iTask;
 public abstract class DecayingItem extends Item implements iTask {
 	
 	/**
-	 * Ezzel a változóval állítható be a ProtoUtil-ban az alapértelmezett lejárati idő.
+	 * Ezzel a változóval állítható be a Main-ban az alapértelmezett lejárati idő.
 	 */
-	public static int defaultDuration = 14 * ProtoUtil.fps;
+	public static int defaultDuration = 14 * Main.fps;
 	
 	/**
 	 * Lejárati idő.
@@ -37,7 +37,7 @@ public abstract class DecayingItem extends Item implements iTask {
 	 * ha a duration eléri a 0-t.
 	 */
 	public void reduceDuration() {
-		ProtoUtil.printLog("reduceDuration");
+		Main.printLog("reduceDuration");
 		duration--;
 		if(duration==0) {
 			notifySubsribers("itemexpired");
@@ -47,7 +47,7 @@ public abstract class DecayingItem extends Item implements iTask {
 			}
 			owner.notifySubsribers("inventory removed "+idx);
 			onDrop();
-			ProtoUtil.printLog("Decaying item expired and removed.");
+			Main.printLog("Decaying item expired and removed.");
 		}
 	}
 	
@@ -56,7 +56,7 @@ public abstract class DecayingItem extends Item implements iTask {
 	 * @return a tárgy aktív állapota
 	 */
 	public boolean getIsActive() {
-		ProtoUtil.printLog("getIsActive");
+		Main.printLog("getIsActive");
 		return isActive;
 	}
 	
@@ -65,7 +65,7 @@ public abstract class DecayingItem extends Item implements iTask {
 	 * @param isactive a tárgy aktív állapota
 	 */
 	public void setIsActive(boolean isactive) {
-		ProtoUtil.printLog("setIsActive");
+		Main.printLog("setIsActive");
 		notifySubsribers("isactive");
 			this.isActive = isactive;
 		}

@@ -1,7 +1,7 @@
 package Items;
 
 import EnvironmentalFactor.Gas;
-import ProtoUtil.ProtoUtil;
+import Main.Main;
 
 /**
  * A Káposztás Camembert osztály felelős mérges gáz kibocsátására egy adott szobában egyszeri alkalommal. 
@@ -28,7 +28,7 @@ public class CabbageCamembert extends NumberOfUsesItem {
 	 */
 	@Override
 	public void use() {
-		ProtoUtil.printLog("use");
+		Main.printLog("use");
 		Gas g=new Gas(owner.getRoom());
 		owner.getRoom().spawnEnvironmentalFactor(g);
 		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
@@ -39,7 +39,7 @@ public class CabbageCamembert extends NumberOfUsesItem {
 	 */
 	@Override
 	public void onPickUp() {
-		ProtoUtil.printLog("onPickUp");
+		Main.printLog("onPickUp");
 	}
 	
 	/**

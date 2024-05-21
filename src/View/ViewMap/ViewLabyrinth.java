@@ -11,10 +11,10 @@ import java.util.Collections;
 
 import javax.swing.JComponent;
 
+import Main.Main;
 import Map.CursedRoom;
 import Map.Labyrinth;
 import Map.Room;
-import ProtoUtil.ProtoUtil;
 import View.Utils.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
@@ -86,7 +86,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 	 * Kezdő map generálás view szinten
 	 */
 	public void initLab() {
-		if(ProtoUtil.random.nextInt(1, -1)==0)
+		if(Main.random.nextInt(1, -1)==0)
 			Collections.shuffle(fixedRoomPositions);
 		for(int i = 0; i < labyrinth.getRooms().size(); i++){
 			roomsInPosition[i]=1;
@@ -201,7 +201,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 			} else {
 				g2D.drawImage(ImageReader.loadImage(ImageReader.path+"lostscreen.png"),0,0,1820,980,null);
 			}
-			ProtoUtil.timer.stop();
+			Main.timer.stop();
 		}
 	}
 }

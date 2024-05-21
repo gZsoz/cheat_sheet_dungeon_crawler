@@ -121,7 +121,7 @@ public class GameFrame extends JFrame {
 	 * @param blue a kék játékos vezérlője
 	 */
 	public GameFrame(ViewLabyrinth vl, PlayerController red, PlayerController blue){
-		super("cheat_sheet");
+		super("A logarléc");
 		GameFrame.vl=vl;
 		GameFrame.red=red;
 		GameFrame.blue=blue;
@@ -130,6 +130,7 @@ public class GameFrame extends JFrame {
 		this.setResizable(false);
 		this.setPreferredSize(new Dimension(1820,980));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setIconImage(ImageReader.loadImage(ImageReader.path+"Items/"+"sliderule.png"));
 	
 		mainPanel =  new JPanel() {
 			@Override
