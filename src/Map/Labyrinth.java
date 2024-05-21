@@ -415,6 +415,8 @@ public class Labyrinth implements iTask {
 			}
 		}
 		
+		Collections.shuffle(roomWithSlideRule.getItems());
+		
 		// diákok legenerálása
 		List<Room> roomsWithStudents = new ArrayList<Room>();
 		
