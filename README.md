@@ -36,4 +36,4 @@ TesztProgram futtatása
 ## Közreműködők
 <a href="https://github.com/gZsoz/cheat_sheet_dungeon_crawler/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=gZsoz/cheat_sheet_dungeon_crawler" />
-</a>
+</a> 
