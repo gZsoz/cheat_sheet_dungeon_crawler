@@ -24,9 +24,9 @@ A program osztályait le kell fordítani, majd ez után futtatható lesz:
 ```bash
 javac Character\*.java EnvironmentalFactor\*.java Items\*.java Map\*.java Time\*.java View\Controller\*.java View\Utils\*.java View\ViewCharacter\*.java View\ViewEnvironmentalFactor\*.java View\ViewItem\*.java View\ViewMap\*.java Main\Main.java
 
-## Tesztelés
 java Main.Main
 ```
+## Tesztelés
 TesztProgram futtatása
 ```bash
   java Main.Main test
