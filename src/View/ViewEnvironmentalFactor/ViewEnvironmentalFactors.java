@@ -5,7 +5,7 @@ import java.awt.Image;
 
 import javax.swing.JComponent;
 
-import EnvironmentalFactor.EnvironmentalFactors;
+import Model.EnvironmentalFactors.EnvironmentalFactors;
 import View.Utils.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;

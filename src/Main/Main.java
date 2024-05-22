@@ -17,18 +17,18 @@ import java.util.Scanner;
 
 import javax.swing.Timer;
 
-import Character.Character;
-import Character.Cleaner;
-import Character.Student;
-import Character.Teacher;
-import EnvironmentalFactor.Sticky;
-import Items.AirFreshener;
-import Items.BatSkin;
-import Items.CabbageCamembert;
-import Items.DecayingItem;
-import Map.CursedRoom;
-import Map.Labyrinth;
-import View.Controller.PlayerController;
+import Model.Characters.Character;
+import Model.Characters.Cleaner;
+import Model.Characters.Student;
+import Model.Characters.Teacher;
+import Model.EnvironmentalFactors.Sticky;
+import Model.Items.NumberOfUsesItems.AirFreshener;
+import Model.Items.NumberOfUsesItems.BatSkin;
+import Model.Items.NumberOfUsesItems.CabbageCamembert;
+import Model.Items.DecayingItems.DecayingItem;
+import Model.Map.CursedRoom;
+import Model.Map.Labyrinth;
+import Controller.PlayerController;
 import View.Utils.GameFrame;
 import View.Utils.SelectionColor;
 import View.ViewMap.ViewLabyrinth;
@@ -360,8 +360,8 @@ public class Main {
         	Character.restTime = 10;
         	Character.stunTime = 5;
         	Cleaner.timeBetweenMoves = 10;
-        	Teacher.angryTime = 3;
-        	Teacher.timeBetweenMoves = 7;
+        	Teacher.angryTime = 8;
+        	Teacher.timeBetweenMoves = 10;
         	DecayingItem.defaultDuration = 14;
         	CursedRoom.defaultCloseDuration = 7;
         	Labyrinth.itemSpawnFrequency = 90;	// szobánkénti átlagos időtartam

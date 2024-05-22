@@ -1,11 +1,8 @@
 package View.ViewEnvironmentalFactor;
 
-import EnvironmentalFactor.Gas;
-import View.Utils.Containers;
+import Model.EnvironmentalFactors.Gas;
 import View.Utils.Coordinates;
-import View.Utils.GameFrame;
 import View.Utils.ImageReader;
-import View.Utils.Size;
 
 import java.awt.*;
 

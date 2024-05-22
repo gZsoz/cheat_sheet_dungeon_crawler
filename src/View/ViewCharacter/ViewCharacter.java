@@ -2,12 +2,10 @@ package View.ViewCharacter;
 
 import View.Utils.Containers;
 import View.Utils.Coordinates;
-import View.Utils.GameFrame;
-import View.Utils.ImageReader;
 import View.Utils.Size;
 import View.Utils.Subscriber;
 import View.ViewItem.ViewItem;
-import Character.Character;
+import Model.Characters.Character;
 
 import javax.swing.*;
 
@@ -57,7 +55,7 @@ public abstract class ViewCharacter extends JComponent implements Subscriber {
 	public abstract void setItemPositions();
 	
 	public void propertyChanged(String property) {
-		if(property.contains("inventory")) { // küldő: Character
+		if(property.contains("inventory")) { // küldő: Model.Character
 			setItemPositions();
 		}
 	}

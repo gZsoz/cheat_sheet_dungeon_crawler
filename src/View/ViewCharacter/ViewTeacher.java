@@ -1,8 +1,6 @@
 package View.ViewCharacter;
 
-import Character.Character;
-import Character.Teacher;
-import View.Utils.Containers;
+import Model.Characters.Teacher;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;

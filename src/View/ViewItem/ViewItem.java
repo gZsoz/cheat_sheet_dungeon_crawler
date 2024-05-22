@@ -7,7 +7,7 @@ import java.awt.Image;
 
 import javax.swing.JComponent;
 
-import Items.Item;
+import Model.Items.Item;
 import View.Utils.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;

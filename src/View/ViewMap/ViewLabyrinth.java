@@ -12,9 +12,9 @@ import java.util.Collections;
 import javax.swing.JComponent;
 
 import Main.Main;
-import Map.CursedRoom;
-import Map.Labyrinth;
-import Map.Room;
+import Model.Map.CursedRoom;
+import Model.Map.Labyrinth;
+import Model.Map.Room;
 import View.Utils.Containers;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;

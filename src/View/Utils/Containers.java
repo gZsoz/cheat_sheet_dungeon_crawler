@@ -1,16 +1,16 @@
 package View.Utils;
 
-import Map.Room;
+import Model.Map.Room;
 import View.ViewItem.ViewItem;
 import View.ViewMap.ViewRoom;
 
 import java.util.HashMap;
 
-import Items.Item;
+import Model.Items.Item;
 import View.ViewCharacter.ViewCharacter;
 import View.ViewEnvironmentalFactor.ViewEnvironmentalFactors;
-import Character.Character;
-import EnvironmentalFactor.EnvironmentalFactors;
+import Model.Characters.Character;
+import Model.EnvironmentalFactors.EnvironmentalFactors;
 
 /**
  * A modellbeli objektumokat a View-beli objektumokkal összekötő osztály.

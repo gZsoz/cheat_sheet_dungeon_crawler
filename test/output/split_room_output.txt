@@ -38,9 +38,9 @@ Neighbours of old room: 2
 getNeighbours
 Neighbours of new room: 2
 getItems
-Items of old room: 1
+Model.Items of old room: 1
 getItems
-Items of new room: 1
+Model.Items of new room: 1
 getCharacters
 Characters of old room: 1
 getCharacters

@@ -1,14 +1,11 @@
 package View.ViewCharacter;
 
-import Character.Student;
-import Character.Character;
-import View.Controller.PlayerController;
+import Model.Characters.Student;
+import Controller.PlayerController;
 import View.Utils.*;
 import View.ViewItem.ViewItem;
 
 import java.awt.*;
-
-import javax.swing.text.View;
 
 /**
  * A diák kirajzolásáért felelős osztály.

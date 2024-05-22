@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import EnvironmentalFactor.Gas;
-import EnvironmentalFactor.Sticky;
-import Items.AirFreshener;
-import Items.BatSkin;
-import Items.Beer;
-import Items.CabbageCamembert;
-import Items.FakeBatSkin;
-import Items.FakeMask;
-import Items.FakeSlideRule;
-import Items.Mask;
-import Items.SlideRule;
-import Items.Transistor;
-import Items.WetCloth;
-import Map.Labyrinth;
-import Map.Room;
-import Map.CursedRoom;
-import Character.Student;
-import Character.Teacher;
-import Character.Character;
-import Character.Cleaner;
+import Model.EnvironmentalFactors.Gas;
+import Model.EnvironmentalFactors.Sticky;
+import Model.Items.NumberOfUsesItems.AirFreshener;
+import Model.Items.NumberOfUsesItems.BatSkin;
+import Model.Items.DecayingItems.Beer;
+import Model.Items.NumberOfUsesItems.CabbageCamembert;
+import Model.Items.NumberOfUsesItems.FakeBatSkin;
+import Model.Items.DecayingItems.FakeMask;
+import Model.Items.NumberOfUsesItems.FakeSlideRule;
+import Model.Items.DecayingItems.Mask;
+import Model.Items.NumberOfUsesItems.SlideRule;
+import Model.Items.SpecialItems.Transistor;
+import Model.Items.DecayingItems.WetCloth;
+import Model.Map.Labyrinth;
+import Model.Map.Room;
+import Model.Map.CursedRoom;
+import Model.Characters.Student;
+import Model.Characters.Teacher;
+import Model.Characters.Character;
+import Model.Characters.Cleaner;
 
 /**
  * A tesztparancsok kezeléséért felelős osztály. A tesztparancsoknak megfelelő műveleteket hajt végre a labirintuson, karaktereken és tárgyakon.

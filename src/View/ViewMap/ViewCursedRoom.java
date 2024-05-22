@@ -1,6 +1,6 @@
 package View.ViewMap;
 
-import Map.Room;
+import Model.Map.Room;
 import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;

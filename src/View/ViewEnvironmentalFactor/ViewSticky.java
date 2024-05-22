@@ -3,7 +3,7 @@ package View.ViewEnvironmentalFactor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import EnvironmentalFactor.Sticky;
+import Model.EnvironmentalFactors.Sticky;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
 

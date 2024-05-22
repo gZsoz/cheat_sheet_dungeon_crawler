@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 
-import View.Controller.PlayerController;
+import Controller.PlayerController;
 import View.ViewCharacter.ViewCharacter;
 import View.ViewEnvironmentalFactor.ViewEnvironmentalFactors;
 import View.ViewItem.ViewItem;
