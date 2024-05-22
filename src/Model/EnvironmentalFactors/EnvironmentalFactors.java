@@ -46,7 +46,7 @@ public abstract class EnvironmentalFactors implements iTask {
 	 * függvényüket a paraméterként kapott Stringgel.
 	 * @param str üzenet arról, hogy mi változott meg, lehetséges értékek: "factorremoved"
 	 */
-	public void notifySubsribers(String str) {
+	public void notifySubscribers(String str) {
 		for(Subscriber sub : new ArrayList<>(subscribers))
 			sub.propertyChanged(str);
 	}

@@ -1,7 +1,6 @@
 package Model.Items.NumberOfUsesItems;
 
 import Main.Main;
-import Model.Items.NumberOfUsesItems.SlideRule;
 
 /**
  * Az osztály egy hamis csúszkálószabályzót reprezentál, amely a SlideRuleból származik.

@@ -49,7 +49,7 @@ public class Teacher extends Character {
 	 */
 	public void setTimeToMove(int timetomove) {
 		moveTime=timetomove;
-		notifySubsribers("angry");
+		notifySubscribers("angry");
 	}
 	
 	/**
@@ -122,7 +122,7 @@ public class Teacher extends Character {
 				}
 				
 				currentRoom.removeCharacter(s); // diák eltávolítása
-				s.notifySubsribers("kicked");
+				s.notifySubscribers("kicked");
 				Main.printLog("student removed from game");
 			}
 		}
@@ -144,7 +144,7 @@ public class Teacher extends Character {
 	@Override
 	public void update() {
 		if(!isStunned() && --moveTime==angryTime) {
-			notifySubsribers("angry");
+			notifySubscribers("angry");
 			searchForStudents();
 		}else if(moveTime<=0&&!currentRoom.getNeighbours().isEmpty()) {
 			if(neighbourWithStudent < currentRoom.getNeighbours().size())

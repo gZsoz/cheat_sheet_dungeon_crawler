@@ -3,7 +3,6 @@ package View.ViewItem.ViewDecayingItems;
 import Model.Items.DecayingItems.WetCloth;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
-import View.ViewItem.ViewDecayingItems.ViewDecayingItem;
 
 /**
  * A nedves törlőrongy kirajzolásáért felelős.

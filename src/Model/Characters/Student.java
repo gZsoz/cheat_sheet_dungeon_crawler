@@ -54,7 +54,7 @@ public class Student extends Character {
 	 */
 	public void setInvincible(boolean state) {
 		Main.printLog("setInvincible");
-		notifySubsribers("invincible");
+		notifySubscribers("invincible");
 		invincible = state;
 	}
 	 

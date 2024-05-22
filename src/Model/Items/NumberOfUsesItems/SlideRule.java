@@ -1,7 +1,6 @@
 package Model.Items.NumberOfUsesItems;
 
 import Main.Main;
-import Model.Items.NumberOfUsesItems.NumberOfUsesItem;
 
 /**
  * A logarléc osztályból az összes többi tárggyal ellentétben csupán egy lehet a pályán, 
@@ -35,6 +34,6 @@ public class SlideRule extends NumberOfUsesItem {
 		Main.printLog("use");
 		if(RemainingUses>0) this.setRemainingUses(RemainingUses-1);
 		Main.printLog("Game over");
-		owner.notifySubsribers("studentwon");
+		owner.notifySubscribers("studentwon");
 	}
 }

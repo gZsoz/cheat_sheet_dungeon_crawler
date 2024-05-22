@@ -88,7 +88,7 @@ public class CursedRoom extends Room {
 	public void addCharacter(Character character) {
 	    hideDoors();
 	    super.addCharacter(character);
-	    notifySubsribers("removedfromneighbours");
+	    notifySubscribers("removedfromneighbours");
 	}
 	
 	/**
@@ -106,7 +106,7 @@ public class CursedRoom extends Room {
 	public void removeAllDoors() {
 	    Main.printLog("removeAllDoors");
 	    isOpen = false;
-	    notifySubsribers("enteredcursedroom");
+	    notifySubscribers("enteredcursedroom");
 	}
 	
 	/**
@@ -115,7 +115,7 @@ public class CursedRoom extends Room {
 	 */
 	private void setCloseDuration(int duration){
 		closeDuration=duration;
-		notifySubsribers("closeDuration");
+		notifySubscribers("closeDuration");
 	}
 	
 	/**

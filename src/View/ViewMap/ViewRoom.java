@@ -383,8 +383,8 @@ public class ViewRoom extends JComponent implements Subscriber {
 	 * A szoba kirajzolása.
 	 */
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D) g;
 		if(selected == SelectionColor.Red){
 			g2D.setColor(Color.RED);

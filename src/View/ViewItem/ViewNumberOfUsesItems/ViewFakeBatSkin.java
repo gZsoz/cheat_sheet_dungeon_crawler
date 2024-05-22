@@ -4,7 +4,6 @@ import Model.Items.NumberOfUsesItems.FakeBatSkin;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
 import View.ViewItem.ViewItem;
-import View.ViewItem.ViewNumberOfUsesItems.ViewBatSkin;
 
 /**
  * A hamis denevérbőr kirajzolásáért felelős.

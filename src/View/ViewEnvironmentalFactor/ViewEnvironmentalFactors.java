@@ -46,13 +46,13 @@ public abstract class ViewEnvironmentalFactors extends JComponent implements Sub
 	/**
 	 * Konstruktor egy környezeti változó nézet létrehozásához.
 	 * @param environmentalFactor a modellbeli környezeti változó
-	 * @param c a koordináták
+	 * @param coor a koordináták
 	 */
-	public ViewEnvironmentalFactors(EnvironmentalFactors environmentalFactor, Coordinates c) {
+	public ViewEnvironmentalFactors(EnvironmentalFactors environmentalFactor, Coordinates coor) {
 		this.environmentalFactor = environmentalFactor;
 		this.environmentalFactor.subscribe(this);
 		size = new Size(360+30,	250);
-		coordinates=c;
+		coordinates=coor;
 		GameFrame.mainPanel.add(this);
 		GameFrame.viewEnvs.add(this);
 		Containers.envs.put(this.environmentalFactor, this);
@@ -82,7 +82,7 @@ public abstract class ViewEnvironmentalFactors extends JComponent implements Sub
 	 * A környezeti változó kirajzolása.
 	 */
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 	}
 }

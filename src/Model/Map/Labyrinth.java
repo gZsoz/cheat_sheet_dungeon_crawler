@@ -142,7 +142,7 @@ public class Labyrinth implements iTask {
 			result.setCapacity(bigger);
 			result.merge(merging);
 			this.removeRoom(merging);
-			merging.notifySubsribers("roomremoved");
+			merging.notifySubscribers("roomremoved");
 			notifySubsribers("neighboursmodified");
 		}
 	}
@@ -240,8 +240,8 @@ public class Labyrinth implements iTask {
 				old.removeItem(old.getItems().get(0));
 			}
 		}
-		old.notifySubsribers("items");
-		n.notifySubsribers("items");
+		old.notifySubscribers("items");
+		n.notifySubscribers("items");
 		
 		// Karakterek hozzáadása
 		if(!old.getCharacters().isEmpty()) {
@@ -250,16 +250,16 @@ public class Labyrinth implements iTask {
 				old.getCharacters().get(0).enterRoom(n);
 			}
 		}
-		old.notifySubsribers("characters");
-		n.notifySubsribers("characters");
+		old.notifySubscribers("characters");
+		n.notifySubscribers("characters");
 		
 		// Környezeti tényezők hozzáadása
 		for(int i=0; i<old.getEnvironmentalFactors().size(); i++){
 			if(old.getEnvironmentalFactors().get(i) instanceof Gas) n.spawnEnvironmentalFactor(new Gas(n));
 			else if(old.getEnvironmentalFactors().get(i) instanceof Sticky) n.spawnEnvironmentalFactor(new Sticky(n)); 
 		}
-		old.notifySubsribers("factors");
-		n.notifySubsribers("factors");
+		old.notifySubscribers("factors");
+		n.notifySubscribers("factors");
 		
 		Main.printLog("Neighbours of old room: "+old.getNeighbours().size());
 		Main.printLog("Neighbours of new room: "+n.getNeighbours().size());

@@ -76,7 +76,7 @@ public class Cleaner extends Character {
 				if(env instanceof Gas)
 					expired=env;
 			r.removeEnvironmentalFactor(expired); // gáz megszűntetése
-			r.notifySubsribers("factors");
+			r.notifySubscribers("factors");
 			Main.printLog("removeEnvironmentalFactor");
 		}
 	

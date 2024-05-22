@@ -15,10 +15,10 @@ public class ViewCursedRoom extends ViewRoom implements Subscriber {
 	/**
 	 * Konstruktor egy elátkozott szoba nézet létrehozásához.
 	 * @param r a modellbeli szoba
-	 * @param pos a koordináták
+	 * @param coor a koordináták
 	 */
-	public ViewCursedRoom(Room r, Coordinates pos) {
-		super(r, pos);
+	public ViewCursedRoom(Room r, Coordinates coor) {
+		super(r, coor);
 		image = ImageReader.loadImage(ImageReader.path + roomPath + "cursedroom.png");
 	}
 	
@@ -30,7 +30,7 @@ public class ViewCursedRoom extends ViewRoom implements Subscriber {
 	    super.propertyChanged(property);
 	    if(property.startsWith("removedfromneighbours")) { // küldő: CursedRoom 
 	    	for(Room r : room.neighbours)
-	    		r.notifySubsribers("cursedremovedfromneighbours "+GameFrame.vl.getLabyrinth().getRooms().indexOf(room));
+	    		r.notifySubscribers("cursedremovedfromneighbours "+GameFrame.vl.getLabyrinth().getRooms().indexOf(room));
 	    }
 	}
 }

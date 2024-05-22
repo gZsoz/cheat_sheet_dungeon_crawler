@@ -30,14 +30,14 @@ public abstract class NumberOfUsesItem extends Item {
 	public void setRemainingUses(int x){
 	    Main.printLog("setRemainingUses"); // Logolás
 	    RemainingUses=x;
-	    notifySubsribers("remaininguses");
+	    notifySubscribers("remaininguses");
 	    if(RemainingUses == 0) {
-			notifySubsribers("itemexpired");
+			notifySubscribers("itemexpired");
 			int idx = owner.getInventory().indexOf(this);
 			if(!owner.getInventory().remove(this)) {
 				System.out.println("Olyan NumberOfUsesItem lett eltávolítva az inventoryból, ami nincs benne az inventoryban!");
 			}
-			owner.notifySubsribers("inventory removed "+idx);
+			owner.notifySubscribers("inventory removed "+idx);
 	    }
 	}
 	

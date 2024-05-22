@@ -154,8 +154,8 @@ public abstract class ViewItem extends JComponent implements Subscriber {
 	 * Tárgy kirajzolása a megadott koordinátákra.
 	 */
 	@Override
-	public void paint(Graphics g) {
-	    // TODO Auto-generated method stub
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D) g;
 		if(selected == SelectionColor.Red){
 			g2D.setColor(Color.RED);

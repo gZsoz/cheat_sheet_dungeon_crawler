@@ -31,7 +31,8 @@ public class ViewGas extends ViewEnvironmentalFactors {
 	 * A gáz kirajzolása.
 	 */
 	@Override
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D)g;
 		g2D.drawImage(image,coordinates.getX()-15,coordinates.getY()-15,size.getWidth(),size.getHeight(),null);
 	}

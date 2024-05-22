@@ -44,7 +44,7 @@ public class Transistor extends Item {
 	public void setPair(Transistor t){
 		Main.printLog("setPair");
 		pair=t;
-		notifySubsribers("pair");
+		notifySubscribers("pair");
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class Transistor extends Item {
 	public void setActive(boolean state){
 		Main.printLog("setActive");
 		active = state;
-		notifySubsribers("isactive");
+		notifySubscribers("isactive");
 	}
 	
 	/**

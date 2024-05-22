@@ -42,7 +42,7 @@ public class Sticky extends EnvironmentalFactors {
 	 */
 	public void reduceRemainingEntries(){
 		Main.printLog("setRemainingEntries");
-		location.notifySubsribers("factors");
+		location.notifySubscribers("factors");
 		remainingEntries--;
 	}
 	

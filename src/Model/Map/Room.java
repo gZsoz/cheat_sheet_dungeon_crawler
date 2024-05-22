@@ -97,7 +97,7 @@ public class Room implements iTask {
 	public void setCapacity(int capacity) {
 	    Main.printLog("setCapacity");
 	    this.capacity=capacity;
-	    notifySubsribers("capacity");
+	    notifySubscribers("capacity");
 	}
 	
 	/**
@@ -165,7 +165,7 @@ public class Room implements iTask {
 	 * @param str üzenet arról, hogy mi változott meg, lehetséges értékek:
 	 * "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx", "spawnfactor <factor pos>", "roomremoved", "enteredcursedroom"
 	 */
-	public void notifySubsribers(String str) {
+	public void notifySubscribers(String str) {
 		for(Subscriber sub : new ArrayList<>(subscribers))
 			sub.propertyChanged(str);  // lehetséges értékek: "factors", "closeduration", "characters", "items", "capacity", "spawnitem <item pos>", "items removed "+idx", "spawnfactor <factor pos>", "roomremoved", "enteredcursedroom"
 	}
@@ -195,7 +195,7 @@ public class Room implements iTask {
 	public void addCharacter(Character character) {
 	    Main.printLog("addCharacter");
 	    characters.add(character);
-	    notifySubsribers("characters");
+	    notifySubscribers("characters");
 	}
 	
 	/**
@@ -206,7 +206,7 @@ public class Room implements iTask {
 	    Main.printLog("removeCharacter");
 	    if (!characters.remove(character))
 	        System.out.println("Olyan karakterre lett meghívva a removeCharacter, ami nincs a listában!!!");
-	    notifySubsribers("characters");
+	    notifySubscribers("characters");
 	}
 	
 	/**
@@ -218,14 +218,14 @@ public class Room implements iTask {
 	    Main.printLog("addItem");
 	    if(items.size()<maxItemCapacity) {
 	    	items.add(i);
-	    	notifySubsribers("items");
+	    	notifySubscribers("items");
 	    	return true;
 	    }else if(i instanceof SlideRule && !(i instanceof FakeSlideRule)){
 	    	items.add(i);
 	    	Item temp=items.get(maxItemCapacity-1); // utolsó item eltávolítása
 	    	removeItem(temp);
-	    	temp.notifySubsribers("itemexpired");
-	    	notifySubsribers("items");
+	    	temp.notifySubscribers("itemexpired");
+	    	notifySubscribers("items");
 	    	return true;
 	    }else {
 	    	if(i instanceof Transistor) {
@@ -239,7 +239,7 @@ public class Room implements iTask {
 				t.setActive(false);
 				t.setLocation(null);
 	    	}
-	    	i.notifySubsribers("itemexpired");
+	    	i.notifySubscribers("itemexpired");
 	    	return false;
 	    }
 	}
@@ -253,7 +253,7 @@ public class Room implements iTask {
 	    int idx=items.indexOf(i);
 	    if (!items.remove(i))
 	        System.out.println("Olyan Itemre lett meghívva a removeItem, ami nincs a listában!!!");
-	    notifySubsribers("items removed "+idx);
+	    notifySubscribers("items removed "+idx);
 	}
 	
 	/**
@@ -291,8 +291,8 @@ public class Room implements iTask {
 	    }
 	    if(temp!=null) removeEnvironmentalFactor(temp);
 	    envFactors.add(ef);
-		notifySubsribers("spawnfactor "+(envFactors.size()-1));
-	    notifySubsribers("factors");
+		notifySubscribers("spawnfactor "+(envFactors.size()-1));
+	    notifySubscribers("factors");
 	}
 	
 	/**
@@ -310,7 +310,7 @@ public class Room implements iTask {
 	    }
 	    if(temp!=null) removeEnvironmentalFactor(temp);
 	    envFactors.add(ef);
-	    notifySubsribers("factors");
+	    notifySubscribers("factors");
 	}
 	
 	/**
@@ -318,9 +318,9 @@ public class Room implements iTask {
 	 * @param ef az eltávolítandó környezeti tényező
 	 */
 	public void removeEnvironmentalFactor(EnvironmentalFactors ef) {
-	    ef.notifySubsribers("factorremoved");
+	    ef.notifySubscribers("factorremoved");
 	    envFactors.remove(ef);
-		notifySubsribers("factors");
+		notifySubscribers("factors");
 	}
 	
 	/**
@@ -364,7 +364,7 @@ public class Room implements iTask {
 	    Main.printLog("spawnItem");
 	    if(items.size()<maxItemCapacity) {
 	    	items.add(i);
-	    	notifySubsribers("spawnitem "+(items.size()-1));
+	    	notifySubscribers("spawnitem "+(items.size()-1));
 	    }
 	}
 	

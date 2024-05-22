@@ -1,33 +1,64 @@
 package View.ViewCharacter;
 
-import Model.Characters.Student;
-import Controller.PlayerController;
-import View.Utils.*;
-import View.ViewItem.ViewItem;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 
-import java.awt.*;
+import Controller.PlayerController;
+import Model.Characters.Student;
+import View.Utils.Containers;
+import View.Utils.Coordinates;
+import View.Utils.ImageReader;
+import View.Utils.SelectionColor;
+import View.ViewItem.ViewItem;
 
 /**
  * A diák kirajzolásáért felelős osztály.
  */
+@SuppressWarnings("serial")
 public class ViewStudent extends ViewCharacter {
-
+	
+	/**
+	 * A kék játékos képe.
+	 */
+	private Image blueImage = ImageReader.loadImage(ImageReader.path+charactersPath+"student_blue.png");
+	
+	/**
+	 * A piros játékos képe.
+	 */
+	private Image redImage = ImageReader.loadImage(ImageReader.path+charactersPath+"student_red.png");
+	
+	/**
+	 * A diák színe.
+	 */
 	private SelectionColor color;
-
+	
+	/**
+	 * Konstruktor egy karakter nézet létrehozásához.
+	 * @param character a modellbeli karakter
+	 * @param coords a koordináták
+	 */
 	public ViewStudent(Student student, Coordinates pos){
 		super(student, pos);
 	}
-
+	
+	/**
+	 * Diák színének beállítása.
+	 * @param color a szín
+	 */
 	public void setImage(SelectionColor color){
 		this.color = color;
 		if(color == SelectionColor.Blue){
-			image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_blue.png");
+			image = blueImage;
 		}
 		else if(color == SelectionColor.Red){
-			image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_red.png");
+			image = redImage;
 		}
 	}
 	
+	/**
+	 * A diák birtokában lévő tárgyak pozíciójának beállítása.
+	 */
 	@Override
 	public void setItemPositions() {
 		if(color == SelectionColor.Red){
@@ -48,13 +79,18 @@ public class ViewStudent extends ViewCharacter {
 		}
 	}
 	
+	/**
+	 * A következőkről kap értesítést:
+	 * a diákot kirúgták,
+	 * a diák el lett kábítva.
+	 */
 	@Override
 	public void propertyChanged(String property) {
 		super.propertyChanged(property);
 		if(property.equals("kicked")) { // küldő: Teacher
 			character.unsubscribe(this);
 		}
-		else if(property.equals("stun")){ // küldő:
+		else if(property.equals("stun")){ // küldő: Character
 			if(character.isStunned()){
 				if(color == SelectionColor.Red){
 					image = ImageReader.loadImage(ImageReader.path+charactersPath+"student_red_stunned.png");
@@ -73,11 +109,14 @@ public class ViewStudent extends ViewCharacter {
 			}
 		}
 	}
-
+	
+	/**
+	 * A diák kirajzolása.
+	 */
 	@Override
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D) g;
-		super.paint(g);
 		g2D.drawImage(image,coordinates.getX(),coordinates.getY(),size.getWidth(),size.getHeight(),null);
 	}
 }

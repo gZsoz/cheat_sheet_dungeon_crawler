@@ -41,12 +41,12 @@ public abstract class DecayingItem extends Item implements iTask {
 		Main.printLog("reduceDuration");
 		duration--;
 		if(duration==0) {
-			notifySubsribers("itemexpired");
+			notifySubscribers("itemexpired");
 			int idx = owner.getInventory().indexOf(this);
 			if(!owner.getInventory().remove(this)) {
 				System.out.println("Olyan DecayingItem lett eltávolítva az inventoryból, ami nincs benne az inventoryban!");
 			}
-			owner.notifySubsribers("inventory removed "+idx);
+			owner.notifySubscribers("inventory removed "+idx);
 			onDrop();
 			Main.printLog("Decaying item expired and removed.");
 		}
@@ -67,7 +67,7 @@ public abstract class DecayingItem extends Item implements iTask {
 	 */
 	public void setIsActive(boolean isactive) {
 		Main.printLog("setIsActive");
-		notifySubsribers("isactive");
+		notifySubscribers("isactive");
 			this.isActive = isactive;
 		}
 	   

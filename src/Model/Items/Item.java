@@ -42,7 +42,7 @@ public abstract class Item {
 	 */
 	public void setSticky(boolean s){
 		sticky=s;
-		notifySubsribers("sticky");
+		notifySubscribers("sticky");
 	}
 	
 	/**
@@ -68,7 +68,7 @@ public abstract class Item {
 	 * függvényüket a paraméterként kapott Stringgel.
 	 * @param str üzenet arról, hogy mi változott meg, lehetséges értékek: "sticky", "remaininguses", "isactive", "pair", "itemexpired"
 	 */
-	public void notifySubsribers(String str) {
+	public void notifySubscribers(String str) {
 		for(Subscriber sub : new ArrayList<>(subscribers))
 			sub.propertyChanged(str);
 	}

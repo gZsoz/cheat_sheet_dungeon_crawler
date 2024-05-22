@@ -549,8 +549,8 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 	/**
 	 * Kirajzolja a játékos által irányított karakter információs ablakát.
 	 */
-	public void paint(Graphics g) {
-	    super.paint(g);
+	public void paintComponent(Graphics g) {
+	    super.paintComponent(g);
 	    Graphics2D g2D = (Graphics2D) g;
 	
 	    // RED Inventory

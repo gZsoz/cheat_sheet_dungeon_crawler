@@ -1,9 +1,8 @@
 package Model.Items.NumberOfUsesItems;
 
+import Main.Main;
 import Model.EnvironmentalFactors.EnvironmentalFactors;
 import Model.EnvironmentalFactors.Gas;
-import Main.Main;
-import Model.Items.NumberOfUsesItems.NumberOfUsesItem;
 import Model.Map.Room;
 
 /**
@@ -41,7 +40,7 @@ public class AirFreshener extends NumberOfUsesItem {
 				if(env instanceof Gas)
 					expired=env;
 			r.removeEnvironmentalFactor(expired); // gáz megszűntetése
-			r.notifySubsribers("factors");
+			r.notifySubscribers("factors");
 			Main.printLog("airfreshener removed gas");
 		}
 	}

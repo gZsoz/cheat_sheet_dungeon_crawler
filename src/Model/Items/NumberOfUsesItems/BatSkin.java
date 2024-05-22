@@ -1,8 +1,7 @@
 package Model.Items.NumberOfUsesItems;
 
-import Model.Characters.Student;
 import Main.Main;
-import Model.Items.NumberOfUsesItems.NumberOfUsesItem;
+import Model.Characters.Student;
 
 /**
  * A tárgyhoz tartozó objektum feladata, hogy veszély esetén megvédje a karaktereket 

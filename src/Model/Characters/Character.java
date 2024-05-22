@@ -110,7 +110,7 @@ public abstract class Character implements iTask {
 	public void setStunned(int s) {
 		Main.printLog("setStunned");
 		stunned = s;
-		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
+		notifySubscribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 	}
 	
 	/**
@@ -119,7 +119,7 @@ public abstract class Character implements iTask {
 	public void reduceStunned() {
 		Main.printLog("reduceStunned");
 		stunned--;
-		notifySubsribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
+		notifySubscribers("stun");	// jelzi, hogy a stunolás állapota megváltozhat
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public abstract class Character implements iTask {
 	 * Meghívja a konstruktorában beállított feliratkozóira a propertyChanged(String) függvényüket a paraméterként kapott Stringgel.
 	 * @param str üzenet arról, hogy mi változott meg, lehetséges értékek: "stun", "inventory", "invincible", "kicked", "studentwon", "angry" 
 	 */
-	public void notifySubsribers(String str) {
+	public void notifySubscribers(String str) {
 		for(Subscriber sub : new ArrayList<>(subscribers))
 			sub.propertyChanged(str);
 	}
@@ -215,7 +215,7 @@ public abstract class Character implements iTask {
 			}
 			currentRoom.removeItem(i);
 			inventory.add(i);
-			notifySubsribers("inventory");
+			notifySubscribers("inventory");
 			i.setOwner(this);
 			Main.printLog("Successfully picked up item");
 			i.onPickUp();
@@ -235,7 +235,7 @@ public abstract class Character implements iTask {
 		if(!inventory.remove(i)) {
 			System.out.println("Olyan Item-re lett meghívva a putdownItem, ami nincs benne az inventoryban!");
 		}
-		notifySubsribers("inventory removed "+idx);
+		notifySubscribers("inventory removed "+idx);
 		if(currentRoom.addItem(i))
 			i.onDrop();
 	}
