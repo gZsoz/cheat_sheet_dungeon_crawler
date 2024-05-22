@@ -1,0 +1,15 @@
+create_room 1 normal
+create_item cabbagecamembert 0
+create_item batskin 0
+create_item mask 0
+create_item mask 0
+create_item batskin 0
+create_item cabbagecamembert 0
+create_character student 0
+select_actor 0
+pickup_item 0
+pickup_item 0
+pickup_item 0
+pickup_item 0
+pickup_item 0
+pickup_item 0

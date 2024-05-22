@@ -1,0 +1,17 @@
+addRoom
+addItem
+getRoom
+addCharacter
+getRoom
+getItems
+pickupItem
+getSticky
+removeItem
+setOwner
+Successfully picked up item
+onPickUp
+use
+setRemainingUses
+getInventory
+getInventory
+Game over

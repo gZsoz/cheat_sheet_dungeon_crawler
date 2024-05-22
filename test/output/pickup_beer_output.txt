@@ -1,0 +1,24 @@
+addRoom
+addItem
+getRoom
+addCharacter
+getRoom
+getItems
+pickupItem
+getSticky
+removeItem
+setOwner
+Successfully picked up item
+onPickUp
+use
+setInvincible
+setIsActive
+getInventory
+getInventory
+getInventory
+putdownItem
+addItem
+onDrop
+getInventory
+setInvincible
+Dropped

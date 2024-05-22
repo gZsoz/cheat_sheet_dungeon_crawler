@@ -1,0 +1,53 @@
+addRoom
+addItem
+addItem
+addItem
+addItem
+addItem
+addItem
+getRoom
+addCharacter
+getRoom
+getItems
+pickupItem
+getSticky
+removeItem
+setOwner
+Successfully picked up item
+onPickUp
+getRoom
+getItems
+pickupItem
+getSticky
+removeItem
+setOwner
+Successfully picked up item
+onPickUp
+getRoom
+getItems
+pickupItem
+getSticky
+removeItem
+setOwner
+Successfully picked up item
+onPickUp
+getRoom
+getItems
+pickupItem
+getSticky
+removeItem
+setOwner
+Successfully picked up item
+onPickUp
+getRoom
+getItems
+pickupItem
+getSticky
+removeItem
+setOwner
+Successfully picked up item
+onPickUp
+getRoom
+getItems
+pickupItem
+Could not pick up item, as it is a paired transistor.

@@ -1,0 +1,6 @@
+create_room 1 normal
+create_item cabbagecamembert 0
+create_character student 0
+select_actor 0
+pickup_item 0
+use_item 0

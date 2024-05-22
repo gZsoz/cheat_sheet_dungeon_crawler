@@ -1,0 +1,31 @@
+addRoom
+addItem
+addItem
+getRoom
+addCharacter
+getRoom
+getItems
+pickupItem
+getSticky
+getPair
+removeItem
+setOwner
+Successfully picked up item
+onPickUp
+getInventory
+getPair
+getRoom
+getItems
+pickupItem
+getSticky
+getPair
+removeItem
+setOwner
+Successfully picked up item
+onPickUp
+getInventory
+getPair
+getPair
+connect
+setPair
+setPair

@@ -1,0 +1,4 @@
+contains "addCharacter" 2
+contains "enterRoom"
+contains "getCapacity"
+contains "getCharacters"

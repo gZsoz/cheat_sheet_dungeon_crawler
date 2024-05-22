@@ -24,6 +24,14 @@ javac Character\*.java EnvironmentalFactor\*.java Items\*.java Map\*.java Time\*
 
 java Main.Main
 ```
+TesztProgram futtatása
+```bash
+  java Main.Main test
+```
+Összes teszt futtatása:
+```bash
+  java Main.Main test all
+  ```
 
 ## Közreműködők
 <a href="https://github.com/gZsoz/cheat_sheet_dungeon_crawler/graphs/contributors">

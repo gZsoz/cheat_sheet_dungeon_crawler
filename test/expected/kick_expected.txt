@@ -1,0 +1,4 @@
+contains "putdownItem
+addItem"
+contains "kick"
+contains "removeCharacter"

@@ -1,0 +1,2 @@
+contains "enterRoom" 2
+contains "removeCharacter" 2

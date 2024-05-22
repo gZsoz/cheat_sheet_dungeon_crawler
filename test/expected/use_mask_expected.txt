@@ -1,0 +1,4 @@
+notcontains "stun
+getStunned
+setStunned"
+contains "stun"

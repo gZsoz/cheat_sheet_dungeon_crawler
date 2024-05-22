@@ -1,0 +1,17 @@
+addRoom
+addNeighbour
+addRoom
+getRoom
+addCharacter
+enterRoom
+getCharacters
+getCapacity
+removeCharacter
+hideDoors
+removeAllDoors
+addCharacter
+setStunned
+setInvincible
+reduceDurationCursed
+reduceDurationCursed
+reduceDurationCursed

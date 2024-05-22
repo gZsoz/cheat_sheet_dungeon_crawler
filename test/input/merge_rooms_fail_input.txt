@@ -1,0 +1,9 @@
+create_room 1 normal
+create_room 2 normal 0
+create_room 1 normal 1
+create_character student 1
+create_character student 0
+create_character student 1
+create_item batskin 1
+create_factor gas 1
+merge 0 1

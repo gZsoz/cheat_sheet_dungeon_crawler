@@ -1,0 +1,4 @@
+contains "removeItem"
+contains "connect"
+contains "setPair" 2
+contains "Successfully picked up item" 2

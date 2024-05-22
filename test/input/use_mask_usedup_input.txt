@@ -1,0 +1,10 @@
+create_room 1 normal
+create_room 1 normal 0
+create_factor gas 1
+create_item mask 0
+create_character student 0
+select_actor 0
+pickup_item 0
+enter_room 1
+update
+update

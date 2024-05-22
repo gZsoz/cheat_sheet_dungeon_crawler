@@ -1,0 +1,6 @@
+create_room 1 normal
+create_room 1 cursed
+create_character student 0
+select_actor 0
+enter_room 1
+update

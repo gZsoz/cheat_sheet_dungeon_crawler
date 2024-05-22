@@ -1,0 +1,8 @@
+create_room 1 normal
+create_room 2 normal 0
+create_item batskin 0
+create_character student 0
+create_character teacher 1
+select_actor 0
+pickup_item 0
+enter_room 1

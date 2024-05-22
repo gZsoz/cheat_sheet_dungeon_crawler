@@ -1,0 +1,1 @@
+contains "Successfully picked up item"

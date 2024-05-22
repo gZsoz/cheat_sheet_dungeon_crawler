@@ -1,0 +1,5 @@
+contains "stun
+getStunned
+setStunned"
+contains "stun"
+contains "use"
