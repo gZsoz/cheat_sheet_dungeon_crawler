@@ -16,7 +16,7 @@ A projektet zip formátumban is le lehet tölteni. A zip fájlt ki kell csomagol
 ## Fordítás és futtatás
 A program osztályait le kell fordítani, majd ez után futtatható lesz:
 ```bash
-javac Character\*.java EnvironmentalFactor\*.java Items\*.java Map\*.java Time\*.java View\Controller\*.java View\Utils\*.java View\ViewCharacter\*.java View\ViewEnvironmentalFactor\*.java View\ViewItem\*.java View\ViewMap\*.java Main\Main.java
+javac Model\Characters\*.java Model\EnvironmentalFactors\*.java Model\Items\DecayingItems\*.java Model\Items\NumberOfUsesItems\*.java Model\Items\SpecialItems\*.java Model\Map\*.java Model\Time\*.java Controller\*.java View\Utils\*.java View\ViewCharacter\*.java View\ViewEnvironmentalFactor\*.java View\ViewItem\ViewDecayingItems\*.java View\ViewItem\ViewNumberOfUsesItems\*.java View\ViewItem\ViewSpecialItems\*.java View\ViewMap\*.java
 
 java Main.Main
 ```
