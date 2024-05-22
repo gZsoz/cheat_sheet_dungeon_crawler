@@ -1,4 +1,4 @@
-# A logarléc - PROTO
+# A logarléc
 
 A Logarléc egy local-multiplayer játék, amelyben a játékosoknak egy elátkozott labirintusban kell keresniük a Logarléc nevű ereklyét. A játékot mérnökhallgatókként lehet játszani, akiknek át kell navigálniuk magukat a labirintuson, miközben megpróbálják kijátszani az oktatókat.
 
@@ -20,16 +20,18 @@ cd cheat_sheet_dungeon_crawler\src
 ## Fordítás és futtatás
 A program osztályait le kell fordítani, majd ez után futtatható lesz:
 ```bash
-javac Model.Characters\*.java Model.EnvironmentalFactors\*.java Model.Items\*.java Model.Map\*.java Model.Time\*.java ProtoUtil\ProtoUtil.java
+javac Character\*.java EnvironmentalFactor\*.java Items\*.java Map\*.java Time\*.java View\Controller\*.java View\Utils\*.java View\ViewCharacter\*.java View\ViewEnvironmentalFactor\*.java View\ViewItem\*.java View\ViewMap\*.java Main\Main.java
+
+java Main.Main
 ```
 TesztProgram futtatása
 ```bash
-  java ProtoUtil.ProtoUtil
+  java Main.Main test
 ```
 Összes teszt futtatása:
 ```bash
-  java ProtoUtil.ProtoUtil test
-```
+  java Main.Main test all
+  ```
 
 ## Közreműködők
 <a href="https://github.com/gZsoz/cheat_sheet_dungeon_crawler/graphs/contributors">
