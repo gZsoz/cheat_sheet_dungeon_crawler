@@ -16,18 +16,18 @@ A projektet zip formátumban is le lehet tölteni. A zip fájlt ki kell csomagol
 ## Fordítás és futtatás
 A program osztályait le kell fordítani, majd ez után futtatható lesz:
 ```bash
-javac Model\Characters\*.java Model\EnvironmentalFactors\*.java Model\Items\DecayingItems\*.java Model\Items\NumberOfUsesItems\*.java Model\Items\SpecialItems\*.java Model\Map\*.java Model\Time\*.java Controller\*.java View\Utils\*.java View\ViewCharacter\*.java View\ViewEnvironmentalFactor\*.java View\ViewItem\ViewDecayingItems\*.java View\ViewItem\ViewNumberOfUsesItems\*.java View\ViewItem\ViewSpecialItems\*.java View\ViewMap\*.java
+javac -cp .;src -d bin src/Model/EnvironmentalFactors/*.java src/Model/Items/DecayingItems/*.java src/Model/Items/NumberOfUsesItems/*.java src/Model/Items/SpecialItems/*.java src/Model/Characters/*.java src/Model/Map/*.java src/Model/Time/*.java src/Controller/*.java src/View/Utils/*.java src/View/ViewCharacter/*.java src/View/ViewEnvironmentalFactor/*.java src/View/ViewItem/ViewDecayingItems/*.java src/View/ViewItem/ViewNumberOfUsesItems/*.java src/View/ViewItem/ViewSpecialItems/*.java src/View/ViewMap/*.java src/Main/*.java
 
-java Main.Main
+java -cp bin Main.Main
 ```
 ## Tesztelés
 TesztProgram futtatása
 ```bash
-  java Main.Main test
+  java -cp bin Main.Main test
 ```
 Összes teszt futtatása:
 ```bash
-  java Main.Main test all
+  java -cp bin Main.Main test all
   ```
 
 ## Közreműködők
