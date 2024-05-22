@@ -16,7 +16,7 @@ A projektet zip formátumban is le lehet tölteni. A zip fájlt ki kell csomagol
 ## Fordítás és futtatás
 A program osztályait le kell fordítani, majd ez után futtatható lesz:
 ```bash
-javac -cp .;src -d bin src/Model/EnvironmentalFactors/*.java src/Model/Items/DecayingItems/*.java src/Model/Items/NumberOfUsesItems/*.java src/Model/Items/SpecialItems/*.java src/Model/Characters/*.java src/Model/Map/*.java src/Model/Time/*.java src/Controller/*.java src/View/Utils/*.java src/View/ViewCharacter/*.java src/View/ViewEnvironmentalFactor/*.java src/View/ViewItem/ViewDecayingItems/*.java src/View/ViewItem/ViewNumberOfUsesItems/*.java src/View/ViewItem/ViewSpecialItems/*.java src/View/ViewMap/*.java src/Main/*.java
+javac -cp .;src -d bin src/Model/EnvironmentalFactors/*.java src/Model/Items/DecayingItems/*.java src/Model/Items/NumberOfUsesItems/*.java src/Model/Items/SpecialItems/*.java src/Model/Characters/*.java src/Model/Map/*.java src/Model/Time/*.java src/Controller/*.java src/View/Utils/*.java src/View/ViewCharacter/*.java src/View/ViewEnvironmentalFactor/*.java src/View/ViewItem/ViewDecayingItems/*.java src/View/ViewItem/ViewNumberOfUsesItems/*.java src/View/ViewItem/ViewSpecialItems/*.java src/View/ViewMap/*.java
 
 java -cp bin Main.Main
 ```
