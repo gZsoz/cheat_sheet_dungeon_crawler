@@ -57,6 +57,11 @@ public class Main {
 	 */
 	private static final String dirName = "test/";
 	
+	/**
+	 * A tesztmappa neve.
+	 */
+	private static final String configFileName = "config/gameconfig.txt";
+	
     /**
      * A stream, ahova logolunk.
      */
@@ -367,13 +372,14 @@ public class Main {
         	Labyrinth.itemSpawnFrequency = 90;	// szobánkénti átlagos időtartam
         	Labyrinth.mergeFrequency = 90;
         	Labyrinth.splitFrequency = 100;
-        	multiplyTimingsWithFps(); // pontosan egyszer kell meghívni, beállítja az időzítéseket fps-sel arányosan
         	
         	Sticky.defaultRemainingEntries=2;
         	AirFreshener.defaultRemainingUses=1;
         	BatSkin.defaultRemainingUses=3;
         	CabbageCamembert.defaultRemainingUses=1;
         	
+        	readConfigValues();
+        	multiplyTimingsWithFps(); // pontosan egyszer kell meghívni, beállítja az időzítéseket fps-sel arányosan
         	
     		Student redStudent=new Student();
     		Student blueStudent=new Student();
@@ -401,4 +407,74 @@ public class Main {
             timer.start();
     	}
     }
+    
+    private static void setConfigValue(String line) {
+    	if(line.trim().startsWith("//"))
+    		return;
+    	String[] parameters = line.split("=");
+    	if(parameters.length<2)
+    		return;
+    	String name = parameters[0].trim();
+    	String value = parameters[1].trim();
+    	switch (name) {
+    		case "Character.restTime":
+    			Character.restTime = Integer.parseInt(value);
+    			break;
+    		case "Character.stunTime":
+    			Character.stunTime = Integer.parseInt(value);
+    			break;
+    		case "Cleaner.timeBetweenMoves":
+    			Cleaner.timeBetweenMoves = Integer.parseInt(value);
+    			break;
+    		case "Teacher.angryTime":
+    			Teacher.angryTime = Integer.parseInt(value);
+    			break;
+    		case "Teacher.timeBetweenMoves":
+    			Teacher.timeBetweenMoves = Integer.parseInt(value);
+    			break;
+    		case "DecayingItem.defaultDuration":
+    			DecayingItem.defaultDuration = Integer.parseInt(value);
+    			break;
+    		case "CursedRoom.defaultCloseDuration":
+    			CursedRoom.defaultCloseDuration = Integer.parseInt(value);
+    			break;
+    		case "Labyrinth.itemSpawnFrequency":
+    			Labyrinth.itemSpawnFrequency = Integer.parseInt(value);
+    			break;
+    		case "Labyrinth.mergeFrequency":
+    			Labyrinth.mergeFrequency = Integer.parseInt(value);
+    			break;
+    		case "Labyrinth.splitFrequency":
+    			Labyrinth.splitFrequency = Integer.parseInt(value);
+    			break;
+    		case "Sticky.defaultRemainingEntries":
+    			Sticky.defaultRemainingEntries = Integer.parseInt(value);
+    			break;
+    		case "AirFreshener.defaultRemainingUses":
+    			AirFreshener.defaultRemainingUses = Integer.parseInt(value);
+    			break;
+    		case "BatSkin.defaultRemainingUses":
+    			BatSkin.defaultRemainingUses = Integer.parseInt(value);
+    			break;
+    		case "CabbageCamembert.defaultRemainingUses":
+    			CabbageCamembert.defaultRemainingUses = Integer.parseInt(value);
+    			break;
+    		default:
+    			System.out.println(name + " nem található az érvényes parancsok közt.");
+    			System.out.println("Megjegyzést a // karakterek mögé lehet írni.");
+    			return;
+    	}
+    	System.out.println(name + " is set to " + value);
+    }
+
+	private static void readConfigValues() {
+		try (Scanner scanner = new Scanner(new File(configFileName))) {
+		    while (scanner.hasNextLine()) {
+		    	setConfigValue(scanner.nextLine());
+		    }
+		} catch (FileNotFoundException fnfe) {
+			System.out.println("Nem található konfigurációs fájl a \"" + configFileName + "\" elérési úton.");
+			System.out.println("Játék indítása az alapértelmezett értékekkel.");
+		}
+	}
 }
