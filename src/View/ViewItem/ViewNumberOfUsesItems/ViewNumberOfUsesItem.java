@@ -71,8 +71,8 @@ public abstract class ViewNumberOfUsesItem extends ViewItem {
 	 * A különböző valahányszor használható tárgyak kirajzolása.
 	 */
 	@Override
-	public void paint(Graphics g){
-		super.paint(g);
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		if (size.equals(ViewItem.inventorySize)) {
 			Graphics2D g2D = (Graphics2D) g;
 			g2D.setColor(Color.YELLOW);

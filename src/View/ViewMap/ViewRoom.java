@@ -1,5 +1,6 @@
 package View.ViewMap;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,18 +16,18 @@ import Model.Characters.Teacher;
 import Model.EnvironmentalFactors.EnvironmentalFactors;
 import Model.EnvironmentalFactors.Gas;
 import Model.EnvironmentalFactors.Sticky;
+import Model.Items.Item;
+import Model.Items.DecayingItems.Beer;
+import Model.Items.DecayingItems.FakeMask;
+import Model.Items.DecayingItems.Mask;
+import Model.Items.DecayingItems.WetCloth;
 import Model.Items.NumberOfUsesItems.AirFreshener;
 import Model.Items.NumberOfUsesItems.BatSkin;
-import Model.Items.DecayingItems.Beer;
 import Model.Items.NumberOfUsesItems.CabbageCamembert;
 import Model.Items.NumberOfUsesItems.FakeBatSkin;
-import Model.Items.DecayingItems.FakeMask;
 import Model.Items.NumberOfUsesItems.FakeSlideRule;
-import Model.Items.Item;
-import Model.Items.DecayingItems.Mask;
 import Model.Items.NumberOfUsesItems.SlideRule;
 import Model.Items.SpecialItems.Transistor;
-import Model.Items.DecayingItems.WetCloth;
 import Model.Map.Room;
 import View.Utils.Containers;
 import View.Utils.Coordinates;
@@ -40,18 +41,18 @@ import View.ViewCharacter.ViewCleaner;
 import View.ViewCharacter.ViewTeacher;
 import View.ViewEnvironmentalFactor.ViewGas;
 import View.ViewEnvironmentalFactor.ViewSticky;
+import View.ViewItem.ViewItem;
+import View.ViewItem.ViewDecayingItems.ViewBeer;
+import View.ViewItem.ViewDecayingItems.ViewFakeMask;
+import View.ViewItem.ViewDecayingItems.ViewMask;
+import View.ViewItem.ViewDecayingItems.ViewWetCloth;
 import View.ViewItem.ViewNumberOfUsesItems.ViewAirFreshener;
 import View.ViewItem.ViewNumberOfUsesItems.ViewBatSkin;
-import View.ViewItem.ViewDecayingItems.ViewBeer;
 import View.ViewItem.ViewNumberOfUsesItems.ViewCabbageCamembert;
 import View.ViewItem.ViewNumberOfUsesItems.ViewFakeBatSkin;
-import View.ViewItem.ViewDecayingItems.ViewFakeMask;
 import View.ViewItem.ViewNumberOfUsesItems.ViewFakeSlideRule;
-import View.ViewItem.ViewItem;
-import View.ViewItem.ViewDecayingItems.ViewMask;
 import View.ViewItem.ViewNumberOfUsesItems.ViewSlideRule;
 import View.ViewItem.ViewSpecialItems.ViewTransistor;
-import View.ViewItem.ViewDecayingItems.ViewWetCloth;
 
 /**
  * A szoba grafikus osztálya.
@@ -386,20 +387,24 @@ public class ViewRoom extends JComponent implements Subscriber {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D) g;
+		g2D.setStroke(new BasicStroke(10));
 		if(selected == SelectionColor.Red){
 			g2D.setColor(Color.RED);
-			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+			g2D.drawRect(coordinates.getX()-5,coordinates.getY()-5,size.getWidth()+10,size.getHeight()+10);
+			//g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
 		}
 		else if(selected == SelectionColor.Blue){
 			g2D.setColor(Color.BLUE.brighter());
-			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+			g2D.drawRect(coordinates.getX()-5,coordinates.getY()-5,size.getWidth()+10,size.getHeight()+10);
+			//g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
 		}
 		else if(selected == SelectionColor.Both){
 			g2D.setColor(Color.BLUE.brighter());
-			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
+			g2D.drawRect(coordinates.getX()-5,coordinates.getY()-5,size.getWidth()+10,size.getHeight()+10);
+			//g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,size.getWidth()+20,size.getHeight()+20);
 			g2D.setColor(Color.RED);
-			g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,(size.getWidth()+20)/2,size.getHeight()+20);
-	
+			g2D.drawRect(coordinates.getX()-5,coordinates.getY()-5,(size.getWidth()+10)/2,size.getHeight()+10);
+			//g2D.fillRect(coordinates.getX()-10,coordinates.getY()-10,(size.getWidth()+20)/2,size.getHeight()+20);
 		}
 	
 		// szoba kirajzolása

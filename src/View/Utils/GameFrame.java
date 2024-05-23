@@ -70,6 +70,11 @@ public class GameFrame extends JFrame {
 	private static Image instructionsBackground = ImageReader.loadImage(ImageReader.path+"Backgrounds/inventory_background.png");
 	
 	/**
+	 * A labirintus háttere.
+	 */
+	private static Image labyrinthImage = ImageReader.loadImage(ImageReader.path+"Backgrounds/labyrinth_background_darker.png");
+	
+	/**
 	 * A játékbeli instrukciókat kiíró komponens.
 	 */
 	public static JComponent instructions = new JComponent() {
@@ -136,18 +141,19 @@ public class GameFrame extends JFrame {
 			@Override
 			public void paint(Graphics g) {
 				super.paint(g);
-				red.paint(g);
-				blue.paint(g);
+				g.drawImage(labyrinthImage, 0, 0, null);
+				red.paintComponent(g);
+				blue.paintComponent(g);
 				for(ViewRoom i : viewRooms)
-					i.paint(g);
+					i.paintComponent(g);
 				for(ViewEnvironmentalFactors i : viewEnvs)
-					i.paint(g);
+					i.paintComponent(g);
 				for(ViewItem i : viewItems)
-					i.paint(g);
+					i.paintComponent(g);
 				for(ViewCharacter i : viewCharacters)
-					i.paint(g);
+					i.paintComponent(g);
 				instructions.paint(g);
-				vl.paint(g);
+				vl.paintComponent(g);
 			};
 		};
 		mainPanel.setBackground(Color.black);
