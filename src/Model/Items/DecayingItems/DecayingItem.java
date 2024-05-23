@@ -1,8 +1,8 @@
 package Model.Items.DecayingItems;
 
-import Main.Main;
 import Model.Items.Item;
 import Model.Time.iTask;
+import main.Main;
 
 /**
  * Absztrakt osztály, amely összefoglalja az időérzékeny tárgyak közös tulajdonságait és metódusait.
@@ -10,7 +10,7 @@ import Model.Time.iTask;
 public abstract class DecayingItem extends Item implements iTask {
 	
 	/**
-	 * Ezzel a változóval állítható be a Main-ban az alapértelmezett lejárati idő.
+	 * Ezzel a változóval állítható be a main-ban az alapértelmezett lejárati idő.
 	 */
 	public static int defaultDuration = 14 * Main.fps;
 	

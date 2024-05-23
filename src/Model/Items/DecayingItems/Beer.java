@@ -1,8 +1,8 @@
 package Model.Items.DecayingItems;
 
 import Model.Characters.Student;
-import Main.Main;
 import Model.Items.Item;
+import main.Main;
 
 /**
  * Az osztály a Beer tárgy reprezentálására szolgál.

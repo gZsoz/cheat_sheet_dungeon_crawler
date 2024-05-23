@@ -1,6 +1,6 @@
 package Model.Items.DecayingItems;
 
-import Main.Main;
+import main.Main;
 
 /**
  * Az osztály egy hamis maszkot reprezentál, amely a Maskból származik.

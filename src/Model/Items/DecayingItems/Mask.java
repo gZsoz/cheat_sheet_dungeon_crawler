@@ -1,7 +1,7 @@
 package Model.Items.DecayingItems;
 
-import Main.Main;
 import Model.Items.Item;
+import main.Main;
 
 /**
  * Az osztály egy maszk tárgyat reprezentál a játékban.

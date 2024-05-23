@@ -1,7 +1,7 @@
 package Model.Items.NumberOfUsesItems;
 
-import Main.Main;
 import Model.EnvironmentalFactors.Gas;
+import main.Main;
 
 /**
  * A Káposztás Camembert osztály felelős mérges gáz kibocsátására egy adott szobában egyszeri alkalommal. 

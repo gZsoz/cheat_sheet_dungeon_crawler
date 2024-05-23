@@ -8,8 +8,8 @@ import Model.Items.NumberOfUsesItems.FakeBatSkin;
 import Model.Items.Item;
 import Model.Items.SpecialItems.Transistor;
 import Model.Items.DecayingItems.WetCloth;
-import Main.Main;
 import Model.Map.Room;
+import main.Main;
 
 /**
  * Kirúgás esetén a Student eltávolítását ez az osztály végzi. NPC karakter, bizonyos időközönként elhatározza, hogy átmegy egy másik szobába.

@@ -4,13 +4,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
-import Controller.PlayerController;
 import Model.Characters.Student;
 import View.Utils.Containers;
 import View.Utils.Coordinates;
 import View.Utils.ImageReader;
 import View.Utils.SelectionColor;
 import View.ViewItem.ViewItem;
+import controller.PlayerController;
 
 /**
  * A diák kirajzolásáért felelős osztály.

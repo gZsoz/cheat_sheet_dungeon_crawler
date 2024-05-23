@@ -2,9 +2,9 @@ package Model.Items.SpecialItems;
 
 import java.util.ArrayList;
 
-import Main.Main;
 import Model.Items.Item;
 import Model.Map.Room;
+import main.Main;
 
 /**
  * Felelős egy másik ugyanilyen tárggyal való összekapcsolódásért, amennyiben a két tárgy ugyanannak a hallgatónak az inventory-jába kerül. 

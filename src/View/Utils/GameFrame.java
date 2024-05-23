@@ -15,12 +15,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 
-import Controller.PlayerController;
 import View.ViewCharacter.ViewCharacter;
 import View.ViewEnvironmentalFactor.ViewEnvironmentalFactors;
 import View.ViewItem.ViewItem;
 import View.ViewMap.ViewLabyrinth;
 import View.ViewMap.ViewRoom;
+import controller.PauseScreen;
+import controller.PlayerController;
+import main.Main;
 
 /**
  * Felelősség: Létrehoz egy fix méretű JPanelt és erre fog majd rajzolni a többi osztály a Graphics segítségével.
@@ -63,6 +65,11 @@ public class GameFrame extends JFrame {
 	 * A két játékos vezérlői.
 	 */
 	public static PlayerController red, blue;
+	
+	/**
+	 * A játék megállításának vezérlője.
+	 */
+	private static PauseScreen pauseScreen = new PauseScreen();
 	
 	/**
 	 * Az instrukciókat kiíró komponens képe.
@@ -132,6 +139,7 @@ public class GameFrame extends JFrame {
 		GameFrame.blue=blue;
 		this.addKeyListener(red);
 		this.addKeyListener(blue);
+		this.addKeyListener(pauseScreen);
 		this.setResizable(false);
 		this.setPreferredSize(new Dimension(1820,980));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -170,4 +178,35 @@ public class GameFrame extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 	}
+
+	
+	/**
+	 * Megállítja a játékot
+	 */
+	public static void pause() {
+		red.setGamePaused(true);
+		blue.setGamePaused(true);
+		Main.timer.stop();
+		pauseScreen.paintComponent(mainPanel.getGraphics());
+	}
+	
+	/**
+	 * Újraindítja a játékot
+	 */
+	public static void resume() {
+		red.setGamePaused(false);
+		blue.setGamePaused(false);
+		Main.timer.start();
+	}
+	
+	/**
+	 * Leállítja a játékot
+	 */
+	public static void endGame() {
+		pauseScreen.gameEnded();
+		red.gameEnded();
+		blue.gameEnded();
+	}
+
+
 }

@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -116,6 +116,11 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 	private boolean isStudentAlive = true;
 	
 	/**
+	 * Meg van-e állítva a játék.
+	 */
+	private boolean gamePaused = false;
+	
+	/**
 	 * Az éppen kiválasztott elem amivel valamilyen műveletet szeretne végezni a játékos.
 	 */
 	private int selectedSlot;
@@ -195,6 +200,21 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 	public void setRoomSubscribed() {
 		room=player.getRoom();
 		room.subscribe(this);
+	}
+	
+	/**
+	 * Beállítja, hogy meg van-e állítva a játék.
+	 * @param paused meg van-e állítva a játék
+	 */
+	public void setGamePaused(boolean paused) {
+		gamePaused=paused;
+	}
+	
+	/**
+	 * Inaktívvá teszi a PlayerController-t
+	 */
+	public void gameEnded() {
+		gamePaused=true;
 	}
 	
 	/**
@@ -318,7 +338,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-	    if(!isStudentAlive)
+	    if(!isStudentAlive || gamePaused)
 	        return;
 	    if(color == SelectionColor.Red){
 	        switch (e.getKeyCode()){
@@ -549,6 +569,7 @@ public class PlayerController extends JComponent implements KeyListener, Subscri
 	/**
 	 * Kirajzolja a játékos által irányított karakter információs ablakát.
 	 */
+	@Override
 	public void paintComponent(Graphics g) {
 	    super.paintComponent(g);
 	    Graphics2D g2D = (Graphics2D) g;

@@ -1,7 +1,7 @@
 package Model.Items.NumberOfUsesItems;
 
-import Main.Main;
 import Model.Items.Item;
+import main.Main;
 
 /**
  * Ebből az osztályból származnak le azok a tárgyak, amiket csak bizonyos számú alkalommal lehet használni. 

@@ -1,8 +1,8 @@
 package Model.EnvironmentalFactors;
 
 import Model.Items.Item;
-import Main.Main;
 import Model.Map.Room;
+import main.Main;
 
 /**
  * Osztály a ragacs környezeti változó reprezentálására.
@@ -10,7 +10,7 @@ import Model.Map.Room;
 public class Sticky extends EnvironmentalFactors {
 	
 	/**
-	 * Ezzel a változóval állítható be a Main-ban, hogy a takarító takarítása után mennyi karakter belépése után válik ragacsossá egy szoba.
+	 * Ezzel a változóval állítható be a main-ban, hogy a takarító takarítása után mennyi karakter belépése után válik ragacsossá egy szoba.
 	 */
 	public static int defaultRemainingEntries=2;
 	

@@ -22,9 +22,9 @@ import Model.Items.DecayingItems.Mask;
 import Model.Items.NumberOfUsesItems.SlideRule;
 import Model.Items.SpecialItems.Transistor;
 import Model.Items.DecayingItems.WetCloth;
-import Main.Main;
 import Model.Time.iTask;
 import View.Utils.Subscriber;
+import main.Main;
 
 /**
  * Osztály, mely reprezentálja a labirintust a játékban.
@@ -32,17 +32,17 @@ import View.Utils.Subscriber;
 public class Labyrinth implements iTask {
 	
 	/**
-	 * Ezzel a változóval állítható be a Main-ban a tárgyak spawn-olásának gyakoriságának átlagos időtartama.
+	 * Ezzel a változóval állítható be a main-ban a tárgyak spawn-olásának gyakoriságának átlagos időtartama.
 	 */
 	public static int itemSpawnFrequency = 100 * Main.fps;
 	
 	/**
-	 * Ezzel a változóval állítható be a Main-ban a szobák összeolvadásának gyakoriságának átlagos időtartama.
+	 * Ezzel a változóval állítható be a main-ban a szobák összeolvadásának gyakoriságának átlagos időtartama.
 	 */
 	public static int mergeFrequency = 100 * Main.fps;
 	
 	/**
-	 * Ezzel a változóval állítható be a Main-ban a szobák szétválásának gyakoriságának átlagos időtartama.
+	 * Ezzel a változóval állítható be a main-ban a szobák szétválásának gyakoriságának átlagos időtartama.
 	 */
 	public static int splitFrequency = 100 * Main.fps;
 	

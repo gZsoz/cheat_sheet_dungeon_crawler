@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Characters.Character;
-import Main.Main;
 import View.Utils.Subscriber;
+import main.Main;
 
 /**
  * Absztrakt osztály, ebből származnak le a különböző tárgyak.

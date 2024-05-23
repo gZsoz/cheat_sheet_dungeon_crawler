@@ -11,7 +11,6 @@ import java.util.Collections;
 
 import javax.swing.JComponent;
 
-import Main.Main;
 import Model.Map.CursedRoom;
 import Model.Map.Labyrinth;
 import Model.Map.Room;
@@ -20,6 +19,7 @@ import View.Utils.Coordinates;
 import View.Utils.GameFrame;
 import View.Utils.ImageReader;
 import View.Utils.Subscriber;
+import main.Main;
 
 /**
  * A labirintus grafikus osztálya.
@@ -197,6 +197,7 @@ public class ViewLabyrinth extends JComponent implements Subscriber {
 				g2D.drawImage(ImageReader.loadImage(ImageReader.path+"lostscreen.png"),0,0,1820,980,null);
 			}
 			Main.timer.stop();
+			GameFrame.endGame();
 		}
 	}
 }

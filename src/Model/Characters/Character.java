@@ -8,10 +8,10 @@ import Model.EnvironmentalFactors.Sticky;
 import Model.Items.DecayingItems.Beer;
 import Model.Items.Item;
 import Model.Items.SpecialItems.Transistor;
-import Main.Main;
 import Model.Map.Room;
 import Model.Time.iTask;
 import View.Utils.Subscriber;
+import main.Main;
 
 /**
  * A Model.Character egy absztrakt osztály, amely a hallgatók és az oktatók közös tulajdonságait
@@ -238,6 +238,12 @@ public abstract class Character implements iTask {
 		notifySubscribers("inventory removed "+idx);
 		if(currentRoom.addItem(i))
 			i.onDrop();
+		else {
+			if(i instanceof Beer) {
+				i.setOwner(this);
+				i.onDrop();
+			}
+		}
 	}
 	
 	/**

@@ -3,10 +3,10 @@ package Model.EnvironmentalFactors;
 import java.util.ArrayList;
 import java.util.List;
 
-import Main.Main;
 import Model.Map.Room;
 import Model.Time.iTask;
 import View.Utils.Subscriber;
+import main.Main;
 
 /**
  * Absztrakt osztály a környezeti változók reprezentálására.

@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import java.awt.EventQueue;
 import java.io.File;
@@ -28,13 +28,13 @@ import Model.Items.NumberOfUsesItems.CabbageCamembert;
 import Model.Items.DecayingItems.DecayingItem;
 import Model.Map.CursedRoom;
 import Model.Map.Labyrinth;
-import Controller.PlayerController;
 import View.Utils.GameFrame;
 import View.Utils.SelectionColor;
 import View.ViewMap.ViewLabyrinth;
+import controller.PlayerController;
 
 /**
- * A Main osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
+ * A main osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
  */
 public class Main {
 	/**

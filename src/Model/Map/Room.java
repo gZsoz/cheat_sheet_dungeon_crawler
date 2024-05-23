@@ -4,9 +4,9 @@ import Model.Items.NumberOfUsesItems.FakeSlideRule;
 import Model.Items.Item;
 import Model.Items.NumberOfUsesItems.SlideRule;
 import Model.Items.SpecialItems.Transistor;
-import Main.Main;
 import Model.Time.iTask;
 import View.Utils.Subscriber;
+import main.Main;
 import Model.EnvironmentalFactors.EnvironmentalFactors;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import Model.Characters.Character;
 public class Room implements iTask {
 	
 	/**
-	 * Ezzel a változóval állítható be a Main-ban a szoba maximális kapacitása.
+	 * Ezzel a változóval állítható be a main-ban a szoba maximális kapacitása.
 	 */
 	public static int maxItemCapacity=6;
 	
@@ -226,6 +226,7 @@ public class Room implements iTask {
 	    	removeItem(temp);
 	    	temp.notifySubscribers("itemexpired");
 	    	notifySubscribers("items");
+	    	temp.setOwner(null);
 	    	return true;
 	    }else {
 	    	if(i instanceof Transistor) {
@@ -240,6 +241,7 @@ public class Room implements iTask {
 				t.setLocation(null);
 	    	}
 	    	i.notifySubscribers("itemexpired");
+	    	i.setOwner(null);
 	    	return false;
 	    }
 	}

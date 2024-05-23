@@ -1,7 +1,7 @@
 package Model.Items.NumberOfUsesItems;
 
-import Main.Main;
 import Model.Characters.Student;
+import main.Main;
 
 /**
  * A tárgyhoz tartozó objektum feladata, hogy veszély esetén megvédje a karaktereket 
@@ -12,7 +12,7 @@ import Model.Characters.Student;
 public class BatSkin extends NumberOfUsesItem {
 	
 	/**
-	 * Ezzel a változóval állítható be a Main-ban az alapértelmezett használatszám.
+	 * Ezzel a változóval állítható be a main-ban az alapértelmezett használatszám.
 	 */
 	public static int defaultRemainingUses = 3;
 	

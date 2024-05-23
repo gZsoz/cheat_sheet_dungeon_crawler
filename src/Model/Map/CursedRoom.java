@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Characters.Character;
-import Main.Main;
+import main.Main;
 
 /**
  * A CursedRoom osztály egy speciális típusú szobát reprezentál a játékban, amely az alap Room osztálytól származik.
@@ -13,7 +13,7 @@ import Main.Main;
 public class CursedRoom extends Room {
 	
 	/**
-	 * Ezzel a változóval állítható be a Main-ban az alapértelmezett zárva tartási idő hossza.
+	 * Ezzel a változóval állítható be a main-ban az alapértelmezett zárva tartási idő hossza.
 	 */
 	public static int defaultCloseDuration=7 * Main.fps;
 	

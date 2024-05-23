@@ -1,9 +1,9 @@
 package Model.Items.NumberOfUsesItems;
 
-import Main.Main;
 import Model.EnvironmentalFactors.EnvironmentalFactors;
 import Model.EnvironmentalFactors.Gas;
 import Model.Map.Room;
+import main.Main;
 
 /**
  * Az AirFreshener osztály egy használati tárgyat reprezentál, amely egy légfrissítőt jelképez.

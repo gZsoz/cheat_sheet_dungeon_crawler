@@ -1,6 +1,6 @@
 package Model.Items.NumberOfUsesItems;
 
-import Main.Main;
+import main.Main;
 
 /**
  * Az osztály egy hamis denevér bőrt reprezentál, amely a BatSkinből származik.

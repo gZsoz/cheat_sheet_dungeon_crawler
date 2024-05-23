@@ -1,8 +1,8 @@
 package Model.Items.DecayingItems;
 
-import Main.Main;
 import Model.Characters.Character;
 import Model.Characters.Teacher;
+import main.Main;
 
 /**
  * Az osztály egy nedves törlőrongyot reprezentál a játékban.

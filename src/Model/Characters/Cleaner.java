@@ -8,8 +8,8 @@ import Model.EnvironmentalFactors.EnvironmentalFactors;
 import Model.EnvironmentalFactors.Gas;
 import Model.EnvironmentalFactors.Sticky;
 import Model.Items.Item;
-import Main.Main;
 import Model.Map.Room;
+import main.Main;
 
 /**
  * A szobák takarítását ez osztály végzi. NPC karakter, bizonyos időközönként elhatározza, hogy átmegy egy másik szobába.

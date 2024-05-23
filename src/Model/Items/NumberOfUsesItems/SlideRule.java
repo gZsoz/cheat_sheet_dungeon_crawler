@@ -1,6 +1,6 @@
 package Model.Items.NumberOfUsesItems;
 
-import Main.Main;
+import main.Main;
 
 /**
  * A logarléc osztályból az összes többi tárggyal ellentétben csupán egy lehet a pályán, 

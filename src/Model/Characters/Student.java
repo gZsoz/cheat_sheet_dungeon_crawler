@@ -3,8 +3,8 @@ package Model.Characters;
 import java.util.ArrayList;
 
 import Model.Items.Item;
-import Main.Main;
 import Model.Map.Room;
+import main.Main;
 
 /**
  * A Student osztály felelős a hallgatók inventory-jában lévő aktiválható tárgyak aktiválásáért,

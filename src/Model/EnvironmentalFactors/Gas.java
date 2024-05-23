@@ -3,11 +3,11 @@ package Model.EnvironmentalFactors;
 import Model.Characters.Character;
 import Model.Characters.Cleaner;
 import Model.Items.*;
-import Main.Main;
 import Model.Items.DecayingItems.FakeMask;
 import Model.Items.DecayingItems.Mask;
 import Model.Items.SpecialItems.Transistor;
 import Model.Map.Room;
+import main.Main;
 
 import java.util.ArrayList;
 
