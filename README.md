@@ -14,15 +14,15 @@ A projektet zip formátumban is le lehet tölteni. A zip fájlt ki kell csomagol
 ### Mappába lépés
 A fordítás és futtatáshoz szükséges a src mappába lépés
 ```bash
-cd cheat_sheet_dungeon_crawler\src
+cd cheat_sheet_dungeon_crawler
 ```
 
 ## Fordítás és futtatás
 A program osztályait le kell fordítani, majd ez után futtatható lesz:
 ```bash
-javac controller\*.java model\characters\*.java model\environmentalfactors\*.java model\items\*.java model\items\decayingitems\*.java model\items\numberofusesitems\*.java model\items\specialitems\*.java model\map\*.java model\modelupdate\*.java view\utils\*.java view\viewcharacters\*.java view\viewenvironmentalfactors\*.java view\viewitems\*.java view\viewitems\viewdecayingitems\*.java view\viewitems\viewnumberofusesitems\*.java view\viewitems\viewspecialitems\*.java view\viewmap\*.java main\*.java
+javac -cp .;src -d bin src\controller\*.java src\model\characters\*.java src\model\environmentalfactors\*.java src\model\items\*.java src\model\items\decayingitems\*.java src\model\items\numberofusesitems\*.java src\model\items\specialitems\*.java src\model\map\*.java src\model\modelupdate\*.java src\view\utils\*.java src\view\viewcharacters\*.java src\view\viewenvironmentalfactors\*.java src\view\viewitems\*.java src\view\viewitems\viewdecayingitems\*.java src\view\viewitems\viewnumberofusesitems\*.java src\view\viewitems\viewspecialitems\*.java src\view\viewmap\*.java src\main\*.java
 
-java main.Main
+java -cp bin main.Main
 ```
 TesztProgram futtatása
 ```bash
