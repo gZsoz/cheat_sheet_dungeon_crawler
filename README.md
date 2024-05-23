@@ -20,17 +20,17 @@ cd cheat_sheet_dungeon_crawler\src
 ## Fordítás és futtatás
 A program osztályait le kell fordítani, majd ez után futtatható lesz:
 ```bash
-javac Character\*.java EnvironmentalFactor\*.java Items\*.java Map\*.java Time\*.java View\Controller\*.java View\Utils\*.java View\ViewCharacter\*.java View\ViewEnvironmentalFactor\*.java View\ViewItem\*.java View\ViewMap\*.java Main\Main.java
+javac controller\*.java model\characters\*.java model\environmentalfactors\*.java model\items\*.java model\items\decayingitems\*.java model\items\numberofusesitems\*.java model\items\specialitems\*.java model\map\*.java model\modelupdate\*.java view\utils\*.java view\viewcharacters\*.java view\viewenvironmentalfactors\*.java view\viewitems\*.java view\viewitems\viewdecayingitems*.java view\viewitems\viewnumberofusesitems*.java view\viewitems\viewspecialitems*.java view\viewmap\*.java main\*.java
 
-java Main.Main
+java main.Main
 ```
 TesztProgram futtatása
 ```bash
-  java Main.Main test
+  java main.Main test
 ```
 Összes teszt futtatása:
 ```bash
-  java Main.Main test all
+  java main.Main test all
   ```
 
 ## Közreműködők
