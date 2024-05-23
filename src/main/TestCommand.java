@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import Model.EnvironmentalFactors.Gas;
-import Model.EnvironmentalFactors.Sticky;
-import Model.Items.NumberOfUsesItems.AirFreshener;
-import Model.Items.NumberOfUsesItems.BatSkin;
-import Model.Items.DecayingItems.Beer;
-import Model.Items.NumberOfUsesItems.CabbageCamembert;
-import Model.Items.NumberOfUsesItems.FakeBatSkin;
-import Model.Items.DecayingItems.FakeMask;
-import Model.Items.NumberOfUsesItems.FakeSlideRule;
-import Model.Items.DecayingItems.Mask;
-import Model.Items.NumberOfUsesItems.SlideRule;
-import Model.Items.SpecialItems.Transistor;
-import Model.Items.DecayingItems.WetCloth;
-import Model.Map.Labyrinth;
-import Model.Map.Room;
-import Model.Map.CursedRoom;
-import Model.Characters.Student;
-import Model.Characters.Teacher;
-import Model.Characters.Character;
-import Model.Characters.Cleaner;
+import model.characters.Character;
+import model.characters.Cleaner;
+import model.characters.Student;
+import model.characters.Teacher;
+import model.environmentalfactors.Gas;
+import model.environmentalfactors.Sticky;
+import model.items.decayingitems.Beer;
+import model.items.decayingitems.FakeMask;
+import model.items.decayingitems.Mask;
+import model.items.decayingitems.WetCloth;
+import model.items.numberofusesitems.AirFreshener;
+import model.items.numberofusesitems.BatSkin;
+import model.items.numberofusesitems.CabbageCamembert;
+import model.items.numberofusesitems.FakeBatSkin;
+import model.items.numberofusesitems.FakeSlideRule;
+import model.items.numberofusesitems.SlideRule;
+import model.items.specialitems.Transistor;
+import model.map.CursedRoom;
+import model.map.Labyrinth;
+import model.map.Room;
 
 /**
  * A tesztparancsok kezeléséért felelős osztály. A tesztparancsoknak megfelelő műveleteket hajt végre a labirintuson, karaktereken és tárgyakon.

@@ -11,18 +11,18 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
-import Model.Characters.Student;
-import Model.Map.Labyrinth;
-import Model.Map.Room;
-import View.Utils.ActionState;
-import View.Utils.Containers;
-import View.Utils.Coordinates;
-import View.Utils.GameFrame;
-import View.Utils.ImageReader;
-import View.Utils.SelectionColor;
-import View.Utils.Subscriber;
-import View.ViewCharacter.ViewStudent;
-import View.ViewMap.ViewRoom;
+import model.characters.Student;
+import model.map.Labyrinth;
+import model.map.Room;
+import view.utils.ActionState;
+import view.utils.Containers;
+import view.utils.Coordinates;
+import view.utils.GameFrame;
+import view.utils.ImageReader;
+import view.utils.SelectionColor;
+import view.utils.Subscriber;
+import view.viewcharacters.ViewStudent;
+import view.viewmap.ViewRoom;
 
 /**
  * A felhasználók bemeneteinek értelmezésére és a model ezek szerinti formázására használt osztály.

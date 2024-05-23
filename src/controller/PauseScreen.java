@@ -7,8 +7,8 @@ import java.awt.Image;
 
 import javax.swing.JComponent;
 
-import View.Utils.GameFrame;
-import View.Utils.ImageReader;
+import view.utils.GameFrame;
+import view.utils.ImageReader;
 
 public class PauseScreen extends JComponent implements KeyListener{
 

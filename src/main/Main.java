@@ -17,21 +17,21 @@ import java.util.Scanner;
 
 import javax.swing.Timer;
 
-import Model.Characters.Character;
-import Model.Characters.Cleaner;
-import Model.Characters.Student;
-import Model.Characters.Teacher;
-import Model.EnvironmentalFactors.Sticky;
-import Model.Items.NumberOfUsesItems.AirFreshener;
-import Model.Items.NumberOfUsesItems.BatSkin;
-import Model.Items.NumberOfUsesItems.CabbageCamembert;
-import Model.Items.DecayingItems.DecayingItem;
-import Model.Map.CursedRoom;
-import Model.Map.Labyrinth;
-import View.Utils.GameFrame;
-import View.Utils.SelectionColor;
-import View.ViewMap.ViewLabyrinth;
 import controller.PlayerController;
+import model.characters.Character;
+import model.characters.Cleaner;
+import model.characters.Student;
+import model.characters.Teacher;
+import model.environmentalfactors.Sticky;
+import model.items.decayingitems.DecayingItem;
+import model.items.numberofusesitems.AirFreshener;
+import model.items.numberofusesitems.BatSkin;
+import model.items.numberofusesitems.CabbageCamembert;
+import model.map.CursedRoom;
+import model.map.Labyrinth;
+import view.utils.GameFrame;
+import view.utils.SelectionColor;
+import view.viewmap.ViewLabyrinth;
 
 /**
  * A main osztály tartalmazza az alapvető segédmetódusokat és tesztfüggvényeket a programhoz.
