@@ -12,7 +12,7 @@ git clone https://github.com/gZsoz/cheat_sheet_dungeon_crawler.git
 A projektet zip formátumban is le lehet tölteni. A zip fájlt ki kell csomagolni.
 
 ### Mappába lépés
-A fordítás és futtatáshoz szükséges a src mappába lépés és a graphic branch-re váltás
+A fordításhoz és futtatáshoz szükséges az src mappába lépés és a graphic branch-re váltás:
 ```bash
 cd cheat_sheet_dungeon_crawler
 
@@ -20,13 +20,15 @@ git checkout graphic
 ```
 
 ## Fordítás és futtatás
-A program osztályait le kell fordítani, majd ez után futtatható lesz:
+A program osztályait le kell fordítani, hogy futtatható legyen program:
 ```bash
 javac -cp .;src -d bin src\controller\*.java src\model\characters\*.java src\model\environmentalfactors\*.java src\model\items\*.java src\model\items\decayingitems\*.java src\model\items\numberofusesitems\*.java src\model\items\specialitems\*.java src\model\map\*.java src\model\modelupdate\*.java src\view\utils\*.java src\view\viewcharacters\*.java src\view\viewenvironmentalfactors\*.java src\view\viewitems\*.java src\view\viewitems\viewdecayingitems\*.java src\view\viewitems\viewnumberofusesitems\*.java src\view\viewitems\viewspecialitems\*.java src\view\viewmap\*.java src\main\*.java
-
+```
+Játék futtatása:
+```bash
 java -cp bin main.Main
 ```
-TesztProgram futtatása
+TesztProgram futtatása:
 ```bash
   java main.Main test
 ```
