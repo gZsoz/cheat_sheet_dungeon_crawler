@@ -14,21 +14,24 @@ git clone https://github.com/gZsoz/cheat_sheet_dungeon_crawler.git
 A projektet zip formátumban is le lehet tölteni. A zip fájlt ki kell csomagolni.
 
 ## Fordítás és futtatás
-A program osztályait le kell fordítani, majd ez után futtatható lesz:
+A program osztályait le kell fordítani, hogy futtatható legyen program:
 ```bash
-javac -cp .;src -d bin src/Model/EnvironmentalFactors/*.java src/Model/Items/DecayingItems/*.java src/Model/Items/NumberOfUsesItems/*.java src/Model/Items/SpecialItems/*.java src/Model/Characters/*.java src/Model/Map/*.java src/Model/Time/*.java src/Controller/*.java src/View/Utils/*.java src/View/ViewCharacter/*.java src/View/ViewEnvironmentalFactor/*.java src/View/ViewItem/ViewDecayingItems/*.java src/View/ViewItem/ViewNumberOfUsesItems/*.java src/View/ViewItem/ViewSpecialItems/*.java src/View/ViewMap/*.java
-java -cp bin Main.Main
-
+javac -cp .;src -d bin src\controller\*.java src\model\characters\*.java src\model\environmentalfactors\*.java src\model\items\*.java src\model\items\decayingitems\*.java src\model\items\numberofusesitems\*.java src\model\items\specialitems\*.java src\model\map\*.java src\model\modelupdate\*.java src\view\utils\*.java src\view\viewcharacters\*.java src\view\viewenvironmentalfactors\*.java src\view\viewitems\*.java src\view\viewitems\viewdecayingitems\*.java src\view\viewitems\viewnumberofusesitems\*.java src\view\viewitems\viewspecialitems\*.java src\view\viewmap\*.java src\main\*.java
+```
+Játék futtatása:
+```bash
+java -cp bin main.Main
 ```
 ## Tesztelés
-TesztProgram futtatása
+TesztProgram futtatása:
 ```bash
-  java -cp bin Main.Main test
+  java -cp bin main.Main test
 ```
 Összes teszt futtatása:
 ```bash
-  java -cp bin Main.Main test all
-  ```
+  java -cp bin main.Main test all
+```
+
 
 ## Közreműködők
 <a href="https://github.com/gZsoz/cheat_sheet_dungeon_crawler/graphs/contributors">

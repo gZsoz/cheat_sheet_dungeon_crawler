@@ -1,0 +1,20 @@
+// Lehetséges értékek:
+// Character.restTime
+// Character.stunTime
+// Cleaner.timeBetweenMoves
+// Teacher.angryTime
+// Teacher.timeBetweenMoves
+// DecayingItem.defaultDuration
+// CursedRoom.defaultCloseDuration
+// Labyrinth.itemSpawnFrequency
+// Labyrinth.mergeFrequency
+// Labyrinth.splitFrequency
+// Sticky.defaultRemainingEntries
+// AirFreshener.defaultRemainingUses
+// BatSkin.defaultRemainingUses
+// CabbageCamembert.defaultRemainingUses
+// Példasor: CursedRoom.defaultCloseDuration = 7
+// Példasor jelentése a CursedRoom ajtaja 7 másodpercig marad zárva, miután bezáródik
+
+Teacher.angryTime = 8
+Teacher.timeBetweenMoves=10
