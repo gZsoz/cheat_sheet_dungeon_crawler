@@ -331,83 +331,6 @@ public class Main {
 	}
 	
 	/**
-	 * A játék időzítőjeinek beállítása az fps-nek megfelelően.
-	 */
-	private static void multiplyTimingsWithFps() {
-		Character.restTime *= fps;
-		Character.stunTime *= fps;
-		Cleaner.timeBetweenMoves *= fps;
-		Teacher.angryTime *= fps;
-		Teacher.timeBetweenMoves *= fps;
-		DecayingItem.defaultDuration *= fps;
-		CursedRoom.defaultCloseDuration *= fps;
-		Labyrinth.itemSpawnFrequency *= fps;
-		Labyrinth.mergeFrequency *= fps;
-		Labyrinth.splitFrequency *= fps;
-	}
-	
-	/**
-	 * A program belépési pontja.
-	 * @param args a program argumentumai
-	 * @throws FileNotFoundException ha a naplófájl nem található
-	 */
-	public static void main(String[] args) throws FileNotFoundException {
-		if(args.length>0 && args[0].equals("test")) {
-			random = new MyRandom(true);
-			test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
-		} else {
-			random = new MyRandom(false);
-			
-			fps = 24; // frames per second
-			
-			// A játékbeli események időzítései másodpercben
-	    	Character.restTime = 10;
-	    	Character.stunTime = 5;
-	    	Cleaner.timeBetweenMoves = 10;
-	    	Teacher.angryTime = 8;
-	    	Teacher.timeBetweenMoves = 10;
-	    	DecayingItem.defaultDuration = 14;
-	    	CursedRoom.defaultCloseDuration = 7;
-	    	Labyrinth.itemSpawnFrequency = 90;	// szobánkénti átlagos időtartam
-	    	Labyrinth.mergeFrequency = 90;
-	    	Labyrinth.splitFrequency = 100;
-	    	
-	    	Sticky.defaultRemainingEntries=2;
-	    	AirFreshener.defaultRemainingUses=1;
-	    	BatSkin.defaultRemainingUses=3;
-	    	CabbageCamembert.defaultRemainingUses=1;
-	    	
-	    	readConfigValues();
-	    	multiplyTimingsWithFps(); // pontosan egyszer kell meghívni, beállítja az időzítéseket fps-sel arányosan
-	    	
-			Student redStudent=new Student();
-			Student blueStudent=new Student();
-			PlayerController redController = new PlayerController(SelectionColor.Red, redStudent);
-			PlayerController blueController = new PlayerController(SelectionColor.Blue, blueStudent);
-			Labyrinth labyrinth = new Labyrinth();
-	        labyrinth.generateRooms(redStudent, blueStudent);
-	        redController.setLabyrinth(labyrinth);
-	        blueController.setLabyrinth(labyrinth);
-	        redController.setRoomSubscribed();
-	        blueController.setRoomSubscribed();
-	        ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
-			GameFrame mf = new GameFrame(viewLabyrinth,redController,blueController);
-	        viewLabyrinth.initLab();
-	        EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-		        	mf.setVisible(true);
-	            }
-	    	});
-	        
-	        timer = new Timer(1000/fps, a -> {
-					GameFrame.mainPanel.repaint();
-					labyrinth.update();
-	        });
-	        timer.start();
-		}
-	}
-	
-	/**
 	 * A kapott String-nek megfelelően beállítja az a játék egy időzítőjét.
 	 * @param line a configfájl egy sora kerül bele
 	 */
@@ -481,6 +404,83 @@ public class Main {
 		} catch (FileNotFoundException fnfe) {
 			System.out.println("Nem található konfigurációs fájl a \"" + configFileName + "\" elérési úton.");
 			System.out.println("Játék indítása az alapértelmezett értékekkel.");
+		}
+	}
+	
+	/**
+	 * A játék időzítőjeinek beállítása az fps-nek megfelelően.
+	 */
+	private static void multiplyTimingsWithFps() {
+		Character.restTime *= fps;
+		Character.stunTime *= fps;
+		Cleaner.timeBetweenMoves *= fps;
+		Teacher.angryTime *= fps;
+		Teacher.timeBetweenMoves *= fps;
+		DecayingItem.defaultDuration *= fps;
+		CursedRoom.defaultCloseDuration *= fps;
+		Labyrinth.itemSpawnFrequency *= fps;
+		Labyrinth.mergeFrequency *= fps;
+		Labyrinth.splitFrequency *= fps;
+	}
+	
+	/**
+	 * A program belépési pontja.
+	 * @param args a program argumentumai
+	 * @throws FileNotFoundException ha a naplófájl nem található
+	 */
+	public static void main(String[] args) throws FileNotFoundException {
+		if(args.length>0 && args[0].equals("test")) {
+			random = new MyRandom(true);
+			test(args);	// első parancssori argumentum "test" összes teszt futtatása: "test all"
+		} else {
+			random = new MyRandom(false);
+			
+			fps = 24; // frames per second
+			
+			// A játékbeli események időzítései másodpercben
+	    	Character.restTime = 10;
+	    	Character.stunTime = 5;
+	    	Cleaner.timeBetweenMoves = 10;
+	    	Teacher.angryTime = 8;
+	    	Teacher.timeBetweenMoves = 10;
+	    	DecayingItem.defaultDuration = 14;
+	    	CursedRoom.defaultCloseDuration = 7;
+	    	Labyrinth.itemSpawnFrequency = 90;	// szobánkénti átlagos időtartam
+	    	Labyrinth.mergeFrequency = 90;
+	    	Labyrinth.splitFrequency = 100;
+	    	
+	    	Sticky.defaultRemainingEntries=2;
+	    	AirFreshener.defaultRemainingUses=1;
+	    	BatSkin.defaultRemainingUses=3;
+	    	CabbageCamembert.defaultRemainingUses=1;
+	    	
+	    	readConfigValues();
+	    	multiplyTimingsWithFps(); // pontosan egyszer kell meghívni, beállítja az időzítéseket fps-sel arányosan
+	    	
+			Student redStudent=new Student();
+			Student blueStudent=new Student();
+			PlayerController redController = new PlayerController(SelectionColor.Red, redStudent);
+			PlayerController blueController = new PlayerController(SelectionColor.Blue, blueStudent);
+			Labyrinth labyrinth = new Labyrinth();
+	        labyrinth.generateRooms(redStudent, blueStudent);
+	        redController.setLabyrinth(labyrinth);
+	        blueController.setLabyrinth(labyrinth);
+	        redController.setRoomSubscribed();
+	        blueController.setRoomSubscribed();
+	        ViewLabyrinth viewLabyrinth = new ViewLabyrinth(labyrinth);
+			GameFrame mf = new GameFrame(viewLabyrinth,redController,blueController);
+	        viewLabyrinth.initLab();
+	        EventQueue.invokeLater(new Runnable() {
+	            public void run() {
+		        	mf.setVisible(true);
+	            }
+	    	});
+	        
+	        timer = new Timer(1000/fps, a -> {
+					GameFrame.mainPanel.repaint();
+					labyrinth.update();
+	        });
+	        timer.start();
 		}
 	}
 }

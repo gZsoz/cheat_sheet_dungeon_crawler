@@ -16,5 +16,5 @@
 // Példasor: CursedRoom.defaultCloseDuration = 7
 // Példasor jelentése a CursedRoom ajtaja 7 másodpercig marad zárva, miután bezáródik
 
-Teacher.angryTime = 3
-Teacher.timeBetweenMoves=7
+Teacher.angryTime = 8
+Teacher.timeBetweenMoves=10
