@@ -2,8 +2,6 @@
 
 A Logarléc egy local-multiplayer játék, amelyben a játékosoknak egy elátkozott labirintusban kell keresniük a Logarléc nevű ereklyét. A játékot mérnökhallgatókként lehet játszani, akiknek át kell navigálniuk magukat a labirintuson, miközben megpróbálják kijátszani az oktatókat.
 
-![gameplay screenshot](https://github.com/gZsoz/cheat_sheet_dungeon_crawler/blob/main/res/images/gameplay.png)
-
 ## Letöltés
 ### GIT klónozás
 A projektet le lehet klónozni:
