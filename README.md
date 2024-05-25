@@ -13,6 +13,14 @@ git clone https://github.com/gZsoz/cheat_sheet_dungeon_crawler.git
 ### ZIP Letöltés
 A projektet zip formátumban is le lehet tölteni. A zip fájlt ki kell csomagolni.
 
+### Mappába lépés
+A fordítás és futtatáshoz szükséges a repository mappájába lépés és a graphic branch-re váltás
+```bash
+cd cheat_sheet_dungeon_crawler
+
+git checkout graphic
+```
+
 ## Fordítás és futtatás
 A program osztályait le kell fordítani, hogy futtatható legyen program:
 ```bash
