@@ -149,7 +149,7 @@ public class GameFrame extends JFrame {
 			@Override
 			public void paint(Graphics g) {
 				super.paint(g);
-				//g.drawImage(labyrinthImage, 0, 0, null);
+				g.drawImage(labyrinthImage, 0, 0, null);
 				red.paintComponent(g);
 				blue.paintComponent(g);
 				for(ViewRoom i : viewRooms)
